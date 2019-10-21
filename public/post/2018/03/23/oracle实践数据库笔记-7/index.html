@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle实践数据库笔记-7 - 手工创建Oracle数据库  - Rehoni.</title>
+    <meta property="og:title" content="Oracle实践数据库笔记-7 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="没操作起来，得等大佬带着操作一下
+注意要用cmd别用windows powershell
+[&amp;hellip;] 创建windows服务（instance） &amp;ndash;oradim
+oradim -new -sid sales  将sales设为当前例程，
+set oracle_sid = sales  创建/编辑初始化参数文件 pfile
+[&amp;hellip;] &amp;hellip;">
+      <meta property="og:description" content="没操作起来，得等大佬带着操作一下
+注意要用cmd别用windows powershell
+[&amp;hellip;] 创建windows服务（instance） &amp;ndash;oradim
+oradim -new -sid sales  将sales设为当前例程，
+set oracle_sid = sales  创建/编辑初始化参数文件 pfile
+[&amp;hellip;] &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle实践数据库笔记-7</h1>
+<h1><span class="subtitle">手工创建Oracle数据库</span></h1>
+<h3>
+  2018-03-23</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="03-23数据库">03/23数据库</h1>
+
+<h2 id="手工创建数据库-sales">手工创建数据库（sales）</h2>
+
+<p><strong>没操作起来，得等大佬带着操作一下</strong></p>
+
+<p><strong>注意要用cmd别用windows powershell</strong></p>
+
+<ol>
+<li><p>创建windows服务（instance） &ndash;oradim</p>
+
+<pre><code class="language-cmd">oradim -new -sid sales
+</code></pre></li>
+
+<li><p>将sales设为当前例程，</p>
+
+<pre><code class="language-cmd">set oracle_sid = sales
+</code></pre></li>
+
+<li><p>创建/编辑初始化参数文件 pfile</p>
+
+<ul>
+<li><p>连接数据库 sqlplus————sys as sysdba——————123456</p>
+
+<pre><code class="language-sql">create pfile from spfile;
+</code></pre></li>
+</ul></li>
+
+<li><p>根据初始化参数创建相应的目录结构</p>
+
+<ul>
+<li>在admin和flash_recovery_area和oradata中创建sales文件夹，</li>
+<li>对应的INITorcl.ora改成INITsales.ora并且改变其中的内容</li>
+
+<li><p>创建口令文件</p>
+
+<pre><code class="language-cmd">这个密码用于set Oracle_sid之后，登陆sysdba的密码
+ orapwd file=E:\app\Res0liya\product\11.2.0\dbhome_1\database\PWDsales.ora password=123 entries=2
+</code></pre></li>
+</ul></li>
+
+<li><p>执行创建数据库的语句</p>
+
+<ul>
+<li><p>启动例程以及验证数据库</p>
+
+<pre><code class="language-sql">startup nomount
+showdown immediate
+show parameter db_name
+</code></pre></li>
+
+<li><p>三个文件必须要，数据文件和日志文件system,sysaux,undo</p></li>
+</ul></li>
+
+<li><p>创建数据字典视图</p></li>
+
+<li><p>创建Oracle内部包</p></li>
+
+<li><p>创建spfile</p></li>
+
+<li><p>创建scott方案</p></li>
+
+<li><p>加载产品用户概要文件信息</p></li>
+
+<li><p>配置监听器（服务器端）和服务名（客户端）</p></li>
+
+<li><p>配置DBConsole（EM，OEM）</p>
+
+<ul>
+<li><p>配置用户</p>
+
+<pre><code class="language-sql">create database sales
+datafile  ---数据文件
+'D:\app\hwj\oradata\sales\system01.dbf' size 350m
+sysaux datafile
+'D:\app\hwj\oradata\sales\sysaux01.dbf' size 350m
+undo tablespace undotbs1 datafile
+'D:\app\hwj\oradata\sales\undo01.dbf' size 350m
+default temporary tablespace temp tempfile
+'D:\app\hwj\oradata\sales\temp01.dbf' size 350m
+logfile  ---日志文件
+group 1 ('D:\app\hwj\oradata\sales\redo01.log') size 10m,
+group 2 ('D:\app\hwj\oradata\sales\redo02.log') size 10m,
+group 3 ('D:\app\hwj\oradata\sales\redo03.log') size 10m,
+</code></pre>
+
+<pre><code class="language-sql">create database sales
+datafile 'D:\app\Res0liya\oradata\sales\system01.dbf' size 350m
+sysaux datafile 'D:\app\Res0liya\oradata\sales\sysaux01.dbf' size 350m
+undo tablespace undotbs1 datafile 'D:\app\Res0liya\oradata\sales\undo01.dbf' size 350m
+default temporary tablespace temp tempfile 'D:\app\Res0liya\oradata\sales\temp01.dbf' size 350m
+logfile group 1 ('D:\app\Res0liya\oradata\sales\redo01.log') size 10m,
+group 2 ('D:\app\Res0liya\oradata\sales\redo02.log') size 10m,
+group 3 ('D:\app\Res0liya\oradata\sales\redo03.log') size 10m;
+</code></pre></li>
+</ul></li>
+</ol>
+
+<p>oracle 图形界面创建数据库</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/03/20/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-6/">Oracle实践数据库笔记-6</a></span>
+  <span class="nav-next"><a href="/post/2018/03/27/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-8/">Oracle实践数据库笔记-8</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

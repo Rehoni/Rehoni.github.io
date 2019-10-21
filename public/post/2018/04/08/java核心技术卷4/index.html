@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Java核心技术卷(4) - Java的类  - Rehoni.</title>
+    <meta property="og:title" content="Java核心技术卷(4) - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="所有与通配符匹配的源文件都将被编译成为类文件
+javac Employee*.java  注意不要编写返回可变对象的访问器方法. 下代码中test代码中d和harry.hireDay引用同一个对象, 更改d就会自动改变这个雇员对象的私有状态
+class Employee{ private Date hireDay; public Date getHireDay() { return &amp;hellip;">
+      <meta property="og:description" content="所有与通配符匹配的源文件都将被编译成为类文件
+javac Employee*.java  注意不要编写返回可变对象的访问器方法. 下代码中test代码中d和harry.hireDay引用同一个对象, 更改d就会自动改变这个雇员对象的私有状态
+class Employee{ private Date hireDay; public Date getHireDay() { return &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Java核心技术卷(4)</h1>
+<h1><span class="subtitle">Java的类</span></h1>
+<h3>
+  2018-04-08</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="chapter4-面向对象">Chapter4 面向对象</h1>
+
+<h1 id="需要了解的类库">需要了解的类库</h1>
+
+<hr />
+
+<ul>
+<li><strong>java.util.GregorianCalendar</strong></li>
+<li><strong>java.text.DateFormatSymbols</strong></li>
+<li><strong>java.util.Random</strong></li>
+</ul>
+
+<h1 id="类">类</h1>
+
+<hr />
+
+<ul>
+<li><strong>类, 构造, 实例, 封装, 实例域, 方法等概念</strong></li>
+<li><strong>对象: 对象的行为, 状态, 标识三个特性</strong></li>
+<li><strong>类之间的关系: 依赖(uses-a), 聚合(has-a), 继承(is-a)</strong></li>
+<li><strong>UML语言来表达类之间的一些关系</strong></li>
+<li><strong>一个对象变量并没有实际包含一个对象,而是仅仅引用一个对象. 任何对象变量的值都是对存储在另一个地方的一个对象的引用, new操作符的返回值也是一个引用.</strong></li>
+<li><strong>隐式参数和显式参数, 隐式参数指对象的实例, 在方法中可以用this代指, 显式参数则为方法括号中的参数</strong></li>
+<li><strong>封装的优点: 保护私密数据, 更改器方法可以执行错误检查.</strong></li>
+<li><strong>封装的要求: 一个私有的数据域, 一个公有的域访问器方法, 一个公有的域更改器方法.</strong></li>
+<li><strong>私有域private以及final的用法</strong></li>
+<li><strong>静态域与静态方法, 静态常量和静态方法可以不用实例化对象就调用. 用静态方法的情况: 1.不需要访问对象状态,其所需参数都是通过显式参数提供 2.只需要访问类的静态域</strong></li>
+<li><strong>工厂方法</strong></li>
+<li><strong>对象引用进行的是值的传递</strong></li>
+<li><strong>重载: 相同方法名, 不同参数</strong></li>
+<li><strong>初始化块以及静态的初始化块</strong></li>
+<li><strong>对象析构和finalize方法, 由于Java自动垃圾回收的机制而不支持析构器, 同时因为难以知道finalize方法什么时候调用而不用(不安全), 一般需要关闭的是一些资源如文件流等对象的close方法</strong></li>
+<li><strong>静态导入, 如 import static java.lang.System.*; 就可以直接 out.println了(似乎也不常见)</strong></li>
+<li><strong>类设计技巧</strong>
+
+<ul>
+<li><strong>一定要保证数据私有</strong></li>
+<li><strong>一定要对数据初始化</strong></li>
+<li><strong>不要在类中使用过多的基本类型</strong></li>
+<li><strong>不是所有的域都需要独立的域访问器和域更改器</strong></li>
+<li><strong>将职责过多的类进行分解</strong></li>
+<li><strong>类名和方法名要能够体现他们的职责</strong></li>
+</ul></li>
+</ul>
+
+<h1 id="一些代码注意点">一些代码注意点</h1>
+
+<hr />
+
+<p><strong>所有与通配符匹配的源文件都将被编译成为类文件</strong></p>
+
+<pre><code class="language-java">    javac Employee*.java
+</code></pre>
+
+<p><strong>注意不要编写返回可变对象的访问器方法. 下代码中test代码中d和harry.hireDay引用同一个对象, 更改d就会自动改变这个雇员对象的私有状态</strong></p>
+
+<pre><code class="language-java">    class Employee{
+    	private Date hireDay;
+    	public Date getHireDay()
+       {
+          return hireDay;
+       }
+    }
+    //test代码中
+    Employee harry=...;
+    Date d=harry.getHireDay();
+    d.setTime(...);
+    //正确代码
+    public Date getHireDay()
+       {
+          return hireDay.clone();
+       }
+</code></pre>
+
+<p><strong>总结Java方法参数的使用情况:</strong></p>
+
+<ol>
+<li><strong>不能修改一个基本数据类型的参数</strong></li>
+<li><strong>可以改变一个对象参数的状态</strong></li>
+
+<li><p><strong>不能让对象参数引用一个新的对象</strong></p>
+
+<pre><code class="language-java">/**
+ * This program demonstrates parameter passing in Java.
+ * @version 1.00 2000-01-27
+ * @author Cay Horstmann
+ */
+public class ParamTest
+{
+   public static void main(String[] args)
+   {
+      /*
+       * Test 1: Methods can't modify numeric parameters
+       */
+      System.out.println(&quot;Testing tripleValue:&quot;);
+      double percent = 10;
+      System.out.println(&quot;Before: percent=&quot; + percent);
+      tripleValue(percent);
+      System.out.println(&quot;After: percent=&quot; + percent);
+    
+      /*
+       * Test 2: Methods can change the state of object parameters
+       */
+      System.out.println(&quot;\nTesting tripleSalary:&quot;);
+      Employee harry = new Employee(&quot;Harry&quot;, 50000);
+      System.out.println(&quot;Before: salary=&quot; + harry.getSalary());
+      tripleSalary(harry);
+      System.out.println(&quot;After: salary=&quot; + harry.getSalary());
+    
+      /*
+       * Test 3: Methods can't attach new objects to object parameters
+       */
+      System.out.println(&quot;\nTesting swap:&quot;);
+      Employee a = new Employee(&quot;Alice&quot;, 70000);
+      Employee b = new Employee(&quot;Bob&quot;, 60000);
+      System.out.println(&quot;Before: a=&quot; + a.getName());
+      System.out.println(&quot;Before: b=&quot; + b.getName());
+      swap(a, b);
+      System.out.println(&quot;After: a=&quot; + a.getName());
+      System.out.println(&quot;After: b=&quot; + b.getName());
+   }
+    
+   public static void tripleValue(double x) // doesn't work
+   {
+      x = 3 * x;
+      System.out.println(&quot;End of method: x=&quot; + x);
+   }
+    
+   public static void tripleSalary(Employee x) // works
+   {
+      x.raiseSalary(200);
+      System.out.println(&quot;End of method: salary=&quot; + x.getSalary());
+   }
+    
+   public static void swap(Employee x, Employee y)
+   {
+      Employee temp = x;
+      x = y;
+      y = temp;
+      System.out.println(&quot;End of method: x=&quot; + x.getName());
+      System.out.println(&quot;End of method: y=&quot; + y.getName());
+   }
+}
+    
+class Employee // simplified Employee class
+{
+   private String name;
+   private double salary;
+    
+   public Employee(String n, double s)
+   {
+      name = n;
+      salary = s;
+   }
+    
+   public String getName()
+   {
+      return name;
+   }
+    
+   public double getSalary()
+   {
+      return salary;
+   }
+    
+   public void raiseSalary(double byPercent)
+   {
+      double raise = salary * byPercent / 100;
+      salary += raise;
+   }
+}
+</code></pre></li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/04/08/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-11/">Oracle实践数据库笔记-11</a></span>
+  <span class="nav-next"><a href="/post/2018/04/20/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E6%80%BB%E7%BB%93/">「数字图像处理」总结</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

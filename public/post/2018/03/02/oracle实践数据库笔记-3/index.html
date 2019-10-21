@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle实践数据库笔记-3 - 乱七八糟的名词  - Rehoni.</title>
+    <meta property="og:title" content="Oracle实践数据库笔记-3 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="demo.sql 调用的时候不用写sql其他的要写 @d:/demo
+select d from scott.dept;
+help index edit run
+null 不参与统计 三值
+[&amp;hellip;] 层次查询
+[&amp;hellip;] lock 共享锁 独享锁
+[&amp;hellip;] 死锁 解决死锁 ：sysdba kill session ：desc v$lock;
+[&amp;hellip;]  &amp;hellip;">
+      <meta property="og:description" content="demo.sql 调用的时候不用写sql其他的要写 @d:/demo
+select d from scott.dept;
+help index edit run
+null 不参与统计 三值
+[&amp;hellip;] 层次查询
+[&amp;hellip;] lock 共享锁 独享锁
+[&amp;hellip;] 死锁 解决死锁 ：sysdba kill session ：desc v$lock;
+[&amp;hellip;]  &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle实践数据库笔记-3</h1>
+<h1><span class="subtitle">乱七八糟的名词</span></h1>
+<h3>
+  2018-03-02</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="3-06-实践数据库"><sup>3</sup>&frasl;<sub>06</sub> 实践数据库</h1>
+
+<p>demo.sql 调用的时候不用写sql其他的要写
+@d:/demo</p>
+
+<p>select d from scott.dept;</p>
+
+<p>help index
+edit
+run</p>
+
+<p>null 不参与统计
+三值</p>
+
+<ul>
+<li><p>层次查询</p></li>
+
+<li><p>lock
+共享锁
+独享锁</p></li>
+
+<li><p>死锁
+解决死锁
+：sysdba kill session
+：desc v$lock;</p></li>
+
+<li><p>修改表
+表名
+:
+增加字段
+:alter table t_name add c_name type(size);
+字段类型
+:alter table t_name modify c_name &ndash;;
+字段宽度
+:alter table t_name modify c_name type(size);</p></li>
+
+<li><p>代理用户</p></li>
+
+<li><p>delete
+DML
+删之前，放至回滚段，效率较低，可回滚，不释放存储空间</p></li>
+
+<li><p>truncate
+DDL
+效率高，不可回滚释放存储空间</p></li>
+
+<li><p>HWM high water mark</p></li>
+</ul>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/02/27/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-1/">Oracle实践数据库笔记-1</a></span>
+  <span class="nav-next"><a href="/post/2018/03/02/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-2/">Oracle实践数据库笔记-2</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

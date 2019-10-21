@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle实践数据库笔记-5 - 了解Oracle的锁和SQL/plus命令  - Rehoni.</title>
+    <meta property="og:title" content="Oracle实践数据库笔记-5 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="两个事物冲突，然后产生死锁，使用v$lock和v$session来解决死锁
+&amp;gt;http://www.cnblogs.com/rootq/articles/1147450.html
+[&amp;hellip;] help index
+[&amp;hellip;] DDL(create,alter,drop,truncate,rename,comment)
+[&amp;hellip;] 序列，索引
+[&amp;hellip;] &amp;hellip;">
+      <meta property="og:description" content="两个事物冲突，然后产生死锁，使用v$lock和v$session来解决死锁
+&amp;gt;http://www.cnblogs.com/rootq/articles/1147450.html
+[&amp;hellip;] help index
+[&amp;hellip;] DDL(create,alter,drop,truncate,rename,comment)
+[&amp;hellip;] 序列，索引
+[&amp;hellip;] &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle实践数据库笔记-5</h1>
+<h1><span class="subtitle">了解Oracle的锁和SQL/plus命令</span></h1>
+<h3>
+  2018-03-16</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="3-16-实践数据库"><sup>3</sup>&frasl;<sub>16</sub>  实践数据库</h1>
+
+<h2 id="锁-lock">锁 lock</h2>
+
+<ul>
+<li>自动，手动，力度权限<br /></li>
+<li>共享锁，独占锁<br /></li>
+<li>行锁，表锁<br /></li>
+</ul>
+
+<h2 id="死锁-deadlock">死锁 deadlock</h2>
+
+<ul>
+<li>Oracle能自动查到产生死锁的语句，并且回滚掉这句</li>
+</ul>
+
+<p>两个事物冲突，然后产生死锁，使用v$lock和v$session来解决死锁<br />
+&gt;<a href="http://www.cnblogs.com/rootq/articles/1147450.html">http://www.cnblogs.com/rootq/articles/1147450.html</a></p>
+
+<h2 id="sql-plus命令">SQL PLUS命令</h2>
+
+<blockquote>
+<p>help index</p>
+</blockquote>
+
+<h2 id="sql-讲完了">SQL 讲完了</h2>
+
+<ul>
+<li>QL(select)<br /></li>
+<li>DML(insert,update,delete,merge)<br /></li>
+<li>DCL(grant,invoke)<br /></li>
+<li>TCL(commit,rollback,savepoint)<br /></li>
+
+<li><p>DDL(create,alter,drop,truncate,rename,comment)</p></li>
+
+<li><p>序列，索引</p></li>
+
+<li><p><strong>建表table原则</strong> (PPT313)</p></li>
+</ul>
+
+<p>名称空间，表的名称不能和同<strong>名称空间</strong>下的对象同名</p>
+
+<ul>
+<li><p>同义词</p></li>
+
+<li><p>创建用户和给予权限（grant）</p></li>
+
+<li><p>pserdocolumn 伪列（不在列编制里边的列，desc不可见）</p></li>
+</ul>
+
+<p>rowid 物理地址，BASE64_CODE文件号，列号，行号</p>
+
+<ul>
+<li><p>主流编制 dbms_rowid</p>
+
+<pre><code class="language-sql">select dbms_rowid.ROWID_RELATIVE_FNO(rowid) File#,
+dbms_rowid.ROWID_BLOCK_NUMBER(rowid) Block#,
+dbms_rowid.ROWID_ROW_NUMBER(rowid) Row#,
+frmo emp;
+</code></pre></li>
+
+<li><p>一些语句</p>
+
+<pre><code class="language-sql">view_name from user_views
+名称空间desc user_objects
+col object_name for a30;
+create user cr identified aaa
+grant给予用户基本权限
+desc dba_users,查询用户默认表空间，存储权限没有，能建表但是在使用的时候才需要
+alter user zhang quota 5m/unlimited on users;
+grant create any table to zhang;
+grant select on scott.emp to zhang;
+alter user scott grant through dl;用dl代理scott用户
+comment on column emp.EMPNO is 'employee number';
+desc user_tab/col_comments;
+select comments from user_tab/col_comments where column_name/table_name = 'emp';
+</code></pre></li>
+
+<li><p>数据类型</p></li>
+</ul>
+
+<p>字符集，编码方案<br />
+表的数据类型</p>
+
+<ul>
+<li>修改表 alter</li>
+</ul>
+
+<ol>
+<li>修改表名 rename<br /></li>
+<li>增加字段 add<br /></li>
+<li>修改字段<br />
+（1）字段改名<br />
+（2）字段类型 alter modified（要修改的列必须为空）<br />
+（3）修改字段宽度<br /></li>
+<li>删除字段<br /></li>
+<li>删除表 drop table对象会放入回收站<br /></li>
+<li>截断表<br />
+delete：DML 有回滚rollback，先复制一份再删除，不释放存储空间<br />
+truncate：DDL 没有回滚，释放存储空间<br />
+引入hwm，high water marker 高端水印，扫描到高端水印为止</li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/03/13/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-4/">Oracle实践数据库笔记-4</a></span>
+  <span class="nav-next"><a href="/post/2018/03/20/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-6/">Oracle实践数据库笔记-6</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

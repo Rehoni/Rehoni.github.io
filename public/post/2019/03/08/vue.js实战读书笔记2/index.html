@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Vue.js实战读书笔记（2） - 记录阅读Vue.js实战阅读中的一些问题和理解。  - Rehoni.</title>
+    <meta property="og:title" content="Vue.js实战读书笔记（2） - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="修饰符：lazy（change事件中同步），number（限定数字），trim（自动过滤首位的输入空格），
+[&amp;hellip;] template的DOM结构必须被一个元素包含，如果直接写成 “这里是组件 的内容”，不带&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;是无法渲染的。
+[&amp;hellip;] Vue 组件的模板在某些情况下会受到HTML的限制，比如＜table＞内规定只允许是〈 &amp;hellip;">
+      <meta property="og:description" content="修饰符：lazy（change事件中同步），number（限定数字），trim（自动过滤首位的输入空格），
+[&amp;hellip;] template的DOM结构必须被一个元素包含，如果直接写成 “这里是组件 的内容”，不带&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;是无法渲染的。
+[&amp;hellip;] Vue 组件的模板在某些情况下会受到HTML的限制，比如＜table＞内规定只允许是〈 &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Vue.js实战读书笔记（2）</h1>
+<h1><span class="subtitle">记录阅读Vue.js实战阅读中的一些问题和理解。</span></h1>
+<h3>
+  2019-03-08</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="vue-js实战读书笔记">Vue.js实战读书笔记</h1>
+
+<h2 id="学习链接">学习链接：</h2>
+
+<ol>
+<li>Vue官方教程 <a href="https://cn.vuejs.org/">https://cn.vuejs.org/</a></li>
+<li><a href="https://www.w3cplus.com/blog/vue">https://www.w3cplus.com/blog/vue</a></li>
+</ol>
+
+<h2 id="v-model-绑定动态数据可以用v-bind来实现">v-model: 绑定动态数据可以用v-bind来实现。</h2>
+
+<ol>
+<li><p>修饰符：lazy（change事件中同步），number（限定数字），trim（自动过滤首位的输入空格），</p></li>
+
+<li><p>template的DOM结构必须被一个元素包含，如果直接写成 “这里是组件 的内容”，不带<code>&lt;div&gt;&lt;/div&gt;</code>是无法渲染的。</p></li>
+
+<li><p>Vue 组件的模板在某些情况下会受到HTML的限制，比如＜table＞内规定只允许是〈位〉、＜td＞、<th＞等这些表格元素，所以在＜table＞内直接使用组件是无效的。这种情况下，可以使用特殊的is属性来挂载组件。 `<tbody is="my-component"></tbody>`tbody在渲染时，会被替换为组件的内容。常见的限制元素还有＜ul＞、＜ol＞、＜select&gt;。</p></li>
+</ol>
+
+<h2 id="props-数组和对象">props: 数组和对象。</h2>
+
+<ol>
+<li>props 中声明的数据与组件 data 函数 return 的数据主要区别就是： props 的来自父级，而 data 中的是组件自己的数据，作用域是组件本身，这两种数据都可以在模板 template 及计算属性 computed和方法 methods 中使用。</li>
+
+<li><p>由于 HT岛E 特性不区分大小写，当使用 DOM 模板时，驼峰命名 (camelCase)的 props 名称要转为短横分隔命名 (kebab-case)</p>
+
+<pre><code class="language-html">&lt;div id=&quot; app” &gt;
+&lt;my-component warning-text ＝ ”提示信息 &quot; ＞＜／ my-component&gt;
+&lt;/div&gt;
+&lt;script&gt;
+Vue.component ( ' my-component ', {
+props: [ 'warningText'],
+template:' &lt;div&gt;{{ warningText }} &lt;/div&gt;'
+});
+var app =new Vue({
+el:' #app '
+})
+&lt;/script&gt;
+</code></pre></li>
+
+<li><p>有时候，传递的数据并不是直接写死的，而是来自父级的动态数据，这时可以使用指令 v-bind 来动态绑定 props 的值，当父组件的数据变化时，也会传递给子组件。</p></li>
+
+<li><p>如果你要直接传递数字、布尔值、数组、对象，而且不使用v-bind，传递的仅仅是字符串。下边message.length=7，而:message.length=3。</p></li>
+
+<li><p>在JavaScript中对象和数组是引用类型，指向同一个内存空间，所以 props 是对象和数组时，在子组件内改变是会影响父组件的。</p>
+
+<pre><code class="language-html">&lt;div id=&quot; app &quot; &gt;
+  &lt;my-component message=&quot; [ 1 , 2, 3 ] &quot; &gt;&lt;/my-component&gt;
+  &lt;my-component :message=&quot; [ 1 , 2, 3 ] &quot; &gt;&lt;/my-component&gt;
+&lt;/div&gt;
+&lt;script&gt;
+  Vue.component (' my-component ', {
+  props: [ ' message ' ],
+  template:'&lt;div&gt;{{ message.length }}&lt;/div&gt;'
+  });
+  var app =new Vue ( {
+    el: '#app'
+  })
+&lt;/script&gt;
+</code></pre></li>
+</ol>
+
+<h2 id="数据验证">数据验证</h2>
+
+<ul>
+<li><p>type: String, Number, Boolean, Object, Array, Function。type也可以是一个自定义构造器，使用instanceof检测。</p>
+
+<pre><code class="language-js">Vue.component('my-component',{
+props : {
+  ／／必须是数字类型
+  propA : Number ,
+  ／／必须是字符串或数字类型
+  propB : [String , Number] ,
+  ／／布尔值，如果没有定义，默认值就是 true
+  propC: {
+    type : Boolean ,
+    default : true
+  }
+  ／／数字，而且是必传
+  propD: {
+    type: Number ,
+    required : true
+  }
+  ／／如果是数组或对象，默认值必须是一个函数来返回
+  propE: {
+    type : Array ,
+    default : function () {
+      return [] ;
+    }
+  }
+  ／／自定义一个验证函数
+  propF: {
+    validator : function (value) {
+      return value &gt; 10;
+    }
+  }
+}
+});
+</code></pre></li>
+</ul>
+
+<h2 id="组件通信">组件通信</h2>
+
+<ol>
+<li>自定义事件：如果你了解过 JavaScript 的设计模式一一观察者模式， 一定知道 dispatchEvent 和 addEventListener这两个方法。 Vue 组件也有与之类似的一套模式，子组件用 $emit（）来触发事件，父组件用 $on（）来监听子组件的事件 。</li>
+<li>中央事件总线(bus)：首先创建了 一个名为 bus 的空 Vue 实例，里面没有任何内容；然后全局定义了组件component-a；最后创建 Vue 实例 app ，在 app 初始化时，也就是在生命周期 mounted 钩子函数里监听了来自 bus 的事件 on-message，而在组件 component-a 中，点击按钮会通过 bus 把事件 on-message发出去，此时 app 就会接收到来自 bus 的事件，进而在回调里完成自己的业务逻辑。如果深入使用，可以扩展 bus 实例，给它添加 data 、 methods、 computed 等选工页，这些都是可以公用的，在业务中，尤其是协同开发时非常有用，因为经常需要共享一些通用的信息，比如用户登录的昵称、性别、邮箱等，还有用户的授权 token 等。只需在初始化时让 bus 获取一次，任何时间、任何组件就可以从中直接使用了，在单页面富应用（ SPA ）中会很实用，也可以选择更好的状态管理解决方案vuex。</li>
+<li>父链：在子组件中，使用 this.$parent 可以直接访问该组件的父实例或组件，父组件也可以通过this.$children 访问它所有的子组件，而且可以递归向上或向下无线访问， 直到根实例或最内层的组件。尽管 Vue 允许这样操作，但在业务中 ， 子组件应该尽可能地避免依赖父组件的数据，更不应该去主动修改它的数据，因为这样使得父子组件紧藕合，只看父组件，很难理解父组件的状态，因为它可能被任意组件修改 ， 理想情况下，只有组件自己能修改它的状态。父子组件最好还是通过props 和 $emit 来通信。</li>
+
+<li><p>当子组件较多时 ，通过 this.$children 来一一遍历出我们需要的一个组件实例是比较困难的，尤其是组件动态渲染时，它们的序列是不固定的。 Vue 提供了子组件索引的方法，用特殊的属性 ref 来为子组件指定一个索引名称。通过父组件事件函数调用声明 $ref 子组件进行内容访问or修改。$refs只在组件渲染完成后才填充，并且它是非响应式的。它仅仅作为一个直接访问子组件的应急方案，应当避免在模板或计算属性中使用$refs。</p>
+
+<pre><code class="language-html">&lt;div id=&quot;app&quot;&gt;
+{{message}}
+&lt;component-a&gt;&lt;/component-a&gt;
+&lt;/div&gt;
+&lt;script&gt;
+var bus = new Vue();
+Vue.component('component-a', {
+    template: '&lt;button @click=&quot;handleEvent&quot;&gt;传递事件&lt;/button&gt;',
+    methods: {
+        handleEvent: function () {
+            bus.$emit('on-message', '来自组件component-a的内容');
+        }
+    }
+});
+var app = new Vue({
+  el: '#app',
+  data: {
+      message: ''
+  },
+  mounted: function () {
+      var _this = this;
+      bus.$on('on-message', function (msg) {
+          _this.message = msg;
+      });
+  }
+})
+&lt;/script&gt;
+</code></pre></li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2019/03/07/vue.js%E5%AE%9E%E6%88%98%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B01/">Vue.js实战读书笔记（1）</a></span>
+  <span class="nav-next"><a href="/post/2019/03/08/vue.js%E5%AE%9E%E6%88%98%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B03/">Vue.js实战读书笔记（3）</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

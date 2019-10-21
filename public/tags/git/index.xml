@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Rehoni.</title>
+    <link>/tags/git/</link>
+    <description>Recent content in git on Rehoni.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 02 Apr 2019 15:28:11 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>git脱坑指南</title>
+      <link>/post/2019/04/02/git%E8%84%B1%E5%9D%91%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Tue, 02 Apr 2019 15:28:11 +0800</pubDate>
+      
+      <guid>/post/2019/04/02/git%E8%84%B1%E5%9D%91%E6%8C%87%E5%8D%97/</guid>
+      <description> 拉取远程分支代码  git clone了master分支的代码下来，但是需要拉取其他远程分支的代码，采用git branch -r查看远程分支列表，如想要拉取，则可以通过git branch -t origin/dev或者git checkout -b dev origin/dev拉取同远程分支名同名的分支到本地。
+ 合并仓库并且保留commit log message记录
+ 将repo1作为远程仓库，添加到repo2中，设置别名为other 从repo1仓库中抓取数据到本仓库 将repo1仓库中抓取的master分支作为新分支checkout到本地，新分支命名为repo1 切换为repo2的master分支 将repo1合并入master分支 注意：产生的文件冲突需要解决提交后才能merge，merge时需要添加参数--allow-unrelated-histories
+git remote add other ../repo1/ git fetch other git checkout -b repo1 other/master git checkout master git merge repo1 --allow-unrelated-histories   变基操作rebase
+  </description>
+    </item>
+    
+  </channel>
+</rss>

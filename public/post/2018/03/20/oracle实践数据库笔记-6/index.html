@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle实践数据库笔记-6 - 关于Oracle的数据完整性和视图，以及sequence序列，index索引，synonyms同义词以及Oracle的例程管理  - Rehoni.</title>
+    <meta property="og:title" content="Oracle实践数据库笔记-6 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="删除操作delete和drop的区别
+回收站的机制
+删除表的时候其实不删除文件而是改动文件名，实现加入回收站的操作
+flashback *****  数据完整性  代码 触发器 约束（开销小）  数据&#43;规则&amp;mdash;&amp;ndash;&amp;gt;合理，有效
+建立表的时候:关键字&#43;起名字&#43;约束类型（&#43;字段）;
+一些关键字: CHECK 检查条件
+FOREIGN KEY, REFERENCES
+ON &amp;hellip;">
+      <meta property="og:description" content="删除操作delete和drop的区别
+回收站的机制
+删除表的时候其实不删除文件而是改动文件名，实现加入回收站的操作
+flashback *****  数据完整性  代码 触发器 约束（开销小）  数据&#43;规则&amp;mdash;&amp;ndash;&amp;gt;合理，有效
+建立表的时候:关键字&#43;起名字&#43;约束类型（&#43;字段）;
+一些关键字: CHECK 检查条件
+FOREIGN KEY, REFERENCES
+ON &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle实践数据库笔记-6</h1>
+<h1><span class="subtitle">关于Oracle的数据完整性和视图，以及sequence序列，index索引，synonyms同义词以及Oracle的例程管理</span></h1>
+<h3>
+  2018-03-20</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="3-20-实践数据库"><sup>3</sup>&frasl;<sub>20</sub> 实践数据库</h1>
+
+<h2 id="回顾">回顾</h2>
+
+<p>删除操作delete和drop的区别<br />
+回收站的机制<br />
+删除表的时候其实不删除文件而是改动文件名，实现加入回收站的操作</p>
+
+<pre><code class="language-sql">flashback *****
+</code></pre>
+
+<h2 id="数据完整性">数据完整性</h2>
+
+<ol>
+<li>代码</li>
+<li>触发器</li>
+<li>约束（开销小）</li>
+</ol>
+
+<p>数据+规则&mdash;&ndash;&gt;合理，有效<br />
+建立表的时候:关键字+起名字+约束类型（+字段）;</p>
+
+<p>一些关键字:
+CHECK 检查条件<br />
+FOREIGN KEY, REFERENCES<br />
+ON DELETE CASECADE, 删除部门，员工回家<br />
+ON DELETE SET NULL, 删除部门，员工待分配</p>
+
+<p>添加约束和删除约束:
+ALTER ADD/DROP/ENABLE/DISABLE</p>
+
+<pre><code class="language-sql">---一点例子
+ALTER TABLE table
+ADD [CONSTRAINT  constraint] type (column) ;
+ALTER TABLE employee s
+ADD CONSTRAINT emp_manager_f k FOREIGN KEY (manager_id)
+REFERENCES employees (empoyee_id) ;
+ALTER TABLE employees
+DROP CONSTRAINT emp_manager_fk;
+</code></pre>
+
+<pre><code class="language-sql">desc user_constraints;
+desc user_cons_columns;
+---添加约束的时候注意处理异常数据的操作
+desc exceptions;异常表不存在
+@?/rdbms/admin/utlexcpt 创建异常表---&gt;查询启用约束后违反约束的数据
+alter table test
+enable constraints uni_c2
+exceptions into exceptions---启用约束时候注意把异常放入exceptions表中
+ select rowid,c1,c2
+  2  from test
+  3  where rowid in (select row_id from exceptions);---查询异常数据然后修改
+truncate table exceptions;
+---
+</code></pre>
+
+<h2 id="视图">视图</h2>
+
+<p>没认真听</p>
+
+<ol>
+<li>屏蔽敏感数据</li>
+<li>便于查询</li>
+<li>数据独立性</li>
+</ol>
+
+<p>虚表&mdash;不是存储结构<br />
+表&mdash;是存储结构</p>
+
+<p>存在一些DML操作无法修改data：</p>
+
+<ul>
+<li>Group function</li>
+<li>GROUP BY</li>
+<li>DISTINCT</li>
+<li>pseudocolumn ROWNUM</li>
+<li>columns defined by exceptions</li>
+</ul>
+
+<p>复杂视图<br />
+内嵌视图</p>
+
+<pre><code class="language-sql">create view emp_info
+as select empno,ename,sal from emp;
+create or replace view emp_info
+as select empno,ename,sal,deptno from emp;--如果删除原来的view，所有的上边的权限会丢失（Oracle是按照id来操作的），那么删掉重建hr会改变导致出现问题
+grant create any view to scott;--给他的权限
+*** with check option---符合条件才能更改
+*** with read only---只读视图
+------子查询
+select empno,ename,sal from emp
+where rownum&lt;=3
+order by sal desc;
+------内嵌式图
+select empno,ename,sal from (select * from emp order by sal desc)
+where rownum&lt;=3;
+</code></pre>
+
+<h2 id="sequence-序列">sequence 序列</h2>
+
+<pre><code class="language-sql">create sequence s1;----序列
+select s1.nextval from dual;
+select s1.currval from dual;
+-------------
+create sequence s2
+start with 20
+increment by -1
+maxvalue 30
+minvalue 0
+cycle 
+cache 4;
+</code></pre>
+
+<h2 id="索引-index">索引 index</h2>
+
+<p>看ppt</p>
+
+<pre><code class="language-sql">
+</code></pre>
+
+<h2 id="synonyms-同义词">synonyms 同义词</h2>
+
+<p>没讲</p>
+
+<h2 id="例程管理">例程管理</h2>
+
+<p>很多没听懂</p>
+
+<p>关于权限不足的问题：</p>
+
+<ol>
+<li>关闭例程（shutdown）</li>
+</ol>
+
+<p>4种模式 （N,T,I,A）</p>
+
+<ol>
+<li>启动数据库（startup）</li>
+</ol>
+
+<ul>
+<li>启动例程 nomount
+加载初始化参数文件，只能访问一部分动态性能视图（内容来自内存的）<br /></li>
+<li>加载数据库 mount
+加载控制文件，可以访问所有的动态性能视图<br /></li>
+<li>打开数据库 open
+加载联机日志文件和数据文件</li>
+</ul>
+
+<ol>
+<li>例程配置</li>
+</ol>
+
+<ul>
+<li>了解初始化文件
+
+<ul>
+<li>文本文件pfile    init<sid>.ora &mdash;initdb11.ora</li>
+<li>二进制文件spfile spfile<sid>.ora &mdash;spfiledb11.ora</li>
+</ul></li>
+<li>查看初始化参数 show parameter **=<br /></li>
+<li>修改初始化参数 alter system set **=<br /></li>
+<li>**将初始化参数还原成默认值 alter system reset ** (重启才生效)**重设所有的默认值该怎么写</li>
+<li><strong>修复出错的初始化参数</strong></li>
+<li>根据spfile/pfile创建pfile/spfile</li>
+<li>启动时选择初始化参数文件的顺序
+
+<ul>
+<li>spfile<sid>.ora</li>
+<li>spfile.ora</li>
+<li>init<sid>.ora</li>
+</ul></li>
+
+<li><p>用指定的初始化参数文件启动
+startup pfile=</p>
+
+<ul>
+<li>静态参数和动态参数</li>
+<li>静态参数需要修改文件，alter system set sga_max_size=3000m;报错，false的mod在文件修改完之后，需要重启后生效</li>
+<li>动态参数可以改动，如share_pool_size，desc v$parameter查询   immediate的mod为可以直接改动后当前会话立即生效，</li>
+
+<li><p>deferred的mod为新会话生效</p>
+
+<pre><code class="language-sql">alter system set shared_pool_size=208m scope=memory;
+show parameter shared_pool_size;
+alter system set sga_max_size=3000m scope=spfile;---重启之后
+create spfile from pfile
+</code></pre></li>
+</ul></li>
+</ul>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/03/16/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-5/">Oracle实践数据库笔记-5</a></span>
+  <span class="nav-next"><a href="/post/2018/03/23/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-7/">Oracle实践数据库笔记-7</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

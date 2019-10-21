@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle实践数据库笔记-4 - Oracle的PL/SQL语句，以及块结构，子查询和DML语句的一些内容。  - Rehoni.</title>
+    <meta property="og:title" content="Oracle实践数据库笔记-4 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="循环 (sql中用斜杠/执行命令)
+[&amp;hellip;] for循环
+begin for i in 1..10 loop insert into t1 values(i); end loop; commit; end;（功能结束就加分号，块结束）   块结构  声明部分（可选） 可执行部分（必须） 异常处理部分（可选）   匿名块：4个部分   declare begin exception &amp;hellip;">
+      <meta property="og:description" content="循环 (sql中用斜杠/执行命令)
+[&amp;hellip;] for循环
+begin for i in 1..10 loop insert into t1 values(i); end loop; commit; end;（功能结束就加分号，块结束）   块结构  声明部分（可选） 可执行部分（必须） 异常处理部分（可选）   匿名块：4个部分   declare begin exception &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle实践数据库笔记-4</h1>
+<h1><span class="subtitle">Oracle的PL/SQL语句，以及块结构，子查询和DML语句的一些内容。</span></h1>
+<h3>
+  2018-03-13</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="3-13-实践数据库"><sup>3</sup>&frasl;<sub>13</sub> 实践数据库</h1>
+
+<h2 id="pl-sql-ql-select">PL/SQL QL(select)</h2>
+
+<p><strong>循环 (sql中用斜杠/执行命令)</strong></p>
+
+<ol>
+<li>绝对循环</li>
+<li>while循环</li>
+
+<li><p>for循环</p>
+
+<pre><code class="language-C++">begin
+for i in 1..10 loop
+    insert into t1 values(i);
+end loop;
+commit;
+end;（功能结束就加分号，块结束）
+</code></pre></li>
+</ol>
+
+<h2 id="块结构">块结构</h2>
+
+<ul>
+<li>声明部分（可选）</li>
+<li>可执行部分（必须）</li>
+<li>异常处理部分（可选）</li>
+</ul>
+
+<ol>
+<li>匿名块：4个部分</li>
+</ol>
+
+<ul>
+<li>declare</li>
+<li>begin</li>
+<li>exception</li>
+<li>end</li>
+</ul>
+
+<ol>
+<li><p>命名块：</p>
+
+<pre><code class="language-C++">create or replace procedure p1
+as
+    begin
+        for i in 1..10 loop
+            insert into t1 values(i);
+        end loop;
+        commit;
+    end;
+</code></pre>
+
+<pre><code class="language-sql">select a.id,b.id from t1 a,t1 b
+where a.id+5=b.id;
+或者where a.id+(select count(*) from t1)/2=b.id;
+where a.id+round((select count(*) from t1)/2)=b.id; //round 四舍五入
+不显示12的话，用外部语句
+where a.id+round((select count(*) from t1)/2)=b.id(+); //报错
+where a.id=b.id(+)-round((select count(*) from t1)/2);
+and a.id&lt;=round((select count(*) from t1)/2);
+</code></pre></li>
+</ol>
+
+<h2 id="子查询">子查询</h2>
+
+<ol>
+<li>嵌套子查询</li>
+
+<li><p>关联子查询</p>
+
+<pre><code class="language-sql">    查询lastname，
+    条件老百姓，不要领导
+    select last_name from employees
+    where employee_id not in (select nvl(manager_id,0)  from employees)
+    select last_name from employees e
+    where not exists 
+        (select employee_id from employees
+        where e.employee_id = manager_id)
+</code></pre></li>
+</ol>
+
+<ul>
+<li>&amp;</li>
+<li>define</li>
+
+<li><p>&amp;&amp;</p>
+
+<pre><code class="language-sql">    select empno,ename from emp where ename=upper(&amp;xm);
+    define gh=7839; //undefine 取消定义
+    select empno,ename from emp where ename=&amp;gh;
+
+    select empno,ename,&amp;c3 from emp order by &amp;c3;
+    select empno,ename,&amp;&amp;c3 from emp order by &amp;c3;
+</code></pre></li>
+</ul>
+
+<h2 id="dml-insert-update-delete-merge">DML(insert,update,delete.merge)</h2>
+
+<pre><code class="language-sql">grant ...限制  
+select department_id from departments order by 1;
+</code></pre>
+
+<p>合并 读写一致性</p>
+
+<p>回滚段的作用：</p>
+
+<ul>
+<li>读一致性</li>
+<li>回退</li>
+<li>闪回回复</li>
+</ul>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/03/11/%E4%BA%91%E8%AE%A1%E7%AE%97%E6%AF%94%E8%B5%9B%E6%80%BB%E7%BB%93/">「云计算比赛」总结</a></span>
+  <span class="nav-next"><a href="/post/2018/03/16/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-5/">Oracle实践数据库笔记-5</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

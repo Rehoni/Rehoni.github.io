@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on Rehoni.</title>
+    <link>/</link>
+    <description>Recent content in Home on Rehoni.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Apr 2019 15:04:11 +0800</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Leetcode-70</title>
+      <link>/post/2019/04/18/leetcode-70/</link>
+      <pubDate>Thu, 18 Apr 2019 15:04:11 +0800</pubDate>
+      
+      <guid>/post/2019/04/18/leetcode-70/</guid>
+      <description>70. Climbing Stairs
+You are climbing a stair case. It takes n steps to reach to the top.
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+Note: Given n will be a positive integer.
+Example 1:
+Input: 2 Output: 2 Explanation: There are two ways to climb to the top. 1. 1 step + 1 step 2. 2 steps  Example 2:</description>
+    </item>
+    
+    <item>
+      <title>git脱坑指南</title>
+      <link>/post/2019/04/02/git%E8%84%B1%E5%9D%91%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Tue, 02 Apr 2019 15:28:11 +0800</pubDate>
+      
+      <guid>/post/2019/04/02/git%E8%84%B1%E5%9D%91%E6%8C%87%E5%8D%97/</guid>
+      <description> 拉取远程分支代码  git clone了master分支的代码下来，但是需要拉取其他远程分支的代码，采用git branch -r查看远程分支列表，如想要拉取，则可以通过git branch -t origin/dev或者git checkout -b dev origin/dev拉取同远程分支名同名的分支到本地。
+ 合并仓库并且保留commit log message记录
+ 将repo1作为远程仓库，添加到repo2中，设置别名为other 从repo1仓库中抓取数据到本仓库 将repo1仓库中抓取的master分支作为新分支checkout到本地，新分支命名为repo1 切换为repo2的master分支 将repo1合并入master分支 注意：产生的文件冲突需要解决提交后才能merge，merge时需要添加参数--allow-unrelated-histories
+git remote add other ../repo1/ git fetch other git checkout -b repo1 other/master git checkout master git merge repo1 --allow-unrelated-histories   变基操作rebase
+  </description>
+    </item>
+    
+    <item>
+      <title>Snap初识</title>
+      <link>/post/2019/04/02/snap%E5%88%9D%E8%AF%86/</link>
+      <pubDate>Tue, 02 Apr 2019 15:28:11 +0800</pubDate>
+      
+      <guid>/post/2019/04/02/snap%E5%88%9D%E8%AF%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>elementUI脱坑指南</title>
+      <link>/post/2019/03/18/elementui%E8%84%B1%E5%9D%91%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Mon, 18 Mar 2019 18:11:56 +0800</pubDate>
+      
+      <guid>/post/2019/03/18/elementui%E8%84%B1%E5%9D%91%E6%8C%87%E5%8D%97/</guid>
+      <description> 深度选择器，当在style scoped中修改对应组件的样式时，发现预览之后样式并没有改变，可以确认样式的修改写入了文件中，但是因为覆盖的优先级的原因，并没有产生变化，这个时候有两种办法，一种是在style scoped之外，再加入style的域进行全局的样式修改；另一种则是在style scoped中，进行这样的声明  </description>
+    </item>
+    
+    <item>
+      <title>Vue.js实战读书笔记（3）</title>
+      <link>/post/2019/03/08/vue.js%E5%AE%9E%E6%88%98%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B03/</link>
+      <pubDate>Fri, 08 Mar 2019 16:43:13 +0800</pubDate>
+      
+      <guid>/post/2019/03/08/vue.js%E5%AE%9E%E6%88%98%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B03/</guid>
+      <description>Vue.js实战读书笔记 slot分发内容 props 传递数据、 events 触发事件和 slot 内 容分发就构成了 Vue 组件的 3 个 API 来源，再复杂的组件也是由这 3 部分构成的。
+ 作用域：slot分发的内容作用域是在父组件上的。 slot用法：
+ 单个slot：父组件中进入子组件child-component，在child-component的模板内定义一个＜slot&amp;gt;元素，并且用一个＜p＞作为默认的内容，在父组件没有使用 slot 时，会渲染这段默认的文本；如果写入了 slot， 那就会替换整个＜slot&amp;gt;。 子组件&amp;lt;slot&amp;gt;内的备用内容，它的作用域是子组件本身。 具名slot：给＜slot&amp;gt;元素指定一个 name 后可以分发多个内容，具名 Slot 可以与单个 Slot 共存。其中在＜div class＝”main与内的＜slot&amp;gt; 没有使用 name 特性，它将作为默认 slot 出现，父组件没有使用 slot 特性的元素与内容都将出现在这里。如果没有指定默认的匿名 slot，父组件内多余的内容片段都将被抛弃。 作用域插槽：在＜slot&amp;gt;元素上有一个类似 props 传递数据给组件的写法 msg＝”xxx”，将数据传到了插槽。父组件中使用了＜template＞元素，而且拥有一个 scope＝”props”的特性，这里的 props只是一个临时变量，就像 v-for=”item in items，里面的 item 一样。 template 内可以通过临时变量 props访问来自子组件插槽的数据 msg 。如果下例还在其他组件内使用，＜Ii＞的内容渲染权是由使用者掌握的，而数据却可以通过临时变量（比如 props ）从子组件内获取。 通过$slots 可以访问某个具名 slot, this .$slots.default 包括了所有没有被包含在具名 slot 中的节点。$slots 在业务中几乎用不到 ， 在用 render 函数（进阶篇中将介绍）创建组件时会比较有用，但主要还是用于独立组件开发中。</description>
+    </item>
+    
+    <item>
+      <title>Vue.js实战读书笔记（2）</title>
+      <link>/post/2019/03/08/vue.js%E5%AE%9E%E6%88%98%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B02/</link>
+      <pubDate>Fri, 08 Mar 2019 14:37:33 +0800</pubDate>
+      
+      <guid>/post/2019/03/08/vue.js%E5%AE%9E%E6%88%98%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B02/</guid>
+      <description>Vue.js实战读书笔记 学习链接：  Vue官方教程 https://cn.vuejs.org/ https://www.w3cplus.com/blog/vue  v-model: 绑定动态数据可以用v-bind来实现。  修饰符：lazy（change事件中同步），number（限定数字），trim（自动过滤首位的输入空格），
+ template的DOM结构必须被一个元素包含，如果直接写成 “这里是组件 的内容”，不带&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;是无法渲染的。
+ Vue 组件的模板在某些情况下会受到HTML的限制，比如＜table＞内规定只允许是〈位〉、＜td＞、`tbody在渲染时，会被替换为组件的内容。常见的限制元素还有＜ul＞、＜ol＞、＜select&amp;gt;。
+  props: 数组和对象。  props 中声明的数据与组件 data 函数 return 的数据主要区别就是： props 的来自父级，而 data 中的是组件自己的数据，作用域是组件本身，这两种数据都可以在模板 template 及计算属性 computed和方法 methods 中使用。 由于 HT岛E 特性不区分大小写，当使用 DOM 模板时，驼峰命名 (camelCase)的 props 名称要转为短横分隔命名 (kebab-case)
+&amp;lt;div id=&amp;quot; app” &amp;gt; &amp;lt;my-component warning-text ＝ ”提示信息 &amp;quot; ＞＜／ my-component&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;script&amp;gt; Vue.component ( &#39; my-component &#39;, { props: [ &#39;warningText&#39;], template:&#39; &amp;lt;div&amp;gt;{{ warningText }} &amp;lt;/div&amp;gt;&#39; }); var app =new Vue({ el:&#39; #app &#39; }) &amp;lt;/script&amp;gt;  有时候，传递的数据并不是直接写死的，而是来自父级的动态数据，这时可以使用指令 v-bind 来动态绑定 props 的值，当父组件的数据变化时，也会传递给子组件。</description>
+    </item>
+    
+    <item>
+      <title>Vue.js实战读书笔记（1）</title>
+      <link>/post/2019/03/07/vue.js%E5%AE%9E%E6%88%98%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B01/</link>
+      <pubDate>Thu, 07 Mar 2019 10:18:33 +0800</pubDate>
+      
+      <guid>/post/2019/03/07/vue.js%E5%AE%9E%E6%88%98%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B01/</guid>
+      <description>Vue.js实战读书笔记 计算属性缓存：method和computed？ 计算属性是基于它的依赖缓存的。一个计算属性所依赖的数据发生变化时，它才会重新取值，所以text只要不改变，计算属性也就不更新。使用计算属性还是methods取决于你是否需要缓存，当遍历大数组和做大量计算时，应当使用计算属性，除非你不希望得到缓存。
+什么是dom？ 知乎回答：https://www.zhihu.com/question/34219998
+v-bind绑定class和style  绑定class：可以跟原class共存，可以绑定多个class。绑定class对象，绑定class数组。可以利用三元表达式进行class的条件切换，同时也可以用computed和method进行更复杂的class条件选择。 绑定style，类似直接添加样式，同样可以绑定对象和数组。使用:style时，Vue.js会自动给特殊的css属性名称增加前缀，比如transform。  vue中的根元素 指令集合  v-cloak：是一个解决初始化慢导致页面闪动的最佳实践，常常与display:none配合使用。 v-once：定义它的元素或组件只渲染一次，包括元素或组件的所有子节点。首次渲染后，不再随数据的变化重新渲染，将被视为静态内容。 v-if、v-else-if、v-else：条件渲染指令。Vue在渲染元素时，出于效率考虑，会尽可能地复用已有的元素而非重新渲染。使用Vue扣提供的key属性，它可以让你自己决定是否要复用元素，key的值必须是唯一的。 v-show：用法与v-if基本一致，只不过v-show是改变元素的css属性display。当v-show表达式的值为false时，元素会隐藏，查看DOM结构会看到元素上加载了内联样式display:none。v-show不能再template上使用。 v-for：当需要将一个数组遍历或枚举一个对象循环显示时，就会用到列表渲染指令v-for。它的表达式需结合in来使用，类似item in items的形式。遍历数组和对象，关键字key，index。 v-show和v-if：v-if和v-show具有类似的功能，不过v-if才是真正的条件渲染，它会根据表达式适当地销毁或重建元素及绑定的事件或子组件。若表达式初始值为false，则一开始元素／组件并不会渲染，只有当条件第一次变为真时才开始编译。 修饰符: stop,prevent,capture,self,once以及按键修饰符keyCode,还有一些快捷别名：enter,tab,delete,esc,space,up,down,right,left可以配合ctrl,alt,shift,meta使用
+&amp;lt;a @click.stop=&amp;quot;handle&amp;quot;&amp;gt;&amp;lt;/a&amp;gt; &amp;lt;form @submit.prevent=&amp;quot;handle&amp;quot;&amp;gt;&amp;lt;/form&amp;gt; &amp;lt;a @click.stop.prevent=&amp;quot;handle&amp;quot;&amp;gt;&amp;lt;/a&amp;gt; &amp;lt;form @submit.prevent&amp;gt;&amp;lt;/form&amp;gt; &amp;lt;div @click . capture=&amp;quot;handle&amp;quot;&amp;gt;...&amp;lt;/div&amp;gt; &amp;lt;div @click.self=&amp;quot;handle&amp;quot; &amp;gt;... &amp;lt;/div&amp;gt; &amp;lt;div @click.once=&amp;quot;handle&amp;quot; &amp;gt;... &amp;lt;/div&amp;gt;   数组更新：  push,pop,shift,unshift,splice,sort,reverse 会改变原有数组 filter,concat,slice 返回新数组 Vue 在检测到数组变化时，并不是直接重新渲染整个列表，而是最大化地复用DOM元素。替换的数组中，含有相同元素的项不会被重新渲染，因此可以大胆地用新数组来替换旧数组，不用担心性能问题。需要注意的是，以下变动的数组中，Vue是不能检测到的，也不会触发视图更新：  通过索引直接设置项，比如app.books[3] = {&amp;hellip;}.  方案一：使用Vue内置的set方法：Vue.set(app.books, 3 ,{&amp;hellip;}）如果是在webpack中使用组件化的方式（进阶篇中将介绍〉，默认是没有导入Vue的，这时可以使用$set，this.$set(app.books, 3 ,{&amp;hellip;}） 方案二：使用splice：app.books.splice(3,1,{&amp;hellip;})  修改数组长度，比如app.books.length = 1.  方案：app.</description>
+    </item>
+    
+    <item>
+      <title>linux常用命令行总结</title>
+      <link>/post/2019/02/11/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/02/11/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%80%BB%E7%BB%93/</guid>
+      <description>Linux 常用命令行总结 常见命令 参考链接 https://www.cnblogs.com/cina33blogs/p/7832602.html</description>
+    </item>
+    
+    <item>
+      <title>Welcome to Jekyll!</title>
+      <link>/post/2018/05/17/welcome-to-jekyll/</link>
+      <pubDate>Thu, 17 May 2018 14:05:21 +0800</pubDate>
+      
+      <guid>/post/2018/05/17/welcome-to-jekyll/</guid>
+      <description>You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.
+To add new posts, simply add a file in the _posts directory that follows the convention YYYY-MM-DD-name-of-post.</description>
+    </item>
+    
+    <item>
+      <title>「Oracle实践数据库」总结</title>
+      <link>/post/2018/04/21/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sat, 21 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/21/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/</guid>
+      <description>Oracle实践数据库 关于老师 这个老师的讲课节奏其实挺快的，后边听课的时候我也在想，大概东西/知识掌握的很熟练的人，对于这样的讲解基本上就是这样子快了，不过苦了我们学生。。大概认真听课到跟上老师节奏花费了我两三周的时间，而这已经意味着十多个课时过去了。
+另外，关于老师更想提的是，课程老师虽然很皮，满嘴骚话的样子，但是对于数据库甚至操作系统，计算机的理解定然是一个老司机，所以从后边的边学边实践的课来说，确实是教会了我们很多东西，虽然只是一些Oracle入门的东西，但是更多的也是教会我们如何找到学习的方法而不是说直接灌输过来，emmm大概吧，我印象比较深刻的一点就是，他上课的时候并不注重教材，而是更加注重实践的过程，可能他快节奏的讲课也是体现‘课程核心’的一种手段？
+关于课程  Oracle数据库的架构 SQL语句的一些基本操作 Oracle数据库SQL plus的实践  总结下来其实也就这么几点吧，虽然自信我可能是两个班里为数不多的听课还算多的同学，Oracle这门课大概是也没学的怎么样，但也算是了解了Oracle的一些基本操作吧，虽然课外没有再花时间在上边，但是也算是拓宽了一点眼界吧。
+关于考试 开卷考试，带的是自己上课记录的笔记，单选题和多选题有点出乎了我的意料。。后来就基本是在蒙了，考到了很多看起来应该是必须掌握的常识类的知识，但是我并不知道，一方面可能是我复习没到位的原因，也可能是两边老师授课的方式和内容不同的原因吧，简答题倒是还行，这次考试倒是也检测出我的比较薄弱的地方，比如说SQL中PL/DML语句，还是理解不够，另外的死记硬背的知识觉得多看看大概就好。总之希望这次考试能拿到一个不太差的成绩吧。
+关于自己 简单的总结一下大概就是这么几点吧：
+ 希望自己从一而终，不留遗憾  因为一开始并没有认真学习，大概是从讲函数开始才认真学习的，虽然前边挺多内容都是之前数据库原理学习过的东西，但是对Oracle整体并没有深刻的理解，没有一个比较好的基石吧。后边开始认真听课，但是进入状态的时间太长了。
+ 希望自己不要自以为是，要尽全力  也是自己的惰性在作怪，复习的时候随意了一些，虽然早就意识到周五就要考试了，心里还是抱着一些侥幸的心里，一方面也是因为认为自己听了课就可以不用那么认真的复习，带好自己的笔记就能考好。事实证明，复习得太晚自己没复习完，打印好的笔记并没有派上很大的用途，考试还是留下一个遗憾，并没有划上比较圆满的句号。</description>
+    </item>
+    
+    <item>
+      <title>「数字图像处理」总结</title>
+      <link>/post/2018/04/20/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/20/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E6%80%BB%E7%BB%93/</guid>
+      <description>数字图像处理研讨课 总来的说学习的就是数字图像处理的一些东西吧，基于matlab来进行一些数字图像方面的操作，根据相关论文做一些研讨和实现。
+关于老师 比较认真也比较幽默的老师，但是上课每次都会点名（估计上课每次点名学生全到是一件非常有成就感的事情，不过也和其他老师差不多，总之对这个老师没有很大的抗拒，虽然布置的东西有点多。总感觉姜老师可能实验室比较缺人，对我们课上的很多学生其实都是很欣赏的，大概不像是特意为了效果的鼓励，是一个比较认真比较可爱的老师呢。
+关于研讨  Color image histogram 快速傅里叶变换 what is fft 维纳滤波 Digital-image-restoration-by-Wiener-filter-in-2D-case  总之我们匆忙的组了一个队伍，因为里边没有大佬的存在，自然也就不存在完全躺尸的选手，而且因为大家都比较熟，其实还是做的很认真的，并没有很敷衍塞责。虽然到后来大家都有些疲乏了，没有很大的行动力了，但感觉我们还是能够坚持做好研讨的。最后一次研讨真是辛苦宝哥哥了，宝哥哥还是很可靠的一个人啊哈哈哈不像我们这群瓜皮。为了这次研讨操碎了心，不过也算是一份努力一分收获吧。
+关于大作业 想不到一个八周的研讨课，会给我们布置一个十六周的大作业。有点意想不到，同时也觉得有点血崩吧。
+ 理论，已有基础  综述, 解决一个具体的图像问题, 不少于20篇文献 提出新的算法, 自己提算法做一个小的实现, 写成论文  工程 自由发挥  软件系统 写一个软件说明(设计, 操作)   关于自己 关于自己的话，一开始对这门课其实也是抱着划水的态度，后来发现这门课并不简单，也可能是对这门课突然有了一点兴趣吧，觉得做点这样的事情还是挺有意思的。
+ 希望能保持好学习的热情  到后边确实是有些疲软了，并没有之前研讨这么有趣和有动力了。可能是惰性心理在作祟吧，对一门短暂的八周的课，都会有这样的心态只能说自己还不够成熟吧。
+ 没有严谨的研究态度  这个大概是来自老师的点评吧，只能说自己还不是一个很严谨的精致男孩呢，虽然我自我感觉对某些东西的要求可能要比周围人要高点，但是至少在作业上没有达到老师的要求是吗？</description>
+    </item>
+    
+    <item>
+      <title>Java核心技术卷(4)</title>
+      <link>/post/2018/04/08/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B74/</link>
+      <pubDate>Sun, 08 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/08/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B74/</guid>
+      <description>Chapter4 面向对象 需要了解的类库  java.util.GregorianCalendar java.text.DateFormatSymbols java.util.Random  类  类, 构造, 实例, 封装, 实例域, 方法等概念 对象: 对象的行为, 状态, 标识三个特性 类之间的关系: 依赖(uses-a), 聚合(has-a), 继承(is-a) UML语言来表达类之间的一些关系 一个对象变量并没有实际包含一个对象,而是仅仅引用一个对象. 任何对象变量的值都是对存储在另一个地方的一个对象的引用, new操作符的返回值也是一个引用. 隐式参数和显式参数, 隐式参数指对象的实例, 在方法中可以用this代指, 显式参数则为方法括号中的参数 封装的优点: 保护私密数据, 更改器方法可以执行错误检查. 封装的要求: 一个私有的数据域, 一个公有的域访问器方法, 一个公有的域更改器方法. 私有域private以及final的用法 静态域与静态方法, 静态常量和静态方法可以不用实例化对象就调用. 用静态方法的情况: 1.不需要访问对象状态,其所需参数都是通过显式参数提供 2.只需要访问类的静态域 工厂方法 对象引用进行的是值的传递 重载: 相同方法名, 不同参数 初始化块以及静态的初始化块 对象析构和finalize方法, 由于Java自动垃圾回收的机制而不支持析构器, 同时因为难以知道finalize方法什么时候调用而不用(不安全), 一般需要关闭的是一些资源如文件流等对象的close方法 静态导入, 如 import static java.lang.System.*; 就可以直接 out.println了(似乎也不常见) 类设计技巧  一定要保证数据私有 一定要对数据初始化 不要在类中使用过多的基本类型 不是所有的域都需要独立的域访问器和域更改器 将职责过多的类进行分解 类名和方法名要能够体现他们的职责   一些代码注意点 所有与通配符匹配的源文件都将被编译成为类文件</description>
+    </item>
+    
+    <item>
+      <title>Oracle实践数据库笔记-11</title>
+      <link>/post/2018/04/08/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-11/</link>
+      <pubDate>Sun, 08 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/08/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-11/</guid>
+      <description>Oracle实践数据库 审核  强制审核 标准数据库审核 基于值的审核 细粒度审核(FGA)
+desc dbms_fga;---STATEMENT_TYPES审核语句类型 execute dbms_fga.add_policy(&#39;SCOTT&#39;,&#39;EMP&#39;,&#39;FGA_DEMO&#39;,STATEMENT_TYPES=&amp;gt;&#39;SELECT,INSERT,DELETE&#39;); ---执行select,insert,delete操作 desc dba_fga_audit_trail alter session set nls_date_format=&#39;yyyy-mm-dd hh24:mi:ss&#39;; ---中间进行scott用户下的select,insert和delete操作 select TIMESTAMP,DB_USER,SQL_TEXT from dba_fga_audit_trail  审核DBA
+show parameter audit   触发器(头部,触发条件,被触发代码)  DML触发器  添加for each row进行逐行操作显示
+添加referencing old as o new as n for each row when(n.sal&amp;gt;5000)进行条件
+create table demo1(a varchar(20)); create or replace trigger scott.tr1 after update on scott.emp for each row begin insert into scott.demo1 values(&#39;changed!</description>
+    </item>
+    
+    <item>
+      <title>Oracle实践数据库笔记-12</title>
+      <link>/post/2018/04/08/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-12/</link>
+      <pubDate>Sun, 08 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/08/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-12/</guid>
+      <description>Oracle实践数据库 数据库备份和恢复  需要数据库备份恢复的情况 PDF D17090 logmnr的使用
+ 启动数据库补充日志
+desc v$database 🆗 select supplementallog from v$database ---不太确定supplementallog alter database add supplemental log data;🆗  产生数据字典文件
+ 设置数据字典文件的目的地(初始化参数)
+ 产生数据字典文件
+ 产生一个事务
+ 添加需要分析的日志文件
+ 启动分析
+ 查询内容
+---老师教程 ---自己跑一遍🆗 ---设置一下目录,得先在文件系统中创建好文件夹 show parameter utl_file_dir 🆗 ---重启生效shutdown immediate&amp;amp;startup , path1为之前在文件系统中创建好的文件夹路径 🆗 alter system set utl_file_dir =&#39;path1&#39; scope=spfile;🆗 ---再show一遍是没有的,重启才生效 execute dbms_logmnr_d.build(dictionary_filename=&amp;gt;&#39;名字.ora&#39;,dictionary_location=&amp;gt;&#39;path&#39;)🆗 ---产生数据文件 提交事务 select empno,ename,sal from emp;🆗 update emp set sal=5000 where empno=7934;🆗 commit;🆗 execute dbms_logmnr.</description>
+    </item>
+    
+    <item>
+      <title>Oracle实践数据库笔记-13</title>
+      <link>/post/2018/04/08/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-13/</link>
+      <pubDate>Sun, 08 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/08/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-13/</guid>
+      <description>Oracle实践数据库 考试信息  时间: 4&amp;frasl;20 2:00-3:30 地点: J1-311教室 开卷: 课堂笔记+教材(D33996+D32645)  考试内容  题型  单选题 30% 多选题 30% 简答题 40%  SQL语句  select where /order by/目录匹配%和_/escape 函数 substr/round/truncate/nvl/case decode(不考) 连接查询和子查询 主函数 AVG/MAX/MIN&amp;hellip;  Oracle架构 D32645 P8  服务器, 连接器, instance(内存+进程), SGA, PGA等等,名称解析, 监听器    logmnr 4/10的内容 awr  备份恢复  RMAN恢复管理器
+ 认识RMAN RMAN常用命令
+report schema;---查看数据库结构 db_unique_name ------------------------------- list backup backup spfile; backup current controlfile; rman datafile 3; backup database; 日志文件不需要备份 list copy crosscheck copy; delete backup; backup archive all; -------------------------------- copy datafile 3 to &#39;path&#39;; restore recover list show configure  RMAN整库备份</description>
+    </item>
+    
+    <item>
+      <title>Java核心技术卷(1)</title>
+      <link>/post/2018/04/06/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B71/</link>
+      <pubDate>Fri, 06 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/06/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B71/</guid>
+      <description> Java核心技术卷1 chapter1 Java程序设计概述 Java的一些特性  简单性 面向对象 网络技能 健壮性 &amp;gt;Java采用的指针模型可以消除重写内存和损坏数据的可能性 安全性 体系结构中立 可移植性 &amp;gt;Java规范中没有依赖具体实现的地方 解释型 &amp;gt;增量式且轻量级的链接 高性能 多线程 动态性  </description>
+    </item>
+    
+    <item>
+      <title>Java核心技术卷(2)</title>
+      <link>/post/2018/04/06/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B72/</link>
+      <pubDate>Fri, 06 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/06/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B72/</guid>
+      <description>Java核心技术卷1 chapter2 Java程序设计环境 JDK 从开始学习java的java7到现在已经有java10了
+一些名词    术语名词 缩写 解释     Java development Kit JDK 编写Java程序的程序员使用的软件   Java runtime environment JRE 运行Java程序的用户使用的软件   Standard Edition SE 用于桌面或者简单的服务器应用的Java平台   Enterprise Edition EE 用于复杂的服务器应用的Java平台   Micro Edition ME 用于手机和其他小型设备的Java平台   Java 2 J2 过时   Software development kit SDK 过时    Java安装  Java位置 C:\Program Files\Java Java文档安装 Java jdk目录结构  使用命令行工具 javac Welcome.</description>
+    </item>
+    
+    <item>
+      <title>Java核心技术卷(3)</title>
+      <link>/post/2018/04/06/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B73/</link>
+      <pubDate>Fri, 06 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/06/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B73/</guid>
+      <description>Java核心技术卷1 chapter3 Java基本程序设计结构 Java类  java.lang.string java.lang.StringBuilder java.util.Scanner java.lang.System java.io.Console java.io.PrintWriter java.nio.file.Paths java,math.BigInteger java.util.Arrays  数据类型  整形     数据类型 存储需求 取值范围     int 4字节 -2147483648~2147483647(正好超过20亿)   short 2字节 -32768~32767   long 8字节 &amp;hellip;算了   byte 1字节 -128~127     Java没有unsigned类型 浮点型     数据类型 存储需求 取值范围     float 4字节 有效位数6-7位   double 8字节 有效位数15位     注意3.</description>
+    </item>
+    
+    <item>
+      <title>Next Theme Individual Build Tutorial</title>
+      <link>/post/2018/04/05/next-theme-individual-build-tutorial/</link>
+      <pubDate>Thu, 05 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/05/next-theme-individual-build-tutorial/</guid>
+      <description>记录博客搭建的过程 初步步骤参照指南
+此次搭建建立于上次搭建安装失败的基础上
+安装ruby包 安装包应该都可以下载到,我这里用的是rubyinstaller-2.5.0-2-x64版本
+完成后会询问你是否安装msys2和mingw开发工具包等,我这里默认安装
+具体也不太清楚这两者的具体用途,但是之前搭建失败貌似就是这方面的原因,因此考虑全部安装
+安装bundler 因为考虑到安装包bundler的位置问题,我打算放在F:\GitHub下,安装好包,然后再考虑clone这个next主题
+关于cmd(我用的Cmder)无法进入其他盘的办法,直接输入盘符F:就好了
+下载next主题 安装依赖 报错如下:
+$ bundle install Bundler could not find compatible versions for gem &amp;quot;mini_portile2&amp;quot;: In snapshot (Gemfile.lock): mini_portile2 (= 2.2.0) In Gemfile: github-pages was resolved to 155, which depends on jekyll-mentions (= 1.2.0) was resolved to 1.2.0, which depends on html-pipeline (~&amp;gt; 2.3) was resolved to 2.7.0, which depends on nokogiri (&amp;gt;= 1.4) was resolved to 1.8.1, which depends on mini_portile2 (~&amp;gt; 2.</description>
+    </item>
+    
+    <item>
+      <title>Oracle实践数据库笔记-10</title>
+      <link>/post/2018/04/03/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-10/</link>
+      <pubDate>Tue, 03 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/03/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-10/</guid>
+      <description>Oracle安全 1、验证 用户 sys 1、操作系统验证
+2、口令文件验证
+show parameter remote_login_passwordfile  1、None
+2、Exclusive（单例程，多用户）
+3、Shared（多例程，单用户）
+ 修改口令文件
+&amp;lt;-cmd管理员-&amp;gt; orapwd file=D:\Oracle\product\11.2.0\dbhome_1\database\PWDdyi.ora password=admin entries=1 force=y #除系统外最多允许四个用户  禁用操作系统验证
+  D:\Oracle\product\11.2.0\dbhome_1\NETWORK\ADMIN\sqlnet.ora 中
+SQLNET.AUTHENTICATION_SERVICES= (NTS) NTS改为NONE
+desc v$pwfile_users; grant sysdba to a1 identified by a1 #授权 ... select username,sysdba from v$pwfile_users; revoke sysdba from scott , a1... #撤销  nosys 1、数据库验证
+create user u1 identified by u1; conn u1/u1#报错无权限 grant creat session to u1;#给权限  2、操作系统验证</description>
+    </item>
+    
+    <item>
+      <title>Oracle实践数据库笔记-9</title>
+      <link>/post/2018/03/30/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-9/</link>
+      <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/03/30/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-9/</guid>
+      <description>03/30 实践数据库(PPT D36245) 管理表空间和数据文件  数据库的存储层次结构 PPT153  数据库, 表空间, 段(存储结构) 区(最小的空间分配单位)___空间管理  数据字典管理[占用系统表空间,增加系统负担,现已被废弃] 本地管理 bitmap位图 extend_id bitmap 1 1 2 0 //可用  块(最小的IO单位) 根据访问数据量来控制块的单位大小 碎片,本地管理 依据管理和性能分配表空间 索引和数据不要放在一个表空间里  空间管理  系统空间 非系统空间  创建表空间
+desc dba_segments show parameter db_block_size create tablespace tbs1 datafile &#39;D:\app\hwj\oradata\sales\tbs1.dbf&#39; size 10m blocksize 2048;---报错 alter session set nls_language=america;---解决报错为?????的办法 show parameter cache; alter system set db_2k_cache_size= 10m; create tablespace userdata datafile &#39;E:\app\Res0liya\oradata\orcl\userdata01.dbf&#39; size 100m autoextend on next 5m maxsize 200m;---创建表空间 create tablespace userdata datafile &#39;E:\app\Res0liya\oradata\orcl\userdata01.</description>
+    </item>
+    
+    <item>
+      <title>Oracle实践数据库笔记-8</title>
+      <link>/post/2018/03/27/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-8/</link>
+      <pubDate>Tue, 27 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/03/27/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-8/</guid>
+      <description>3&amp;frasl;27 实例数据库 管理控制文件  控制文件的作用❓ 控制文件的内容❓二进制  oradebug dump controlf 3 oradebug setmypid oradebug tracefile_name
+alter session set nls_language=american
+ 控制文件的复用🆗 内容一模一样，做多个同样的控制文件放在不同的地方
+见ppt 126/383 alter system set control_files = &#39;path1&#39;,&#39;path2&#39;,&#39;path3&#39; scope=spfile; shutdown cp &#39;path1&#39;/&#39;path2&#39; &#39;path3&#39;; startup show parameter control_files;  创建控制文件
+alter database backup controlfile to trace as &#39;e:\trace_controlf.txt&#39; alter database mount 删除控制文件之后启动报错再启动一下脚本 语句在trace_controlf.txt里边跑一下   实验：
+ 查看控制文件的名称和内容🆗 select name &amp;hellip; show parameter control_files; oradebug &amp;hellip;见上 控制文件的复用🆗 创建控制文件  不是很清楚，再看大佬演示一下跑一下脚本</description>
+    </item>
+    
+    <item>
+      <title>Oracle实践数据库笔记-7</title>
+      <link>/post/2018/03/23/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-7/</link>
+      <pubDate>Fri, 23 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/03/23/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-7/</guid>
+      <description>03/23数据库 手工创建数据库（sales） 没操作起来，得等大佬带着操作一下
+注意要用cmd别用windows powershell
+ 创建windows服务（instance） &amp;ndash;oradim
+oradim -new -sid sales  将sales设为当前例程，
+set oracle_sid = sales  创建/编辑初始化参数文件 pfile
+ 连接数据库 sqlplus————sys as sysdba——————123456
+create pfile from spfile;   根据初始化参数创建相应的目录结构
+ 在admin和flash_recovery_area和oradata中创建sales文件夹， 对应的INITorcl.ora改成INITsales.ora并且改变其中的内容 创建口令文件
+这个密码用于set Oracle_sid之后，登陆sysdba的密码 orapwd file=E:\app\Res0liya\product\11.2.0\dbhome_1\database\PWDsales.ora password=123 entries=2   执行创建数据库的语句
+ 启动例程以及验证数据库
+startup nomount showdown immediate show parameter db_name  三个文件必须要，数据文件和日志文件system,sysaux,undo
+  创建数据字典视图
+ 创建Oracle内部包
+ 创建spfile
+ 创建scott方案
+ 加载产品用户概要文件信息
+ 配置监听器（服务器端）和服务名（客户端）</description>
+    </item>
+    
+    <item>
+      <title>Oracle实践数据库笔记-6</title>
+      <link>/post/2018/03/20/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-6/</link>
+      <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/03/20/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-6/</guid>
+      <description>3&amp;frasl;20 实践数据库 回顾 删除操作delete和drop的区别
+回收站的机制
+删除表的时候其实不删除文件而是改动文件名，实现加入回收站的操作
+flashback *****  数据完整性  代码 触发器 约束（开销小）  数据+规则&amp;mdash;&amp;ndash;&amp;gt;合理，有效
+建立表的时候:关键字+起名字+约束类型（+字段）;
+一些关键字: CHECK 检查条件
+FOREIGN KEY, REFERENCES
+ON DELETE CASECADE, 删除部门，员工回家
+ON DELETE SET NULL, 删除部门，员工待分配
+添加约束和删除约束: ALTER ADD/DROP/ENABLE/DISABLE
+---一点例子 ALTER TABLE table ADD [CONSTRAINT constraint] type (column) ; ALTER TABLE employee s ADD CONSTRAINT emp_manager_f k FOREIGN KEY (manager_id) REFERENCES employees (empoyee_id) ; ALTER TABLE employees DROP CONSTRAINT emp_manager_fk;  desc user_constraints; desc user_cons_columns; ---添加约束的时候注意处理异常数据的操作 desc exceptions;异常表不存在 @?</description>
+    </item>
+    
+    <item>
+      <title>Oracle实践数据库笔记-5</title>
+      <link>/post/2018/03/16/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-5/</link>
+      <pubDate>Fri, 16 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/03/16/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-5/</guid>
+      <description>3&amp;frasl;16 实践数据库 锁 lock  自动，手动，力度权限
+ 共享锁，独占锁
+ 行锁，表锁
+  死锁 deadlock  Oracle能自动查到产生死锁的语句，并且回滚掉这句  两个事物冲突，然后产生死锁，使用v$lock和v$session来解决死锁
+&amp;gt;http://www.cnblogs.com/rootq/articles/1147450.html
+SQL PLUS命令  help index
+ SQL 讲完了  QL(select)
+ DML(insert,update,delete,merge)
+ DCL(grant,invoke)
+ TCL(commit,rollback,savepoint)
+ DDL(create,alter,drop,truncate,rename,comment)
+ 序列，索引
+ 建表table原则 (PPT313)
+  名称空间，表的名称不能和同名称空间下的对象同名
+ 同义词
+ 创建用户和给予权限（grant）
+ pserdocolumn 伪列（不在列编制里边的列，desc不可见）
+  rowid 物理地址，BASE64_CODE文件号，列号，行号
+ 主流编制 dbms_rowid
+select dbms_rowid.ROWID_RELATIVE_FNO(rowid) File#, dbms_rowid.ROWID_BLOCK_NUMBER(rowid) Block#, dbms_rowid.ROWID_ROW_NUMBER(rowid) Row#, frmo emp;  一些语句</description>
+    </item>
+    
+    <item>
+      <title>Oracle实践数据库笔记-4</title>
+      <link>/post/2018/03/13/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-4/</link>
+      <pubDate>Tue, 13 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/03/13/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-4/</guid>
+      <description>3&amp;frasl;13 实践数据库 PL/SQL QL(select) 循环 (sql中用斜杠/执行命令)
+ 绝对循环 while循环 for循环
+begin for i in 1..10 loop insert into t1 values(i); end loop; commit; end;（功能结束就加分号，块结束）   块结构  声明部分（可选） 可执行部分（必须） 异常处理部分（可选）   匿名块：4个部分   declare begin exception end   命名块：
+create or replace procedure p1 as begin for i in 1..10 loop insert into t1 values(i); end loop; commit; end;  select a.id,b.id from t1 a,t1 b where a.</description>
+    </item>
+    
+    <item>
+      <title>「云计算比赛」总结</title>
+      <link>/post/2018/03/11/%E4%BA%91%E8%AE%A1%E7%AE%97%E6%AF%94%E8%B5%9B%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 11 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/03/11/%E4%BA%91%E8%AE%A1%E7%AE%97%E6%AF%94%E8%B5%9B%E6%80%BB%E7%BB%93/</guid>
+      <description>总结一下云计算比赛的一点得失吧 最近单曲循环的一首ed，来自《恶魔人crybaby》，今夜だけ，其实皮掉了怪可惜的，但是也没有吃后悔药的机会。同时也感觉做这种比赛如果没有沉下心来做，其实最多也只是能学到一些皮毛的东西。相反的就是考研一定要沉下心，学习本来就该是这个样子。
+我做的部分 这次照样选择的javeEE的ssm框架那一套熟练的操作，之所以选这个ssm而不是什么spark，scala之类的，本来是抱着借这次机会来好好深入了解一下ssm的框架的东西，弥补一下自己的不足,也是弥补一下大三上的数据库第六次作业的网上书店和更早的tuba项目的遗憾。曾经在寒假抱着自己肝一个完完整整的与时代接轨的ssm项目，但是&amp;hellip;人还是太懒了，也不能用没有条件来当借口，毕竟人要是想做的事情，无论无何也不会苛刻的物质条件什么的而放弃吧，所以说白了自己的内心其实也是抗拒的,典型的三天打鱼两天晒网。
+不过说来这次我做的部分，虽然说后来是fork了GitHub上的一个项目，通过学习他的项目来制作自己的SSM网站，虽然和我的初衷不符，但是也算是有点收获，可能自己的理解和正统还是有些偏差，但是也不枉此次的结果了。这次的代码应该可以作为以后的模板来套用和学习，虽然是啃老菜&amp;hellip;但我觉得还ok，也算是对ssm体系的一些基本操作比较熟练了，还有就是redis，感觉是一个挺有趣的东西。虽然才仅仅会redis的helloworld&amp;hellip;
+一些经历 除此之外的经历反而有趣，可能是因为本身是比较乐观的性格吧。而且也没有必须要做出来的要求，或许以后上班是要被辞退的选手吧&amp;hellip;和泊淼一起在辅楼调bug的时候确实爆炸有趣，把logstash调通和redis调通的时候,是真的爆炸开心,虽然后边又崩了&amp;hellip;这个时候还正好赶上数字图像处理的研讨&amp;hellip;我疯狂鸽他们的研讨，泊淼疯狂鸽他们的乐队排练，特别有意思。然后我在这个ddl的时候写着这个blog，也是因为ddl又一次被推迟&amp;hellip;应该说是我们自认为的推迟&amp;hellip;
+玄学bug调不好调不好&amp;hellip;
+然后晚上一起去川味人家吃烧烤，还临时下了一个王者荣耀一起玩耍，还挺有意思的~
+啊好的ddl推迟了两天 但其实这个周二我们结果还在调bug，现在其实在我看来还是有很多不好的地方。今晚大家一起吃完麻辣香锅之后，也算是在梅4辅楼再度聚首，开始进行了一波传统的讨论（纸和笔），我开始选择不打扰他们，让他们三个慢慢讨论吧。这个时候我在他们对面，开始写下现在这段话，在一个旁观者的视角下，感觉他们还是看起来没有那么皮的样子&amp;hellip;吧。
+4月5日来更新 我们进决赛了&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Oracle实践数据库笔记-2</title>
+      <link>/post/2018/03/02/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-2/</link>
+      <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/03/02/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-2/</guid>
+      <description>3&amp;frasl;02 实践数据库 用户  sys（用户） sysdba（权限） sysoper（权限）
+ 空闲例程是已经关的，要先startup
+ shutdown immediate 立即关闭例程
+  oracle内 代码+数据（系统/用户数据）
+日志  log 日志 作用：恢复 redo log 重做日志  数据文件+日志文件
+记录事务 ACID
+ A 原子性 C 一致性 I 隔离性（锁lock（锁外存）/闩latch（锁内存）） D 持久性/永久性  restore 还原 对应backup
+recover 恢复 （数据文件+日志文件）
+create tablespace ts datafile &#39;&#39; create table scott.t(id int) insert... commit.. alter tablespace ts offline alter database create datafile 7 online recover  进程结构  服务器进程（专用服务器进程 客户连接数&amp;lt;200/共享服务器进程） 用户进程/后台进程（1-3那张图的PMON SMON DBWR LGWR CKPT Others）</description>
+    </item>
+    
+    <item>
+      <title>Oracle实践数据库笔记-3</title>
+      <link>/post/2018/03/02/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-3/</link>
+      <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/03/02/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-3/</guid>
+      <description>3&amp;frasl;06 实践数据库 demo.sql 调用的时候不用写sql其他的要写 @d:/demo
+select d from scott.dept;
+help index edit run
+null 不参与统计 三值
+ 层次查询
+ lock 共享锁 独享锁
+ 死锁 解决死锁 ：sysdba kill session ：desc v$lock;
+ 修改表 表名 : 增加字段 :alter table t_name add c_name type(size); 字段类型 :alter table t_name modify c_name &amp;ndash;; 字段宽度 :alter table t_name modify c_name type(size);
+ 代理用户
+ delete DML 删之前，放至回滚段，效率较低，可回滚，不释放存储空间
+ truncate DDL 效率高，不可回滚释放存储空间
+ HWM high water mark</description>
+    </item>
+    
+    <item>
+      <title>Oracle实践数据库笔记-1</title>
+      <link>/post/2018/02/27/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-1/</link>
+      <pubDate>Tue, 27 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/02/27/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-1/</guid>
+      <description>2&amp;frasl;27 实践数据库 oracle服务器 1.instance
+ SGA（system global area 系统） PGA（程序用的 局部）  2.database（文件的集合）
+ table 表 全称 heap table 堆表 代码 数据（系统数据+用户数据） 共享池shared pool  库缓存 放代码 数据字典缓存   数据字典 dictionary sys@db&amp;gt;desc dictionary select table_name from dict where table_name like &#39;%SGA%&#39;  1.数据字典视图（数据文件 不改就不变）
+ USER_ 当前用户是所有者 属于他自己的对象 ALL_ 当前用户有select权限 能访问 DBA_
+scott@DESC user_tables select table_name from user_tables /all_tables可以看到用户的表 /能访问的表 desc user_indexes select index_name from user_indexes   2.</description>
+    </item>
+    
+    <item>
+      <title>大三上学期末总结</title>
+      <link>/post/2018/01/27/%E5%A4%A7%E4%B8%89%E4%B8%8A%E5%AD%A6%E6%9C%9F%E6%9C%AB%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/01/27/%E5%A4%A7%E4%B8%89%E4%B8%8A%E5%AD%A6%E6%9C%9F%E6%9C%AB%E6%80%BB%E7%BB%93/</guid>
+      <description>&lt;p&gt;这学期，很忙碌的一个学期，经历了很多事情吧
+说实话真的挺多的感触
+当然也免不了为赋新词强说愁
+最初选课的时候，就选了四门研讨课
+说来也是，也是自己的一个老毛病
+每次都是一开始定很多个目标
+最后绝对是差强人意甚至更差
+一路忙碌下来，其实也没有很长时间
+但是感觉像是过了很久，但也像时钟拨的很快
+转眼又是一年伊始&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>「数据库原理」总结</title>
+      <link>/post/2017/12/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Wed, 13 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/12/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/</guid>
+      <description> 总结一下这个学期数据库这门课的一些印象深刻的东西吧 数据库第五次作业，总之就是最后凉了吧 本来打算用ssm写作业的
+后来发现自己真是眼瞎
+1.可执行文件
+2.mdb文件
+都是ssm没有的
+尤其重要的其实还是20M的上传限制
+感觉略坑&amp;hellip;后来打算用java直接写
+结果突然想起java的多线程大概是已经不会了
+本身用java来说对于只有三天时间的我大概也来不及了
+所以最后选择是python
+一开始考虑tk直接写
+刚写完一个helloworld被瞬间丑哭
+这才开始我的pyqt之旅
+磕磕碰碰也算是有点心得
+这里不得不说下我刚到的键盘
+雷柏V500Pro合金幻彩版青轴
+在这个0.08分的时候我只觉这打字声音真是太大了&amp;hellip;
+下次写下次写&amp;hellip;还让不让人睡觉了
+数据库原理第六次作业，印象很深刻呢 关于考试 </description>
+    </item>
+    
+    <item>
+      <title>「计算机图形学」总结</title>
+      <link>/post/2017/12/11/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Mon, 11 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/12/11/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E6%80%BB%E7%BB%93/</guid>
+      <description> 关于计算机图形学混分上分的心路历程 计算机图形学第二次Pre 开始混开始皮开始有躺着等大佬带的嫌疑
+可以说是很酷炫的罗小黑了
+计算机图形学第三次Pre last_modified_at:2017-11-30T20:47:49  这首歌封面很赞很符合我的状态Vintage
+其实也没有多大的感受 又是一次划水的操作
+主要还是看着xjy和dk的操作
+自己一开始分离的点的计算的时候
+也没有想到过其实buffer那边的操作也是重复的
+结果就是虽然优化了一部分但是等dk修改完的时候
+大感差距其实有点大
+所以说白了其实还是自己在划水
+和大佬一组做图形学的结果一般都是
+他们总会把一切弄好让你舒舒服服
+总的来说这次的代码量其实比较少
+主要就是重构了一下代码
+然后添加了一个键盘操作
+结果就是我上的presentation的ppt里
+根本没有什么可以讲的东西&amp;hellip;
+计算机图形学之后的Pre 感觉自己太皮了&amp;hellip;
+啊相隔的时间太久的一个不好的事情就是都忘了快
+好的确实是已经忘了
+我学到了什么？ </description>
+    </item>
+    
+    <item>
+      <title>年末总结，又是新的开始</title>
+      <link>/post/2017/12/05/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93%E5%8F%88%E6%98%AF%E6%96%B0%E7%9A%84%E5%BC%80%E5%A7%8B/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/12/05/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93%E5%8F%88%E6%98%AF%E6%96%B0%E7%9A%84%E5%BC%80%E5%A7%8B/</guid>
+      <description>年末总结 我的这个2017 先放一首歌吧&amp;hellip;跨年晚会上听到的
+叫做第三人格
+说来2017真是过得浑浑噩噩
+上半年倒是还好
+但是个记忆力不佳的老年人啊
+所幸记得的那么几件事（但其实也记不得多少- -）
+都是充满了很多很多的很棒的回忆
+尤其想念吃好睡好群里的那些小伙伴们
+这个学期算来主观原因客观原因鸽了他们好多次
+真是罪过啊
+拥有这样多这样好的朋友们却不懂得珍惜
+幸运的是他们不离不弃吧哈哈
+关于这个2018啊 总之希望自己越来越好吧
+3/11回来看的时候
+发现自己变好是真的很难的一件事儿</description>
+    </item>
+    
+    <item>
+      <title>关于这几天确实是</title>
+      <link>/post/2017/12/02/%E5%85%B3%E4%BA%8E%E8%BF%99%E5%87%A0%E5%A4%A9%E7%A1%AE%E5%AE%9E%E6%98%AF/</link>
+      <pubDate>Sat, 02 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/12/02/%E5%85%B3%E4%BA%8E%E8%BF%99%E5%87%A0%E5%A4%A9%E7%A1%AE%E5%AE%9E%E6%98%AF/</guid>
+      <description> 这段时间丧到爆炸 写完这个博客的时候听到的歌,我以为是关于梦想的。
+大概是听出了一点不同的东西吧,不禁让我想起了淼淼写的那首歌。
+那么放上这首歌——
+He Films The Clouds Pt. 2
+十多天没有写博客已经开始有些生疏了
+从第八周大数据结题之后
+就开始低迷起来了
+第九周其实是自己最轻松的一段时间
+除了软件测试和第十周周四pre的图形学之外
+其实没有别的什么事情了
+然后日夜开始颠倒
+执着于夜晚的时间
+熬夜到三四点不愿意睡过去是个事实
+知道对身体不好但是就是舍不得睡过去
+到第十周更甚
+说来也是，整个人开始颓废
+开始丧，开始鸽各种课
+说来打击最大的其实是
+第十周这周鸽了几次跑操尤其难过
+emmm，现在就是个鸽课的清晨
+开始变得像x老师一样
+为了跑一次6点40的早操
+要通宵到这个时候起床去
+所以说
+什么秃啊，脱发啊
+什么憔悴啊，猝死啊
+什么翘课被点名啊，什么失约啊
+其实都是自己的原因
+不过是丧失了几乎大部分的生活热情
+大概这也叫做一种丧吧
+写下博客记录一下这段时间的丧
+虽然配图意义不大&amp;hellip;足以证明自己的皮&amp;hellip;
+后话 所以希望你啊
+能够早睡吧
+毕竟这跑操还得跑个4周的样子不能缺了啊
+能够有点自己的追求吧
+不要总是精神空虚了吧
+不要对生活丧失希望了啊
+不要为了他人而活不要只是因为责任感而活啊
+能够对自己对亲人负责吧
+身体是你自己的它难受的时候你自己不难受吗
+父母那么关照你是为了什么心里没有点b树吗
+但你是怎么做的
+ 希望你能找到一份能赋予你热情的东西吧
+ </description>
+    </item>
+    
+    <item>
+      <title>计软迎新的微信小测试网站</title>
+      <link>/post/2017/11/30/%E8%AE%A1%E8%BD%AF%E8%BF%8E%E6%96%B0%E7%9A%84%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B5%8B%E8%AF%95%E7%BD%91%E7%AB%99/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/11/30/%E8%AE%A1%E8%BD%AF%E8%BF%8E%E6%96%B0%E7%9A%84%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B5%8B%E8%AF%95%E7%BD%91%E7%AB%99/</guid>
+      <description>开个新坑 根本不知道怎么写于是就打算用暑假ssm框架写了
+感觉事情可能并没有这么复杂
+就在刚刚2017年12月2日10:55:45
+dk突然问我：&amp;rdquo;lh,你有没有突然觉得很寂寞？&amp;rdquo;
+对不起，我就算寂寞我也不告诉你&amp;hellip;
+毕竟害怕.jpg
+再续前缘 发现自己不会用springMVC了也是很难过
+但是改写的还是要写的
+就看怎么操作了&amp;hellip;
+不过今天是12.6号，之后的话可能先考虑把我的编译原理作业给写了吧
+毕竟周五的时候要交编译原理
+事情其实不算多，但也不能说少
+如果能认真的话其实是可以一直忙下去的
+但是全心全意扑在学习上边对我来说其实是挺困难的一件事情
+除此之外也有些自己不太想做的也是一方面的原因
+再者的话就只有周五开始学习了
+想来自己还有无线网安的ppt还没改好
+不过也是5G挺有意思的一件事儿
+今天碰到通信电子线路的老师请了一个老师给我们讲座
+真的外貌音色都特别像马老师！
+为此还特意留了张照片23333
+呀哈哈哈哈哈~
+九龙湖计软迎新的小测试写的网站
+沉迷github的后果就是
+什么都往github上放</description>
+    </item>
+    
+    <item>
+      <title>「大数据处理」总结</title>
+      <link>/post/2017/11/23/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Thu, 23 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/11/23/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%80%BB%E7%BB%93/</guid>
+      <description>关于大数据这个课 这学期选修的大数据是一门研讨课的形式，这就意味着学生本身是占据课上绝大部分时间的。 而且在同学作报告的时候，以我的性格是绝对不会主动发言提出问题的。 事实也就是如此，老师讲课的课时很少，更多其实是学生们作报告（作业好吧） 个人——两次报告，小组——一个系统。
+其实内心是比较想要一个人做做报告，但还是和淼淼他们组了个队吧。 想到一个人呢，报告的话自由度很高，而且一个人不怕拖累别人，毕竟本人太皮。 而且这两个系统的选题，其实个人没有多大兴趣； 没有兴趣驱动的东西最终能够做到差强人意哦不做到结束的原因大概也只有成绩原因了。
+关于出勤 其实我想吧很多人都像我一样在短学期的时候斗志满满， 做项目的时候像海绵一样疯狂地汲取着知识，在不断地学习中不断改善自己的项目， 然后可以说是刚极易折吧，绷紧的弦一下子就断了，开学各种课程压下来， 坚持了三四周的课，慢慢地无趣的课多了，鸽也就成了常事了。
+关于大数据也就是这样一个&amp;hellip;“循序渐进”的过程， 因为大数据的课时安排的很紧吧，但其实内容不多也还算是枯燥（虽然老师真的很好超级好， 尤其是到第七周第八周的时候，因为安排下来了，小组的第二次报告逐步接近deadline的时候， 其实内心还是蛮紧迫的，但身体仿佛生锈行动不起来，拖拖踏踏到最后几天， 几个皮皮才开始聚在一起，在Game#开始了这次征途， 然后自然而然地，第七周第八周的大数据课基本没有去， 虽然本着本来也就是同学在报告，其实去不去无所谓毕竟大家水平差不多， 但这么一想那老师讲的就值得听了？大家讲的东西其实没有本质区别， 大概也只是为了自己心里找个借口，而鸽了的课的时间其实也没有在做一些正事&amp;hellip; 作业也在那个时候压下来，就感觉弦慢慢绷紧的感觉，久违了
+我做的我想到的 爬虫，大概是我一直在项目里做的部分，很简陋，就是urllib2+bs4 就是一个简简单单的爬虫，当初迪凯也是这样说的，爬取一个这样的网页 不需要什么高端的操作，（再说我也不一定学不会 也算是学会了很多东西吧， 关于py的bs4怎么爬取标签，关于urllib的request， 关于pymysql的链接数据库操作，其他的几种有机会一定试试 关于中途用py2.7后来又换用3.6的两种版本的一些小区别&amp;hellip; 最大的收获也是pycharm的调试，基本上是一边调试一边码代码， 这个时候我能清清楚楚感受到自己的进展，比调bug有意思多了~ 虽然因为py的一些问题弄的迪凯不胜其烦&amp;hellip;
+可以说写这些代码的时候，是我最认真最专注最开心的一段时间， 能学到东西是一方面，有人陪着也是一方面， 能够并肩的时候，谁也不希望自己还一直孤独着不是吗？ =-= 最后写出了一个奇怪的但是简单的spider，初窥爬虫的新世界 因为没有多线程的原因，爬取数据的时候爆炸慢 爬完一遍大概需要四五个小时，效率很低但是很欣慰 大概设计方面也有很多问题，没有要修改的意思一方面也是因为自己懒惰 借口就是自己是初学者呗233333
+后续 后来，绷紧的弦断了&amp;hellip; 哦也不，大数据写完又和迪凯通宵撸了一手代码， 整个人没有dalao多久，又变成了一个皮皮虾， (啊刚刚给我的vscode换了个字体感觉自己棒棒哒，等线中文很赞~)
+开始写不动东西，开始熬不动夜，开始四个人一起去吃麻辣香锅特辣&amp;hellip; 说来记忆中最深刻的，还是那天晚上四个皮皮, 在梅4辅楼game#，弹着吉他喝着可乐码着代码聊着天， 还有《倔强的罗皓不将就的歌单》..之类的神奇的操作&amp;hellip; 时间就这样悄悄地从指缝间溜走了~外边的风就慢慢吹
+除此之外，第八周的周二终于肝完就立马上课跑去pre了， 看到橙子涵讲的其实心里虚得很， 那句话怎么说的来着，努力了不知道结果如何，就算心里虚的很也要强撑 周三因为没有去大数据的最后一节结课，这又是另外一个故事了~ 23333是不是说明自己慢慢成为一个有故事的人呢?
+这几天橙子涵借此机会用大数据的课程报告向学院做了个srtp的申请, 虽然在我和淼淼看来，都不大抱着希望&amp;hellip; 就这样慢慢走过来，明天计算机268第一个答辩&amp;hellip;就莫名虚的很, 哪有大数据用mysql做数据存储的啊&amp;hellip;还是我写的这串代码&amp;hellip;
+官方个人心得2333 关于这次大数据的项目的实现，我在组内更多的是做了一些数据爬取方面的微小的工作，在项目不断进展中，我对大数据的理解也不断加深，整个流程这样比较清晰摆在面前的时候，只感觉这样做下去就能够把它做好，虽然还有很多不足的地方，但是目标明确的情况下，在项目进展中才不会有挫败感，才会更自信要求更高地做好每一份工作。
+关于数据爬取—爬虫，终于开始接触爬虫，这次参考了多方面的资料打算从安居客这个网站入手，是因为这个网站对爬虫比较友好，这次数据爬取过程中体会很多，关于爬虫的技术性问题没少请问别人，一方面是自己技术和经验上的不足，二是爬虫的定制化比较强需要自己不断理解和钻研，这次也算是碰到了挺多的难题和bug，虽然最后爬取的效率很低，没有框架没有多线程，但是从这次爬虫中除了对大数据的数据预处理和数据清洗的重要性有了深刻的认识，也是对简单爬虫整体的流程有了一个具体而清晰的认识，也算是提供了一份宝贵的经验和模板，同时也学会了pycharm的debug功能对爬虫的便利之处。美中不足的地方就是爬虫的优化确实不够，爬取的效率太低，一路坎坎坷坷才爬取所有的数据。</description>
+    </item>
+    
+    <item>
+      <title>这个季节有点儿凉</title>
+      <link>/post/2017/11/23/%E8%BF%99%E4%B8%AA%E5%AD%A3%E8%8A%82%E6%9C%89%E7%82%B9%E5%84%BF%E5%87%89/</link>
+      <pubDate>Thu, 23 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/11/23/%E8%BF%99%E4%B8%AA%E5%AD%A3%E8%8A%82%E6%9C%89%E7%82%B9%E5%84%BF%E5%87%89/</guid>
+      <description>这样的清晨总给我一种即将世界末日的错觉 每天早上起得很早，但总是没有一个人早
+间歇性已经开始很努力，但总是没有一个人努力
+我很好奇那些能日复一日年复一年坚持下来的人啊
+他们是怎么做到如此坚持下来的呢？
+早上跑操的时候，随手一拍路上的景色
+居然会有人觉得这还挺好看的
+说来也是，对我来说几乎每天(没跑操绝对不去！)都要见的场景
+一开始或许被惊艳了那么一瞬间
+但后来的日子还是稀疏平常
+我常常在想
+有那么一个人儿
+会觉得这样的普通景色都很漂亮
+是因为她只经过去往自习室的路
+在很多人尚且还在被窝的6点清晨里
+艰难地爬起床风雨无阻地去自习去学习
+是怎样一种信念和坚持
+我不知道一个人的内心是怎样的想法
+但是大概是有一种倔强吧
+我想就是我下定决心去考研的时候
+也无法做到这样吧？
+各种外界因素不断挑动着神经挑动着你的坚定
+才能意识到，心无旁骛是怎样的一种专注
+我觉得我缺少了很多份这样的东西
+我慢慢的都是自我怀疑
+或许是懦弱的自卑的太久了
+就像是佝偻了太久了已经直不起腰了
+虽然像是借口，但是我知道我做不到
+ 但关于坚持，我最喜欢的一句话是： 坚持并不是永不动摇，而是在犹豫和退缩的时刻决定继续往前走。 这句话最大的价值就是指明， 生活从来不是一片灰暗或者一片光明，而是永远在它们的中间线上。 没有人绝对强大。 但你会发现，几乎所有了不起的事情都是在战胜沮丧和软弱的过程中实现的。
+ 我想起今天跑操路上
+听到了一首感触很深的歌
+推开世界的门
+我不知道你们看到的是什么
+我只知道这几个月来
+每天6点看到的那个消息
+已经快成为我的习惯
+虽然我做不到
+但是至少从中能汲取到一点力量
+让本来可能更加堕落的我知道了
+有人已经这样子努力了
+而你还在心安理得地虚度光阴
+还在做着各种幼稚的事情
+你是不是也应该往前挪挪你的步子？
+就算追不上别人的脚步
+那也不应该成为你落在最后的理由吧你说呢</description>
+    </item>
+    
+    <item>
+      <title>Github pages —— basically&amp;next</title>
+      <link>/post/2017/11/21/github-pages-basicallynext/</link>
+      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/11/21/github-pages-basicallynext/</guid>
+      <description>关于某天晚上又是深夜一两点在修改自己博客的故事 关于这个主题 basically 发生了一些这样的故事
+{: .align-center}
+这个确实是意想不到的事情
+总被github说这个主题不合适，但明明就是他自己商店里的主题
+第二个地方是首页的图片 确实是一个个html找了好久，这个结构比较乱
+当然也可能是我脑子转不动了
+第三点 当我把 index.md 改好之后发生了一个这样的事情
+paginate: true alt_title: &amp;quot;Res0liya&amp;quot; sub_title: &amp;quot;To be or not to be&amp;quot; image: /assets/images/amine-ounnas-180287.jpg  Posts都丢了，真是奇怪
+但其实关键就在于这一行
+paginate: false  是否翻页，这个让我有些无奈&amp;hellip;
+还需要自己仔细看看
+第四点&amp;mdash;翻页 时隔这么久已经忘却了
+总之翻页现在已经稳稳的了
+第五点&amp;mdash;图片的这个绿绿的滤镜啊 第六点&amp;mdash;开启评论功能 第七点&amp;mdash;完善所有的东西 最后 慢慢来吧，想要一个自己定制的好看的博客
+其实也算是一项大工程了
+除此之外&amp;hellip;早睡早睡啊&amp;hellip;明天还有体侧的一千米呢
+加入next主题 https://luoboyala.github.io
+安装了ruby，后来要安装msys2
+还好next有中文安装文档
+github主页：https://github.com/Simpleyyt/jekyll-theme-next
+安装文档：http://theme-next.simpleyyt.com/getting-started.html
+ 出现的几个问题  bundle install报错解决方案：
+管理员下打开控制台powershell,执行安装脚本时报错
+https://www.cnblogs.com/zhaozhan/archive/2012/06/01/2529384.html
+还有问题 commonmaker
+解决详见另外一篇tutorial</description>
+    </item>
+    
+    <item>
+      <title>About Hugo Ivy</title>
+      <link>/about/</link>
+      <pubDate>Sun, 06 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>This Hugo theme was ported from Ivy, a minimalist website generator built in Python. I don&amp;rsquo;t have time to document this theme. You have to read the source code to understand what it can do. All I can say for now is that I love it. It is clean, minimal, and responsive.
+I hope you will enjoy this theme. The source code is on Github. Happy hacking!</description>
+    </item>
+    
+    <item>
+      <title>Another Note on A blogdown Tutorial</title>
+      <link>/note/2017/06/14/another-note/</link>
+      <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/note/2017/06/14/another-note/</guid>
+      <description>I just discovered an awesome tutorial on blogdown written by Alison. I have to admit this is the best blogdown tutorial I have seen so far.</description>
+    </item>
+    
+    <item>
+      <title>A Quick Note on Two Beautiful Websites</title>
+      <link>/note/2017/06/13/a-quick-note/</link>
+      <pubDate>Tue, 13 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/note/2017/06/13/a-quick-note/</guid>
+      <description>To me, the two most impressive websites based on blogdown are:
+ Rob J Hyndman&amp;rsquo;s personal website. Live Free or Dichotomize by Lucy and Nick et al.  I&amp;rsquo;m sure there will be more.</description>
+    </item>
+    
+    <item>
+      <title>Hello Jekyll</title>
+      <link>/post/2017/04/18/hello-jekyll/</link>
+      <pubDate>Tue, 18 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/04/18/hello-jekyll/</guid>
+      <description>Transform your plain text into static websites and blogs.
+ Welcome Welcome Welcome This site aims to be a comprehensive guide to Jekyll. We’ll cover topics such as getting your site up and running, creating and managing your content, customizing the way your site works and looks, deploying to various environments, and give you some advice on participating in the future development of Jekyll itself.
+So what is Jekyll, exactly?</description>
+    </item>
+    
+    <item>
+      <title>A Plain Markdown Post</title>
+      <link>/post/2016/02/14/a-plain-markdown-post/</link>
+      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016/02/14/a-plain-markdown-post/</guid>
+      <description>This sample post is mainly for blogdown users. If you do not use blogdown, you can skip the first section.
+1. Markdown or R Markdown This is a post written in plain Markdown (*.md) instead of R Markdown (*.Rmd). The major differences are:
+ You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (```{r}); A plain Markdown post is rendered through Blackfriday, and an R Markdown document is compiled by rmarkdown and Pandoc.</description>
+    </item>
+    
+    <item>
+      <title>Lorem Ipsum</title>
+      <link>/post/2015/07/23/lorem-ipsum/</link>
+      <pubDate>Thu, 23 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2015/07/23/lorem-ipsum/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Quisque mattis volutpat lorem vitae feugiat.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode-198</title>
+      <link>/post/1/01/01/leetcode-198/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/post/1/01/01/leetcode-198/</guid>
+      <description>198. House Robber
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode-69</title>
+      <link>/post/1/01/01/leetcode-69/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/post/1/01/01/leetcode-69/</guid>
+      <description>69. Sqrt(x)
+Implement int sqrt(int x).
+Compute and return the square root of x, where x is guaranteed to be a non-negative integer.
+Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.
+Example 1:
+Input: 4 Output: 2  Example 2:
+Input: 8 Output: 2 Explanation: The square root of 8 is 2.82842..., and since the decimal part is truncated, 2 is returned.</description>
+    </item>
+    
+  </channel>
+</rss>

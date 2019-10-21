@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Next Theme Individual Build Tutorial - 个人搭建NexT博客的一点小问题和解决方案  - Rehoni.</title>
+    <meta property="og:title" content="Next Theme Individual Build Tutorial - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="初步步骤参照指南
+此次搭建建立于上次搭建安装失败的基础上
+[&amp;hellip;] 安装包应该都可以下载到,我这里用的是rubyinstaller-2.5.0-2-x64版本
+完成后会询问你是否安装msys2和mingw开发工具包等,我这里默认安装
+具体也不太清楚这两者的具体用途,但是之前搭建失败貌似就是这方面的原因,因此考虑全部安装
+[&amp;hellip;] 因为考虑到安装包bundler的位置问题,我 &amp;hellip;">
+      <meta property="og:description" content="初步步骤参照指南
+此次搭建建立于上次搭建安装失败的基础上
+[&amp;hellip;] 安装包应该都可以下载到,我这里用的是rubyinstaller-2.5.0-2-x64版本
+完成后会询问你是否安装msys2和mingw开发工具包等,我这里默认安装
+具体也不太清楚这两者的具体用途,但是之前搭建失败貌似就是这方面的原因,因此考虑全部安装
+[&amp;hellip;] 因为考虑到安装包bundler的位置问题,我 &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Next Theme Individual Build Tutorial</h1>
+<h1><span class="subtitle">个人搭建NexT博客的一点小问题和解决方案</span></h1>
+<h3>
+  2018-04-05</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="记录博客搭建的过程">记录博客搭建的过程</h1>
+
+<p>初步步骤参照<a href="http://theme-next.simpleyyt.com/getting-started.html">指南</a></p>
+
+<p>此次搭建建立于上次搭建安装失败的基础上</p>
+
+<h2 id="安装ruby包">安装ruby包</h2>
+
+<p>安装包应该都可以下载到,我这里用的是rubyinstaller-2.5.0-2-x64版本</p>
+
+<p>完成后会询问你是否安装msys2和mingw开发工具包等,我这里默认安装</p>
+
+<p>具体也不太清楚这两者的具体用途,但是之前搭建失败貌似就是这方面的原因,因此考虑全部安装</p>
+
+<h2 id="安装bundler">安装bundler</h2>
+
+<p>因为考虑到安装包bundler的位置问题,我打算放在F:\GitHub下,安装好包,然后再考虑clone这个next主题</p>
+
+<p>关于cmd(我用的Cmder)无法进入其他盘的办法,直接输入盘符F:就好了</p>
+
+<h2 id="下载next主题">下载next主题</h2>
+
+<h2 id="安装依赖">安装依赖</h2>
+
+<p>报错如下:</p>
+
+<pre><code class="language-sh">$ bundle install
+  Bundler could not find compatible versions for gem &quot;mini_portile2&quot;:
+  In snapshot (Gemfile.lock):
+    mini_portile2 (= 2.2.0)
+
+  In Gemfile:
+    github-pages was resolved to 155, which depends on
+      jekyll-mentions (= 1.2.0) was resolved to 1.2.0, which depends on
+        html-pipeline (~&gt; 2.3) was resolved to 2.7.0, which depends on
+          nokogiri (&gt;= 1.4) was resolved to 1.8.1, which depends on
+            mini_portile2 (~&gt; 2.3.0) x64-mingw32
+
+    github-pages was resolved to 155, which depends on
+      jekyll-mentions (= 1.2.0) was resolved to 1.2.0, which depends on
+        html-pipeline (~&gt; 2.3) was resolved to 2.7.0, which depends on
+          nokogiri (&gt;= 1.4) was resolved to 1.8.1, which depends on
+            mini_portile2 (~&gt; 2.2.0)
+
+Running `bundle update` will rebuild your snapshot from scratch, using only
+the gems in your Gemfile, which may resolve the conflict.
+</code></pre>
+
+<p>根据提示输入bundle update,装了一大堆莫名其妙的东西</p>
+
+<p>好的然后bundle install,成功了</p>
+
+<p>啧,果然之前总报错就是我没有完整安装msys2的原因吗</p>
+
+<h2 id="简单部署">简单部署</h2>
+
+<p>报错如下:</p>
+
+<pre><code class="language-sh">$ bundle exec jekyll server
+  Configuration file: F:/Github/jekyll-theme-next/_config.yml
+            Source: F:/Github/jekyll-theme-next
+       Destination: F:/Github/jekyll-theme-next/_site
+  Incremental build: disabled. Enable with --incremental
+      Generating...
+   GitHub Metadata: No GitHub API authentication could be found. Some fields may be missing or have incorrect data.
+   GitHub Metadata: Error processing value 'description':
+  Liquid Exception: No repo name found. Specify using PAGES_REPO_NWO environment variables, 'repository' in your configuration, or set up an 'origin' git remote pointing to your github.com repository. in /_layouts/post.html
+             ERROR: YOUR SITE COULD NOT BE BUILT:
+                    ------------------------------------
+                    No repo name found. Specify using PAGES_REPO_NWO environment variables, 'repository' in your configuration, or set up an 'origin' git remote pointing to your github.com repository.
+</code></pre>
+
+<p>大意大概是需要指向我自己的GitHub repository吧</p>
+
+<p>然后我这里考虑直接把jekyll-theme-next文件夹里的所有的文件直接拷贝到我自己的blog仓库(之前创建了一个空的只有readme的文件的仓库名为luoboyala.github.io)里了</p>
+
+<p>再次bundle install一遍,发现没有问题,开始bundle exec jekyll server仍然是上边的错误,根据提示开始修改config文件中的url</p>
+
+<pre><code class="language-yml">url:https://luoboyala.github.io
+</code></pre>
+
+<p>报错如下:</p>
+
+<pre><code class="language-sh">jekyll 3.7.3 | Error:  (F:/Github/luoboyala.github.io/_config.yml): could not find expected ':' while scanning a simple key at line 17 column 1
+</code></pre>
+
+<p>很明显是一个空格的原因吧&hellip;</p>
+
+<pre><code class="language-yml">url: https://luoboyala.github.io
+</code></pre>
+
+<p>好的还是报错了,发现问题在于没有初始化git仓库,这个虽然是一个git仓库,但是应该是缺少了git authentication<br />
+解决办法只需要:</p>
+
+<pre><code class="language-sh">$ git init
+$ bundle exec jekyll server
+</code></pre>
+
+<h2 id="其它配置">其它配置</h2>
+
+<p>见说明中,慢慢来吧</p>
+
+<h2 id="其它补充">其它补充</h2>
+
+<p>喜欢这个作者的<a href="https://notes.wanghao.work/">next博客</a>,学习一下吧&hellip;</p>
+
+<h2 id="闲话">闲话</h2>
+
+<p>想起刚才不小心点到我的IntelliJ,因为是预览版&hellip;需要我重新下载了,好气!</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/04/03/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-10/">Oracle实践数据库笔记-10</a></span>
+  <span class="nav-next"><a href="/post/2018/04/06/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B73/">Java核心技术卷(3)</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

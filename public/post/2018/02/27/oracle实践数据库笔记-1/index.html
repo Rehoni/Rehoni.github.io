@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle实践数据库笔记-1 - 简单了解Oracle，Oracle服务器，数据字典和Oracle使用  - Rehoni.</title>
+    <meta property="og:title" content="Oracle实践数据库笔记-1 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="1.instance
+[&amp;hellip;] 2.database（文件的集合）
+[&amp;hellip;] sys@db&amp;gt;desc dictionary select table_name from dict where table_name like &#39;%SGA%&#39;  1.数据字典视图（数据文件 不改就不变）
+[&amp;hellip;] DBA_
+scott@DESC user_tables &amp;hellip;">
+      <meta property="og:description" content="1.instance
+[&amp;hellip;] 2.database（文件的集合）
+[&amp;hellip;] sys@db&amp;gt;desc dictionary select table_name from dict where table_name like &#39;%SGA%&#39;  1.数据字典视图（数据文件 不改就不变）
+[&amp;hellip;] DBA_
+scott@DESC user_tables &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle实践数据库笔记-1</h1>
+<h1><span class="subtitle">简单了解Oracle，Oracle服务器，数据字典和Oracle使用</span></h1>
+<h3>
+  2018-02-27</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="2-27-实践数据库"><sup>2</sup>&frasl;<sub>27</sub>  实践数据库</h1>
+
+<h2 id="oracle服务器">oracle服务器</h2>
+
+<p>1.instance</p>
+
+<ul>
+<li>SGA（system global area 系统）</li>
+<li>PGA（程序用的 局部）</li>
+</ul>
+
+<p>2.database（文件的集合）</p>
+
+<ul>
+<li>table 表 全称 heap table 堆表</li>
+<li>代码</li>
+<li>数据（系统数据+用户数据）</li>
+<li>共享池shared pool
+
+<ul>
+<li>库缓存 放代码</li>
+<li>数据字典缓存</li>
+</ul></li>
+</ul>
+
+<h2 id="数据字典-dictionary">数据字典 dictionary</h2>
+
+<pre><code class="language-sql">sys@db&gt;desc dictionary
+select table_name from dict where table_name like '%SGA%'
+</code></pre>
+
+<p>1.数据字典视图（数据文件 不改就不变）</p>
+
+<ul>
+<li>USER_ 当前用户是所有者 属于他自己的对象</li>
+<li>ALL_ 当前用户有select权限 能访问</li>
+
+<li><p>DBA_</p>
+
+<pre><code class="language-sql">scott@DESC user_tables
+select table_name from user_tables  /all_tables可以看到用户的表 /能访问的表
+desc user_indexes
+select index_name from user_indexes
+</code></pre></li>
+</ul>
+
+<p>2.动态性能视图（内存和控制文件）</p>
+
+<ul>
+<li>v$</li>
+<li><strong>注意了解一下</strong></li>
+</ul>
+
+<p>cache 提高读性能 buffer 提高写性能<br />
+<strong>推荐书籍《oracle concepts》</strong></p>
+
+<h2 id="使用oracle">使用oracle</h2>
+
+<p>1.用户接口 界面 sqlplus</p>
+
+<pre><code class="language-sql">  sqlplus /as sysdba
+</code></pre>
+
+<p>2.了解用户</p>
+
+<ul>
+<li>sys(sysdba 管理整个oracle服务器)
+  @&gt;conn sys/admin as sysdba</li>
+<li>sys(sysoper 只管例程instance 不能管database)
+  conn sys。。。</li>
+
+<li><p>system（只管database）
+  conn sys。。。。</p></li>
+
+<li><p>一般用户 scott和hr————<strong>conn hr/abc (账号密码)</strong></p></li>
+</ul>
+
+<p>3.用户账号解锁</p>
+
+<pre><code class="language-sql">seclect user_name,account_status_
+col username format a30 该列宽
+alter user hr account unlock 解锁
+</code></pre>
+
+<p>4.修改用户密码</p>
+
+<pre><code class="language-sql">@&gt;conn/as sysdba
+alter user hr identified by abc
+conn hr/abc或者conn / as sysdba
+password hr
+sqlprompt sql提示符
+set sqlprompt_user&quot;@&quot;_donnect_identifier&gt;显示用户连接
+connect ??? scott/tiger
+show all
+set time on/off显示时间
+product-11.2.0-dbhome_1-sqlplus-admin-glogin
+set sqlprompt_user&quot;@&quot;_connect_identifier
+set linesize 120
+set rollsize 25 设置行宽列宽
+</code></pre>
+
+<p>5.会查询数据字典</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/01/27/%E5%A4%A7%E4%B8%89%E4%B8%8A%E5%AD%A6%E6%9C%9F%E6%9C%AB%E6%80%BB%E7%BB%93/">大三上学期末总结</a></span>
+  <span class="nav-next"><a href="/post/2018/03/02/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-3/">Oracle实践数据库笔记-3</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

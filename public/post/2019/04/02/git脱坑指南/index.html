@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>git脱坑指南 - 最近碰到的git的一些问题以及解决方案。  - Rehoni.</title>
+    <meta property="og:title" content="git脱坑指南 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="git clone了master分支的代码下来，但是需要拉取其他远程分支的代码，采用git branch -r查看远程分支列表，如想要拉取，则可以通过git branch -t origin/dev或者git checkout -b dev origin/dev拉取同远程分支名同名的分支到本地。
+[&amp;hellip;] 合并仓库并且保留commit log message记录
+[&amp;hellip;]  &amp;hellip;">
+      <meta property="og:description" content="git clone了master分支的代码下来，但是需要拉取其他远程分支的代码，采用git branch -r查看远程分支列表，如想要拉取，则可以通过git branch -t origin/dev或者git checkout -b dev origin/dev拉取同远程分支名同名的分支到本地。
+[&amp;hellip;] 合并仓库并且保留commit log message记录
+[&amp;hellip;]  &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>git脱坑指南</h1>
+<h1><span class="subtitle">最近碰到的git的一些问题以及解决方案。</span></h1>
+<h3>
+  2019-04-02</h3>
+<hr>
+
+
+      </header>
+
+
+
+<ol>
+<li>拉取远程分支代码</li>
+</ol>
+
+<p><code>git clone</code>了<code>master</code>分支的代码下来，但是需要拉取其他远程分支的代码，采用<code>git branch -r</code>查看远程分支列表，如想要拉取，则可以通过<code>git branch -t origin/dev</code>或者<code>git checkout -b dev origin/dev</code>拉取同远程分支名同名的分支到本地。</p>
+
+<ol>
+<li><p>合并仓库并且保留commit log message记录</p>
+
+<ol>
+<li>将repo1作为远程仓库，添加到repo2中，设置别名为other</li>
+<li>从repo1仓库中抓取数据到本仓库</li>
+<li>将repo1仓库中抓取的master分支作为新分支checkout到本地，新分支命名为repo1</li>
+<li>切换为repo2的master分支</li>
+
+<li><p>将repo1合并入master分支
+注意：产生的文件冲突需要解决提交后才能merge，merge时需要添加参数<code>--allow-unrelated-histories</code></p>
+
+<pre><code class="language-cmd">git remote add other ../repo1/
+git fetch other
+git checkout -b repo1 other/master
+git checkout master
+git merge repo1 --allow-unrelated-histories
+</code></pre></li>
+</ol></li>
+
+<li><p>变基操作<code>rebase</code></p></li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2019/04/02/snap%E5%88%9D%E8%AF%86/">Snap初识</a></span>
+  <span class="nav-next"><a href="/post/2019/04/18/leetcode-70/">Leetcode-70</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

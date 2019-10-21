@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle实践数据库笔记-12 - Oracle数据库的备份和恢复  - Rehoni.</title>
+    <meta property="og:title" content="Oracle实践数据库笔记-12 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="logmnr的使用
+[&amp;hellip;] 启动数据库补充日志
+desc v$database 🆗 select supplementallog from v$database ---不太确定supplementallog alter database add supplemental log data;🆗  产生数据字典文件
+[&amp;hellip;] 设置数据字典文件的目的地(初始化参数) &amp;hellip;">
+      <meta property="og:description" content="logmnr的使用
+[&amp;hellip;] 启动数据库补充日志
+desc v$database 🆗 select supplementallog from v$database ---不太确定supplementallog alter database add supplemental log data;🆗  产生数据字典文件
+[&amp;hellip;] 设置数据字典文件的目的地(初始化参数) &amp;hellip;">
+      
+    
+
+    
+    
+    <meta name="twitter:image" content="https://static.notion-static.com/3729c29a-5919-4e8e-8496-e24177713690/Untitled">
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle实践数据库笔记-12</h1>
+<h1><span class="subtitle">Oracle数据库的备份和恢复</span></h1>
+<h3>
+  2018-04-08</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="oracle实践数据库">Oracle实践数据库</h1>
+
+<h2 id="数据库备份和恢复">数据库备份和恢复</h2>
+
+<ul>
+<li><strong>需要数据库备份恢复的情况</strong> PDF D17090</li>
+
+<li><p><strong>logmnr的使用</strong></p>
+
+<ul>
+<li><p><strong>启动数据库补充日志</strong></p>
+
+<pre><code class="language-sql">desc v$database 🆗
+select supplementallog from v$database ---不太确定supplementallog 
+alter database add supplemental log data;🆗
+</code></pre></li>
+
+<li><p><strong>产生数据字典文件</strong></p></li>
+
+<li><p><strong>设置数据字典文件的目的地(初始化参数)</strong></p></li>
+
+<li><p><strong>产生数据字典文件</strong></p></li>
+
+<li><p><strong>产生一个事务</strong></p></li>
+
+<li><p><strong>添加需要分析的日志文件</strong></p></li>
+
+<li><p><strong>启动分析</strong></p></li>
+
+<li><p><strong>查询内容</strong></p>
+
+<pre><code class="language-sql">---老师教程 
+---自己跑一遍🆗
+---设置一下目录,得先在文件系统中创建好文件夹
+show parameter utl_file_dir  🆗
+---重启生效shutdown immediate&amp;startup , path1为之前在文件系统中创建好的文件夹路径 🆗
+alter system set utl_file_dir ='path1' scope=spfile;🆗 ---再show一遍是没有的,重启才生效 
+execute dbms_logmnr_d.build(dictionary_filename=&gt;'名字.ora',dictionary_location=&gt;'path')🆗
+---产生数据文件 提交事务
+select empno,ename,sal from emp;🆗
+update emp set sal=5000 where empno=7934;🆗
+commit;🆗
+execute dbms_logmnr.add_logfile(LogFileName=&gt;'path2',Options=&gt;dbms_logmnr.new)🆗
+---如果是追加为.addfile
+select group\#,status from v$log;🆗 ---查询当前组 current
+select group\#,member from v$logfile;🆗
+---对应current编号的path2=&gt;E:\APP\RES0LIYA\ORADATA\ORCL\REDO02.LOG
+execute dbms_logmnr.start_logmnr(DictFileName=&gt;'path1')🆗 ---数据字典文件在此步之前创建好就行
+---报错,sysaux报错 ❗因为本身没有脱机所以没有碰到这个bug
+desc dbs_tablespaces
+select tablespacename,status from dbs_tablespaces
+---发现sysaux脱机了,让它联机就ok
+desc v$logmnr_contents🆗
+select TIMESTAMP,USERNAME,SQL_REDO from v$logmnr_contents🆗---一定要记得选加where
+where SEG_NAME='EMP' and OPERATION='UPDATE'🆗
+---调整时间格式 alter set session nls_date_format=''
+</code></pre>
+
+<p><img src="https://static.notion-static.com/3729c29a-5919-4e8e-8496-e24177713690/Untitled" alt="效果图" /></p></li>
+</ul></li>
+
+<li><p><strong>备份类型</strong></p>
+
+<ul>
+<li><strong>用户管理的备份</strong></li>
+
+<li><p><strong>冷备份—关闭数据库的备份/一致性备份</strong></p>
+
+<ul>
+<li><strong>文件列表</strong></li>
+
+<li><p><strong>shutdown</strong></p>
+
+<pre><code class="language-sql">spool E:\app\luohaobackup\filelist.txt
+show parameter spfile
+select name from v$controlfile;
+select member from v$logfile;
+select name from v$datafile;
+select name from v$tempfile;
+---检测一下是否为存档模式
+archive log list ---如果是存档模式
+---开启归档模式
+shutdown immediate
+startup mount ---正常startup 为open状态数据库打开,mount为装载数据库,nomount为实例启动
+---
+select name from v$archivelog
+spool off
+create table scott.cold(a varchar(20));
+insert into scott.cold values('before backup');
+select * from scott.cold;
+commit;
+shutdown immediate
+---到文件系统中复制粘贴所有文件,路径可以在上边查到
+---.SPFILE文件,外部,没有shutdown不影响
+---.CTL控制文件,都是一样
+---.LOG日志文件
+---.DBF数据文件
+---.ARC归档文件
+startup
+insert into scott.cold value('after backup');
+select * from scott.cold;
+shutdown immediate
+---新建一个log文件夹 放入.CTL和.LOG文件
+startup
+cmd&gt;dbca ---删除数据库orcl
+---恢复 ❗
+cmd&gt;oradim -new -sid sales;
+---把SPFILE放入E:\app\Res0liya\product\11.2.0\dbhome_1\database
+---根据SPFILE的内容创建各种目录
+select * from v$recoverfile
+recover database
+alter database open
+select * from scott.cold
+        
+---我的操作
+cortana&gt; net configuration assistant ---配置监听器
+admin cmd&gt; dbca 
+---傻瓜式创建完库luohao之后
+---net start 服务名 启动服务名
+cmd&gt; set oracle_sid=luohao
+cmd&gt; sqlplus ---输入sys as sysdba 密码
+sql&gt; show parameter db_name;---luohao
+conn scott ---未解锁 解锁
+alter user scott account unlock;
+alter user scott identified by tiger;
+conn scott/tiger
+</code></pre></li>
+</ul></li>
+
+<li><p><strong>热备份 可以做全备份也可以做部分备份</strong></p>
+
+<ul>
+<li><strong>归档模式</strong></li>
+
+<li><p><strong>备份模式</strong></p>
+
+<pre><code class="language-sql">select tablespace_name from dba_tables
+where table_name='COLD';
+select file_name from dba_data_files
+where tablespace_name='USERS';---在文件系统中拷贝一份
+select * from v$backup;
+---单个表
+alter tablespace users begin backup;---开启备份模式
+select * from scott.cold;
+insert into scott.cold values('after hot backup');
+commit;
+alter tablespace users offline;
+第 1 行出现错误:
+ORA-01150: 无法防止写入 - 文件 4 设置了联机备份
+ORA-01110: 数据文件 4: 'E:\APP\RES0LIYA\ORADATA\LUOHAO\USERS01.DBF'
+alter tablespace users end backup;---结束备份模式
+alter tablespace users offline;---删除users01.dbf,拷贝原来的回去
+alter tablespace users online;
+ORA-01113: 文件 4 需要介质恢复
+ORA-01110: 数据文件 4: 'E:\APP\RES0LIYA\ORADATA\LUOHAO\USERS01.DBF'
+recover datafile 4;或者alter tablespace users ...
+alter tablespace users online;
+select * from scott.cold;
+---多个表
+alter database begin backup
+</code></pre>
+
+<p><img src="https://static.notion-static.com/4be09484-4e67-4108-8c42-71145a288546/Untitled" alt="效果图" /></p></li>
+</ul></li>
+
+<li><p><strong>服务器管理的备份 (RMAN)</strong></p></li>
+</ul></li>
+</ul>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/04/08/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-13/">Oracle实践数据库笔记-13</a></span>
+  <span class="nav-next"><a href="/post/2018/04/08/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-11/">Oracle实践数据库笔记-11</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

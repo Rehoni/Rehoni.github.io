@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle实践数据库笔记-13 - Oracle中RMAN的备份恢复操作  - Rehoni.</title>
+    <meta property="og:title" content="Oracle实践数据库笔记-13 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="[&amp;hellip;] RMAN恢复管理器
+[&amp;hellip;] RMAN常用命令
+report schema;---查看数据库结构 db_unique_name ------------------------------- list backup backup spfile; backup current controlfile; rman datafile 3; backup &amp;hellip;">
+      <meta property="og:description" content="[&amp;hellip;] RMAN恢复管理器
+[&amp;hellip;] RMAN常用命令
+report schema;---查看数据库结构 db_unique_name ------------------------------- list backup backup spfile; backup current controlfile; rman datafile 3; backup &amp;hellip;">
+      
+    
+
+    
+    
+    <meta name="twitter:image" content="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/29724aff-6c2a-4b4d-91e7-78f00516514a/Untitled">
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle实践数据库笔记-13</h1>
+<h1><span class="subtitle">Oracle中RMAN的备份恢复操作</span></h1>
+<h3>
+  2018-04-08</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="oracle实践数据库">Oracle实践数据库</h1>
+
+<h2 id="考试信息">考试信息</h2>
+
+<ul>
+<li><strong>时间: <sup>4</sup>&frasl;<sub>20</sub> 2:00-3:30</strong></li>
+<li><strong>地点: J1-311教室</strong></li>
+<li><strong>开卷: 课堂笔记+教材(D33996+D32645)</strong></li>
+</ul>
+
+<h2 id="考试内容">考试内容</h2>
+
+<ul>
+<li><strong>题型</strong>
+
+<ul>
+<li><strong>单选题 30%</strong></li>
+<li><strong>多选题 30%</strong></li>
+<li><strong>简答题 40%</strong></li>
+</ul></li>
+<li><strong>SQL语句</strong>
+
+<ul>
+<li><strong><code>select</code></strong></li>
+<li><strong><code>where</code> /<code>order by</code>/目录匹配<code>%</code>和<code>_</code>/<code>escape</code></strong></li>
+<li><strong>函数 <code>substr</code>/<code>round</code>/<code>truncate</code>/<code>nvl</code>/<code>case decode</code>(不考)</strong></li>
+<li><strong>连接查询和子查询</strong></li>
+<li><strong>主函数 <code>AVG</code>/<code>MAX</code>/<code>MIN</code>&hellip;</strong></li>
+</ul></li>
+<li><strong>Oracle架构 D32645 P8</strong>
+
+<ul>
+<li><strong>服务器, 连接器, <code>instance</code>(内存+进程), SGA, PGA等等,名称解析, 监听器</strong></li>
+</ul></li>
+</ul>
+
+<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/29724aff-6c2a-4b4d-91e7-78f00516514a/Untitled" alt="架构图" /></p>
+
+<ul>
+<li><strong>logmnr 4/10的内容</strong></li>
+<li><strong>awr</strong></li>
+</ul>
+
+<h2 id="备份恢复">备份恢复</h2>
+
+<ul>
+<li><p><strong>RMAN恢复管理器</strong></p>
+
+<ul>
+<li><strong>认识RMAN</strong></li>
+
+<li><p><strong>RMAN常用命令</strong></p>
+
+<pre><code class="language-sql">report schema;---查看数据库结构 db_unique_name
+-------------------------------
+list backup
+backup spfile;
+backup current controlfile;
+rman datafile 3;
+backup database;
+日志文件不需要备份
+list copy
+crosscheck copy;
+delete backup;
+backup archive all;
+--------------------------------
+copy datafile 3 to 'path';
+restore
+recover
+list
+show
+configure
+</code></pre></li>
+
+<li><p><strong>RMAN整库备份</strong></p></li>
+
+<li><p><strong><code>spfile</code>, <code>controlfile</code></strong></p></li>
+
+<li><p><strong>指定<code>spfile</code>和<code>controlfile</code>的备份目的地</strong></p></li>
+
+<li><p><strong>指定<code>datafile</code>的备份目的地</strong></p></li>
+
+<li><p><strong>归档( 联机日志文件的备份 )</strong></p></li>
+
+<li><p><strong>备份归档日志(<code>plus archivelog</code>)</strong></p></li>
+
+<li><p><strong>执行备份</strong></p></li>
+
+<li><p><strong>插入数据进入<code>cold</code>表</strong></p></li>
+
+<li><p><strong>复制日志文件</strong></p></li>
+
+<li><p><strong>摧毁数据库</strong></p></li>
+
+<li><p><strong>恢复数据库</strong></p>
+
+<pre><code class="language-sql">#文件夹中建立一个目录
+list backup;
+delete backup;
+show all;##查看配置
+#CONFIGURE CONTROLFILE AUTOBACKUP OFF;
+#CONFIGURE CONTROLFILE AUTOBACKUP FORMAT FOR DEVICE TYPE DISK TO '%F';
+configure channel device type disk format 'D:\salesback\%d_%u_%T';
+sql&gt;alter system archive log current;
+sql&gt;select * from scott.cold;
+rman&gt;backup database plus arcivelog;
+sql&gt;insert into scott.cold values('after full backup');
+#破坏数据库 用dbca删除数据库
+#恢复数据库
+oradim -new -sid luohao
+##创建各种文件的目录*3
+rman&gt;restore spfile from 'backuppath';
+rman&gt;startup nomount
+rman&gt;restore spfile from 'backuppath';###初始化参数文件spfile就回来了
+rman&gt;shutdown immediate
+rman&gt;startup nomount
+rman&gt;restore controlfile from 'backuppath';###控制文件就回来了
+rman&gt;alter database mount;
+rman&gt;restore controlfile from 'backuppath';###恢复日志文件❓
+alter database open;
+alter database open resetlogs;
+</code></pre>
+
+<pre><code class="language-sql"># 我的操作
+cmd&gt;set oracle_sid=luohao
+cmd&gt;rman
+rman&gt;connect target sys
+list backup;
+delete backup;
+show all;
+CONFIGURE CONTROLFILE AUTOBACKUP on;
+CONFIGURE CONTROLFILE AUTOBACKUP FORMAT FOR DEVICE TYPE DISK TO 'E:\app\rmanlhbak\%F';
+configure channel device type disk format 'E:\app\rmanlhbak\%d_%u_%T'
+##sqlplus
+show parameter db_name;
+alter system archive log current;
+archive log list;
+rman&gt;backup database plus arcivelog;
+sql&gt;insert into scott.cold values('after full backup');
+##复制oradata下的三个日志文件保存好
+##推出sqlplus和rman,管理员cmd下dbca删除
+cmd&gt;oradim -new -sid luohao
+##oradata下创建luohao,admin下复制orcl副本改为luohao
+set oracle_sid=luohao
+orapwd file=E:\app\Res0liya\product\11.2.0\dbhome_1\database\PWDluohao.ora password=123 entries=2
+##没做完
+</code></pre></li>
+</ul></li>
+
+<li><p><strong>指定数据库类型</strong></p>
+
+<ul>
+<li><strong>目标数据库</strong></li>
+<li><strong>目录数据库</strong></li>
+
+<li><p><strong>辅助数据库</strong></p>
+
+<pre><code class="language-sql">----
+cmd&gt;set oracle_sid=orcl
+connect target sys
+--------------
+Rman tablespace users --报错
+connect target / as sysdba --报错
+connect target / 
+--connect target / 能够登陆 对于我是 
+connect target sys
+backup tablespace users ---备份成功了
+---在sqlplus之中插入一条记录, 脱机数据表, 删除userdata01
+sql&gt;select * from scott.cold;
+sql&gt;insert into scott.cold values('after rman backup');
+sql&gt;select name from v$datafile;
+sql&gt;commit;
+sql&gt;alter database datafile 'E:\APP\RES0LIYA\ORADATA\LUOHAO\USERS01.DBF' offline;
+---
+rman&gt;RMAN target
+rman&gt;restore tablespace users 
+sql&gt; shutdown immediate
+sql&gt; startup
+alter database datafile 'E:\APP\RES0LIYA\ORADATA\LUOHAO\USERS01.DBF' online;
+recover datafile 4;
+select * from scott.cold;
+---------------------------
+advise/repair
+</code></pre></li>
+</ul></li>
+</ul>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/04/06/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B71/">Java核心技术卷(1)</a></span>
+  <span class="nav-next"><a href="/post/2018/04/08/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-12/">Oracle实践数据库笔记-12</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

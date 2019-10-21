@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>「计算机图形学」总结 - 对这个学期唐慧老师的计算机图形学这门课的一些总结  - Rehoni.</title>
+    <meta property="og:title" content="「计算机图形学」总结 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="开始混开始皮开始有躺着等大佬带的嫌疑
+可以说是很酷炫的罗小黑了
+[&amp;hellip;] last_modified_at:2017-11-30T20:47:49  这首歌封面很赞很符合我的状态Vintage
+[&amp;hellip;] 又是一次划水的操作
+主要还是看着xjy和dk的操作
+自己一开始分离的点的计算的时候
+也没有想到过其实buffer那边的操作也是重复的
+结果就是虽然优化了一部分但是等dk修改 &amp;hellip;">
+      <meta property="og:description" content="开始混开始皮开始有躺着等大佬带的嫌疑
+可以说是很酷炫的罗小黑了
+[&amp;hellip;] last_modified_at:2017-11-30T20:47:49  这首歌封面很赞很符合我的状态Vintage
+[&amp;hellip;] 又是一次划水的操作
+主要还是看着xjy和dk的操作
+自己一开始分离的点的计算的时候
+也没有想到过其实buffer那边的操作也是重复的
+结果就是虽然优化了一部分但是等dk修改 &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>「计算机图形学」总结</h1>
+<h1><span class="subtitle">对这个学期唐慧老师的计算机图形学这门课的一些总结</span></h1>
+<h3>
+  2017-12-11</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="关于计算机图形学混分上分的心路历程">关于计算机图形学混分上分的心路历程</h1>
+
+<h2 id="计算机图形学第二次pre">计算机图形学第二次Pre</h2>
+
+<p>开始混开始皮<strong>开始有躺着等大佬带的嫌疑</strong></p>
+
+<p>可以说是很酷炫的<a href="https://github.com/Dokyme/ComputerGraphicsLab">罗小黑</a>了</p>
+
+<h2 id="计算机图形学第三次pre">计算机图形学第三次Pre</h2>
+
+<pre><code class="language-markdown">last_modified_at:2017-11-30T20:47:49
+</code></pre>
+
+<p><strong>这首歌封面很赞很符合我的状态<a href="http://music.163.com/#/song?id=469104844">Vintage</a></strong></p>
+
+<h3 id="其实也没有多大的感受">其实也没有多大的感受</h3>
+
+<p>又是一次划水的操作</p>
+
+<p>主要还是看着xjy和dk的操作</p>
+
+<p>自己一开始分离的点的计算的时候</p>
+
+<p>也没有想到过其实buffer那边的操作也是重复的</p>
+
+<p>结果就是虽然优化了一部分但是等dk修改完的时候</p>
+
+<p>大感差距其实有点大</p>
+
+<p>所以说白了其实还是自己在划水</p>
+
+<p>和大佬一组做图形学的结果一般都是</p>
+
+<p>他们<strong>总会把一切弄好让你舒舒服服</strong></p>
+
+<p>总的来说这次的代码量其实比较少</p>
+
+<p>主要就是重构了一下代码</p>
+
+<p>然后添加了一个键盘操作</p>
+
+<p>结果就是我上的presentation的ppt里</p>
+
+<p>根本没有什么可以讲的东西&hellip;</p>
+
+<h2 id="计算机图形学之后的pre">计算机图形学之后的Pre</h2>
+
+<p>感觉自己太皮了&hellip;</p>
+
+<p>啊相隔的时间太久的一个不好的事情就是都忘了快</p>
+
+<p>好的确实是已经忘了</p>
+
+<h2 id="我学到了什么">我学到了什么？</h2>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2017/12/05/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93%E5%8F%88%E6%98%AF%E6%96%B0%E7%9A%84%E5%BC%80%E5%A7%8B/">年末总结，又是新的开始</a></span>
+  <span class="nav-next"><a href="/post/2017/12/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/">「数据库原理」总结</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

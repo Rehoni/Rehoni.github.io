@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle实践数据库笔记-2 - Oracle的一些基本内容，包括用户，日志，记录事务，进程结构，数据库文件和日志模式等内容。  - Rehoni.</title>
+    <meta property="og:title" content="Oracle实践数据库笔记-2 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="sysoper（权限）
+[&amp;hellip;] 空闲例程是已经关的，要先startup
+[&amp;hellip;] shutdown immediate 立即关闭例程
+[&amp;hellip;] oracle内 代码&#43;数据（系统/用户数据）
+[&amp;hellip;] 数据文件&#43;日志文件
+[&amp;hellip;] ACID
+[&amp;hellip;] restore 还原 对应backup
+recover 恢复 （数据文件&#43;日 &amp;hellip;">
+      <meta property="og:description" content="sysoper（权限）
+[&amp;hellip;] 空闲例程是已经关的，要先startup
+[&amp;hellip;] shutdown immediate 立即关闭例程
+[&amp;hellip;] oracle内 代码&#43;数据（系统/用户数据）
+[&amp;hellip;] 数据文件&#43;日志文件
+[&amp;hellip;] ACID
+[&amp;hellip;] restore 还原 对应backup
+recover 恢复 （数据文件&#43;日 &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle实践数据库笔记-2</h1>
+<h1><span class="subtitle">Oracle的一些基本内容，包括用户，日志，记录事务，进程结构，数据库文件和日志模式等内容。</span></h1>
+<h3>
+  2018-03-02</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="3-02-实践数据库"><sup>3</sup>&frasl;<sub>02</sub> 实践数据库</h1>
+
+<h2 id="用户">用户</h2>
+
+<ul>
+<li>sys（用户）</li>
+<li>sysdba（权限）</li>
+
+<li><p>sysoper（权限）</p></li>
+
+<li><p>空闲例程是已经关的，要先startup</p></li>
+
+<li><p>shutdown immediate 立即关闭例程</p></li>
+</ul>
+
+<p>oracle内 代码+数据（系统/用户数据）</p>
+
+<h2 id="日志">日志</h2>
+
+<ul>
+<li>log 日志 作用：恢复</li>
+<li>redo log 重做日志</li>
+</ul>
+
+<p>数据文件+日志文件</p>
+
+<h2 id="记录事务">记录事务</h2>
+
+<p><strong>ACID</strong></p>
+
+<ul>
+<li>A 原子性</li>
+<li>C 一致性</li>
+<li>I 隔离性（锁lock（锁外存）/闩latch（锁内存））</li>
+<li>D 持久性/永久性</li>
+</ul>
+
+<p><strong>restore</strong> 还原 对应backup<br />
+<strong>recover</strong> 恢复 （数据文件+日志文件）</p>
+
+<pre><code class="language-sql">create tablespace ts datafile ''
+create table scott.t(id int)
+insert...
+commit..
+
+alter tablespace ts offline
+alter database create datafile 7
+online
+recover
+</code></pre>
+
+<h2 id="进程结构">进程结构</h2>
+
+<ul>
+<li>服务器进程（专用服务器进程 客户连接数&lt;200/共享服务器进程）</li>
+
+<li><p>用户进程/后台进程（1-3那张图的PMON SMON DBWR LGWR CKPT Others）</p></li>
+
+<li><p>名称解析</p></li>
+</ul>
+
+<p>服务名：conn scott/tiger@db11 可以设置网络 $hostname</p>
+
+<ul>
+<li>监听器</li>
+</ul>
+
+<p>listener  lsnrctl stop 停止监听 /start /status</p>
+
+<ul>
+<li>TCP</li>
+</ul>
+
+<p>协议+端口：</p>
+
+<ul>
+<li><p>CKPT checkpoint 检查点进程</p>
+
+<pre><code class="language-sql">scn system change number 系统改变号
+alter system/database
+</code></pre></li>
+
+<li><p>检查点作用：</p></li>
+
+<li><p>同步所有的数据文件</p></li>
+
+<li><p>同步所有的控制文件</p></li>
+
+<li><p>发送信号通知DBWR写盘</p></li>
+</ul>
+
+<p>show parameter mttr<br />
+alter system set fast_start_mttr_target=300重做时间不超过300秒</p>
+
+<h2 id="数据库-文件的集合">数据库（文件的集合）</h2>
+
+<ol>
+<li>外部文件</li>
+<li>内部文件</li>
+</ol>
+
+<ul>
+<li>日志工作体系：</li>
+</ul>
+
+<p>形式：组 commit通过lgwr向current的组里写</p>
+
+<h2 id="数据库的日志模式">数据库的日志模式</h2>
+
+<ol>
+<li>非归档模式（会丢数据）</li>
+
+<li><p>归档模式（自动保存的log会满，第一个写满了到切换到第二个，类推，循环工作模式，数字变但是块不变，覆盖，原来的归档了）</p>
+
+<pre><code class="language-sql">select log_mode from v$database
+切换日志文件 alter system switch logfile;
+select menber grom v$logfile
+</code></pre></li>
+</ol>
+
+<ul>
+<li>日志
+
+<ul>
+<li>active 做恢复时用的到的日志文件</li>
+<li>inactive 做恢复时用不到的日志文件</li>
+</ul></li>
+</ul>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/03/02/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-3/">Oracle实践数据库笔记-3</a></span>
+  <span class="nav-next"><a href="/post/2018/03/11/%E4%BA%91%E8%AE%A1%E7%AE%97%E6%AF%94%E8%B5%9B%E6%80%BB%E7%BB%93/">「云计算比赛」总结</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

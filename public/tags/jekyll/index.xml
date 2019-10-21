@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jekyll on Rehoni.</title>
+    <link>/tags/jekyll/</link>
+    <description>Recent content in jekyll on Rehoni.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/jekyll/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Next Theme Individual Build Tutorial</title>
+      <link>/post/2018/04/05/next-theme-individual-build-tutorial/</link>
+      <pubDate>Thu, 05 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/05/next-theme-individual-build-tutorial/</guid>
+      <description>记录博客搭建的过程 初步步骤参照指南
+此次搭建建立于上次搭建安装失败的基础上
+安装ruby包 安装包应该都可以下载到,我这里用的是rubyinstaller-2.5.0-2-x64版本
+完成后会询问你是否安装msys2和mingw开发工具包等,我这里默认安装
+具体也不太清楚这两者的具体用途,但是之前搭建失败貌似就是这方面的原因,因此考虑全部安装
+安装bundler 因为考虑到安装包bundler的位置问题,我打算放在F:\GitHub下,安装好包,然后再考虑clone这个next主题
+关于cmd(我用的Cmder)无法进入其他盘的办法,直接输入盘符F:就好了
+下载next主题 安装依赖 报错如下:
+$ bundle install Bundler could not find compatible versions for gem &amp;quot;mini_portile2&amp;quot;: In snapshot (Gemfile.lock): mini_portile2 (= 2.2.0) In Gemfile: github-pages was resolved to 155, which depends on jekyll-mentions (= 1.2.0) was resolved to 1.2.0, which depends on html-pipeline (~&amp;gt; 2.3) was resolved to 2.7.0, which depends on nokogiri (&amp;gt;= 1.4) was resolved to 1.8.1, which depends on mini_portile2 (~&amp;gt; 2.</description>
+    </item>
+    
+    <item>
+      <title>Github pages —— basically&amp;next</title>
+      <link>/post/2017/11/21/github-pages-basicallynext/</link>
+      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/11/21/github-pages-basicallynext/</guid>
+      <description>关于某天晚上又是深夜一两点在修改自己博客的故事 关于这个主题 basically 发生了一些这样的故事
+{: .align-center}
+这个确实是意想不到的事情
+总被github说这个主题不合适，但明明就是他自己商店里的主题
+第二个地方是首页的图片 确实是一个个html找了好久，这个结构比较乱
+当然也可能是我脑子转不动了
+第三点 当我把 index.md 改好之后发生了一个这样的事情
+paginate: true alt_title: &amp;quot;Res0liya&amp;quot; sub_title: &amp;quot;To be or not to be&amp;quot; image: /assets/images/amine-ounnas-180287.jpg  Posts都丢了，真是奇怪
+但其实关键就在于这一行
+paginate: false  是否翻页，这个让我有些无奈&amp;hellip;
+还需要自己仔细看看
+第四点&amp;mdash;翻页 时隔这么久已经忘却了
+总之翻页现在已经稳稳的了
+第五点&amp;mdash;图片的这个绿绿的滤镜啊 第六点&amp;mdash;开启评论功能 第七点&amp;mdash;完善所有的东西 最后 慢慢来吧，想要一个自己定制的好看的博客
+其实也算是一项大工程了
+除此之外&amp;hellip;早睡早睡啊&amp;hellip;明天还有体侧的一千米呢
+加入next主题 https://luoboyala.github.io
+安装了ruby，后来要安装msys2
+还好next有中文安装文档
+github主页：https://github.com/Simpleyyt/jekyll-theme-next
+安装文档：http://theme-next.simpleyyt.com/getting-started.html
+ 出现的几个问题  bundle install报错解决方案：
+管理员下打开控制台powershell,执行安装脚本时报错
+https://www.cnblogs.com/zhaozhan/archive/2012/06/01/2529384.html
+还有问题 commonmaker
+解决详见另外一篇tutorial</description>
+    </item>
+    
+    <item>
+      <title>Hello Jekyll</title>
+      <link>/post/2017/04/18/hello-jekyll/</link>
+      <pubDate>Tue, 18 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/04/18/hello-jekyll/</guid>
+      <description>Transform your plain text into static websites and blogs.
+ Welcome Welcome Welcome This site aims to be a comprehensive guide to Jekyll. We’ll cover topics such as getting your site up and running, creating and managing your content, customizing the way your site works and looks, deploying to various environments, and give you some advice on participating in the future development of Jekyll itself.
+So what is Jekyll, exactly?</description>
+    </item>
+    
+  </channel>
+</rss>

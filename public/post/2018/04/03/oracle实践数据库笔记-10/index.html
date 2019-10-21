@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle实践数据库笔记-10 - Oracle安全的相关的东西，摘自芳芳笔记  - Rehoni.</title>
+    <meta property="og:title" content="Oracle实践数据库笔记-10 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="1、操作系统验证
+2、口令文件验证
+show parameter remote_login_passwordfile  1、None
+2、Exclusive（单例程，多用户）
+3、Shared（多例程，单用户）
+[&amp;hellip;] 修改口令文件
+&amp;lt;-cmd管理员-&amp;gt; orapwd &amp;hellip;">
+      <meta property="og:description" content="1、操作系统验证
+2、口令文件验证
+show parameter remote_login_passwordfile  1、None
+2、Exclusive（单例程，多用户）
+3、Shared（多例程，单用户）
+[&amp;hellip;] 修改口令文件
+&amp;lt;-cmd管理员-&amp;gt; orapwd &amp;hellip;">
+      
+    
+
+    
+    
+    <meta name="twitter:image" content="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8c4ae53b-206c-4681-aeac-be6e40e58a44/Untitled">
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle实践数据库笔记-10</h1>
+<h1><span class="subtitle">Oracle安全的相关的东西，摘自芳芳笔记</span></h1>
+<h3>
+  2018-04-03</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="oracle安全">Oracle安全</h1>
+
+<h2 id="1-验证">1、验证</h2>
+
+<h3 id="用户">用户</h3>
+
+<h3 id="sys">sys</h3>
+
+<p>1、<strong>操作系统验证</strong></p>
+
+<p>2、<strong>口令文件验证</strong></p>
+
+<pre><code class="language-sql">    show parameter remote_login_passwordfile
+</code></pre>
+
+<p>1、None</p>
+
+<p>2、Exclusive（单例程，多用户）</p>
+
+<p>3、Shared（多例程，单用户）</p>
+
+<ul>
+<li><p><strong>修改口令文件</strong></p>
+
+<pre><code class="language-sql">&lt;-cmd管理员-&gt;
+orapwd file=D:\Oracle\product\11.2.0\dbhome_1\database\PWDdyi.ora password=admin entries=1 force=y
+#除系统外最多允许四个用户
+</code></pre></li>
+
+<li><p><strong>禁用操作系统验证</strong></p></li>
+</ul>
+
+<p>D:\Oracle\product\11.2.0\dbhome_1\NETWORK\ADMIN\sqlnet.ora 中</p>
+
+<p>SQLNET.AUTHENTICATION_SERVICES= (NTS) NTS改为NONE</p>
+
+<pre><code class="language-sql">    desc v$pwfile_users;
+    grant sysdba to a1 identified by a1 #授权
+    ...
+    select username,sysdba from v$pwfile_users;
+    revoke sysdba from scott , a1... #撤销
+</code></pre>
+
+<h3 id="nosys">nosys</h3>
+
+<p>1、<strong>数据库验证</strong></p>
+
+<pre><code class="language-sql">    create user u1 identified by u1;
+    conn u1/u1#报错无权限
+    grant creat session to u1;#给权限
+</code></pre>
+
+<p>2、<strong>操作系统验证</strong></p>
+
+<ul>
+<li><strong>编辑注册表</strong></li>
+</ul>
+
+<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8c4ae53b-206c-4681-aeac-be6e40e58a44/Untitled" alt="1" /></p>
+
+<ul>
+<li><strong>找到Oracle</strong></li>
+</ul>
+
+<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5096d26b-a111-4566-8297-ae4830b67acf/Untitled" alt="2" /></p>
+
+<ul>
+<li><p><strong>增加OSAUTH_PREFIX_DOMAIN字串,值为false</strong></p></li>
+
+<li><p><strong>建立新的windows用户hehe</strong></p></li>
+
+<li><p><strong>在Oracle中建立用户</strong></p>
+
+<pre><code class="language-sql">show parameter os #查信息
+alter system set os_authent_prefix='' scope=spfile; #将value OPS$去掉，改完shutdown重新启动使修改生效
+    
+create user hehe identified externally #若没执行上步，需使用OPS$hehe
+grant connect to hehe #赋权限
+</code></pre></li>
+
+<li><p><strong>以windows用户登入</strong></p>
+
+<pre><code class="language-sql">runas /user:hehe cmd
+sqlplus/ 或 conn/ 连接数据库
+</code></pre></li>
+
+<li><p><strong>遗留问题，之前改的NONE要改回NTS</strong></p></li>
+</ul>
+
+<h2 id="2-授权">2、授权</h2>
+
+<hr />
+
+<ul>
+<li><strong>系统权限</strong></li>
+<li><strong>对象权限</strong></li>
+<li><strong>权限传递的原则</strong>
+
+<ul>
+<li><strong>系统权限不连带</strong></li>
+<li><strong>对象权限是连带的</strong></li>
+</ul></li>
+<li><strong>角色：权限的集合（需要激活）</strong>
+
+<ul>
+<li><strong>自定义角色</strong></li>
+<li><strong>预定义角色</strong></li>
+<li><strong>应用程序角色（靠应用程序激活的角色）</strong></li>
+</ul></li>
+</ul>
+
+<h2 id="3-审核">3、审核</h2>
+
+<hr />
+
+<ul>
+<li><strong>强制审核（默认审核）：重大数据库事件&mdash;&mdash;&mdash;-警告日志文件 D:\Oracle\diag\rdbms\orcl\orcl\trace</strong></li>
+
+<li><p><strong>标准数据库审核</strong></p>
+
+<ul>
+<li><p><strong>启用审核 &mdash;&mdash;-修改初始化参数</strong></p>
+
+<pre><code class="language-sql">show parameter audit
+alter system set audit_trail=bzd scope=spfile; #报错会告诉你能用什么
+      
+select count(*) from aud$
+truncate table aud$;
+      
+desc dba_audit_trail; #查用户在什么时间做了什么
+</code></pre></li>
+</ul></li>
+</ul>
+
+<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3fdfe78d-3a38-4a66-b5fb-2f3f203e4b9e/Untitled" alt="3" /></p>
+
+<ul>
+<li><p><strong>指定审核选项</strong></p>
+
+<ul>
+<li><p><strong>用户审核（权限审核）</strong></p>
+
+<pre><code class="language-sql">audit select any table by scott; #监视scott，只要看表就记录
+</code></pre></li>
+
+<li><p><strong>对象审核</strong></p>
+
+<pre><code class="language-sql">audit delete on scott.emp; #只要删表就记录
+      
+noaudit delete on scott.emp;
+audit delete on scott.emp whenever successful;#成功时记录
+</code></pre></li>
+
+<li><p><strong>语句审核</strong></p>
+
+<pre><code class="language-sql">audit create trigger; #产生行为就记录
+      
+audit sesssion whenever not successful;
+audit update on scott.emp by session #不管做多少次，只记录一次
+                           access #做一次记一次
+</code></pre></li>
+</ul></li>
+</ul>
+
+<hr />
+
+<p><strong>工作组：以资源共享为目的</strong></p>
+
+<p><strong>域：以管理为目的</strong></p>
+
+<p><strong>网络</strong></p>
+
+<p><strong>1、资源共享</strong></p>
+
+<p><strong>2、集中管理</strong></p>
+
+<p><strong>3、安全</strong></p>
+
+<p><strong>权力：全局性，用户</strong></p>
+
+<p><strong>权限：局部性，资源</strong></p>
+
+<p><strong>触发器：不能手工调用，是自动调用</strong></p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/03/30/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-9/">Oracle实践数据库笔记-9</a></span>
+  <span class="nav-next"><a href="/post/2018/04/05/next-theme-individual-build-tutorial/">Next Theme Individual Build Tutorial</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

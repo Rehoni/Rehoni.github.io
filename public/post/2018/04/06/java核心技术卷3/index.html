@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Java核心技术卷(3) - Java的基本操作  - Rehoni.</title>
+    <meta property="og:title" content="Java核心技术卷(3) - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="枚举类型
+enum Size{S,M,L,XL}; Size s = Size.M;  字符串
+[&amp;hellip;] 空串和null不同
+s.strength()=0; s.equal(&amp;quot;&amp;quot;); if(str!=null&amp;amp;&amp;amp;str.length()!=0)  输入输出
+Scanner in = new Scanner(System.in); &amp;hellip;">
+      <meta property="og:description" content="枚举类型
+enum Size{S,M,L,XL}; Size s = Size.M;  字符串
+[&amp;hellip;] 空串和null不同
+s.strength()=0; s.equal(&amp;quot;&amp;quot;); if(str!=null&amp;amp;&amp;amp;str.length()!=0)  输入输出
+Scanner in = new Scanner(System.in); &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Java核心技术卷(3)</h1>
+<h1><span class="subtitle">Java的基本操作</span></h1>
+<h3>
+  2018-04-06</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="java核心技术卷1-chapter3-java基本程序设计结构">Java核心技术卷1 chapter3 Java基本程序设计结构</h1>
+
+<h2 id="java类">Java类</h2>
+
+<ul>
+<li>java.lang.string</li>
+<li>java.lang.StringBuilder</li>
+<li>java.util.Scanner</li>
+<li>java.lang.System</li>
+<li>java.io.Console</li>
+<li>java.io.PrintWriter</li>
+<li>java.nio.file.Paths</li>
+<li>java,math.BigInteger</li>
+<li>java.util.Arrays</li>
+</ul>
+
+<h2 id="数据类型">数据类型</h2>
+
+<ul>
+<li>整形</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">存储需求</th>
+<th align="center">取值范围</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">int</td>
+<td align="center">4字节</td>
+<td align="center">-2147483648~2147483647(正好超过20亿)</td>
+</tr>
+
+<tr>
+<td align="center">short</td>
+<td align="center">2字节</td>
+<td align="center">-32768~32767</td>
+</tr>
+
+<tr>
+<td align="center">long</td>
+<td align="center">8字节</td>
+<td align="center">&hellip;算了</td>
+</tr>
+
+<tr>
+<td align="center">byte</td>
+<td align="center">1字节</td>
+<td align="center">-128~127</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>Java没有unsigned类型</li>
+<li>浮点型</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">存储需求</th>
+<th align="center">取值范围</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">float</td>
+<td align="center">4字节</td>
+<td align="center">有效位数6-7位</td>
+</tr>
+
+<tr>
+<td align="center">double</td>
+<td align="center">8字节</td>
+<td align="center">有效位数15位</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>注意3.14F为float类型, 3.<sup>14</sup>&frasl;<sub>3</sub>.14D为double类型</li>
+<li>NaN: 0/0或者负数的平方根结果 Double.NaN(x)</li>
+<li>char类型: 用UTF-16编码描述一个代码单元</li>
+<li>Boolean类型</li>
+</ul>
+
+<h2 id="变量">变量</h2>
+
+<ul>
+<li>变量初始化</li>
+<li>常量用<strong>final</strong>, const为Java保留的关键字</li>
+</ul>
+
+<h2 id="运算符">运算符</h2>
+
+<ul>
+<li>三元运算符 condition ? yes : no</li>
+<li>位运算符
+
+<ul>
+<li>&amp;与,|或,^异或,~非: 没有逻辑短路(&amp;&amp;和||)</li>
+<li>&gt;&gt;和&lt;&lt;: 将二进制进行右移和左移操作</li>
+<li>&gt;&gt;&gt;: 将0填充到高位, 没有&lt;&lt;&lt;</li>
+</ul></li>
+<li>数学函数Math类</li>
+<li>数值类型转换
+
+<ul>
+<li>直接进行合法转换: 有信息丢失的为int-&gt;float,long-&gt;float和long-&gt;double,编译器也有警告</li>
+<li>强制类型转换: 会有截断 int nx=(int) x</li>
+<li>还可以用各种类型类的函数</li>
+</ul></li>
+<li>运算符优先级和结合性</li>
+
+<li><p>枚举类型</p>
+
+<pre><code class="language-java">enum Size{S,M,L,XL};
+Size s = Size.M;
+</code></pre></li>
+
+<li><p>字符串</p>
+
+<ul>
+<li>Java的&rsquo;+&lsquo;加号了解一下</li>
+<li>equal函数用于检测字符串是否相等</li>
+
+<li><p>空串和null不同</p>
+
+<pre><code class="language-java">s.strength()=0;
+s.equal(&quot;&quot;);
+if(str!=null&amp;&amp;str.length()!=0)
+</code></pre></li>
+
+<li><p>输入输出</p>
+
+<pre><code class="language-java">Scanner in = new Scanner(System.in);
+
+System.out.println(&quot;what is your name?&quot;);
+String name = in.nextLine();
+
+System.out.println(&quot;how old are your?&quot;);
+int age=in.nextInt();
+</code></pre></li>
+
+<li><p>格式化输出 printf</p>
+
+<pre><code class="language-java">System.out.prinf();
+</code></pre></li>
+
+<li><p>文件输入与输出</p>
+
+<pre><code class="language-java">try {
+    Scanner in = new Scanner(Paths.get(&quot;F:\\Github\\CourseRecord\\Java\\code\\src\\aaa.txt&quot;));//读取文件
+    while (in.hasNext()){
+        System.out.println(in.nextLine());
+    }
+    PrintWriter out = new PrintWriter(&quot;F:\\Github\\CourseRecord\\Java\\code\\src\\aaa.txt&quot;);//写入文件
+} catch (IOException e) {
+    e.printStackTrace();
+}
+</code></pre></li>
+</ul></li>
+</ul>
+
+<h2 id="控制流程">控制流程</h2>
+
+<ul>
+<li>块作用域</li>
+<li>条件语句 if else</li>
+<li>循环 while/do while</li>
+<li>确定循环 for</li>
+<li>多重选择 switch case</li>
+<li>中断控制流程语句 break和continue</li>
+<li>大数值</li>
+</ul>
+
+<h2 id="数组">数组</h2>
+
+<ul>
+<li>创建数组,都初始化为0;创建默认Boolean数组,都初始化为false;创建对象数组,都默认为null(比如String).</li>
+
+<li><p>for each循环以及数组拷贝(一般用于扩大数组长度)</p>
+
+<pre><code class="language-java">int[] a =new int[10];
+for (int element:a){
+    element=1;
+}
+System.out.println(Arrays.toString(a));
+for (int i=0;i&lt;10;i++){
+    a[i]=1;
+}
+System.out.println(Arrays.toString(a));
+int[] b = new int[5];
+b=Arrays.copyOf(a,8);
+System.out.println(Arrays.toString(b));
+</code></pre></li>
+
+<li><p>数组排序 Arrays类中的sort和binarySearch</p></li>
+
+<li><p>二维数组</p></li>
+
+<li><p>不规则数组</p></li>
+</ul>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/04/05/next-theme-individual-build-tutorial/">Next Theme Individual Build Tutorial</a></span>
+  <span class="nav-next"><a href="/post/2018/04/06/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B72/">Java核心技术卷(2)</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

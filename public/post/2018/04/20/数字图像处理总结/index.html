@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>「数字图像处理」总结 - 关于大三上的研讨课数字图像处理  - Rehoni.</title>
+    <meta property="og:title" content="「数字图像处理」总结 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="总来的说学习的就是数字图像处理的一些东西吧，基于matlab来进行一些数字图像方面的操作，根据相关论文做一些研讨和实现。
+[&amp;hellip;] 比较认真也比较幽默的老师，但是上课每次都会点名（估计上课每次点名学生全到是一件非常有成就感的事情，不过也和其他老师差不多，总之对这个老师没有很大的抗拒，虽然布置的东西有点多。总感觉姜老师可能实验室比较缺人，对我们课上的很多学生其实都是很欣赏的，大概不像是特 &amp;hellip;">
+      <meta property="og:description" content="总来的说学习的就是数字图像处理的一些东西吧，基于matlab来进行一些数字图像方面的操作，根据相关论文做一些研讨和实现。
+[&amp;hellip;] 比较认真也比较幽默的老师，但是上课每次都会点名（估计上课每次点名学生全到是一件非常有成就感的事情，不过也和其他老师差不多，总之对这个老师没有很大的抗拒，虽然布置的东西有点多。总感觉姜老师可能实验室比较缺人，对我们课上的很多学生其实都是很欣赏的，大概不像是特 &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>「数字图像处理」总结</h1>
+<h1><span class="subtitle">关于大三上的研讨课数字图像处理</span></h1>
+<h3>
+  2018-04-20</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="数字图像处理研讨课">数字图像处理研讨课</h1>
+
+<p>总来的说学习的就是数字图像处理的一些东西吧，基于matlab来进行一些数字图像方面的操作，根据相关论文做一些研讨和实现。</p>
+
+<h2 id="关于老师">关于老师</h2>
+
+<p>比较认真也比较幽默的老师，但是上课每次都会点名（估计上课每次点名学生全到是一件非常有成就感的事情，不过也和其他老师差不多，总之对这个老师没有很大的抗拒，虽然布置的东西有点多。总感觉姜老师可能实验室比较缺人，对我们课上的很多学生其实都是很欣赏的，大概不像是特意为了效果的鼓励，是一个比较认真比较可爱的老师呢。</p>
+
+<h2 id="关于研讨">关于研讨</h2>
+
+<ul>
+<li>Color image histogram</li>
+<li>快速傅里叶变换 what is fft</li>
+<li>维纳滤波 Digital-image-restoration-by-Wiener-filter-in-2D-case</li>
+</ul>
+
+<p>总之我们匆忙的组了一个队伍，因为里边没有大佬的存在，自然也就不存在完全躺尸的选手，而且因为大家都比较熟，其实还是做的很认真的，并没有很敷衍塞责。虽然到后来大家都有些疲乏了，没有很大的行动力了，但感觉我们还是能够坚持做好研讨的。最后一次研讨真是辛苦宝哥哥了，宝哥哥还是很可靠的一个人啊哈哈哈不像我们这群瓜皮。为了这次研讨操碎了心，不过也算是一份努力一分收获吧。</p>
+
+<h2 id="关于大作业">关于大作业</h2>
+
+<p>想不到一个八周的研讨课，会给我们布置一个十六周的大作业。有点意想不到，同时也觉得有点血崩吧。</p>
+
+<ul>
+<li>理论，已有基础
+
+<ul>
+<li>综述, 解决一个具体的图像问题, 不少于20篇文献</li>
+<li>提出新的算法, 自己提算法做一个小的实现, 写成论文</li>
+</ul></li>
+<li>工程 自由发挥
+
+<ul>
+<li>软件系统 写一个软件说明(设计, 操作)</li>
+</ul></li>
+</ul>
+
+<h2 id="关于自己">关于自己</h2>
+
+<p>关于自己的话，一开始对这门课其实也是抱着划水的态度，后来发现这门课并不简单，也可能是对这门课突然有了一点兴趣吧，觉得做点这样的事情还是挺有意思的。</p>
+
+<ul>
+<li>希望能保持好学习的热情</li>
+</ul>
+
+<p>到后边确实是有些疲软了，并没有之前研讨这么有趣和有动力了。可能是惰性心理在作祟吧，对一门短暂的八周的课，都会有这样的心态只能说自己还不够成熟吧。</p>
+
+<ul>
+<li>没有严谨的研究态度</li>
+</ul>
+
+<p>这个大概是来自老师的点评吧，只能说自己还不是一个很严谨的精致男孩呢，虽然我自我感觉对某些东西的要求可能要比周围人要高点，但是至少在作业上没有达到老师的要求是吗？</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/04/08/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B74/">Java核心技术卷(4)</a></span>
+  <span class="nav-next"><a href="/post/2018/04/21/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/">「Oracle实践数据库」总结</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

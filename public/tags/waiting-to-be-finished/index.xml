@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>waiting to be finished on Rehoni.</title>
+    <link>/tags/waiting-to-be-finished/</link>
+    <description>Recent content in waiting to be finished on Rehoni.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Apr 2019 15:04:11 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/waiting-to-be-finished/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Leetcode-70</title>
+      <link>/post/2019/04/18/leetcode-70/</link>
+      <pubDate>Thu, 18 Apr 2019 15:04:11 +0800</pubDate>
+      
+      <guid>/post/2019/04/18/leetcode-70/</guid>
+      <description>70. Climbing Stairs
+You are climbing a stair case. It takes n steps to reach to the top.
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+Note: Given n will be a positive integer.
+Example 1:
+Input: 2 Output: 2 Explanation: There are two ways to climb to the top. 1. 1 step + 1 step 2. 2 steps  Example 2:</description>
+    </item>
+    
+    <item>
+      <title>git脱坑指南</title>
+      <link>/post/2019/04/02/git%E8%84%B1%E5%9D%91%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Tue, 02 Apr 2019 15:28:11 +0800</pubDate>
+      
+      <guid>/post/2019/04/02/git%E8%84%B1%E5%9D%91%E6%8C%87%E5%8D%97/</guid>
+      <description> 拉取远程分支代码  git clone了master分支的代码下来，但是需要拉取其他远程分支的代码，采用git branch -r查看远程分支列表，如想要拉取，则可以通过git branch -t origin/dev或者git checkout -b dev origin/dev拉取同远程分支名同名的分支到本地。
+ 合并仓库并且保留commit log message记录
+ 将repo1作为远程仓库，添加到repo2中，设置别名为other 从repo1仓库中抓取数据到本仓库 将repo1仓库中抓取的master分支作为新分支checkout到本地，新分支命名为repo1 切换为repo2的master分支 将repo1合并入master分支 注意：产生的文件冲突需要解决提交后才能merge，merge时需要添加参数--allow-unrelated-histories
+git remote add other ../repo1/ git fetch other git checkout -b repo1 other/master git checkout master git merge repo1 --allow-unrelated-histories   变基操作rebase
+  </description>
+    </item>
+    
+    <item>
+      <title>Snap初识</title>
+      <link>/post/2019/04/02/snap%E5%88%9D%E8%AF%86/</link>
+      <pubDate>Tue, 02 Apr 2019 15:28:11 +0800</pubDate>
+      
+      <guid>/post/2019/04/02/snap%E5%88%9D%E8%AF%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux常用命令行总结</title>
+      <link>/post/2019/02/11/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/02/11/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%80%BB%E7%BB%93/</guid>
+      <description>Linux 常用命令行总结 常见命令 参考链接 https://www.cnblogs.com/cina33blogs/p/7832602.html</description>
+    </item>
+    
+    <item>
+      <title>「数字图像处理」总结</title>
+      <link>/post/2018/04/20/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/20/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E6%80%BB%E7%BB%93/</guid>
+      <description>数字图像处理研讨课 总来的说学习的就是数字图像处理的一些东西吧，基于matlab来进行一些数字图像方面的操作，根据相关论文做一些研讨和实现。
+关于老师 比较认真也比较幽默的老师，但是上课每次都会点名（估计上课每次点名学生全到是一件非常有成就感的事情，不过也和其他老师差不多，总之对这个老师没有很大的抗拒，虽然布置的东西有点多。总感觉姜老师可能实验室比较缺人，对我们课上的很多学生其实都是很欣赏的，大概不像是特意为了效果的鼓励，是一个比较认真比较可爱的老师呢。
+关于研讨  Color image histogram 快速傅里叶变换 what is fft 维纳滤波 Digital-image-restoration-by-Wiener-filter-in-2D-case  总之我们匆忙的组了一个队伍，因为里边没有大佬的存在，自然也就不存在完全躺尸的选手，而且因为大家都比较熟，其实还是做的很认真的，并没有很敷衍塞责。虽然到后来大家都有些疲乏了，没有很大的行动力了，但感觉我们还是能够坚持做好研讨的。最后一次研讨真是辛苦宝哥哥了，宝哥哥还是很可靠的一个人啊哈哈哈不像我们这群瓜皮。为了这次研讨操碎了心，不过也算是一份努力一分收获吧。
+关于大作业 想不到一个八周的研讨课，会给我们布置一个十六周的大作业。有点意想不到，同时也觉得有点血崩吧。
+ 理论，已有基础  综述, 解决一个具体的图像问题, 不少于20篇文献 提出新的算法, 自己提算法做一个小的实现, 写成论文  工程 自由发挥  软件系统 写一个软件说明(设计, 操作)   关于自己 关于自己的话，一开始对这门课其实也是抱着划水的态度，后来发现这门课并不简单，也可能是对这门课突然有了一点兴趣吧，觉得做点这样的事情还是挺有意思的。
+ 希望能保持好学习的热情  到后边确实是有些疲软了，并没有之前研讨这么有趣和有动力了。可能是惰性心理在作祟吧，对一门短暂的八周的课，都会有这样的心态只能说自己还不够成熟吧。
+ 没有严谨的研究态度  这个大概是来自老师的点评吧，只能说自己还不是一个很严谨的精致男孩呢，虽然我自我感觉对某些东西的要求可能要比周围人要高点，但是至少在作业上没有达到老师的要求是吗？</description>
+    </item>
+    
+    <item>
+      <title>Leetcode-198</title>
+      <link>/post/1/01/01/leetcode-198/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/post/1/01/01/leetcode-198/</guid>
+      <description>198. House Robber
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode-69</title>
+      <link>/post/1/01/01/leetcode-69/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/post/1/01/01/leetcode-69/</guid>
+      <description>69. Sqrt(x)
+Implement int sqrt(int x).
+Compute and return the square root of x, where x is guaranteed to be a non-negative integer.
+Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.
+Example 1:
+Input: 4 Output: 2  Example 2:
+Input: 8 Output: 2 Explanation: The square root of 8 is 2.82842..., and since the decimal part is truncated, 2 is returned.</description>
+    </item>
+    
+  </channel>
+</rss>

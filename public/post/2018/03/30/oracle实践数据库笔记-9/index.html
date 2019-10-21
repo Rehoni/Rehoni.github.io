@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle实践数据库笔记-9 - 了解数据库Oracle的存储层次结构，管理Oracle的表空间和数据文件的相关指令，以及实践  - Rehoni.</title>
+    <meta property="og:title" content="Oracle实践数据库笔记-9 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="创建表空间
+desc dba_segments show parameter db_block_size create tablespace tbs1 datafile &#39;D:\app\hwj\oradata\sales\tbs1.dbf&#39; size 10m blocksize 2048;---报错 alter session set nls_language=america;---解决报错 &amp;hellip;">
+      <meta property="og:description" content="创建表空间
+desc dba_segments show parameter db_block_size create tablespace tbs1 datafile &#39;D:\app\hwj\oradata\sales\tbs1.dbf&#39; size 10m blocksize 2048;---报错 alter session set nls_language=america;---解决报错 &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle实践数据库笔记-9</h1>
+<h1><span class="subtitle">了解数据库Oracle的存储层次结构，管理Oracle的表空间和数据文件的相关指令，以及实践</span></h1>
+<h3>
+  2018-03-30</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="03-30-实践数据库-ppt-d36245">03/30 实践数据库(PPT D36245)</h1>
+
+<h2 id="管理表空间和数据文件">管理表空间和数据文件</h2>
+
+<ol>
+<li>数据库的存储层次结构 PPT153
+
+<ul>
+<li>数据库,</li>
+<li>表空间,</li>
+<li>段(存储结构)</li>
+<li>区(最小的空间分配单位)___空间管理
+
+<ul>
+<li>数据字典管理[占用系统表空间,增加系统负担,现已被废弃]</li>
+<li>本地管理 bitmap位图
+extend_id bitmap
+1           1
+2           0 //可用</li>
+</ul></li>
+<li>块(最小的IO单位) 根据访问数据量来控制块的单位大小</li>
+<li>碎片,本地管理
+依据管理和性能分配表空间
+索引和数据不要放在一个表空间里</li>
+</ul></li>
+<li>空间管理
+
+<ul>
+<li>系统空间</li>
+<li>非系统空间</li>
+</ul></li>
+
+<li><p>创建表空间</p>
+
+<pre><code class="language-sql">    desc dba_segments
+    show parameter db_block_size
+    create tablespace tbs1 datafile 'D:\app\hwj\oradata\sales\tbs1.dbf' size 10m blocksize 2048;---报错
+    alter session set nls_language=america;---解决报错为?????的办法
+    show parameter cache;
+    alter system set db_2k_cache_size= 10m;
+    create tablespace userdata datafile 'E:\app\Res0liya\oradata\orcl\userdata01.dbf' size 100m autoextend on next 5m maxsize 200m;---创建表空间
+    create tablespace userdata datafile 'E:\app\Res0liya\oradata\orcl\userdata01.dbf' size 100m extend management dictionary;---创建表空间
+    desc dba_tablespaces;---如果你的system表空间是本地管理local的,那你只能创建本地管理表空间,如果是dictionary的那么两者都可以创建
+</code></pre></li>
+
+<li><p>表空间的类型</p>
+
+<ul>
+<li><p>常规表空间</p>
+
+<pre><code class="language-sql">select name from v$tablespace;
+</code></pre></li>
+
+<li><p>临时表空间(排序)
+数据库属性视图</p>
+
+<pre><code class="language-sql">desc database_properties;
+select property_name,property_value from database_properties;---default_temp_tablespace临时表空间,default_permament_tablespace默认常规表空间
+create tablespace users datafile 'E:\app\Res0liya\oradata\orcl\users01.dbf' size 30m;
+alter database default tablespace users;---设置为默认表空间
+create temporary tablespace temp2 tempfile 'E:\app\Res0liya\oradata\orcl\users02.dbf' size 30m;
+alter database default temporary tablespace temp2;
+</code></pre></li>
+
+<li><p>大文件表空间理解一下</p>
+
+<pre><code class="language-sql">default_tbs_type ---smallfile
+</code></pre></li>
+
+<li><p>撤销表空间(放回滚的数据的DML修改之前可以回滚)</p>
+
+<pre><code class="language-sql">show parameter undo_tablespace;
+create undo tablespace undotbs2 datafile 'E:\app\Res0liya\oradata\orcl\undotbs02.dbf' size 20m;
+alter system set undo_tablespace=undotbs2;
+</code></pre></li>
+</ul></li>
+
+<li><p>表空间的状态</p>
+
+<ul>
+<li><p>正常状态(联机,可读可写)</p>
+
+<pre><code class="language-sql">desc dba_tablespaces;
+select tablespace_name,status from dba_tablespaces;---online,read only
+create table scott.demo(id int,name varchar(20)) tablespace tbs1;
+insert into scott.demo values(1,'luobo');
+insert into scott.demo values(2,'aaa');
+commit;
+alter system checkpoint;
+</code></pre></li>
+
+<li><p>只读状态</p>
+
+<pre><code class="language-sql">alter tablespace tbs1 read only;
+drop table scott.demo;---是可以删除掉的
+alter tablespace tbs1 read write;
+flashback table demo to before drop;
+</code></pre></li>
+
+<li><p>脱机状态
+不能脱机的表空间 <strong>system,undotbs1,所有的临时表空间</strong>
+sysaux辅助系统表空间,自动优化调整,自动化管理,能够脱机,功能失效
+undotbs撤销表空间,活动/当前的undotbs不能够脱机</p>
+
+<pre><code class="language-sql">alter tablespace system offline;---online
+</code></pre></li>
+</ul></li>
+
+<li><p>删除表空间</p>
+
+<pre><code class="language-sql">    drop tablespace tbs1;---内容不是空的,就不能删
+    drop tablespace tbs1 including contents;
+</code></pre></li>
+
+<li><p>OMF的表空间</p>
+
+<pre><code class="language-sql">    show parameter db_create;
+    alter system set db_create_file_dest;
+    create tablespace tbs2;---报错
+    create tablespace tbs2 datafile 'path' size 10m;
+    drop tablespace tbs2;---文件没被删掉
+    alter system set db_create_file_dest='E:\app\OMF\dest';
+    create tablespace tbs2;
+    select tablespace name,file_name from 某个表;
+    drop tablespace tbs2;---文件被删掉
+</code></pre></li>
+
+<li><p>扩展表空间 PPT167</p>
+
+<ul>
+<li><p>修改原数据文件的大小</p>
+
+<ul>
+<li>自动扩展</li>
+
+<li><p>手动扩展</p>
+
+<pre><code class="language-sql">ALTER DATABASE DATAFILE
+'/u01/oradata/userdata02.dbf' SIZE 200M
+AUTOEXTEND ON NEXT 10M MAXSIZE 500M;
+ALTER DATABASE
+DATAFILE '/u03/oradata/userdata02.dbf'
+RESIZE 200M;
+</code></pre></li>
+</ul></li>
+
+<li><p>添加新的数据文件</p>
+
+<pre><code class="language-sql">ALTER TABLESPACE app_data
+ADD DATAFILE '/u01/oradata/userdata03.dbf'
+SIZE 200M;
+</code></pre></li>
+</ul></li>
+
+<li><p>移动数据文件 PPT171</p>
+
+<ul>
+<li>可以移动 不再用的文件</li>
+<li>物理移动</li>
+<li>更新控制文件</li>
+</ul></li>
+</ol>
+
+<h2 id="实验">实验</h2>
+
+<p>创建USERS表空间,并设置为数据库默认的永久表空间</p>
+
+<ol>
+<li>创建一个由4K的块组成表空间TEST(TEST01.dbf 10M) 🆗</li>
+<li>向TEST表空间增加一个10M的数据文件(TEST02.dbf),将TEST01.DBF修改为15m 🆗</li>
+<li>移动TEST01.DBF 🆗</li>
+<li>在TEST表空间内创建一张表table1(insert)🆗</li>
+<li>将TEST表空间改为read only🆗</li>
+<li>删除表table1🆗</li>
+<li>将表空间改为read write🆗</li>
+<li>删除TEST表空间 检测数据文件是否被删除🆗</li>
+<li>OMF创建表空间 检测数据文件是否被删除🆗</li>
+<li>创建1个撤销表空间undotbs2,并把它设为系统当前的撤销表空间🆗</li>
+<li>创建临时表空间temp2,并把它设为数据库默认的临时表空间🆗</li>
+
+<li><p>没有备份的恢复(归档模式)</p>
+
+<ul>
+<li>创建一个表空间TBS1(TBS1.DBF)🆗</li>
+<li>在TBS1表空间内创建一张表T1🆗</li>
+<li>shutdown immediate🆗</li>
+<li>手工删除表空间TBS1的数据文件🆗</li>
+<li>startup🆗</li>
+<li>将数据文件TBS1.DBF脱机🆗</li>
+<li>alter database open;🆗</li>
+<li>alter database create datafile &lsquo;pth\tbs1.bdf&rsquo;;🆗</li>
+<li>recover datafile &lsquo;path\tbs1.dbf&rsquo;;🆗</li>
+<li>将数据文件TBS1.DBF联机🆗</li>
+
+<li><p>检查数据是否恢复🆗</p>
+
+<pre><code class="language-sql">create tablespace TEST datafile 'E:\app\Res0liya\oradata\orcl\test01.dbf' size 10m blocksize 4096;---报错
+alter system set db_4k_cache_size=10m;
+create tablespace TEST datafile 'E:\app\Res0liya\oradata\orcl\test01.dbf' size 10m blocksize 4096;
+alter tablespace TEST add datafile 'E:\app\Res0liya\oradata\orcl\test02.dbf' size 10m;
+alter database datafile 'E:\app\Res0liya\oradata\orcl\test01.dbf' resize 15m;
+select tablespace_name,status from dba_tablespaces;
+alter tablespace test offline;
+alter tablespace TEST
+2  rename
+3  datafile 'E:\app\Res0liya\oradata\orcl\test01.dbf'
+4  to 'E:\app\Res0liya\oradata\test01.dbf';
+alter tablespace TEST online;
+create table scott.table1(id int,name varchar(20)) tablespace test;
+insert into scott.table1 values(1,'luobo');
+insert into scott.table1 values(2,'aaa');
+alter tablespace TEST read only;
+select tablespace_name,status from dba_tablespaces;
+drop table scott.table1;
+alter tablespace TEST read write;
+drop tablespace TEST;---数据文件未被删除
+show parameter db_create;
+alter system set db_create_file_dest='E:\app\OMF';
+create tablespace TEST;
+drop tablespace TEST;---数据文件删除了
+create undo tablespace undotbs2 datafile 'E:\app\Res0liya\oradata\orcl\undotbs2.dbf' size 30m;
+alter system set undo_tablespace=undotbs2;
+show parameter undo_tablespace;---查询
+create temporary tablespace temp2 tempfile 'E:\app\Res0liya\oradata\orcl\temp2.dbf' size 30m;
+alter database default temporary tablespace temp2;
+select property_name,property_value from database_properties;---查询
+col PROPERTY_NAME for a32;
+col PROPERTY_VALUE for a32;
+select property_name,property_value from database_properties;
+create tablespace TBS1 datafile 'E:\app\Res0liya\oradata\orcl\tbs01.dbf' size 30m;
+select tablespace_name,status from dba_tablespaces;---查询
+</code></pre>
+
+<pre><code class="language-sql">create tablespace TBS1 datafile 'E:\app\Res0liya\oradata\orcl\tbs01.dbf' size 30m;
+select tablespace_name,status from dba_tablespaces;
+create table scott.t1(id int);
+insert table scott.t1 values (1);
+commit;
+alter system checkpoint;
+shutdown immediate
+删除本地文件tbs01.dbf
+startup---报错
+ORA-01157: 无法标识/锁定数据文件 8 - 请参阅 DBWR 跟踪文件
+ORA-01110: 数据文件 8: 'E:\APP\RES0LIYA\ORADATA\ORCL\TBS01.DBF'
+alter database datafile 8 offline;---报错
+archive log list;---检查是不是归档模式
+alter database archivelog;--设置了归档模式(见之前的笔记)之后就不会报错
+alter database open;
+alter database create datafile 'E:\APP\RES0LIYA\ORADATA\ORCL\TBS01.DBF';
+recover datafile 'E:\APP\RES0LIYA\ORADATA\ORCL\TBS01.DBF';
+alter database datafile 8 online;
+本地文件tbs01.dbf回来了
+desc scott.t1;
+select * from scott.t1;
+</code></pre></li>
+</ul></li>
+</ol>
+
+<p><strong>Oracle最基础的部分已经结束了,后边的部分可以自学了</strong>啧</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/03/27/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-8/">Oracle实践数据库笔记-8</a></span>
+  <span class="nav-next"><a href="/post/2018/04/03/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-10/">Oracle实践数据库笔记-10</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

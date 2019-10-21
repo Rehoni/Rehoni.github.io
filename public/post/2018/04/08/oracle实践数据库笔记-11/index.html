@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle实践数据库笔记-11 - Oracle审核的操作，触发器的代码实现，以及数据移动的操作  - Rehoni.</title>
+    <meta property="og:title" content="Oracle实践数据库笔记-11 - Rehoni.">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="细粒度审核(FGA)
+desc dbms_fga;---STATEMENT_TYPES审核语句类型 execute dbms_fga.add_policy(&#39;SCOTT&#39;,&#39;EMP&#39;,&#39;FGA_DEMO&#39;,STATEMENT_TYPES=&amp;gt;&#39;SELECT,INSERT,DELETE&#39;); ---执行select,insert,delete操作 desc dba_fga_audit_trail &amp;hellip;">
+      <meta property="og:description" content="细粒度审核(FGA)
+desc dbms_fga;---STATEMENT_TYPES审核语句类型 execute dbms_fga.add_policy(&#39;SCOTT&#39;,&#39;EMP&#39;,&#39;FGA_DEMO&#39;,STATEMENT_TYPES=&amp;gt;&#39;SELECT,INSERT,DELETE&#39;); ---执行select,insert,delete操作 desc dba_fga_audit_trail &amp;hellip;">
+      
+    
+
+    
+    
+    <meta name="twitter:image" content="https://static.notion-static.com/801127da-7c3c-439e-8c98-4e9aa6330129/Untitled">
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="post">
+    <header class="masthead">
+      <h1><a href="/">Rehoni.</a></h1>
+
+<p class="tagline">你有双牧羊人的眼睛，在你眼里谁是羊群，毫无头绪</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/about/">About</a></li>
+  
+  <li><a href="/categories/">Categories</a></li>
+  
+  <li><a href="/tags/">Tags</a></li>
+  
+  <li><a href="/index.xml">Subscribe</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle实践数据库笔记-11</h1>
+<h1><span class="subtitle">Oracle审核的操作，触发器的代码实现，以及数据移动的操作</span></h1>
+<h3>
+  2018-04-08</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="oracle实践数据库">Oracle实践数据库</h1>
+
+<h2 id="审核">审核</h2>
+
+<ul>
+<li><strong>强制审核</strong></li>
+<li><strong>标准数据库审核</strong></li>
+<li><strong>基于值的审核</strong></li>
+
+<li><p><strong>细粒度审核(FGA)</strong></p>
+
+<pre><code class="language-sql">desc dbms_fga;---STATEMENT_TYPES审核语句类型
+execute dbms_fga.add_policy('SCOTT','EMP','FGA_DEMO',STATEMENT_TYPES=&gt;'SELECT,INSERT,DELETE');
+---执行select,insert,delete操作
+desc dba_fga_audit_trail
+alter session set nls_date_format='yyyy-mm-dd hh24:mi:ss';
+---中间进行scott用户下的select,insert和delete操作
+select TIMESTAMP,DB_USER,SQL_TEXT from dba_fga_audit_trail
+</code></pre></li>
+
+<li><p><strong>审核DBA</strong></p>
+
+<pre><code class="language-sql">show parameter audit
+</code></pre></li>
+</ul>
+
+<h2 id="触发器-头部-触发条件-被触发代码">触发器(头部,触发条件,被触发代码)</h2>
+
+<ul>
+<li><strong>DML触发器</strong></li>
+</ul>
+
+<p>添加for each row进行逐行操作显示</p>
+
+<p>添加referencing old as o new as n for each row when(n.sal&gt;5000)进行条件</p>
+
+<pre><code class="language-sql">    create table demo1(a varchar(20));
+    create or replace trigger scott.tr1
+    after update on scott.emp for each row
+    begin
+    	insert into scott.demo1 values('changed!');
+    end;
+    update emp set sal=2000 where empno=7369;
+    select * from demo1;
+    create or replace trigger scott.tr1
+    after update on scott.emp referencing old as o new as n for each row when(n.sal&gt;5000)
+    begin
+    	insert into scott.demo1 values('changed!');
+    end;
+</code></pre>
+
+<p><strong>创建一个工资表, 用触发器实现更改工资之后, 显示旧的工资和新的工资的变化</strong>🆗</p>
+
+<pre><code class="language-sql">    create table sal_change(empno number(4),ename varchar2(10), old_sal number(7,2), new_sal number(7,2));
+    create or replace trigger scott.tr1
+    after update on scott.emp referencing old as o new as n for each row
+    begin
+      insert into scott.sal_change values(:o.empno, :o.ename,:o.sal,:n.sal);
+    end;
+    update emp set sal=4000 where empno=7902;
+    select * from sal_change;
+</code></pre>
+
+<ul>
+<li><p><strong>系统触发器</strong></p>
+
+<p><strong>如用来记录用户的登陆情况</strong></p>
+
+<pre><code class="language-sql">login_rec +++(username,login_time)
+create or replace trigger scott.tr1
+after logon on database
+begin
+    insert into login_rec values ();
+end;---scott权限不足得换用户
+alter session set nls_data_format='yyyy-mm-dd hh24:mi:ss';
+desc dbms_shared_pool;---共享池
+desc v$db_object_cache;---内存中的东西
+select owner,name,type from v$db_object_cache
+where owner&lt;&gt;'SYS' and kept='YES';---查询内存中的内存
+desc user_procedures;
+select object_name,object_type from user_procedures
+where object_type ='PROCEDURE';---查询存储过程
+execute dbms_shared_pool.keep('scott.p20');---保持p20这个存储过程
+select object_name,object_type from user_procedures
+where object_type ='procedure';
+</code></pre>
+
+<p><strong>创建一个startup的触发器</strong></p>
+
+<pre><code class="language-sql">create or replace procedure scott.p20
+as
+begin
+null;
+end;
+/
+select owner,name,type from v$db_object_cache
+where owner&lt;&gt;'SYS' and kept='YES';---查询一下内存中是否存在 N
+execute dbms_shared_pool.keep('scott.p20');
+select owner,name,type from v$db_object_cache
+where owner&lt;&gt;'SYS' and kept='YES';---查询一下内存中是否存在 Y
+---经过shutdown和startup之后,p20在内存中不会存在了
+---如果遇见shutdown和startup之后,操作报错就再操作一遍
+shutdown immediate
+startup
+---如果是scott.tr2就是在scott下进行keep操作就需要grant权限
+create or replace trigger tr2
+after startup on database
+begin
+    sys.dbms_shared_pool.keep('scott.p20');
+end;
+shutdown immediate
+startup
+select owner,name,type from v$db_object_cache
+where owner&lt;&gt;'SYS' and kept='YES';---有了
+</code></pre></li>
+</ul>
+
+<h2 id="移动数据">移动数据</h2>
+
+<ul>
+<li><p><strong>数据文件—&gt;数据库</strong></p>
+
+<ul>
+<li><strong>cmd下sqlldr</strong></li>
+
+<li><p><strong>cmd下exp/imp (export和import)</strong></p>
+
+<pre><code class="language-sql">查询exp和imp的参数
+CMD&gt;exp help=y
+      
+导出工资在2500以上的emp表中的数据---cmd中
+CMD&gt;exp scott/tiger file=d:\demo1.dmp tables=emp query='where sal&gt;2500'
+报错 LRM-00111: 值 'where sal' 缺少右引号
+是因为&gt;是管道命令,输出的意思. 因此会在当前cmd目录下产生一个名为&quot;2500'&quot;的文件
+因此要屏蔽大于号
+CMD&gt;exp scott/tiger file=d:\demo1.dmp tables=emp query='where &quot;sal&gt;2500&quot;'
+或者在&gt;SQL中加上$跑
+SQL&gt;$exp scott/tiger file=d:\demo1.dmp tables=emp query='where &quot;sal&gt;2500&quot;'
+      
+字符集问题 16进制-&gt;354对应字符集id-&gt;852,查询为ZHS16GBK
+select nls_charset_name(852) from dual;
+更改字符集为WE8ISO8859P1,查询该id得到为31,转为16进制-&gt;1F
+select nls_charset_id('WE8ISO8859P1') from dual;
+</code></pre></li>
+</ul></li>
+</ul>
+
+<p><img src="https://static.notion-static.com/801127da-7c3c-439e-8c98-4e9aa6330129/Untitled" alt="效果图" /></p>
+
+<p><img src="https://static.notion-static.com/bb819c5c-0092-4d36-89f5-2a5a7609e4e6/Untitled" alt="效果图" /></p>
+
+<ul>
+<li><p><strong>expdp/impdp 数据泵, 并行(大任务, 足够多的空闲资源)</strong></p>
+
+<pre><code class="language-sql">  CMD&gt;expdp scott/tiger file=d:\demo2.dmp tables=emp
+  报错:
+  ORA-39001: 参数值无效
+  ORA-39000: 转储文件说明错误
+  ORA-39088: 文件名不能包含路径说明
+  SQL&gt;create directory sha as 'd:\dxp' 只是在数据库中声明,实际目录需要在文件中创建好
+  SQL&gt;grant read,write on directory sha to scott;
+  CMD&gt;expdp scott/tiger directory=sha file=demo2.dmp tables=emp
+  SQL&gt;conn scott/tiger
+  SQL&gt;drop table emp;
+  CMD&gt;impdp scott/tiger directory=sha file=demo2.dmp tables=emp
+</code></pre></li>
+</ul>
+
+<p><img src="https://static.notion-static.com/2b622c7a-1bf2-4fe6-b312-3553fc69ab74/Untitled" alt="4" /></p>
+
+<p><img src="https://static.notion-static.com/f5f13bc0-df35-459a-a931-6d09a4ea7682/Untitled" alt="5" /></p>
+
+<ul>
+<li><strong>数据库&lt;—&gt;数据库</strong></li>
+<li><strong>数据库—&gt;数据文件</strong></li>
+</ul>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/post/2018/04/08/oracle%E5%AE%9E%E8%B7%B5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0-12/">Oracle实践数据库笔记-12</a></span>
+  <span class="nav-next"><a href="/post/2018/04/08/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B74/">Java核心技术卷(4)</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="https://github.com/rehoni">Rehoni</a> 2019 | <a href="resliya@outlook.com">Email</a> | <a href="https://www.zhihu.com/people/luo-hao-37-27/activities">ZhiHu</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
