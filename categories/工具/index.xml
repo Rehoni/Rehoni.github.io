@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>工具 on Rehoni | 罗皓</title>
+    <link>/categories/%E5%B7%A5%E5%85%B7/</link>
+    <description>Recent content in 工具 on Rehoni | 罗皓</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 15 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>chrony 服务器集群对时</title>
+      <link>/cn/2021/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6/</link>
+      <pubDate>Wed, 15 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/2021/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6/</guid>
+      <description>现有对时： scada1节点办公内网网口（198.120.100.104/10.228.96.232）通过chronyd，从市公司对时源10.109.192.7获取标准时钟 弃用：省公司NTP时钟源（20.55.32.202、20.55.32.203）获取标准时钟
+scada1作为服务端从内部交换机使用NTP协议对时给web1（101）、web2（102）、his（103）、robot（105）四个节点对时
+video（198.120.100.106/10.228.96.235）节点采用ntp，从 scada1节点获取标准时钟
+希文，轨道机器人巡检主机（每个巡检主机拥有自己独立办公网络ip）通过sntp，均从video节点获取标准时钟
+chronyd对时 使用root用户修改
+对时配置文件：
+vi /etc/chrony.conf （1）作为客户端，设置从哪里对时（即时钟源），web1（101）、web2（102）、his（103）、robot（105）四个节点对时采用
+server xxx.xxx.xxx.xxx iburst （2）作为服务端，允许哪些节点从本机对时， scada1节点采用
+allow xxx.xxx.xxx.xxx （3）修改配置后，重启服务（客户端）
+对时服务（客户端）常用指令
+systemctl restart chronyd systemctl start chronyd systemctl stop chronyd ntp对时 使用root用户修改
+对时配置文件：
+vi /etc/ntp.conf （1）作为客户端，设置从哪里对时（即时钟源），video（198.120.100.106/10.228.96.235）节点采用
+server xxx.xxx.xxx.xxx iburst </description>
+    </item>
+    
+  </channel>
+</rss>
