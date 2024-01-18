@@ -205,5 +205,14 @@
       <description></description>
     </item>
     
+    <item>
+      <title>travel</title>
+      <link>/tags/travel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/travel/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
