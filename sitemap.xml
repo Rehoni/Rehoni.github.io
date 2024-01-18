@@ -2,11 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/cn/2024/2024%E9%87%8D%E5%BA%86%E5%85%83%E6%97%A6%E6%B8%B8%E8%AE%B0/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/categories/</loc>
-    <lastmod>2023-12-11T00:00:00+00:00</lastmod>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/</loc>
-    <lastmod>2023-12-11T00:00:00+00:00</lastmod>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/categories/%E6%B8%B8%E8%AE%B0/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/%E9%87%8D%E5%BA%86/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/cn/2023/%E6%89%93%E5%B7%A5%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
     <lastmod>2023-12-11T00:00:00+00:00</lastmod>
@@ -344,8 +353,6 @@
     <loc>/cn/2016/2016-02-14-hello-markdown/</loc>
     <lastmod>2016-02-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/cn/2024/2024%E9%87%8D%E5%BA%86%E5%85%83%E6%97%A6%E6%B8%B8%E8%AE%B0/</loc>
-  </url><url>
     <loc>/en/about/</loc>
   </url><url>
     <loc>/en/vitae/</loc>
@@ -358,13 +365,9 @@
   </url><url>
     <loc>/cn/publication/</loc>
   </url><url>
-    <loc>/categories/%E6%B8%B8%E8%AE%B0/</loc>
-  </url><url>
     <loc>/cn/guestbook/</loc>
   </url><url>
     <loc>/cn/vitae/</loc>
-  </url><url>
-    <loc>/tags/%E9%87%8D%E5%BA%86/</loc>
   </url><url>
     <loc>/cn/links/</loc>
   </url>
