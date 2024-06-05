@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tomcat on Rehoni | 罗皓</title>
+    <link>/tags/tomcat/</link>
+    <description>Recent content in Tomcat on Rehoni | 罗皓</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/tomcat/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tomcat 静态资源映射</title>
+      <link>/cn/2021/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84/</link>
+      <pubDate>Thu, 02 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>/cn/2021/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84/</guid>
+      <description>方法一 tomcat访问外部的资源，配置静态资源映射&#xA;https://www.cnblogs.com/iyangyuan/p/3316444.html&#xA;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;Context crossContext=&amp;#34;true&amp;#34; docBase=&amp;#34;/users/ems/zhsbdStatic&amp;#34; path=&amp;#34;/zhsbdResources&amp;#34; reloadable=&amp;#34;true&amp;#34;&amp;gt; &amp;lt;/Context&amp;gt; server.xml的Host标签下&#xA;&amp;lt;Host name=&amp;#34;localhost&amp;#34; appBase=&amp;#34;webapps&amp;#34; unpackWARs=&amp;#34;true&amp;#34; autoDeploy=&amp;#34;true&amp;#34;&amp;gt; &amp;lt;!-- 增加虚拟路径，供访问本地图片--&amp;gt; &amp;lt;Context path=&amp;#34;/upload_file&amp;#34; docBase=&amp;#34;D:/upload/img&amp;#34; reloadable=&amp;#34;false&amp;#34; &amp;gt;&amp;lt;/Context&amp;gt; &amp;lt;/Host&amp;gt; 方法二 只适合jar包或者打包了资源的war包，未打包资源的war包丢入服务器的tomcat，是无法通过配置来访问外部资源的&#xA;@Configuration public class WebMvcConfig implements WebMvcConfigurer { /** * Add handlers to serve static resources such as images, js, and, css * files from specific locations under web application root, the classpath, * and others. * * @param registry */ @Override public void addResourceHandlers(ResourceHandlerRegistry registry) { // addResourceHandler 服务的相对路径 // addResourceLocations 本机/部署环境的绝对路径，注意Windows下前缀不同 file:///D:/files/ registry.</description>
+    </item>
+  </channel>
+</rss>

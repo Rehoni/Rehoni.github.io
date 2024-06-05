@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Rehoni | 罗皓</title>
+    <link>/tags/linux/</link>
+    <description>Recent content in Linux on Rehoni | 罗皓</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 15 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>chrony 服务器集群对时</title>
+      <link>/cn/2021/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6/</link>
+      <pubDate>Wed, 15 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>/cn/2021/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6/</guid>
+      <description>现有对时： scada1节点办公内网网口（198.120.100.104/10.228.96.232）通过chronyd，从市公司对时源10.109.192.7获取标准时钟 弃用：省公司NTP时钟源（20.55.32.202、20.55.32.203）获取标准时钟&#xA;scada1作为服务端从内部交换机使用NTP协议对时给web1（101）、web2（102）、his（103）、robot（105）四个节点对时&#xA;video（198.120.100.106/10.228.96.235）节点采用ntp，从 scada1节点获取标准时钟&#xA;希文，轨道机器人巡检主机（每个巡检主机拥有自己独立办公网络ip）通过sntp，均从video节点获取标准时钟&#xA;chronyd对时 使用root用户修改&#xA;对时配置文件：&#xA;vi /etc/chrony.conf （1）作为客户端，设置从哪里对时（即时钟源），web1（101）、web2（102）、his（103）、robot（105）四个节点对时采用&#xA;server xxx.xxx.xxx.xxx iburst （2）作为服务端，允许哪些节点从本机对时， scada1节点采用&#xA;allow xxx.xxx.xxx.xxx （3）修改配置后，重启服务（客户端）&#xA;对时服务（客户端）常用指令&#xA;systemctl restart chronyd systemctl start chronyd systemctl stop chronyd ntp对时 使用root用户修改&#xA;对时配置文件：&#xA;vi /etc/ntp.conf （1）作为客户端，设置从哪里对时（即时钟源），video（198.120.100.106/10.228.96.235）节点采用&#xA;server xxx.xxx.xxx.xxx iburst </description>
+    </item>
+    <item>
+      <title>linux下批量杀死java进程</title>
+      <link>/cn/2020/2020-06-29-linux-killjavathread/</link>
+      <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/cn/2020/2020-06-29-linux-killjavathread/</guid>
+      <description>批量杀死java进程，需要运用ps, grep, cut 和 kill 一起操作。&#xA;ps -ef|grep LOCAL=NO|grep -v grep|cut -c 9-15|xargs kill -9 关键字为LOCAL=NO&#xA;管道符”|”用来隔开两个命令，管道符左边命令的输出会作为管道符右边命令的输入。&#xA;“ps -ef” 是linux里查看所有进程的命令。这时检索出的进程将作为下一条命令”grep LOCAL=NO”的输入。&#xA;“grep LOCAL=NO” 的输出结果是，所有含有关键字”LOCAL=NO”的进程。&#xA;“grep -v grep” 是在列出的进程中去除含有关键字”grep”的进程。&#xA;“cut -c 9-15” 是截取输入行的第9个字符到第15个字符，而这正好是进程号PID。&#xA;“xargs kill -9” 中的 xargs 命令是用来把前面命令的输出结果（PID）作为”kill -9”命令的参数，并执行该命令。”kill -9”会强行杀掉指定进程。&#xA;另一种方法可以使用awk&#xA;ps x|grep LOCAL=NO|grep -v grep |awk &amp;#39;{print $1}&amp;#39;|xargs kill -9 参考 linux下如何批量杀JAVA进程或某个进程方法</description>
+    </item>
+  </channel>
+</rss>
