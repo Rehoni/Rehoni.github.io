@@ -2,502 +2,586 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:1313/categories/</loc>
+    <loc>/categories/</loc>
     <lastmod>2024-06-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/</loc>
+    <loc>/tags/</loc>
     <lastmod>2024-06-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/typora/</loc>
+    <loc>/tags/typora/</loc>
     <lastmod>2024-06-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2024/typora%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</loc>
+    <loc>/cn/2024/typora%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</loc>
     <lastmod>2024-06-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E5%B7%A5%E5%85%B7/</loc>
+    <loc>/categories/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2024-06-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2024/%E5%B9%BD%E7%81%B5/</loc>
+    <loc>/cn/2024/%E5%B9%BD%E7%81%B5/</loc>
     <lastmod>2024-06-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
+    <loc>/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
     <lastmod>2024-06-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>/tags/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2024-06-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2023/web3%E5%92%8C%E5%9B%BD%E4%BC%81/</loc>
+    <loc>/cn/2023/web3%E5%92%8C%E5%9B%BD%E4%BC%81/</loc>
     <lastmod>2024-04-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/</loc>
+    <loc>/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/</loc>
     <lastmod>2024-04-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E7%BB%8F%E9%AA%8C/</loc>
+    <loc>/tags/%E7%BB%8F%E9%AA%8C/</loc>
     <lastmod>2024-04-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2024/qq%E8%A1%A8%E6%83%85%E5%8C%85%E8%BD%AC%E5%BE%AE%E4%BF%A1%E8%A1%A8%E6%83%85%E5%8C%85/</loc>
+    <loc>/cn/2024/qq%E8%A1%A8%E6%83%85%E5%8C%85%E8%BD%AC%E5%BE%AE%E4%BF%A1%E8%A1%A8%E6%83%85%E5%8C%85/</loc>
     <lastmod>2024-04-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <loc>/tags/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2024-04-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91/</loc>
+    <loc>/tags/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2024-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2023/%E7%90%86%E8%B4%A2%E4%BD%93%E6%82%9F/</loc>
+    <loc>/cn/2023/%E7%90%86%E8%B4%A2%E4%BD%93%E6%82%9F/</loc>
     <lastmod>2024-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2024/typora%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</loc>
+    <loc>/cn/2024/typora%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</loc>
     <lastmod>2024-02-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2024/2024%E9%87%8D%E5%BA%86%E5%85%83%E6%97%A6%E6%B8%B8%E8%AE%B0/</loc>
+    <loc>/cn/2024/2024%E9%87%8D%E5%BA%86%E5%85%83%E6%97%A6%E6%B8%B8%E8%AE%B0/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E6%B8%B8%E8%AE%B0/</loc>
+    <loc>/categories/%E6%B8%B8%E8%AE%B0/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E9%87%8D%E5%BA%86/</loc>
+    <loc>/tags/%E9%87%8D%E5%BA%86/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2023/2023%E8%AE%A1%E5%88%92-%E6%80%BB%E7%BB%93/</loc>
+    <loc>/cn/2023/2023%E8%AE%A1%E5%88%92-%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E5%B9%B4%E5%BA%A6%E8%AE%A1%E5%88%92/</loc>
+    <loc>/tags/%E5%B9%B4%E5%BA%A6%E8%AE%A1%E5%88%92/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E5%B9%B4%E5%BA%A6%E8%AE%A1%E5%88%92/</loc>
+    <loc>/categories/%E5%B9%B4%E5%BA%A6%E8%AE%A1%E5%88%92/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2023/%E6%89%93%E5%B7%A5%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
+    <loc>/cn/2023/%E6%89%93%E5%B7%A5%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
     <lastmod>2023-12-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E8%81%8C%E5%9C%BA/</loc>
+    <loc>/tags/%E8%81%8C%E5%9C%BA/</loc>
     <lastmod>2023-12-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2023/%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B/</loc>
+    <loc>/cn/2023/%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B/</loc>
     <lastmod>2023-10-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2023/%E5%8E%8B%E5%8A%9B%E5%92%8C%E5%8A%A8%E5%8A%9B/</loc>
+    <loc>/cn/2023/%E5%8E%8B%E5%8A%9B%E5%92%8C%E5%8A%A8%E5%8A%9B/</loc>
     <lastmod>2023-10-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E6%84%9F%E6%82%9F/</loc>
+    <loc>/tags/%E6%84%9F%E6%82%9F/</loc>
     <lastmod>2023-10-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2023/%E4%B8%80%E7%82%B9%E6%84%9F%E6%82%9F/</loc>
+    <loc>/tags/kafka/</loc>
     <lastmod>2023-10-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E6%8A%80%E6%9C%AF%E6%BC%AB%E8%B0%88/</loc>
+    <loc>/cn/2023/kafka/</loc>
     <lastmod>2023-10-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2023/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/</loc>
+    <loc>/cn/2023/%E4%B8%80%E7%82%B9%E6%84%9F%E6%82%9F/</loc>
     <lastmod>2023-10-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/</loc>
+    <loc>/categories/%E6%8A%80%E6%9C%AF%E6%BC%AB%E8%B0%88/</loc>
+    <lastmod>2023-10-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2023/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/</loc>
+    <lastmod>2023-10-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2023-10-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/</loc>
     <lastmod>2023-08-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2023/workflow/</loc>
+    <loc>/cn/2023/workflow/</loc>
     <lastmod>2023-08-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E7%9C%BC%E9%95%9C/</loc>
+    <loc>/tags/%E6%80%9D%E8%80%83/</loc>
+    <lastmod>2023-03-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2023-03-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/%E7%AE%80%E5%8E%86/</loc>
+    <lastmod>2023-03-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2023/%E7%AE%80%E5%8E%86%E5%92%8C%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2023-03-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2023-03-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/%E7%9C%BC%E9%95%9C/</loc>
     <lastmod>2023-03-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2023/%E7%9C%BC%E9%95%9C%E9%85%8D%E9%95%9C/</loc>
+    <loc>/cn/2023/%E7%9C%BC%E9%95%9C%E9%85%8D%E9%95%9C/</loc>
     <lastmod>2023-03-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2023/202302/</loc>
+    <loc>/cn/2023/202302/</loc>
     <lastmod>2023-03-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E8%B4%A2%E5%8A%A1%E5%AE%9E%E8%AF%81/</loc>
+    <loc>/tags/%E8%B4%A2%E5%8A%A1%E5%AE%9E%E8%AF%81/</loc>
     <lastmod>2023-03-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E8%B4%A2%E5%8A%A1%E5%AE%9E%E8%AF%81/</loc>
+    <loc>/categories/%E8%B4%A2%E5%8A%A1%E5%AE%9E%E8%AF%81/</loc>
     <lastmod>2023-03-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2023/202301/</loc>
+    <loc>/cn/2023/202301/</loc>
     <lastmod>2023-01-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E6%97%85%E6%B8%B8/</loc>
+    <loc>/tags/%E6%97%85%E6%B8%B8/</loc>
     <lastmod>2022-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2022/%E7%8E%AF%E7%90%830903%E6%94%BB%E7%95%A5/</loc>
+    <loc>/cn/2022/%E7%8E%AF%E7%90%830903%E6%94%BB%E7%95%A5/</loc>
     <lastmod>2022-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E7%8E%AF%E7%90%83%E5%BD%B1%E5%9F%8E/</loc>
+    <loc>/tags/%E7%8E%AF%E7%90%83%E5%BD%B1%E5%9F%8E/</loc>
     <lastmod>2022-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E7%97%9B%E9%A3%8E/</loc>
+    <loc>/tags/windows/</loc>
+    <lastmod>2022-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2022/windows%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</loc>
+    <lastmod>2022-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/nginx/</loc>
+    <lastmod>2022-04-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2022/nginx%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2022-04-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/web%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2022-04-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2022/%E8%BE%BE%E6%A2%A6%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</loc>
+    <lastmod>2022-04-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2022-04-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2022/%E8%BE%BE%E6%A2%A6%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5/</loc>
+    <lastmod>2022-04-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2022/%E8%BE%BE%E6%A2%A6disql%E5%B7%A5%E5%85%B7%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2022-04-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2022/%E8%BE%BE%E6%A2%A6%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2022-04-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2022/%E8%BE%BE%E6%A2%A6%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2022-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/%E7%97%9B%E9%A3%8E/</loc>
     <lastmod>2022-01-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2022/%E7%97%9B%E9%A3%8E%E5%98%8C%E5%91%A4%E9%A5%AE%E9%A3%9F%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</loc>
+    <loc>/cn/2022/%E7%97%9B%E9%A3%8E%E5%98%8C%E5%91%A4%E9%A5%AE%E9%A3%9F%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</loc>
     <lastmod>2022-01-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E9%A5%AE%E9%A3%9F/</loc>
+    <loc>/tags/%E9%A5%AE%E9%A3%9F/</loc>
     <lastmod>2022-01-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6/</loc>
+    <loc>/cn/2021/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6/</loc>
     <lastmod>2021-12-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/linux/</loc>
+    <loc>/tags/linux/</loc>
     <lastmod>2021-12-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/mysql/</loc>
+    <loc>/tags/mysql/</loc>
     <lastmod>2021-12-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <loc>/cn/2021/%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2021-12-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <loc>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2021-12-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/2021%E8%AE%A1%E5%88%92/</loc>
+    <loc>/cn/2021/2021%E8%AE%A1%E5%88%92/</loc>
     <lastmod>2021-12-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/tomcat/</loc>
+    <loc>/tags/tomcat/</loc>
     <lastmod>2021-12-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84/</loc>
+    <loc>/cn/2021/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84/</loc>
     <lastmod>2021-12-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2021-12-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/%E5%AF%86%E7%A0%81/</loc>
+    <loc>/tags/%E5%AF%86%E7%A0%81/</loc>
     <lastmod>2021-12-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/</loc>
+    <loc>/cn/2021/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/</loc>
     <lastmod>2021-12-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
+    <loc>/cn/2021/windows%E8%BE%93%E5%87%BA%E7%9B%B8%E5%90%8C%E9%9F%B3%E6%BA%90/</loc>
     <lastmod>2021-10-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/windows%E8%BE%93%E5%87%BA%E7%9B%B8%E5%90%8C%E9%9F%B3%E6%BA%90/</loc>
+    <loc>/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
     <lastmod>2021-10-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/202109/</loc>
+    <loc>/cn/2021/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2021-10-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2021-10-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2021/202109/</loc>
     <lastmod>2021-09-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/202108/</loc>
+    <loc>/cn/2021/202108/</loc>
     <lastmod>2021-09-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/%E5%8F%82%E4%BF%9D%E8%81%8C%E5%B7%A5%E6%8A%80%E8%83%BD%E6%8F%90%E5%8D%87%E8%A1%A5%E8%B4%B4/</loc>
+    <loc>/cn/2021/%E8%AE%BE%E7%BD%AEjvm%E5%A4%A7%E5%B0%8F/</loc>
+    <lastmod>2021-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2021/%E5%8F%82%E4%BF%9D%E8%81%8C%E5%B7%A5%E6%8A%80%E8%83%BD%E6%8F%90%E5%8D%87%E8%A1%A5%E8%B4%B4/</loc>
     <lastmod>2021-08-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E6%90%9E%E9%92%B1/</loc>
+    <loc>/tags/%E6%90%9E%E9%92%B1/</loc>
     <lastmod>2021-08-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/202107/</loc>
+    <loc>/cn/2021/202107/</loc>
     <lastmod>2021-08-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/202106/</loc>
+    <loc>/cn/2021/202106/</loc>
     <lastmod>2021-07-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/202105/</loc>
+    <loc>/cn/2021/202105/</loc>
     <lastmod>2021-05-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/202104/</loc>
+    <loc>/cn/2021/202104/</loc>
     <lastmod>2021-05-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/2021-04-12-fire9/</loc>
+    <loc>/cn/2021/2021-04-12-fire9/</loc>
     <lastmod>2021-04-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/%E4%B9%9F%E5%A4%A7%E4%B9%A6%E5%8D%95%E6%94%B6%E9%9B%86%E6%95%B4%E7%90%86/</loc>
+    <loc>/cn/2021/%E4%B9%9F%E5%A4%A7%E4%B9%A6%E5%8D%95%E6%94%B6%E9%9B%86%E6%95%B4%E7%90%86/</loc>
     <lastmod>2021-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E4%B9%A6%E5%8D%95/</loc>
+    <loc>/tags/%E4%B9%A6%E5%8D%95/</loc>
     <lastmod>2021-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/2021-03-01-fire8/</loc>
+    <loc>/cn/2021/2021-03-01-fire8/</loc>
     <lastmod>2021-03-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/2021-01-31-fire7/</loc>
+    <loc>/cn/2021/2021-01-31-fire7/</loc>
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/2021-01-29-life-how-to-read/</loc>
+    <loc>/cn/2021/2021-01-29-life-how-to-read/</loc>
     <lastmod>2021-01-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E9%98%85%E8%AF%BB%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>/tags/%E9%98%85%E8%AF%BB%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2021-01-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2021/2021-01-21-life-computer/</loc>
+    <loc>/cn/2021/2021-01-21-life-computer/</loc>
     <lastmod>2021-01-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E8%A3%85%E6%9C%BA%E6%B1%87%E6%80%BB/</loc>
+    <loc>/tags/%E8%A3%85%E6%9C%BA%E6%B1%87%E6%80%BB/</loc>
     <lastmod>2021-01-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2021-01-01-fire6/</loc>
+    <loc>/cn/2020/2021-01-01-fire6/</loc>
     <lastmod>2020-12-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-12-03-fire5/</loc>
+    <loc>/cn/2020/2020-12-03-fire5/</loc>
     <lastmod>2020-12-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/docker/</loc>
+    <loc>/tags/docker/</loc>
     <lastmod>2020-12-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-12-03-docker-windowsstartup/</loc>
+    <loc>/cn/2020/2020-12-03-docker-windowsstartup/</loc>
     <lastmod>2020-12-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/java/</loc>
+    <loc>/tags/java/</loc>
     <lastmod>2020-11-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-11-24-java-restwithres/</loc>
+    <loc>/cn/2020/2020-11-24-java-restwithres/</loc>
     <lastmod>2020-11-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-10-13-java-timesconvert/</loc>
+    <loc>/cn/2020/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</loc>
+    <lastmod>2020-11-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2020/2020-10-13-java-timesconvert/</loc>
     <lastmod>2020-10-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/moneywiz3%E9%A2%84%E7%AE%97%E8%B0%83%E6%95%B4/</loc>
+    <loc>/cn/2020/moneywiz3%E9%A2%84%E7%AE%97%E8%B0%83%E6%95%B4/</loc>
     <lastmod>2020-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2023/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%80%9D%E8%80%83/</loc>
+    <loc>/cn/2020/%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/</loc>
     <lastmod>2020-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-08-15-java-createstaticmap/</loc>
+    <loc>/cn/2020/%E9%9A%90%E8%97%8F%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B/</loc>
+    <lastmod>2020-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2023/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%80%9D%E8%80%83/</loc>
+    <lastmod>2020-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2020/2020-08-15-java-createstaticmap/</loc>
     <lastmod>2020-08-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-07-13-mysql-explain/</loc>
+    <loc>/cn/2020/2020-07-13-mysql-explain/</loc>
     <lastmod>2020-07-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-29-java-bean2map/</loc>
+    <loc>/cn/2020/paasiaas%E7%AD%89/</loc>
+    <lastmod>2020-07-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/%E7%BC%96%E7%A8%8B%E6%A6%82%E5%BF%B5/</loc>
+    <lastmod>2020-07-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2020/2020-06-29-java-bean2map/</loc>
     <lastmod>2020-06-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-29-java-dom4j/</loc>
+    <loc>/cn/2020/2020-06-29-java-dom4j/</loc>
     <lastmod>2020-06-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-29-linux-killjavathread/</loc>
+    <loc>/cn/2020/2020-06-29-linux-killjavathread/</loc>
     <lastmod>2020-06-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/oracle/</loc>
+    <loc>/tags/oracle/</loc>
     <lastmod>2020-06-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-29-oracle-removerepeatdata/</loc>
+    <loc>/cn/2020/2020-06-29-oracle-removerepeatdata/</loc>
     <lastmod>2020-06-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/windows/</loc>
+    <loc>/cn/2020/2020-06-29-windows-killbackendprocess/</loc>
     <lastmod>2020-06-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-29-windows-killbackendprocess/</loc>
+    <loc>/cn/2020/2020-06-29-windows-batrun/</loc>
     <lastmod>2020-06-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-29-windows-batrun/</loc>
+    <loc>/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2020-06-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2020-06-29T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-22-oracle-userlock/</loc>
+    <loc>/cn/2020/2020-06-22-oracle-userlock/</loc>
     <lastmod>2020-06-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-22-oracle-expimp/</loc>
+    <loc>/cn/2020/2020-06-22-oracle-expimp/</loc>
     <lastmod>2020-06-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-20-java-jdbctrycatch/</loc>
+    <loc>/cn/2020/2020-06-20-java-jdbctrycatch/</loc>
     <lastmod>2020-06-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-20-java-jdbcutils/</loc>
+    <loc>/cn/2020/2020-06-20-java-jdbcutils/</loc>
     <lastmod>2020-06-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/jdbc/</loc>
+    <loc>/tags/jdbc/</loc>
     <lastmod>2020-06-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-20-techs-devrules/</loc>
+    <loc>/cn/2020/2020-06-20-techs-devrules/</loc>
     <lastmod>2020-06-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-20-techs-dbrules/</loc>
+    <loc>/cn/2020/2020-06-20-techs-dbrules/</loc>
     <lastmod>2020-06-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-20-python-essential/</loc>
+    <loc>/cn/2020/2020-06-20-python-essential/</loc>
     <lastmod>2020-06-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E8%AF%B4%E6%98%8E%E4%B9%A6/</loc>
+    <loc>/tags/%E8%AF%B4%E6%98%8E%E4%B9%A6/</loc>
     <lastmod>2020-06-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-04-15-workflow-word2sql/</loc>
+    <loc>/cn/2020/2020-04-15-workflow-word2sql/</loc>
     <lastmod>2020-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-06-20-oracle-tablestructquery/</loc>
+    <loc>/cn/2020/2020-06-20-oracle-tablestructquery/</loc>
     <lastmod>2020-04-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-03-16-thoughts-techsqa/</loc>
+    <loc>/cn/2020/2020-03-16-thoughts-techsqa/</loc>
     <lastmod>2020-03-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2020/2020-02-29-fire4/</loc>
+    <loc>/cn/2020/2020-02-29-fire4/</loc>
     <lastmod>2020-02-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2019/2020-01-04-fire3/</loc>
+    <loc>/cn/2020/%E7%A6%BB%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87pc%E4%B8%AD%E8%BD%AC%E8%BF%9E%E6%8E%A5%E5%85%AC%E7%BD%91/</loc>
+    <lastmod>2020-02-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</loc>
+    <lastmod>2020-01-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2020/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%A7%84%E5%88%99/</loc>
+    <lastmod>2020-01-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/cn/2019/2020-01-04-fire3/</loc>
     <lastmod>2019-12-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2019/2019-12-19-springboot-devtools/</loc>
+    <loc>/cn/2019/2019-12-19-springboot-devtools/</loc>
     <lastmod>2019-12-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/springboot/</loc>
+    <loc>/tags/springboot/</loc>
     <lastmod>2019-12-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E6%8A%80%E6%9C%AF%E6%A1%86%E6%9E%B6/</loc>
+    <loc>/categories/%E6%8A%80%E6%9C%AF%E6%A1%86%E6%9E%B6/</loc>
     <lastmod>2019-12-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2019/2019-12-07-fire2/</loc>
+    <loc>/cn/2019/2019-12-07-fire2/</loc>
     <lastmod>2019-12-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2019/2019-11-05-fire1/</loc>
+    <loc>/cn/2019/2019-11-05-fire1/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/git/</loc>
+    <loc>/tags/git/</loc>
     <lastmod>2019-10-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2019/2019-10-11-git-problems/</loc>
+    <loc>/cn/2019/2019-10-11-git-problems/</loc>
     <lastmod>2019-10-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
+    <loc>/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2019-10-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/vue.js%E5%AE%9E%E6%88%98/</loc>
+    <loc>/tags/vue.js%E5%AE%9E%E6%88%98/</loc>
     <lastmod>2019-03-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2019/2019-03-08-vue-2/</loc>
+    <loc>/cn/2019/2019-03-08-vue-2/</loc>
     <lastmod>2019-03-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2019/2019-03-08-vue-3/</loc>
+    <loc>/cn/2019/2019-03-08-vue-3/</loc>
     <lastmod>2019-03-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2019/2019-03-07-vue-1/</loc>
+    <loc>/cn/2019/2019-03-07-vue-1/</loc>
     <lastmod>2019-03-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/issue/</loc>
+    <loc>/issue/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-04-21-summary-oraclepracticedatabase/</loc>
+    <loc>/cn/2018/2018-04-21-summary-oraclepracticedatabase/</loc>
     <lastmod>2018-04-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E6%80%BB%E7%BB%93/</loc>
+    <loc>/tags/%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2018-04-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E8%AF%BE%E7%A8%8B/</loc>
+    <loc>/categories/%E8%AF%BE%E7%A8%8B/</loc>
     <lastmod>2018-04-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-04-20-summary-digitalimageprocess/</loc>
+    <loc>/cn/2018/2018-04-20-summary-digitalimageprocess/</loc>
     <lastmod>2018-04-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-04-17-oracle-13/</loc>
+    <loc>/cn/2018/2018-04-17-oracle-13/</loc>
     <lastmod>2018-04-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B7/</loc>
+    <loc>/tags/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B7/</loc>
     <lastmod>2018-04-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-04-08-javacore4/</loc>
+    <loc>/cn/2018/2018-04-08-javacore4/</loc>
     <lastmod>2018-04-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-04-08-oracle-11/</loc>
+    <loc>/cn/2018/2018-04-08-oracle-11/</loc>
     <lastmod>2018-04-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-04-10-oracle-12/</loc>
+    <loc>/cn/2018/2018-04-10-oracle-12/</loc>
     <lastmod>2018-04-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-04-06-javacore1/</loc>
+    <loc>/cn/2018/2018-04-06-javacore1/</loc>
     <lastmod>2018-04-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-04-06-javacore2/</loc>
+    <loc>/cn/2018/2018-04-06-javacore2/</loc>
     <lastmod>2018-04-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-04-06-javacore3/</loc>
+    <loc>/cn/2018/2018-04-06-javacore3/</loc>
     <lastmod>2018-04-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-04-05-jekyll-2/</loc>
+    <loc>/cn/2018/2018-04-05-jekyll-2/</loc>
     <lastmod>2018-04-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/</loc>
+    <loc>/tags/%E5%8D%9A%E5%AE%A2%E6%9E%84%E5%BB%BA/</loc>
     <lastmod>2018-04-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-04-03-oracle-10/</loc>
+    <loc>/cn/2018/2018-04-03-oracle-10/</loc>
     <lastmod>2018-04-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-03-30-oracle-9/</loc>
+    <loc>/cn/2018/2018-03-30-oracle-9/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-03-27-oracle-8/</loc>
+    <loc>/cn/2018/2018-03-27-oracle-8/</loc>
     <lastmod>2018-03-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-03-23-oracle-7/</loc>
+    <loc>/cn/2018/2018-03-23-oracle-7/</loc>
     <lastmod>2018-03-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-03-20-oracle-6/</loc>
+    <loc>/cn/2018/2018-03-20-oracle-6/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-03-16-oracle-5/</loc>
+    <loc>/cn/2018/2018-03-16-oracle-5/</loc>
     <lastmod>2018-03-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-03-13-oracle-4/</loc>
+    <loc>/cn/2018/2018-03-13-oracle-4/</loc>
     <lastmod>2018-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-03-11-summary-cloudcomputing/</loc>
+    <loc>/cn/2018/2018-03-11-summary-cloudcomputing/</loc>
     <lastmod>2018-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-03-02-oracle-2/</loc>
+    <loc>/cn/2018/2018-03-02-oracle-2/</loc>
     <lastmod>2018-03-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-03-06-oracle-3/</loc>
+    <loc>/cn/2018/2018-03-06-oracle-3/</loc>
     <lastmod>2018-03-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-02-27-oracle-1/</loc>
+    <loc>/cn/2018/2018-02-27-oracle-1/</loc>
     <lastmod>2018-02-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2018/2018-01-27-thoughts-5/</loc>
+    <loc>/cn/2018/2018-01-27-thoughts-5/</loc>
     <lastmod>2018-01-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>/categories/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2018-01-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2017/2017-12-13-summary-dbprinciple/</loc>
+    <loc>/cn/2017/2017-12-13-summary-dbprinciple/</loc>
     <lastmod>2017-12-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2017/2017-12-11-summary-computergraphics/</loc>
+    <loc>/cn/2017/2017-12-11-summary-computergraphics/</loc>
     <lastmod>2017-12-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2017/2017-12-05-thoughts-4/</loc>
+    <loc>/cn/2017/2017-12-05-thoughts-4/</loc>
     <lastmod>2017-12-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2017/2017-12-02-thoughts-3/</loc>
+    <loc>/cn/2017/2017-12-02-thoughts-3/</loc>
     <lastmod>2017-12-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2017/2017-11-30-thoughts-2/</loc>
+    <loc>/cn/2017/2017-11-30-thoughts-2/</loc>
     <lastmod>2017-11-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2017/2017-11-22-summary-bigdata/</loc>
+    <loc>/cn/2017/2017-11-22-summary-bigdata/</loc>
     <lastmod>2017-11-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2017/2017-11-23-thoughts-1/</loc>
+    <loc>/cn/2017/2017-11-23-thoughts-1/</loc>
     <lastmod>2017-11-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2017/2017-11-21-techs-jekyllbuildblog/</loc>
+    <loc>/cn/2017/2017-11-21-techs-jekyllbuildblog/</loc>
     <lastmod>2017-11-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/</loc>
+    <loc>/</loc>
     <lastmod>2017-01-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/en/</loc>
+    <loc>/en/</loc>
     <lastmod>2017-01-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/</loc>
+    <loc>/cn/</loc>
     <lastmod>2017-01-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/cn/2016/2016-02-14-hello-markdown/</loc>
+    <loc>/cn/2016/2016-02-14-hello-markdown/</loc>
     <lastmod>2016-02-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/en/about/</loc>
+    <loc>/en/about/</loc>
   </url><url>
-    <loc>//localhost:1313/en/vitae/</loc>
+    <loc>/en/vitae/</loc>
   </url><url>
-    <loc>//localhost:1313/en/links/</loc>
+    <loc>/en/links/</loc>
   </url><url>
-    <loc>//localhost:1313/en/publication/</loc>
+    <loc>/en/publication/</loc>
   </url><url>
-    <loc>//localhost:1313/cn/about/</loc>
+    <loc>/cn/about/</loc>
   </url><url>
-    <loc>//localhost:1313/cn/publication/</loc>
+    <loc>/cn/publication/</loc>
   </url><url>
-    <loc>//localhost:1313/cn/guestbook/</loc>
+    <loc>/cn/guestbook/</loc>
   </url><url>
-    <loc>//localhost:1313/cn/vitae/</loc>
+    <loc>/cn/vitae/</loc>
   </url><url>
-    <loc>//localhost:1313/cn/links/</loc>
+    <loc>/cn/links/</loc>
   </url>
 </urlset>

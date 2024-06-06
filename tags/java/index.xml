@@ -2,45 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/java/</link>
+    <link>/tags/java/</link>
     <description>Recent content in Java on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 24 Nov 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Java线程定时得到结果退出示例</title>
-      <link>//localhost:1313/cn/2020/2020-11-24-java-restwithres/</link>
+      <link>/cn/2020/2020-11-24-java-restwithres/</link>
       <pubDate>Tue, 24 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-11-24-java-restwithres/</guid>
+      <guid>/cn/2020/2020-11-24-java-restwithres/</guid>
       <description>大致需求 定时每几秒调用一次rest接口，如果接口响应成功则退出线程，如果接口响应失败，则继续调用直至成功。&#xA;做了一个简单的线程任务。简单来说是一个异步的调用方式。目前采用的方式是设置一个flag，作为判断rest接口是否调用成功的结果标志位，接口调用不成功则线程死循环；接口调用成功则线程不进入while，退出。&#xA;public static void main(String[] args) { // 线程沉睡时间，每3秒试图调用一次接口插入到告警表 final long timeInterval = 3000; AtomicBoolean flag = new AtomicBoolean(false); Thread thread = new Thread(() -&amp;gt; { while (!flag.get()) { flag.set(testFlag()); try { Thread.sleep(timeInterval); } catch (InterruptedException e) { log.info(&amp;#34;thread sleep interrupted&amp;#34;); } } }); thread.start(); } private static boolean testFlag() { int code = 500; boolean fl = false; try { if (code == 500) { throw new NullPointerException(); } else if (code == 200) { log.</description>
     </item>
     <item>
+      <title>Java学习规划（2020版）</title>
+      <link>/cn/2020/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</link>
+      <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>/cn/2020/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</guid>
+      <description>Java基础书籍阅读 Java8 实战 effective Java on Java 8 深入理解Java虚拟机 第三版 算法 第四版 Java并发编程实战 环境搭建 Java版本 Java8：https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html&#xA;代码管理工具sourcetree：https://www.sourcetreeapp.com/&#xA;Jar包管理Maven：https://maven.apache.org/download.cgi&#xA;Maven的setting配置需要修改，配置公司的仓库。&#xA;Java开发IDE Jet brains IDEA：https://www.jetbrains.com/idea/download/#section=windows&#xA;破解：https://juejin.im/post/5df8a5a5e51d4557f0460990&#xA;DataGrip可装可不装&#xA;注意要配入环境变量：Maven、Java&#xA;新特性 Java 8 新特性 localDate，Optinal容器类，lambda表达式、Colletcions集合、steam流、函数式编程&#xA;Modern Java - A Guide to Java 8 翻译版 https://juejin.im/post/5c3d7c8a51882525dd591ac7#Stream-流&#xA;Java 8 新特性概述 https://www.ibm.com/developerworks/cn/java/j-lo-jdk8newfeature/&#xA;Java8新特性总结 https://www.jianshu.com/p/4df02599aeb2&#xA;Java 8新特性终极指南 https://www.cnblogs.com/LiuYanYGZ/p/6206159.html&#xA;深入理解 Java 函数式编程 https://www.ibm.com/developerworks/cn/java/j-understanding-functional-programming-1/index.html&#xA;Java 11 新特性 Java 11 新特性介绍 https://www.ibm.com/developerworks/cn/java/the-new-features-of-Java-11/index.html&#xA;指南 项目推荐 awesome-java ： https://github.com/akullpp/awesome-java#bean-mapping&#xA;Collection of awesome Java project on Github(Github 上非常棒的 Java 开源项目集合).</description>
+    </item>
+    <item>
       <title>Java各时间类的转换</title>
-      <link>//localhost:1313/cn/2020/2020-10-13-java-timesconvert/</link>
+      <link>/cn/2020/2020-10-13-java-timesconvert/</link>
       <pubDate>Tue, 13 Oct 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-10-13-java-timesconvert/</guid>
+      <guid>/cn/2020/2020-10-13-java-timesconvert/</guid>
       <description>LocalDateTime和String的转换 // LocalDateTime转为String String string = LocalDateTime.now().format(new DateTimeFormatter.ofPattern(&amp;#34;yyyy-MM-dd HH:mm:ss.SSSSSS&amp;#34;)); // String转为LocalDateTime String time = &amp;#34;2020-07-08 14:41:50.238473&amp;#34;; LocalDateTime parse = LocalDateTime.parse(time, new DateTimeFormatter.ofPattern(&amp;#34;yyyy-MM-dd HH:mm:ss.SSSSSS&amp;#34;)); java.util.Date和String的转换 SimpleDateFormat格式化进行转换&#xA;// java.util.Date转换String DateFormat dateFormat = new SimpleDateFormat(&amp;#34;dd-MM-yy:HH:mm:ss&amp;#34;); Date date = new Date(); String dateStr = dateFormat.format(date); // String转换java.util.Date try { DateFormat dateFormat = new SimpleDateFormat(&amp;#34;dd/MM/yyy&amp;#34;); Date date = dateFormat.parse(dateStr); } catch (ParseException e) { e.printStack(); } java.sql.Timestamp和String的转换 与java.util.Date和String的转换类似，都是通过SimpleDateFormat格式化进行转换，不展开代码细讲。&#xA;java.util.Date和java.sql.Timestamp的转换 //Date转换Timestamp Timestamp timestamp = new Timestamp((new Date()).</description>
     </item>
     <item>
       <title>Java创建不可变并且static静态的Map</title>
-      <link>//localhost:1313/cn/2020/2020-08-15-java-createstaticmap/</link>
+      <link>/cn/2020/2020-08-15-java-createstaticmap/</link>
       <pubDate>Sat, 15 Aug 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-08-15-java-createstaticmap/</guid>
+      <guid>/cn/2020/2020-08-15-java-createstaticmap/</guid>
       <description>findbugs错误提示 MS_MUTABLE_COLLECTION_PKGPROTECT, Priority: Normal&#xA;XX.XX.XXX.XX is a mutable collection which should be package protected&#xA;A mutable collection instance is assigned to a final static field, thus can be changed by malicious code or by accident from another package. The field could be made package protected to avoid this vulnerability. Alternatively you may wrap this field into Collections.unmodifiableSet/List/Map/etc. to avoid this vulnerability. 很容易写的一个错误案例如下： public class TestMap { private static final Map&amp;lt;Integer,String&amp;gt; map = new LinkedHashMap&amp;lt;Integer, String&amp;gt;(); static { map = new HashMap(); map.</description>
     </item>
     <item>
       <title>Java实体类和map的转换</title>
-      <link>//localhost:1313/cn/2020/2020-06-29-java-bean2map/</link>
+      <link>/cn/2020/2020-06-29-java-bean2map/</link>
       <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-06-29-java-bean2map/</guid>
+      <guid>/cn/2020/2020-06-29-java-bean2map/</guid>
       <description>Java反射对JavaBean体和泛型Map做互换 Map转为Bean public &amp;lt;T, K, V&amp;gt; T map2Bean(Map&amp;lt;K, V&amp;gt; map, Class&amp;lt;T&amp;gt; beanCls) { // try catch未写 T t = null; BeanInfo beanInfo = Introspector.getBeanInfo(beanCls.getClass()); PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors(); t = beanCls.newInstance(); for (PropertyDescriptor property : propertyDescriptors) { String key = property.getName(); if (map.containsKey(key)) { Object value = map.get(key); Method setter = property.getWriteMethod(); setter.invoke(t, value); } } return t; } Bean转为Map public &amp;lt;T, K, V&amp;gt; Map&amp;lt;String, Object&amp;gt; bean2Map(T bean) { // try catch未写 Map&amp;lt;String, Object&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); if (bean == null) { return null; } BeanInfo beanInfo = Introspector.</description>
     </item>
     <item>
       <title>Java的DOM4J解析XML文件</title>
-      <link>//localhost:1313/cn/2020/2020-06-29-java-dom4j/</link>
+      <link>/cn/2020/2020-06-29-java-dom4j/</link>
       <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-06-29-java-dom4j/</guid>
+      <guid>/cn/2020/2020-06-29-java-dom4j/</guid>
       <description>dom4j获取iterator&#xA;/** * @author luohao * @create 2020/6/18 17:21 */ @Slf4j public class Dom4jUtils { public static Iterator&amp;lt;Element&amp;gt; getElementIterator(String path) { SAXReader reader = new SAXReader(); Document document = null; try { document = reader.read(new File(path)); } catch (DocumentException e) { log.error(&amp;#34;Dom4j：读取xml文件时异常{}&amp;#34;, e.getMessage(), e); } Optional&amp;lt;Document&amp;gt; docElementOpt = Optional.ofNullable(document); return docElementOpt.map(Document::getRootElement).map(Element::elementIterator).orElseGet(() -&amp;gt; new Iterator&amp;lt;Element&amp;gt;() { @Override public boolean hasNext() { return false; } @Override public Element next() { return null; } }); } } 获取xml的node节点和属性</description>
     </item>
   </channel>

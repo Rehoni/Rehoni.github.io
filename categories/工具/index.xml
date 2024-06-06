@@ -2,46 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>工具 on Rehoni | 罗皓</title>
-    <link>//localhost:1313/categories/%E5%B7%A5%E5%85%B7/</link>
+    <link>/categories/%E5%B7%A5%E5%85%B7/</link>
     <description>Recent content in 工具 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 06 Jun 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Typora配置Github图床</title>
-      <link>//localhost:1313/cn/2024/typora%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</link>
+      <link>/cn/2024/typora%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</link>
       <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2024/typora%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</guid>
+      <guid>/cn/2024/typora%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</guid>
       <description>1、github&#xA;创建 github 私有仓库&#xA;生成一个 token 用于 PicGo 操作你的仓库：&#xA;访问：https://github.com/settings/tokens&#xA;然后点击 Generate new token。&#xA;2、picgo/picList&#xA;图床，选择“Github”作为图床服务。&#xA;在 Github 设置页面中，填写你的 Github 仓库信息，包括仓库名称、分支、文件夹等。&#xA;确保仓库是公开可访问的，并且已经创建了用于存储图片的文件夹。&#xA;可以启用 CDN 加速：https://cdn.jsdelivr.net/gh/user/repo@version/file&#xA;picList 可以开启删除云端功能，记得在设置中配置代理加速&#xA;3、typora&#xA;插入图片时规则——上传图片，并勾选对本地位置的图片应用上述规则&#xA;上传服务勾选 PicGo 或者 PicList，选中安装路径即可。&#xA;typora 如果显示图片比较慢，可以开启 typora 代理：Launch Arguments (Windows / Linux)</description>
     </item>
     <item>
       <title>Typora使用指南</title>
-      <link>//localhost:1313/cn/2024/typora%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</link>
+      <link>/cn/2024/typora%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</link>
       <pubDate>Tue, 06 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2024/typora%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</guid>
+      <guid>/cn/2024/typora%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</guid>
       <description>Typora使用指南 1、快捷键 参考知乎：完全使用指南&#xA;收起侧边栏 ctrl + shift + L/3 段落内代码 ctrl + shift +· 代码块 ctrl + shift + k 折叠 删除线 like this，~~like this~~&#xA;下划线 Ctrl + U 或者加上标签`&amp;lt;u&amp;gt;Underline&amp;lt;/u&amp;gt;` 。 添加/删除表格行 Command/Ctrl+Enter添加行&#xA;Shift+Command/Ctrl+L删除行&#xA;鼠标拽住表头可以进行拖拽。&#xA;强调 ==like this==，==like this==&#xA;To use this feature, please enable it first in the Preference Panel -&amp;gt; Markdown Tab. Then, use == to wrap highlight content. For example: ==highlight==.&#xA;表格内行内换行 shift + Enter会以插入一个&amp;lt;br/&amp;gt;的形式，进行换行。&#xA;2、一些高级用法 Typora，世界上最漂亮的写作App - 马索萌的文章 - 知乎 https://zhuanlan.</description>
     </item>
     <item>
       <title>chrony 服务器集群对时</title>
-      <link>//localhost:1313/cn/2021/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6/</link>
+      <link>/cn/2021/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6/</link>
       <pubDate>Wed, 15 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6/</guid>
+      <guid>/cn/2021/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6/</guid>
       <description>现有对时： scada1节点办公内网网口（198.120.100.104/10.228.96.232）通过chronyd，从市公司对时源10.109.192.7获取标准时钟 弃用：省公司NTP时钟源（20.55.32.202、20.55.32.203）获取标准时钟&#xA;scada1作为服务端从内部交换机使用NTP协议对时给web1（101）、web2（102）、his（103）、robot（105）四个节点对时&#xA;video（198.120.100.106/10.228.96.235）节点采用ntp，从 scada1节点获取标准时钟&#xA;希文，轨道机器人巡检主机（每个巡检主机拥有自己独立办公网络ip）通过sntp，均从video节点获取标准时钟&#xA;chronyd对时 使用root用户修改&#xA;对时配置文件：&#xA;vi /etc/chrony.conf （1）作为客户端，设置从哪里对时（即时钟源），web1（101）、web2（102）、his（103）、robot（105）四个节点对时采用&#xA;server xxx.xxx.xxx.xxx iburst （2）作为服务端，允许哪些节点从本机对时， scada1节点采用&#xA;allow xxx.xxx.xxx.xxx （3）修改配置后，重启服务（客户端）&#xA;对时服务（客户端）常用指令&#xA;systemctl restart chronyd systemctl start chronyd systemctl stop chronyd ntp对时 使用root用户修改&#xA;对时配置文件：&#xA;vi /etc/ntp.conf （1）作为客户端，设置从哪里对时（即时钟源），video（198.120.100.106/10.228.96.235）节点采用&#xA;server xxx.xxx.xxx.xxx iburst </description>
     </item>
     <item>
       <title>Windows同时输出相同音源</title>
-      <link>//localhost:1313/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</link>
+      <link>/cn/2021/windows%E8%BE%93%E5%87%BA%E7%9B%B8%E5%90%8C%E9%9F%B3%E6%BA%90/</link>
       <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid>
+      <guid>/cn/2021/windows%E8%BE%93%E5%87%BA%E7%9B%B8%E5%90%8C%E9%9F%B3%E6%BA%90/</guid>
+      <description>同时输出相同音源 需求：和老婆一起玩双人同屏游戏（以撒的结合:抗生），但需要带上蓝牙耳机玩。&#xA;设备：2个蓝牙耳机、1个蓝牙接收器、1台Win10系统电脑。&#xA;通过关键字搜索出一个解决方案（Output audio to multiple devices in Windows 10）&#xA;在我电脑上测试无法实现。&#xA;但顺着思路，找到了虚拟音频软件（Virtual Audio Cable）。&#xA;经测试，使用Virtual Audio Cable软件可以实现以上需求。&#xA;安装软件，连接蓝牙设备。 运行Audio Repeater (MME)，Wave in 选择Line 1，Wave Out选择你的蓝牙设备1，Total buffer设置为50，点start。 不关再运行一次Audio Repeater (MME)，也就是双开软件，Wave in 选择Line 1，Wave Out选择你的蓝牙设备2，Total buffer设置为50。点start。&#xA;其实如果只是看剧的话，可以用MPC-BE播放器，选项-音频里可以设置多重输出，选择你的两个蓝牙设备即可，效果还更好。&#xA;Windows快捷键 🚈 Windows桌面和虚拟桌面 贴靠窗口：Win +左/右&amp;gt; Win +上/下&amp;gt;窗口可以变为1/4大小放置在屏幕4个角落&#xA;切换窗口：Alt + Tab&#xA;任务视图：Win + Tab(松开键盘界面不会消失)&#xA;创建新的虚拟桌面：Win + Ctrl + D&#xA;关闭当前虚拟桌面：Win + Ctrl + F4&#xA;切换虚拟桌面：Win + Ctrl +左/右&#xA;输入法 中英文符号切换：ctrl+.&#xA;表情：Win+.或;&#xA;字体 Fira Code 连字 https://github.</description>
+    </item>
+    <item>
+      <title>Windows快捷键</title>
+      <link>/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid>
       <description>Windows快捷键 🚈 Windows桌面和虚拟桌面 贴靠窗口：Win +左/右&amp;gt; Win +上/下&amp;gt;窗口可以变为1/4大小放置在屏幕4个角落&#xA;切换窗口：Alt + Tab&#xA;任务视图：Win + Tab(松开键盘界面不会消失)&#xA;创建新的虚拟桌面：Win + Ctrl + D&#xA;关闭当前虚拟桌面：Win + Ctrl + F4&#xA;切换虚拟桌面：Win + Ctrl +左/右&#xA;输入法 中英文符号切换：ctrl+.&#xA;表情：Win+.或;&#xA;字体 Fira Code 连字 https://github.com/tonsky/FiraCode cascadia code 连字 https://github.com/microsoft/cascadia-code palatino linotype Monaco operator mono mononoki jetbrains mono连字 consolas Ubuntu mono </description>
     </item>
     <item>
-      <title>Windows同时输出相同音源</title>
-      <link>//localhost:1313/cn/2021/windows%E8%BE%93%E5%87%BA%E7%9B%B8%E5%90%8C%E9%9F%B3%E6%BA%90/</link>
-      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/windows%E8%BE%93%E5%87%BA%E7%9B%B8%E5%90%8C%E9%9F%B3%E6%BA%90/</guid>
-      <description>同时输出相同音源 需求：和老婆一起玩双人同屏游戏（以撒的结合:抗生），但需要带上蓝牙耳机玩。&#xA;设备：2个蓝牙耳机、1个蓝牙接收器、1台Win10系统电脑。&#xA;通过关键字搜索出一个解决方案（Output audio to multiple devices in Windows 10）&#xA;在我电脑上测试无法实现。&#xA;但顺着思路，找到了虚拟音频软件（Virtual Audio Cable）。&#xA;经测试，使用Virtual Audio Cable软件可以实现以上需求。&#xA;安装软件，连接蓝牙设备。 运行Audio Repeater (MME)，Wave in 选择Line 1，Wave Out选择你的蓝牙设备1，Total buffer设置为50，点start。 不关再运行一次Audio Repeater (MME)，也就是双开软件，Wave in 选择Line 1，Wave Out选择你的蓝牙设备2，Total buffer设置为50。点start。&#xA;其实如果只是看剧的话，可以用MPC-BE播放器，选项-音频里可以设置多重输出，选择你的两个蓝牙设备即可，效果还更好。&#xA;Windows快捷键 🚈 Windows桌面和虚拟桌面 贴靠窗口：Win +左/右&amp;gt; Win +上/下&amp;gt;窗口可以变为1/4大小放置在屏幕4个角落&#xA;切换窗口：Alt + Tab&#xA;任务视图：Win + Tab(松开键盘界面不会消失)&#xA;创建新的虚拟桌面：Win + Ctrl + D&#xA;关闭当前虚拟桌面：Win + Ctrl + F4&#xA;切换虚拟桌面：Win + Ctrl +左/右&#xA;输入法 中英文符号切换：ctrl+.&#xA;表情：Win+.或;&#xA;字体 Fira Code 连字 https://github.</description>
+      <title>离线服务器通过PC中转连接公网</title>
+      <link>/cn/2020/%E7%A6%BB%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87pc%E4%B8%AD%E8%BD%AC%E8%BF%9E%E6%8E%A5%E5%85%AC%E7%BD%91/</link>
+      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>/cn/2020/%E7%A6%BB%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87pc%E4%B8%AD%E8%BD%AC%E8%BF%9E%E6%8E%A5%E5%85%AC%E7%BD%91/</guid>
+      <description>CCProxy 主要用于局域网内共享宽带上网，ADSL共享上网、专线代理共享、ISDN代理共享、卫星代理共享、蓝牙代理共享、二级代理和SOCKS5代理等共享代理上网。&#xA;安装好这个软件之后启动就相当于开启了当前这台安装CCProxy的电脑作为中转服务器，然后挑选一个离线内网服务器可以访问的到的IP地址作为流量中转服务器的代理地址。&#xA;Proxychains4 一个可以在终端进行socks流量转发的工具Proxychains4&#xA;proxychains-ng是proxychains的加强版，主要有以下功能和不足：&#xA;支持http/https/socks4/socks5 支持认证 远端dns查询 多种代理模式 不支持udp/icmp转发 少部分程序和在后台运行的可能无法代理 简单的说就是这个程序 Hook 了 sockets 相关的操作，让普通程序的 sockets 数据走 SOCKS/HTTP 代理。其核心就是利用了 LD_PRELOAD 这个环境变量（Mac 上是 DYLD_INSERT_LIBRARIES）。&#xA;在 Unix 系统中，如果设置了 LD_PRELOAD 环境变量，那么在程序运行时，动态链接器会先加载该环境变量所指定的动态库。也就是说，这个动态库的加载优先于任何其它的库，包括 libc。&#xA;ProxyChains 创建了一个叫 libproxychains4.so（Mac 上是 libproxychains4.dylib）的动态库。里面重写了 connect、close 以及 sendto 等与 socket 相关的函数，通过这些函数发出的数据将会走代理，详细代码可以参考 libproxychains.c。&#xA;在主程序里，它会读取配置文件，查找 libproxychains4 所在位置，把这些信息存入环境变量后执行子程序。这样子程序里对 socket 相关的函数调用就会被 Hook 了，对子程序来说，跟代理相关的东西都是透明的。&#xA;配置 通过源代码安装的配置文件默认在 /etc/proxychains.conf，我们通过改写这个配置文件中的最后几行如下：&#xA;[ProxyList]&#xD;# 一些注释&#xD;# 填入你的代理服务器IP x.x.x.x 和端口&#xD;socks5 x.x.x.x 3030 使用 任意使用某个指令，例如下载某个东西：&#xA;proxychains4 wget 下载地址 同理，它还可以用于梯子的使用。</description>
     </item>
   </channel>
 </rss>

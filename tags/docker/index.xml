@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/docker/</link>
+    <link>/tags/docker/</link>
     <description>Recent content in Docker on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 03 Dec 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>windows启用docker</title>
-      <link>//localhost:1313/cn/2020/2020-12-03-docker-windowsstartup/</link>
+      <link>/cn/2020/2020-12-03-docker-windowsstartup/</link>
       <pubDate>Thu, 03 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-12-03-docker-windowsstartup/</guid>
+      <guid>/cn/2020/2020-12-03-docker-windowsstartup/</guid>
       <description>问题 这次出现这个问题的原因是给电脑上安装了安卓模拟器导致了冲突，后卸载后docker仍不可用，故再排查一次。&#xA;An Error occurred.&#xA;windows 10 docker cannot enable hyper-v service&#xA;1、systeminfo命令 在命令行中执行systeminfo，如果所有列出的Hyper-V要求的值都为Yes，则系统可以运行Hyper-V。&#xA;Hyper-V要求： 虚拟机监视器模式扩展：是&#xD;固件中已启用虚拟化：是&#xD;二级地址转换：是&#xD;执行数据保护可用：是 同样需要四项均为“是”才符合运行Hyper-V虚拟机的要求&#xA;2、启用或关闭Windows功能 3、bios设置 CPU Configuration -&amp;gt; Intel Virtualization Technology，将次设置项修改为enabled。&#xA;如果已经是enabled状态，可以考虑开关一次此设置，再F10保存重启。</description>
     </item>
   </channel>
