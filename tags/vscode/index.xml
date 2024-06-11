@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>VsCode on Rehoni | 罗皓</title>
+    <link>/tags/vscode/</link>
+    <description>Recent content in VsCode on Rehoni | 罗皓</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VsCode小技巧</title>
+      <link>/cn/2022/%E5%B7%A5%E5%85%B7_vscode/</link>
+      <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
+      <guid>/cn/2022/%E5%B7%A5%E5%85%B7_vscode/</guid>
+      <description>删除重复行并排序 安装插件:Transformer&#xA;ctrl + a 全选文字&#xA;ctrl + shift + P 打开命令窗口&#xA;输入：&#xA;Transform:Unique Lines //删除重复行&#xA;Transform:Sort Lines //排序&#xA;提取指定特征的文本 一般通过正则筛选特征文本后，点击菜单上的，选择-&amp;gt;选择所有匹配项，后复制即可&#xA;行首行尾处理 列模式，编辑软件应该都有； 搜索时，选择正则表达式，行首^，行尾$,匹配之后进行全部替换；在正则表达式模式下，替换成/n可以实现换行。 vscode列模式 按住alt+shift 点选；命令调出列模式选择。&#xA;转化大小写 需要自定义一个快捷键&#xA;搜索、移动和折叠 ctrl+f，下方有替换栏；左侧栏有全局搜索；&#xA;选中代码块，tab可以整体右移；shift + tab整体左移；&#xA;softWrap设置vscode折叠代码；&#xA;vscode格式化vue的格式 分号，单引号问题 Setting.json里边修改设置&#xA;&amp;#34;vetur.format.defaultFormatterOptions&amp;#34;: {&#xD;&amp;#34;js-beautify-html&amp;#34;: {&#xD;// force-aligned | force-expand-multiline&#xD;&amp;#34;wrap_attributes&amp;#34;: &amp;#34;force-aligned&amp;#34;&#xD;},&#xD;&amp;#34;prettyhtml&amp;#34;: {&#xD;&amp;#34;printWidth&amp;#34;: 100,&#xD;&amp;#34;singleQuote&amp;#34;: false,&#xD;&amp;#34;wrapAttributes&amp;#34;: false,&#xD;&amp;#34;sortAttributes&amp;#34;: true&#xD;},&#xD;// --- 解决问题 ---&#xD;&amp;#34;prettier&amp;#34;: {&#xD;&amp;#34;semi&amp;#34;: false,&#xD;&amp;#34;singleQuote&amp;#34;: true&#xD;}&#xD;// --- 解决问题 ---&#xD;} x-invalid-end-tag问题 在.</description>
+    </item>
+  </channel>
+</rss>

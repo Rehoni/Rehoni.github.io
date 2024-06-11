@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Selenium on Rehoni | 罗皓</title>
+    <link>/tags/selenium/</link>
+    <description>Recent content in Selenium on Rehoni | 罗皓</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 13 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/selenium/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>selenium driver实现后台运行</title>
+      <link>/cn/2023/selenium%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</link>
+      <pubDate>Fri, 13 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>/cn/2023/selenium%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</guid>
+      <description>标准解决方案：使用headless的selenium driver就可以了。&#xA;短频快的解决方案：使用ghost driver。&#xA;解决&amp;rsquo;chromedriver&amp;rsquo; executable needs to be in PATH问题 1.首先需要下载Chromedriver，下载后得到的是一个chromedriver.exe文件。（chromedriver下载地址） 2.将chromedriver.exe拷贝至谷歌浏览器目录（如 C:\Program Files\Google\Chrome\Application）以及python根目录（C:\Python27）。 3.将谷歌浏览器环境变量添加到path（C:\Users\HD003\AppData\Local\Google\Chrome\Application）。 至此，就可以解决 ‘chromedriver’ executable needs to be in PATH问题了。&#xA;填充表单 Selenium专门提供了Select类来处理下拉框。 其实 WebDriver 中提供了一个叫 Select 的方法，可以帮助我们完成这些事情：&#xA;# 导入 Select 类&#xD;from selenium.webdriver.support.ui import Select&#xD;# 找到 name 的选项卡&#xD;select = Select(driver.find_element_by_name(&amp;#39;status&amp;#39;))&#xD;# select.select_by_index(1)&#xD;select.select_by_value(&amp;#34;0&amp;#34;)&#xD;select.select_by_visible_text(u&amp;#34;未审核&amp;#34;) 以上是三种选择下拉框的方式，它可以根据索引来选择，可以根据值来选择，可以根据文字来选择。注意：&#xA;index 索引从 0 开始 value是option标签的一个属性值，并不是显示在下拉框中的值 visible_text是在option标签文本的值，是显示在下拉框的值&#xA;全部取消选择怎么办呢？很简单:&#xA;select.deselect_all() </description>
+    </item>
+  </channel>
+</rss>

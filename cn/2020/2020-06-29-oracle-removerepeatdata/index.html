@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Oracle数据库中去除重复数据 - Rehoni | 罗皓</title>
-    <meta property="og:title" content="Oracle数据库中去除重复数据 - Rehoni | 罗皓">
+    <title>Oracle——查找和去除重复数据 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Oracle——查找和去除重复数据 - Rehoni | 罗皓">
     
     <meta name="twitter:card" content="summary">
 
@@ -15,10 +15,12 @@
 
     
       
-      <meta property="description" content="全表重复
-[&amp;hellip;] create table maindevicetemp as ( select distinct * from ELECTRANS.GEA_DM_RP_MAIN_DEVICE ); truncate table ELECTRANS.GEA_DM_RP_MAIN_DEVICE; insert into ELECTRANS.GEA_DM_RP_MAIN_DEVICE &amp;hellip;">
-      <meta property="og:description" content="全表重复
-[&amp;hellip;] create table maindevicetemp as ( select distinct * from ELECTRANS.GEA_DM_RP_MAIN_DEVICE ); truncate table ELECTRANS.GEA_DM_RP_MAIN_DEVICE; insert into ELECTRANS.GEA_DM_RP_MAIN_DEVICE &amp;hellip;">
+      <meta property="description" content="查询两个字段是否是一对一的关系：count_a != count_b时，不是一对一
+[&amp;hellip;] select count(distinct a) count_a,count(distinct b) count_b from table t; 假设count_a&amp;gt;count_b，那么查询重复的a的记录：
+[&amp;hellip;] select a,count(a) count_a &amp;hellip;">
+      <meta property="og:description" content="查询两个字段是否是一对一的关系：count_a != count_b时，不是一对一
+[&amp;hellip;] select count(distinct a) count_a,count(distinct b) count_b from table t; 假设count_a&amp;gt;count_b，那么查询重复的a的记录：
+[&amp;hellip;] select a,count(a) count_a &amp;hellip;">
       
     
 
@@ -98,7 +100,7 @@
     <article class="main">
       <header class="title">
       
-<h1>Oracle数据库中去除重复数据</h1>
+<h1>Oracle——查找和去除重复数据</h1>
 
 
 <h3>Rehoni / 
@@ -111,57 +113,55 @@
 
 
 
-<p>全表重复</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> maindevicetemp <span style="color:#66d9ef">as</span> (
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> <span style="color:#f92672">*</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">from</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE
-</span></span><span style="display:flex;"><span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">truncate</span> <span style="color:#66d9ef">table</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> maindevicetemp;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">table</span> maindevicetemp;
-</span></span></code></pre></div><p>部分重复：直接删除查出来的代码，1. 可以通过把查出来的表放入临时表的操作来提高效率；2. 可以通过选择隐藏字段rowid，取最大的rowid（而不用group by &hellip; having count(*) &gt;1 的操作）为最新的记录。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> geamaindevice <span style="color:#66d9ef">as</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> a.OBJECT_ID, <span style="color:#66d9ef">max</span>(a.ROWID) dataid
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE a
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> a.OBJECT_ID;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> geamaindevice;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">from</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE a
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> a.ROWID <span style="color:#f92672">&lt;&gt;</span> (
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span> b.dataid <span style="color:#66d9ef">from</span> geamaindevice b
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">where</span> a.OBJECT_ID <span style="color:#f92672">=</span> b.OBJECT_ID
-</span></span><span style="display:flex;"><span>    );
-</span></span></code></pre></div><p>提取更新时间最近的一条记录</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">select</span> t.EMPLOYEE_ID,
-</span></span><span style="display:flex;"><span>       EMPLOYEE_NAME,
-</span></span><span style="display:flex;"><span>       a.ORG_ID,
-</span></span><span style="display:flex;"><span>       b.ORG_NAME,
-</span></span><span style="display:flex;"><span>       t.SHORT_SPELL,
-</span></span><span style="display:flex;"><span>       t.FULL_SPELL,JOBSTATUS,EMPLOYEE_STATUS,NATIONALITY,SEX,EDUCATION,MOBILE_PHONE,FIX_PHONE,EMAIL,t.UPDATE_TIME,
-</span></span><span style="display:flex;"><span>       row_number() over (partition <span style="color:#66d9ef">by</span> EMPLOYEE_NAME <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> t.UPDATE_TIME) rn
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> SJHL_ZH.NZWOT_TOP_EMPLOYEE t
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">left</span> <span style="color:#66d9ef">join</span> NZWOT_TOP_USER a <span style="color:#66d9ef">on</span> a.EMPLOYEE_ID <span style="color:#f92672">=</span> t.EMPLOYEE_ID
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">inner</span> <span style="color:#66d9ef">join</span> (<span style="color:#66d9ef">select</span> org_id, org_name, parent_org_id, org_type, name_full_path, update_time <span style="color:#66d9ef">from</span> sjhl_zh.nzwot_top_organization
-</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">state</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">and</span> regexp_like(name_full_path, <span style="color:#e6db74">&#39;(变电管理所|输电管理所|试验研究所)&#39;</span>)
-</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">start</span> <span style="color:#66d9ef">with</span> parent_org_id <span style="color:#f92672">=</span> ( <span style="color:#66d9ef">select</span> org_id <span style="color:#66d9ef">from</span> sjhl_zh.nzwot_top_organization
-</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">where</span> name_full_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;中国南方电网有限责任公司/广东电网有限责任公司/珠海供电局&#39;</span>
-</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">state</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">and</span> org_level <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> ) <span style="color:#66d9ef">connect</span> <span style="color:#66d9ef">by</span> <span style="color:#66d9ef">prior</span> org_id <span style="color:#f92672">=</span> parent_org_id
-</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">union</span>
-</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">select</span> org_id, org_name, <span style="color:#66d9ef">null</span>, org_type, name_full_path, update_time <span style="color:#66d9ef">from</span> sjhl_zh.nzwot_top_organization
-</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">where</span> name_full_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;中国南方电网有限责任公司/广东电网有限责任公司/珠海供电局&#39;</span> <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">state</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">and</span> org_level <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>) b <span style="color:#66d9ef">on</span> b.ORG_ID <span style="color:#f92672">=</span> a.ORG_ID) tb
-</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">where</span> tb.rn <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+<h2 id="查找重复根据字段"><strong>查找重复（根据字段）</strong></h2>
+<p>查询两个字段是否是一对一的关系：count_a != count_b时，不是一对一</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span> <span style="color:#66d9ef">select</span> <span style="color:#a6e22e">count</span>(<span style="color:#66d9ef">distinct</span> a) count_a,<span style="color:#a6e22e">count</span>(<span style="color:#66d9ef">distinct</span> b) count_b <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">table</span> t;
+</span></span></code></pre></div><p>假设count_a&gt;count_b，那么查询重复的a的记录：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span> <span style="color:#66d9ef">select</span> a,<span style="color:#a6e22e">count</span>(a) count_a
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">table</span> t
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> t.a
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">having</span> <span style="color:#a6e22e">count</span>(a)<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><p>那么查询对应的表的记录为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">table</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">where</span> a <span style="color:#66d9ef">in</span> (
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">select</span> a,<span style="color:#a6e22e">count</span>(a) count_a
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">table</span> t
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> t.a
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">having</span> <span style="color:#a6e22e">count</span>(a)<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><h2 id="去除重复"><strong>去除重复</strong></h2>
+<h3 id="全表重复"><strong>全表重复</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> maindevicetemp <span style="color:#66d9ef">as</span> (
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">from</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE
+</span></span><span style="display:flex;"><span> );
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> truncate <span style="color:#66d9ef">table</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> maindevicetemp;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">table</span> maindevicetemp;
+</span></span></code></pre></div><h3 id="部分重复"><strong>部分重复</strong></h3>
+<p>直接删除查出来的代码，1. 可以通过把查出来的表放入临时表的操作来提高效率；2. 可以通过选择隐藏字段rowid，取最大的rowid（而不用group by &hellip; having count(*) &gt;1 的操作）为最新的记录。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> geamaindevice <span style="color:#66d9ef">as</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">select</span> a.OBJECT_ID, <span style="color:#a6e22e">max</span>(a.ROWID) dataid
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">from</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE a
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> a.OBJECT_ID;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> geamaindevice;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">from</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE a
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">where</span> a.ROWID <span style="color:#f92672">&lt;&gt;</span> (
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">select</span> b.dataid <span style="color:#66d9ef">from</span> geamaindevice b
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">where</span> a.OBJECT_ID <span style="color:#f92672">=</span> b.OBJECT_ID
+</span></span><span style="display:flex;"><span>     );
 </span></span></code></pre></div>
 
   <footer>
   
 <nav class="post-nav">
-  <span class="nav-prev">&larr; <a href="/cn/2020/2020-06-29-windows-killbackendprocess/">windows下杀死进程</a></span>
+  <span class="nav-prev">&larr; <a href="/cn/2020/2020-06-29-windows-batrun/">windows——后台执行bat脚本</a></span>
   <span class="nav-next"><a href="/cn/2020/2020-06-29-linux-killjavathread/">linux下批量杀死java进程</a> &rarr;</span>
 </nav>
 <script type="text/javascript">
@@ -170,7 +170,7 @@ document.addEventListener('keyup', function(e) {
   var url = false;
   if (e.which == 37) {  
     
-    url = '\/cn\/2020\/2020-06-29-windows-killbackendprocess\/';
+    url = '\/cn\/2020\/2020-06-29-windows-batrun\/';
     
   } else if (e.which == 39) {  
     

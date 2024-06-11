@@ -6,8 +6,15 @@
     <description>Recent content in Docker on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 11 Apr 2022 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker——常见场景</title>
+      <link>/cn/2022/%E5%B7%A5%E5%85%B7_docker/</link>
+      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
+      <guid>/cn/2022/%E5%B7%A5%E5%85%B7_docker/</guid>
+      <description>《Docker-从入门到实践》&#xA;1、MySQL docker search mysql docker pull mysql # 进入shell，查看mysql版本信息 docker run -it mysql /bin/bash mysql --help | grep Distrib mysql --version # 后台启动，可以使用-v 挂载目录，比如/data/mysql/logs:/logs docker run -p 3306:3306 --name mysql_test -e MYSQL_ROOT_PASSWORD=123456 -d mysql # 查看端口映射 docker port mysql_test # 进入运行的MySQL容器内部 docker exec -it mysql_test /bin/bash 2、mongodb # 运行，-v 为设置容器的挂载目录，这里是将本机的“/data/mongo”目录挂载到容器中的/data/db中，作为 mongodb 的存储目录 docker run -p 27017:27017 -v ~/docker/mongodb:/data/db --name mongodb_test -d mongo # 进入运行的mongodb容器内部 docker exec -it mongodb_test mongo # 连接数据库（此时不需要用户就可以连接），创建用户 db.</description>
+    </item>
     <item>
       <title>windows启用docker</title>
       <link>/cn/2020/2020-12-03-docker-windowsstartup/</link>

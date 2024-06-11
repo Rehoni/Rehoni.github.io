@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PostgreSQL on Rehoni | 罗皓</title>
+    <link>/tags/postgresql/</link>
+    <description>Recent content in PostgreSQL on Rehoni | 罗皓</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Mar 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PostgreSQL——特性及多表连表查询</title>
+      <link>/cn/2023/postgresql_%E7%89%B9%E6%80%A7%E6%8F%8F%E8%BF%B0/</link>
+      <pubDate>Sun, 19 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>/cn/2023/postgresql_%E7%89%B9%E6%80%A7%E6%8F%8F%E8%BF%B0/</guid>
+      <description>sql优化 in 条件 1、regexp_split_to_table&#xA;2、PostgreSQL in 与 = any 的SQL语法异同与性能优化&#xA;特性、坑 timestamp(0) 传入毫秒会四舍五入&#xA;事务隔离级别没有 read_uncommit&#xA;分页不支持 limit #,# ，只支持 limit 5 offet 10，表示11-15，从10开始的5个&#xA;jdbcurl需要设置ssl证书，并且不同scheme下需要指定 currentScheme&#xA;postgre无默认排序，只能在SQL中指定order by&#xA;postgre无法移动字段顺序，调整只能重建表&#xA;排序问题 在数据库中NULL值是指UNKNOWN的值，不存储任何值，在排序时，它排在有值的行前面还是后面通过语法来指定。&#xA;-- 表示null排在有值行的前面 select * from tbl order by id nulls first; -- 表示null排在有值行的后面 select * from tbl order by id nulls last; 多表联合更新 UPDATE point_preset A SET camera_name = b.channel_name, device_id = C.device_id, device_name = C.device_name, ref_station_id = C.ref_station_id FROM camera_channel_base b, camera_nvr_base C WHERE A.</description>
+    </item>
+  </channel>
+</rss>
