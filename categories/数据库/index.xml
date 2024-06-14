@@ -2,136 +2,136 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>数据库 on Rehoni | 罗皓</title>
-    <link>//localhost:1313/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <link>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
     <description>Recent content in 数据库 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 12 Oct 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MySQL——问题小书</title>
-      <link>//localhost:1313/cn/2023/mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <link>/cn/2023/mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
       <pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <guid>/cn/2023/mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
       <description>问题1、截取字符串 具体描述 left 从左开始截取字符串&#xA;用法：left(str, length)，即：left(被截取字符串， 截取长度)&#xA;right subString substring_index https://yuanrengu.com/2020/9cfe2ad6.html&#xA;问题2、查看相关信息 # 查看端口 show variables like &amp;#39;port&amp;#39;; # 查看表结构 desc tablename; # 查看mysql版本 select version() from dual; # 查看mysql时区 show variables like &amp;#39;%time_zone&amp;#39;; system_time_zone CST time_zone +08:00 set global time_zone = &amp;#39;+08:00&amp;#39;; flush privileges; # 全局时区和当前session时区 select @@global.time_zone, @@session.time_zone; # 获取当前时间戳，各个类型 SELECT TIME_TO_SEC(NOW()), NOW(), current_timestamp(), REPLACE(unix_timestamp(NOW(3)), &amp;#39;.&amp;#39;, &amp;#39;&amp;#39;), REPLACE(unix_timestamp(current_timestamp(3)), &amp;#39;.&amp;#39;, &amp;#39;&amp;#39;), current_timestamp(3), unix_timestamp(current_timestamp(3)); # 审计日志相关 show variables like &amp;#39;init_connect&amp;#39;; show variables like &amp;#39;%log_bin%&amp;#39;;# 查看是否开启binlog show variables like &amp;#39;%binlog%&amp;#39;; # 查看binlog相关参数 show variables like &amp;#39;%audit%&amp;#39;; set global init_connect=NULL; show binlog events;# 只查看第一个binlog文件的内容 show binlog events in &amp;#39;mysql-bin.</description>
     </item>
     <item>
       <title>PostgreSQL——特性及多表连表查询</title>
-      <link>//localhost:1313/cn/2023/postgresql_%E7%89%B9%E6%80%A7%E6%8F%8F%E8%BF%B0/</link>
+      <link>/cn/2023/postgresql_%E7%89%B9%E6%80%A7%E6%8F%8F%E8%BF%B0/</link>
       <pubDate>Sun, 19 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/postgresql_%E7%89%B9%E6%80%A7%E6%8F%8F%E8%BF%B0/</guid>
+      <guid>/cn/2023/postgresql_%E7%89%B9%E6%80%A7%E6%8F%8F%E8%BF%B0/</guid>
       <description>sql优化 in 条件 1、regexp_split_to_table&#xA;2、PostgreSQL in 与 = any 的SQL语法异同与性能优化&#xA;特性、坑 timestamp(0) 传入毫秒会四舍五入&#xA;事务隔离级别没有 read_uncommit&#xA;分页不支持 limit #,# ，只支持 limit 5 offet 10，表示11-15，从10开始的5个&#xA;jdbcurl需要设置ssl证书，并且不同scheme下需要指定 currentScheme&#xA;postgre无默认排序，只能在SQL中指定order by&#xA;postgre无法移动字段顺序，调整只能重建表&#xA;排序问题 在数据库中NULL值是指UNKNOWN的值，不存储任何值，在排序时，它排在有值的行前面还是后面通过语法来指定。&#xA;-- 表示null排在有值行的前面 select * from tbl order by id nulls first; -- 表示null排在有值行的后面 select * from tbl order by id nulls last; 多表联合更新 UPDATE point_preset A SET camera_name = b.channel_name, device_id = C.device_id, device_name = C.device_name, ref_station_id = C.ref_station_id FROM camera_channel_base b, camera_nvr_base C WHERE A.</description>
     </item>
     <item>
       <title>MySQL数据库备份</title>
-      <link>//localhost:1313/cn/2021/%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <link>/cn/2021/%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
       <pubDate>Wed, 15 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <guid>/cn/2021/%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
       <description>mysqldump 语法：&#xA;默认不带参数的导出，导出文本内容大概如下：创建数据库判断语句-删除表-创建表-锁表-禁用索引-插入数据-启用索引-解锁表。&#xA;Usage: mysqldump [OPTIONS] database [tables] OR mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...] OR mysqldump [OPTIONS] --all-databases [OPTIONS] 导出所有数据库 mysqldump -uroot -proot --all-databases &amp;gt;/tmp/all.sql 导出db1、db2两个数据库的所有数据 mysqldump -uroot -proot --databases db1 db2 &amp;gt;/tmp/user.sql 导出db1中的a1、a2表 注意导出指定表只能针对一个数据库进行导出，且导出的内容中和导出数据库也不一样，导出指定表的导出文本中没有创建数据库的判断语句，只有删除表-创建表-导入数据。&#xA;mysqldump -uroot -proot --databases db1 --tables a1 a2 &amp;gt;/tmp/db1.sql 条件导出，导出db1表a1中id=1的数据 mysqldump -uroot -proot --databases db1 --tables a1 --where=&amp;#39;id=1&amp;#39; &amp;gt;/tmp/a1.sql 只导出表结构不导出数据，&amp;ndash;no-data mysqldump -uroot -proot --no-data --databases db1 &amp;gt;/tmp/db1.sql 跨服务器导出导入数据 mysqldump --host=h1 -uroot -proot --databases db1 |mysql --host=h2 -uroot -proot db2 将h1服务器中的db1数据库的所有数据导入到h2中的db2数据库中，db2的数据库必须存在否则会报错</description>
     </item>
     <item>
       <title>MySQL——重置mysql数据库</title>
-      <link>//localhost:1313/cn/2021/%E9%87%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <link>/cn/2021/%E9%87%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
       <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/%E9%87%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <guid>/cn/2021/%E9%87%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
       <description>1、删掉 data 文件夹，这个文件夹的具体位置是 my.ini 里决定的数据库数据的存放位置，一般默认都是数据库的根目录。&#xA;遇到删除不了的情况，打开服务-&amp;gt;关闭mysql服务&#xA;2、使用命令初始化data数据&#xA;mysqld --initialize --console 会重新生成一个密码，用这个密码就可以重新登录数据库了&#xA;3、登录数据库注意&#xA;mysql -uroot -p show databases; # 无法使用，会提示你修改密码 alter user &amp;#39;root&amp;#39;@&amp;#39;localhost&amp;#39; identified by &amp;#39;root&amp;#39;; 报错ERROR 2003 (HY000): Can&amp;rsquo;t connect to MySQL server on &amp;rsquo;localhost&amp;rsquo; (10061)，因为数据库服务没有启动，重新开启数据库服务，已有的mysql80服务估计无法正常启动，因此需要mysqld -nstall 重新安装一下，安装服务默认名为mysql&#xA;# 服务-&amp;gt;开启mysql服务 net start mysql # 启动mysql服务 net start mysql80 # 无法启动 # 如果找不到mysql服务 mysqld -install # 删除原来无用的服务 sc delete mysql80 </description>
     </item>
     <item>
       <title>Oracle——自动按月分区</title>
-      <link>//localhost:1313/cn/2021/%E6%8C%89%E6%9C%88%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA/</link>
+      <link>/cn/2021/%E6%8C%89%E6%9C%88%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA/</link>
       <pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/%E6%8C%89%E6%9C%88%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA/</guid>
+      <guid>/cn/2021/%E6%8C%89%E6%9C%88%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA/</guid>
       <description>Oracle建分区表自动按月分区 -- 自动按月分区 create table EMS_RATIO ( FUNCTION_ID VARCHAR2(64), FUNCTION_NAME VARCHAR2(256), FUNCTION_TYPE NUMBER(4), RESOLVE_TIME TIMESTAMP(0), MEASURE_TIME TIMESTAMP(0) not null, VOLTAGE VARCHAR2(32), START_STATION VARCHAR2(64), END_STATION VARCHAR2(64), RATED_CAPACITY FLOAT(24), LIMIT_I FLOAT(24), I FLOAT(24), P FLOAT(24), Q FLOAT(24), LOAD FLOAT(24), LOAD_TYPE NUMBER(4), ID VARCHAR2(32) not null, NAME VARCHAR2(64), constraint EMS_RATIO_PK primary key (ID, MEASURE_TIME) ) tablespace EMS_RATIO_TB partition by RANGE (MEASURE_TIME) interval (numtoyminterval(1,&amp;#39;month&amp;#39;)) store in (EMS_RATIO_TB)( partition ems_ratio_partition values less than (to_date(&amp;#39;2020-06-01&amp;#39;,&amp;#39;yyyy-MM-dd&amp;#39;)) ) </description>
     </item>
     <item>
       <title>Oracle——问题小书</title>
-      <link>//localhost:1313/cn/2021/oracle%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <link>/cn/2021/oracle%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
       <pubDate>Thu, 22 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/oracle%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <guid>/cn/2021/oracle%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
       <description>问题1、日期格式重复 ORA-01810 format code appears twice&#xA;报次错误的原因很简单，原因是重复了&#xA;比如：日期格式：&#xA;正确：TO_DATE(&amp;lsquo;2012-07-03 13:04:58&amp;rsquo;, &amp;lsquo;yyyy-MM-dd hh24:mi:ss&amp;rsquo;)&#xA;错误：TO_DATE(&amp;lsquo;2012-07-03 13:04:58&amp;rsquo;, &amp;lsquo;yyyy-MM-dd hh24:mi:dd&amp;rsquo;) dd是重复的&#xA;错误：TO_DATE(&amp;lsquo;2012-07-03 13:04:58&amp;rsquo;, &amp;lsquo;yyyy-MM-dd hh24:mm:ss&amp;rsquo;) mm是重复的&#xA;错误：TO_DATE(&amp;lsquo;2012-07-03 13:04:58&amp;rsquo;, &amp;lsquo;yyyy-MM-dd hh24:mm:dd&amp;rsquo;) dd，mm是重复的&#xA;问题2、ORA-01000: 超出打开游标的最大数 一般是Java代码在执行conn.createStatement()和 conn.prepareStatement()的时候，实际上都是相当与在数据库中打开了一个cursor。尤其是，如果你的 createStatement和prepareStatement是在一个循环里面的话，就会非常容易出现这个问题。因为游标一直在不停的打开，而且没有关闭。&#xA;问题3、Oracle取两列中值最大和最小的列 Greatest和least两个函数；或者用case when&#xA;-- a，b，c为table中的三列 select (case when a&amp;gt;b then a else b end),(case when b&amp;gt;c then b else c end) from table; 问题4、Oracle的update set必须是子查询 ORA-01767: UPDATE ...SET 表达式必须是子查询 问题5、Oracle查找和删除约束 select * from user_constraints; -- 在sys账户下查找 alter table standard.</description>
     </item>
     <item>
       <title>Oracle——连接远程数据库</title>
-      <link>//localhost:1313/cn/2021/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%8Adblink/</link>
+      <link>/cn/2021/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%8Adblink/</link>
       <pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%8Adblink/</guid>
+      <guid>/cn/2021/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%8Adblink/</guid>
       <description>sqlplus swgk/Nr_9000@10.151.51.251:1522/zhsjhl 在tnsnames.ora文件中添加tns监听&#xA;ORA-12504：TNS：监听程序在CONNECT_DATA中未获得SERVICE_NAME zhsjhl = (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.151.51.251)(PORT = 1522)) ) (CONNECT_DATA = (SERVICE_NAME = zhsjhl) ) ) 创建库之间的链接 grant create public database link,create database link to huilk; create database link link1 connect to swgk identified by Nr_9000; create database link link2 connect to swgk identified by Nr_9000 using &amp;#39; (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.</description>
     </item>
     <item>
       <title>Oracle——索引操作</title>
-      <link>//localhost:1313/cn/2020/%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/</link>
+      <link>/cn/2020/%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/</link>
       <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/</guid>
+      <guid>/cn/2020/%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/</guid>
       <description>查找索引&#xA;-- 查看某个表的索引 SELECT * from all_indexes WHERE table_name=upper(&amp;#39;table_name&amp;#39;); -- 查看索引在哪个字段 select * from user_ind_columns where table_name=upper(&amp;#39;table_name&amp;#39;); -- 查看某个用户下面所有的索引 SELECT * from all_indexes WHERE owner=&amp;#39;SR&amp;#39;; 创建和删除索引&#xA;-- 删除普通索引 drop index 索引名字 --创建普通索引 create index 索引名 on 表名(索引对应的列名); -- 创建组合索引 create index index_name on table_name(column_name_1,column_name_2); --删除主键索引 alter table 表名 drop constraint 索引名 --创建主键索引 alter table 表名 add constraint 表名 add constraint 索引名 primary key (主键); </description>
     </item>
     <item>
       <title>Oracle——获取每个分组中日期最大的一条</title>
-      <link>//localhost:1313/cn/2020/%E8%8E%B7%E5%8F%96%E6%AF%8F%E4%B8%AA%E5%88%86%E7%BB%84%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%9C%80%E5%A4%A7%E7%9A%84%E4%B8%80%E6%9D%A1/</link>
+      <link>/cn/2020/%E8%8E%B7%E5%8F%96%E6%AF%8F%E4%B8%AA%E5%88%86%E7%BB%84%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%9C%80%E5%A4%A7%E7%9A%84%E4%B8%80%E6%9D%A1/</link>
       <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/%E8%8E%B7%E5%8F%96%E6%AF%8F%E4%B8%AA%E5%88%86%E7%BB%84%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%9C%80%E5%A4%A7%E7%9A%84%E4%B8%80%E6%9D%A1/</guid>
+      <guid>/cn/2020/%E8%8E%B7%E5%8F%96%E6%AF%8F%E4%B8%AA%E5%88%86%E7%BB%84%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%9C%80%E5%A4%A7%E7%9A%84%E4%B8%80%E6%9D%A1/</guid>
       <description>在报表开发中，经常遇到这样的问题：分组后，只需要每个分组最新的一条数据，其他的就不要了&#xA;此时的思路应该是：对分组进行排序，并编号，然后select编号为1的记录即可。&#xA;select rn,a,b,c from (select ROW_NUMBER() OVER(PARTITION BY a ORDER BY b DESC) rn,a,b,c from table) where rn = 1 </description>
     </item>
     <item>
       <title>Oracle——存储过程及函数写法</title>
-      <link>//localhost:1313/cn/2020/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%8F%8A%E5%87%BD%E6%95%B0/</link>
+      <link>/cn/2020/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%8F%8A%E5%87%BD%E6%95%B0/</link>
       <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%8F%8A%E5%87%BD%E6%95%B0/</guid>
+      <guid>/cn/2020/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%8F%8A%E5%87%BD%E6%95%B0/</guid>
       <description>Oracle的插入存储过程实现 create or replace procedure insert_by_tablename(tableName in varchar2,&#xD;sortId in number,&#xD;flId in varchar2,&#xD;flName in varchar2,&#xD;flCode in varchar2,&#xD;vindicateOid in varchar2,&#xD;baseVoltageId in varchar2,&#xD;flLongitude in number,&#xD;flLatitude in number,&#xD;fullPath in varchar2,&#xD;runManageOid in varchar2)&#xD;as&#xD;dynamic_insert_sql varchar2(1000);&#xD;begin&#xD;dynamic_insert_sql := &amp;#39;insert into &amp;#39; || tableName ||&#xD;&amp;#39;(ID,FL_NAME,FL_CODE,VINDICATE_OID,SORT_ID,BASE_VOLTAGE_ID,LONGITUDE,LATITUDE,FULL_PATH,RUNMANAG_OID)&amp;#39; ||&#xD;&amp;#39; values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10)&amp;#39;;&#xD;execute immediate dynamic_insert_sql using flId,flName,flCode,vindicateOid,sortId,baseVoltageId,flLongitude,flLatitude,fullPath,runManageOid;&#xD;commit;&#xD;end insert_by_tablename; </description>
     </item>
     <item>
       <title>Oracle——纵表转横表</title>
-      <link>//localhost:1313/cn/2020/%E7%BA%B5%E8%A1%A8%E8%BD%AC%E6%A8%AA%E6%A0%87%E5%8F%8Acasewhen/</link>
+      <link>/cn/2020/%E7%BA%B5%E8%A1%A8%E8%BD%AC%E6%A8%AA%E6%A0%87%E5%8F%8Acasewhen/</link>
       <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/%E7%BA%B5%E8%A1%A8%E8%BD%AC%E6%A8%AA%E6%A0%87%E5%8F%8Acasewhen/</guid>
+      <guid>/cn/2020/%E7%BA%B5%E8%A1%A8%E8%BD%AC%E6%A8%AA%E6%A0%87%E5%8F%8Acasewhen/</guid>
       <description>使用decode实现 select MONITORINGPOINT,&#xD;ACQTM,&#xD;max(coalesce(DECODE(NAME, &amp;#39;EquCa&amp;#39;, MONITORVALUE, null), 0)) as EQUCA,&#xD;max(coalesce(DECODE(NAME, &amp;#39;LosFact&amp;#39;, MONITORVALUE, null), 0)) as LOSFACT,&#xD;max(coalesce(DECODE(NAME, &amp;#39;RisAmp&amp;#39;, MONITORVALUE, null), 0)) as RISAMP,&#xD;max(coalesce(DECODE(NAME, &amp;#39;TotAmp&amp;#39;, MONITORVALUE, null), 0)) as TOTAMP,&#xD;max(coalesce(DECODE(NAME, &amp;#39;CalAmp&amp;#39;, MONITORVALUE, null), 0)) as CALAMP&#xD;from IMP_TELEMETERING&#xD;where MONITORINGTYPEID = &amp;#39;A386&amp;#39; --and MONITORINGPOINT = &amp;#39;0304B13009999A386109001&amp;#39;&#xD;group by MONITORINGPOINT, ACQTM; 使用case when实现 SELECT&#xD;E_CODE,&#xD;E_TIME,&#xD;SUM( CASE E_TYPE WHEN 0 THEN E_VALUE ELSE 0 END ) AS WATER_ENERGY,--水耗&#xD;SUM( CASE E_TYPE WHEN 1 THEN E_VALUE ELSE 0 END ) AS ELE_ENERGY,--电耗&#xD;SUM( CASE E_TYPE WHEN 2 THEN E_VALUE ELSE 0 END ) AS HEAT_ENERGGY--热耗&#xD;FROM&#xD;THTF_ENERGY_TEST&#xD;GROUP BY E_CODE,E_TIME 嵌套case when 注意嵌套case when的时候似乎只能使用一个then，然后就要接else了。</description>
     </item>
     <item>
       <title>Oracle——触发器写法</title>
-      <link>//localhost:1313/cn/2020/%E8%A7%A6%E5%8F%91%E5%99%A8/</link>
+      <link>/cn/2020/%E8%A7%A6%E5%8F%91%E5%99%A8/</link>
       <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/%E8%A7%A6%E5%8F%91%E5%99%A8/</guid>
+      <guid>/cn/2020/%E8%A7%A6%E5%8F%91%E5%99%A8/</guid>
       <description>Oracle触发器 create or replace trigger update_insert_trigger&#xD;after insert or update&#xD;on GEA_DM_FUNCTION_LOCATION&#xD;for each row&#xD;begin&#xD;if inserting then&#xD;if :NEW.RUNNING_STATE&amp;lt;&amp;gt;&amp;#39;1&amp;#39; then&#xD;DBMS_OUTPUT.PUT_LINE(&amp;#39;是运行态=1,记录已经成功插入gea，执行插入clean&amp;#39;);&#xD;insert into ELECTRANS.CLEAND_EMS_DEVICE(CLEAND_EMS_DEVICE.ID,&#xD;CLEAND_EMS_DEVICE.FL_NAME,&#xD;CLEAND_EMS_DEVICE.FL_CODE,&#xD;CLEAND_EMS_DEVICE.VINDICATE_OID,&#xD;SORT_ID,&#xD;CLEAND_EMS_DEVICE.BASE_VOLTAGE_ID,&#xD;CLEAND_EMS_DEVICE.LONGITUDE,&#xD;CLEAND_EMS_DEVICE.LATITUDE,&#xD;CLEAND_EMS_DEVICE.FULL_PATH,&#xD;RUNMANAG_OID)&#xD;values (:NEW.CLASSIFY_ID,&#xD;:NEW.FL_NAME,&#xD;:NEW.FL_CODE,&#xD;:NEW.VINDICATE_OID,&#xD;:NEW.CLASSIFY_ID,&#xD;:NEW.BASE_VOLTAGE_ID,&#xD;:NEW.LONGITUDE,&#xD;:NEW.LATITUDE,&#xD;:NEW.FULL_PATH,&#xD;:NEW.RUNMANAGE_OID);&#xD;else&#xD;DBMS_OUTPUT.PUT_LINE(:NEW.RUNNING_CODE);&#xD;DBMS_OUTPUT.PUT_LINE(&amp;#39;不是运行态！=1,记录已经成功插入gea，不执行插入clean&amp;#39;);&#xD;end if;&#xD;elsif updating then&#xD;if :NEW.RUNNING_STATE = 1 then&#xD;DBMS_OUTPUT.PUT_LINE(&amp;#39;是运行态=1,记录已经成功插入gea，执行插入clean&amp;#39;);&#xD;update ELECTRANS.CLEAND_EMS_DEVICE&#xD;set CLEAND_EMS_DEVICE.FL_NAME = :NEW.FL_NAME,&#xD;CLEAND_EMS_DEVICE.FL_CODE = :NEW.FL_CODE,&#xD;CLEAND_EMS_DEVICE.VINDICATE_OID = :NEW.</description>
     </item>
     <item>
       <title>Oracle——递归查询写法</title>
-      <link>//localhost:1313/cn/2020/%E9%80%92%E5%BD%92%E6%9F%A5%E8%AF%A2/</link>
+      <link>/cn/2020/%E9%80%92%E5%BD%92%E6%9F%A5%E8%AF%A2/</link>
       <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/%E9%80%92%E5%BD%92%E6%9F%A5%E8%AF%A2/</guid>
+      <guid>/cn/2020/%E9%80%92%E5%BD%92%E6%9F%A5%E8%AF%A2/</guid>
       <description>Oracle递归查询 select * from&#xD;(select t.EMPLOYEE_ID,&#xD;EMPLOYEE_NAME,&#xD;a.ORG_ID,&#xD;b.ORG_NAME,&#xD;t.SHORT_SPELL,&#xD;t.FULL_SPELL,JOBSTATUS,EMPLOYEE_STATUS,NATIONALITY,SEX,EDUCATION,MOBILE_PHONE,FIX_PHONE,EMAIL,t.UPDATE_TIME,&#xD;row_number() over (partition by EMPLOYEE_NAME order by t.UPDATE_TIME) rn&#xD;from SJHL_ZH.NZWOT_TOP_EMPLOYEE t&#xD;left join NZWOT_TOP_USER a on a.EMPLOYEE_ID = t.EMPLOYEE_ID&#xD;inner join (select org_id, org_name, parent_org_id, org_type, name_full_path, update_time from sjhl_zh.nzwot_top_organization&#xD;where state = 1 and regexp_like(name_full_path, &amp;#39;(变电管理所|输电管理所|试验研究所)&amp;#39;)&#xD;start with parent_org_id = ( select org_id from sjhl_zh.nzwot_top_organization&#xD;where name_full_path = &amp;#39;中国南方电网有限责任公司/广东电网有限责任公司/珠海供电局&amp;#39; and state = 1 and org_level = 3 ) connect by prior org_id = parent_org_id&#xD;union&#xD;select org_id, org_name, null, org_type, name_full_path, update_time from sjhl_zh.</description>
     </item>
     <item>
       <title>MySQL——通过Explain计划优化sql</title>
-      <link>//localhost:1313/cn/2020/2020-07-13-mysql-explain/</link>
+      <link>/cn/2020/2020-07-13-mysql-explain/</link>
       <pubDate>Mon, 13 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-07-13-mysql-explain/</guid>
+      <guid>/cn/2020/2020-07-13-mysql-explain/</guid>
       <description>Explain计划 MySQL执行中，遇到一个执行起来很慢的SQL语句&#xA;SELECT t.ORG_NAME AS OBJECT_NAME, t.ORG_ID, f.DEFECT_LEVEL FROM GEA_ORGANIZATION_INFO t INNER JOIN MAPPER_EMS_STATION s ON s.VINDICATE_OID = t.ORG_ID INNER JOIN MAPPER_EMS_DEVICE d ON d.SITE_ID = s.FUNCTION_ID INNER JOIN SORT_DICT tt ON d.sort_id = tt.sort_id LEFT JOIN ( SELECT * FROM GEA_SP_PD_DEFECT WHERE STATE IN ( 3, 4 ) AND REPORT_TIME BETWEEN str_to_date( &amp;#39;2020-07-01 00:00:00&amp;#39;, &amp;#39;%Y-%m-%d %H:%i:%s&amp;#39; ) AND str_to_date( &amp;#39;2020-07-11 15:15:11&amp;#39;, &amp;#39;%Y-%m-%d %H:%i:%s&amp;#39; )) f ON f.SITE_ID = s.FUNCTION_ID AND f.</description>
     </item>
     <item>
       <title>Oracle——查找和去除重复数据</title>
-      <link>//localhost:1313/cn/2020/2020-06-29-oracle-removerepeatdata/</link>
+      <link>/cn/2020/2020-06-29-oracle-removerepeatdata/</link>
       <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-06-29-oracle-removerepeatdata/</guid>
+      <guid>/cn/2020/2020-06-29-oracle-removerepeatdata/</guid>
       <description>查找重复（根据字段） 查询两个字段是否是一对一的关系：count_a != count_b时，不是一对一&#xA;select count(distinct a) count_a,count(distinct b) count_b from table t; 假设count_a&amp;gt;count_b，那么查询重复的a的记录：&#xA;select a,count(a) count_a from table t group by t.a having count(a)&amp;gt;1; 那么查询对应的表的记录为：&#xA;select * from table where a in ( select a,count(a) count_a from table t group by t.a having count(a)&amp;gt;1); 去除重复 全表重复 create table maindevicetemp as ( select distinct * from ELECTRANS.GEA_DM_RP_MAIN_DEVICE ); truncate table ELECTRANS.GEA_DM_RP_MAIN_DEVICE; insert into ELECTRANS.GEA_DM_RP_MAIN_DEVICE select * from maindevicetemp; drop table maindevicetemp; 部分重复 直接删除查出来的代码，1.</description>
     </item>
     <item>
       <title>Oracle——数据库备份和恢复</title>
-      <link>//localhost:1313/cn/2020/2020-06-22-oracle-expimp/</link>
+      <link>/cn/2020/2020-06-22-oracle-expimp/</link>
       <pubDate>Mon, 22 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-06-22-oracle-expimp/</guid>
+      <guid>/cn/2020/2020-06-22-oracle-expimp/</guid>
       <description>两种导出程序的比较和区别 exp、imp是客户段工具程序， expdp和impdp是服务端的工具程序。 exp和imp效率比较低；expdp和impdp效率高。 expdp、impdp数据泵功能强大并行、过滤、转换、压缩、加密、交互等等; 数据泵不支持9i以前版本， EXP/IMP短期内还是比较适用; EXP-0006:出现内部不一致的错误解决办法&#xA;出现此问题的原因是：在超过9i的Oracle版本进行exp操作，并且导出的表有进行表分区，就会出现导出中断并且报错。&#xA;因此新版本Oracle数据库以数据泵进行备份恢复为主。&#xA;在expdp、impdp命令使用时，不要习惯性的在命令末尾加上分号“;”，会导致不经意间出现错误。&#xA;1. expdp导出 在sqlplus下创建目录directory，创建逻辑目录，该命令不会在操作系统创建真正的目录，最好以system等管理员创建。&#xA;-- 需要在系统中创建真正的目录 create or replace directory DMP as &amp;#39;/users/oracle/dmp&amp;#39;; -- 可以查看已创建的逻辑目录 select * from dba_directories; 把读写权限授予特定用户&#xA;grant read,write on directory dir_dp to scott; 导出数据库&#xA;# 导出整个数据库 expdp user/psw DIRECTORY=DMP DUMPFILE=expstd.dmp FULL=y; # 按用户（执行时选择按用户进行比较合适） expdp scott/tiger@orcl schemas=scott dumpfile=expdp.dmp DIRECTORY=dpdata1; # 并行进程 expdp scott/tiger@orcl directory=dpdata1 dumpfile=scott3.dmp parallel=40 job_name=scott3 # 按表名 expdp scott/tiger@orcl TABLES=emp,dept dumpfile=expdp.dmp DIRECTORY=dpdata1; # 按查询条件导 expdp scott/tiger@orcl directory=dpdata1 dumpfile=expdp.</description>
     </item>
     <item>
       <title>Oracle排查账户锁定</title>
-      <link>//localhost:1313/cn/2020/2020-06-22-oracle-userlock/</link>
+      <link>/cn/2020/2020-06-22-oracle-userlock/</link>
       <pubDate>Mon, 22 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-06-22-oracle-userlock/</guid>
+      <guid>/cn/2020/2020-06-22-oracle-userlock/</guid>
       <description>设置时间格式 遇到登录报用户被锁时，先不要着急解锁，先使用dba角色的用户登录，设置具体时间格式，以便我们查询具体的被锁时间：&#xA;alter session set nls_date_format=&amp;#39;yyyy-mm-dd hh24:mi:ss&amp;#39;; 查看具体被锁时间： select username,lock_date from dba_users where username=&amp;#39;username&amp;#39;; 或者&#xA;select username,lock_date from dba_users where username=&amp;#39;xxx&amp;#39;; 如果发现被锁用户的时间信息已经不存在，原因是用户已经被客户解锁，所以视图dba_users中已经看不到用户被锁时间的信息。&#xA;这个时候通过查看表user$来解决这个问题：&#xA;select name,ltime from user$ where name =&amp;#39;XXXX&amp;#39;; 查看造成用户被锁的ip 主要监听日志，一般路径为：$ORACLE_HOME/network/admin/log/listener.log日志&#xA;查看监听日志：可以看出IP、登录用户Res0l、端口2067、登陆程序Datagrip等内容。&#xA;22-6月 -2020 15:31:20 * (CONNECT_DATA=(SID=ora12a)(CID=(PROGRAM=DataGrip)(HOST=__jdbc__)(USER=Res0l))) * (ADDRESS=(PROTOCOL=t cp)(HOST=198.120.100.198)(PORT=2067)) * establish * ora12a * 0 2020-06-22T15:31:23.829623+08:00 22-6月 -2020 15:31:23 * (CONNECT_DATA=(SID=ora12a)(CID=(PROGRAM=DataGrip)(HOST=__jdbc__)(USER=Res0l))) * (ADDRESS=(PROTOCOL=t cp)(HOST=198.120.100.198)(PORT=2071)) * establish * ora12a * 0 2020-06-22T15:31:26.862394+08:00 如果实在找不到，可以在终端或cmd窗口输入lsnrctl status 输出的信息中会有监听的日志文件路径&#xA;或者执行全文件夹搜索&#xA;find /users/oracle/ -name listener.</description>
     </item>
     <item>
       <title>Oracle——表结构查询</title>
-      <link>//localhost:1313/cn/2020/2020-06-20-oracle-tablestructquery/</link>
+      <link>/cn/2020/2020-06-20-oracle-tablestructquery/</link>
       <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-06-20-oracle-tablestructquery/</guid>
+      <guid>/cn/2020/2020-06-20-oracle-tablestructquery/</guid>
       <description>Oracle获取用户下的所有表的主键 select a.OWNER as 外键拥有者, a.TABLE_NAME as 外键表, c.COLUMN_NAME as 外键列, b.OWNER as 主键拥有者, b.TABLE_NAME as 主键表, d.COLUMN_NAME as 主键列, c.CONSTRAINT_NAME as 外键列, d.CONSTRAINT_NAME as 主键名 from USER_CONSTRAINTS a, USER_CONSTRAINTS b, USER_CONS_COLUMNS c, USER_CONS_COLUMNS d where a.R_CONSTRAINT_NAME = b.CONSTRAINT_NAME and a.CONSTRAINT_TYPE = &amp;#39;R&amp;#39; and b.CONSTRAINT_TYPE = &amp;#39;P&amp;#39; and a.R_OWNER = b.OWNER and a.CONSTRAINT_NAME = c.CONSTRAINT_NAME and b.CONSTRAINT_NAME = d.CONSTRAINT_NAME and a.OWNER = c.OWNER and a.TABLE_NAME = c.TABLE_NAME and b.OWNER = d.</description>
     </item>
   </channel>

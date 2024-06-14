@@ -2,73 +2,73 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/java/</link>
+    <link>/tags/java/</link>
     <description>Recent content in Java on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 24 Dec 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>后端——问题小书（2023）</title>
-      <link>//localhost:1313/cn/2023/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%983/</link>
+      <link>/cn/2023/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%983/</link>
       <pubDate>Sun, 24 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%983/</guid>
+      <guid>/cn/2023/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%983/</guid>
       <description>1、MyBatis注解-动态SQL解决方案 在一个表中有id,name,email我们查询的时候，希望name不为null的时候，作为查询条件，如果email不为null的时候，作为查询条件。&#xA;方案1：&amp;lt;script&amp;gt; @Select(&amp;#34;&amp;lt;script&amp;gt; &amp;#34; + &amp;#34;SELECT * &amp;#34; + &amp;#34;from Demo &amp;#34; + &amp;#34; &amp;lt;where&amp;gt; &amp;#34; + &amp;#34; 1=1&amp;#34; + &amp;#34; &amp;lt;if test=\&amp;#34;name != null\&amp;#34;&amp;gt;and name=#{name}&amp;lt;/if&amp;gt; &amp;#34; + &amp;#34; &amp;lt;if test=\&amp;#34;email != null\&amp;#34;&amp;gt; and email=#{email}&amp;lt;/if&amp;gt; &amp;#34; + &amp;#34; &amp;lt;/where&amp;gt; &amp;#34; + &amp;#34; &amp;lt;/script&amp;gt; &amp;#34;) public List&amp;lt;Demo&amp;gt; select4(Demo demo); 方案二：@Provider 对于创建动态的查的语言。MyBatis提供了多个注解如：@InsertProvider,@UpdateProvider,@DeleteProvider和@SelectProvider，这些都是建立动态语言和让MyBatis执行这些语言。&#xA;2、SpringBoot 实现 Websocket 通信详解 SpringBoot 实现 Websocket 通信详解&#xA;3、Spring的BeanUtils.copyProperties(obj1, obj2)，复制对象时字段类型不一致，导致赋值不上 当用spring的BeanUtils.copyProperties(obj1, obj2);对象进行复制时，因为在obj1 类型的对象中定义的属性类型不同（set方法中用的是Integer类型，get方法中返回的是int类型）：&#xA;public int getNumber() { return number; } public void setNumber(Integer number) { this.</description>
     </item>
     <item>
       <title>后端——问题小书（2022）</title>
-      <link>//localhost:1313/cn/2022/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882/</link>
+      <link>/cn/2022/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882/</link>
       <pubDate>Sat, 31 Dec 2022 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2022/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882/</guid>
+      <guid>/cn/2022/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882/</guid>
       <description>1、spring cloud stream介绍 Spring Cloud Stream是一个用来为微服务应用构建消息驱动能力的框架。它可以基于Spring Boot来创建独立的、可用于生产的Spring应用程序。它通过使用Spring Integration来连接消息代理中间件以实现消息事件驱动的微服务应用。Spring Cloud Stream为一些供应商的消息中间件产品提供了个性化的自动化配置实现，并且引入了发布-订阅、消费组以及消息分区这三个核心概念。简单的说，Spring Cloud Stream本质上就是整合了Spring Boot和Spring Integration，实现了一套轻量级的消息驱动的微服务框架。通过使用Spring Cloud Stream，可以有效地简化开发人员对消息中间件的使用复杂度，让系统开发人员可以有更多的精力关注于核心业务逻辑的处理。&#xA;Binder绑定器 通过定义绑定器作为中间层，完美地实现了应用程序与消息中间件细节之间的隔离。通过向应用程序暴露统一的Channel通道，使得应用程序不需要再考虑各种不同的消息中间件实现。&#xA;发布-订阅模式 在Spring Cloud Stream中的消息通信方式遵循了发布-订阅模式，当一条消息被投递到消息中间件之后，它会通过共享的Topic主题进行广播，消息消费者在订阅的主题中收到它并触发自身的业务逻辑处理。这里所提到的Topic主题是Spring Cloud Stream中的一个抽象概念，用来代表发布共享消息给消费者的地方。在不同的消息中间件中，Topic可能对应着不同的概念，比如：在RabbitMQ中的它对应了Exchange、而在Kakfa中则对应了Kafka中的Topic。&#xA;消费组 虽然Spring Cloud Stream通过发布-订阅模式将消息生产者与消费者做了很好的解耦，基于相同主题的消费者可以轻松的进行扩展，但是这些扩展都是针对不同的应用实例而言的，在现实的微服务架构中，我们每一个微服务应用为了实现高可用和负载均衡，实际上都会部署多个实例。很多情况下，消息生产者发送消息给某个具体微服务时，只希望被消费一次，按照上面我们启动两个应用的例子，虽然它们同属一个应用，但是这个消息出现了被重复消费两次的情况。为了解决这个问题，在Spring Cloud Stream中提供了消费组的概念。&#xA;如果在同一个主题上的应用需要启动多个实例的时候，我们可以通过spring.cloud.stream.bindings.input.group属性为应用指定一个组名，这样这个应用的多个实例在接收到消息的时候，只会有一个成员真正的收到消息并进行处理。&#xA;消息分区 通过引入消费组的概念，我们已经能够在多实例的情况下，保障每个消息只被组内一个实例进行消费。通过上面对消费组参数设置后的实验，我们可以观察到，消费组并无法控制消息具体被哪个实例消费。也就是说，对于同一条消息，它多次到达之后可能是由不同的实例进行消费的。但是对于一些业务场景，就需要对于一些具有相同特征的消息每次都可以被同一个消费实例处理，比如：一些用于监控服务，为了统计某段时间内消息生产者发送的报告内容，监控服务需要在自身内容聚合这些数据，那么消息生产者可以为消息增加一个固有的特征ID来进行分区，使得拥有这些ID的消息每次都能被发送到一个特定的实例上实现累计统计的效果，否则这些数据就会分散到各个不同的节点导致监控结果不一致的情况。而分区概念的引入就是为了解决这样的问题：当生产者将消息数据发送给多个消费者实例时，保证拥有共同特征的消息数据始终是由同一个消费者实例接收和处理。&#xA;2、mapstruct简单使用 MapStruct 是一个代码生成器，主要用于 Java Bean 之间的映射，如 entity 到 DTO 的映射。&#xA;参考 优雅的对象转换解决方案-MapStruct使用进阶(二)&#xA;MapStruct使用指南&#xA;导入 Maven 依赖以及插件 注意lombok和MapStruct 的冲突（在maven install时候会出现属性找不到错误）：&#xA;确保 Lombok 最低版本为 1.18.16 annotationProcessorPaths 中，要配置lombok 如未使用 lombok 可以去除后两个注解处理器&#xA;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;project xmlns=&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34; xmlns:xsi=&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34; xsi:schemaLocation=&amp;#34;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&amp;gt; &amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt; &amp;lt;parent&amp;gt; &amp;lt;groupId&amp;gt;org.</description>
     </item>
     <item>
       <title>后端——问题小书（2021）</title>
-      <link>//localhost:1313/cn/2021/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <link>/cn/2021/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
       <pubDate>Wed, 29 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <guid>/cn/2021/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
       <description>问题1：Cannot forward to error page for request 具体描述&#xA;Cannot forward to error page for request [/wechat/portal] as the response has already been commit&#xA;解决方案和原理&#xA;使用response输出流或@ResponseBody&#xA;response.getWriter().print(echostr);&#xA;@responseBody注解的作用是将controller的方法返回的对象通过适当的转换器转换为指定的格式之后，写入到response对象的body区，通常用来返回JSON数据或者是XML数据，需要注意的呢，在使用此注解之后不会再走试图处理器，而是直接将数据写入到流中，他的效果等同于通过response对象输出指定格式的数据。&#xA;因此可知之前直接使用return echostr spring会找不到对应的视图，但是视图找不到，spring又转到errorPage，但是项目中没有配置errorPage，从而404.&#xA;问题2、文件上传功能报错 具体描述&#xA;Current request is not a multipart request&#xA;解决方案和原理&#xA;是postmapping而不是getmapping&#xA;@ApiOperation(value = &amp;#34;测试图片上传&amp;#34;) @PostMapping(value = &amp;#34;/upload&amp;#34;) public Result handleFileUpload(@RequestParam List&amp;lt;MultipartFile&amp;gt; files) { return Result.buildSuccess( storageService.storeByString(files) ).setMsg(&amp;#34;You successfully uploaded &amp;#34; + files.size() + &amp;#34;files !&amp;#34;); } 问题3、httpClient警告 具体描述&#xA;Warning：“Going to buffer response body of large or unknown size.</description>
     </item>
     <item>
       <title>Java线程定时得到结果退出示例</title>
-      <link>//localhost:1313/cn/2020/2020-11-24-java-restwithres/</link>
+      <link>/cn/2020/2020-11-24-java-restwithres/</link>
       <pubDate>Tue, 24 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-11-24-java-restwithres/</guid>
+      <guid>/cn/2020/2020-11-24-java-restwithres/</guid>
       <description>大致需求 定时每几秒调用一次rest接口，如果接口响应成功则退出线程，如果接口响应失败，则继续调用直至成功。&#xA;做了一个简单的线程任务。简单来说是一个异步的调用方式。目前采用的方式是设置一个flag，作为判断rest接口是否调用成功的结果标志位，接口调用不成功则线程死循环；接口调用成功则线程不进入while，退出。&#xA;public static void main(String[] args) { // 线程沉睡时间，每3秒试图调用一次接口插入到告警表 final long timeInterval = 3000; AtomicBoolean flag = new AtomicBoolean(false); Thread thread = new Thread(() -&amp;gt; { while (!flag.get()) { flag.set(testFlag()); try { Thread.sleep(timeInterval); } catch (InterruptedException e) { log.info(&amp;#34;thread sleep interrupted&amp;#34;); } } }); thread.start(); } private static boolean testFlag() { int code = 500; boolean fl = false; try { if (code == 500) { throw new NullPointerException(); } else if (code == 200) { log.</description>
     </item>
     <item>
       <title>Java学习规划（2020版）</title>
-      <link>//localhost:1313/cn/2020/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</link>
+      <link>/cn/2020/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</link>
       <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</guid>
+      <guid>/cn/2020/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</guid>
       <description>Java基础书籍阅读 Java8 实战 effective Java on Java 8 深入理解Java虚拟机 第三版 算法 第四版 Java并发编程实战 环境搭建 Java版本 Java8：https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html&#xA;代码管理工具sourcetree：https://www.sourcetreeapp.com/&#xA;Jar包管理Maven：https://maven.apache.org/download.cgi&#xA;Maven的setting配置需要修改，配置公司的仓库。&#xA;Java开发IDE Jet brains IDEA：https://www.jetbrains.com/idea/download/#section=windows&#xA;破解：https://juejin.im/post/5df8a5a5e51d4557f0460990&#xA;DataGrip可装可不装&#xA;注意要配入环境变量：Maven、Java&#xA;新特性 Java 8 新特性 localDate，Optinal容器类，lambda表达式、Colletcions集合、steam流、函数式编程&#xA;Modern Java - A Guide to Java 8 翻译版 https://juejin.im/post/5c3d7c8a51882525dd591ac7#Stream-流&#xA;Java 8 新特性概述 https://www.ibm.com/developerworks/cn/java/j-lo-jdk8newfeature/&#xA;Java8新特性总结 https://www.jianshu.com/p/4df02599aeb2&#xA;Java 8新特性终极指南 https://www.cnblogs.com/LiuYanYGZ/p/6206159.html&#xA;深入理解 Java 函数式编程 https://www.ibm.com/developerworks/cn/java/j-understanding-functional-programming-1/index.html&#xA;Java 11 新特性 Java 11 新特性介绍 https://www.ibm.com/developerworks/cn/java/the-new-features-of-Java-11/index.html&#xA;指南 项目推荐 awesome-java ： https://github.com/akullpp/awesome-java#bean-mapping&#xA;Collection of awesome Java project on Github(Github 上非常棒的 Java 开源项目集合).</description>
     </item>
     <item>
       <title>Java各时间类的转换</title>
-      <link>//localhost:1313/cn/2020/2020-10-13-java-timesconvert/</link>
+      <link>/cn/2020/2020-10-13-java-timesconvert/</link>
       <pubDate>Tue, 13 Oct 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-10-13-java-timesconvert/</guid>
+      <guid>/cn/2020/2020-10-13-java-timesconvert/</guid>
       <description>LocalDateTime和String的转换 // LocalDateTime转为String String string = LocalDateTime.now().format(new DateTimeFormatter.ofPattern(&amp;#34;yyyy-MM-dd HH:mm:ss.SSSSSS&amp;#34;)); // String转为LocalDateTime String time = &amp;#34;2020-07-08 14:41:50.238473&amp;#34;; LocalDateTime parse = LocalDateTime.parse(time, new DateTimeFormatter.ofPattern(&amp;#34;yyyy-MM-dd HH:mm:ss.SSSSSS&amp;#34;)); java.util.Date和String的转换 SimpleDateFormat格式化进行转换&#xA;// java.util.Date转换String DateFormat dateFormat = new SimpleDateFormat(&amp;#34;dd-MM-yy:HH:mm:ss&amp;#34;); Date date = new Date(); String dateStr = dateFormat.format(date); // String转换java.util.Date try { DateFormat dateFormat = new SimpleDateFormat(&amp;#34;dd/MM/yyy&amp;#34;); Date date = dateFormat.parse(dateStr); } catch (ParseException e) { e.printStack(); } java.sql.Timestamp和String的转换 与java.util.Date和String的转换类似，都是通过SimpleDateFormat格式化进行转换，不展开代码细讲。&#xA;java.util.Date和java.sql.Timestamp的转换 //Date转换Timestamp Timestamp timestamp = new Timestamp((new Date()).</description>
     </item>
     <item>
       <title>Java创建不可变并且static静态的Map</title>
-      <link>//localhost:1313/cn/2020/2020-08-15-java-createstaticmap/</link>
+      <link>/cn/2020/2020-08-15-java-createstaticmap/</link>
       <pubDate>Sat, 15 Aug 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-08-15-java-createstaticmap/</guid>
+      <guid>/cn/2020/2020-08-15-java-createstaticmap/</guid>
       <description>findbugs错误提示 MS_MUTABLE_COLLECTION_PKGPROTECT, Priority: Normal&#xA;XX.XX.XXX.XX is a mutable collection which should be package protected&#xA;A mutable collection instance is assigned to a final static field, thus can be changed by malicious code or by accident from another package. The field could be made package protected to avoid this vulnerability. Alternatively you may wrap this field into Collections.unmodifiableSet/List/Map/etc. to avoid this vulnerability. 很容易写的一个错误案例如下： public class TestMap { private static final Map&amp;lt;Integer,String&amp;gt; map = new LinkedHashMap&amp;lt;Integer, String&amp;gt;(); static { map = new HashMap(); map.</description>
     </item>
     <item>
       <title>Java实体类和map的转换</title>
-      <link>//localhost:1313/cn/2020/2020-06-29-java-bean2map/</link>
+      <link>/cn/2020/2020-06-29-java-bean2map/</link>
       <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-06-29-java-bean2map/</guid>
+      <guid>/cn/2020/2020-06-29-java-bean2map/</guid>
       <description>Java反射对JavaBean体和泛型Map做互换 Map转为Bean public &amp;lt;T, K, V&amp;gt; T map2Bean(Map&amp;lt;K, V&amp;gt; map, Class&amp;lt;T&amp;gt; beanCls) { // try catch未写 T t = null; BeanInfo beanInfo = Introspector.getBeanInfo(beanCls.getClass()); PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors(); t = beanCls.newInstance(); for (PropertyDescriptor property : propertyDescriptors) { String key = property.getName(); if (map.containsKey(key)) { Object value = map.get(key); Method setter = property.getWriteMethod(); setter.invoke(t, value); } } return t; } Bean转为Map public &amp;lt;T, K, V&amp;gt; Map&amp;lt;String, Object&amp;gt; bean2Map(T bean) { // try catch未写 Map&amp;lt;String, Object&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); if (bean == null) { return null; } BeanInfo beanInfo = Introspector.</description>
     </item>
     <item>
       <title>Java的DOM4J解析XML文件</title>
-      <link>//localhost:1313/cn/2020/2020-06-29-java-dom4j/</link>
+      <link>/cn/2020/2020-06-29-java-dom4j/</link>
       <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-06-29-java-dom4j/</guid>
+      <guid>/cn/2020/2020-06-29-java-dom4j/</guid>
       <description>dom4j获取iterator&#xA;/** * @author luohao * @create 2020/6/18 17:21 */ @Slf4j public class Dom4jUtils { public static Iterator&amp;lt;Element&amp;gt; getElementIterator(String path) { SAXReader reader = new SAXReader(); Document document = null; try { document = reader.read(new File(path)); } catch (DocumentException e) { log.error(&amp;#34;Dom4j：读取xml文件时异常{}&amp;#34;, e.getMessage(), e); } Optional&amp;lt;Document&amp;gt; docElementOpt = Optional.ofNullable(document); return docElementOpt.map(Document::getRootElement).map(Element::elementIterator).orElseGet(() -&amp;gt; new Iterator&amp;lt;Element&amp;gt;() { @Override public boolean hasNext() { return false; } @Override public Element next() { return null; } }); } } 获取xml的node节点和属性</description>
     </item>
   </channel>
