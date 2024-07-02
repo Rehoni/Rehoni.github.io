@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MAVEN on Rehoni | 罗皓</title>
-    <link>/tags/maven/</link>
+    <link>//localhost:1313/tags/maven/</link>
     <description>Recent content in MAVEN on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 23 Jun 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/maven/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/maven/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MAVEN的relativePath标签说明</title>
-      <link>/cn/2023/maven/</link>
+      <link>//localhost:1313/cn/2023/maven/</link>
       <pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate>
-      <guid>/cn/2023/maven/</guid>
+      <guid>//localhost:1313/cn/2023/maven/</guid>
       <description>relativePath标签说明 从父级仓库查找依赖版本&#xA;MAVEN构建jar包时候查找顺序：relativePath元素中的地址&amp;gt;本地仓库&amp;gt;远程仓库&#xA;父模块配置 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.18.12&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 子模块 &amp;lt;parent&amp;gt; 没有配置 `&amp;lt;relativePath/&amp;gt;` 如果`&amp;lt;dependencies&amp;gt;`中依赖没有指定版本，编译时不能获取父`&amp;lt;dependencyManagement&amp;gt;`中定义的版本。 工作案例 不带，有默认值，就是从父级目录查找pom.xml，也就是../ 目录查找pom，如果这个父级元素不在这个目录就会报错。&#xA;但你这个父级肯定不是在这个位置，而是在远程仓库中，或者本地仓库中。 如果带了，而不指定位置，那就是只从远程仓库中查找。 如果带了，也指定了位置，那就是先从指定位置查找，然后本地仓库，最后远程仓库。&#xA;不带这个，一般是用于模块项目，就是建一个父项目，然后很多子项目。一般创建模块子项目的时候，是不带的，比如我们pcs9000V1版本是这样的。&#xA;但是如果父项目是外部依赖，并不是项目的父项目，才会用到relativePath，比如你创建一个springboot项目的时候，父依赖如果是spring-boot-starter-parent，那么就会加relativePath这个标签，来指定父依赖的来源是远程仓库。 比如我们现在的pcs9000V2、pcs9000V3中的父元素nrcloud，以及nrcloud中的父元素spring-boot-starter-parent。&#xA;dependencies与dependencyManagement的区别 dependencies即使在子项目中不写该依赖项，那么子项目仍然会从父项目中继承该依赖项（全部继承）&#xA;dependencyManagement里只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本，才会从父项目中继承该项，并且version和scope都读取自父pom;另外如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。&#xA;&amp;lt;!--父项目1--&amp;gt; &amp;lt;dependencyManagement&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;!--这个要子项目引入才能使用--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2.61&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; &amp;lt;/dependencyManagement&amp;gt; &amp;lt;!--子项目：添加一个fastjson--&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; &amp;lt;!--父项目2--&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;!--这个依赖，子项目一定会依赖，可以直接使用--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.commons&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;commons-lang3&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;3.8.1&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; Dependency scope 用来限制Dependency的作用范围的, 影响maven项目在各个生命周期时导入的package的状态。&#xA;自从2.0.9后，新增了1种，现在有了6种scope:&#xA;compile 默认的scope，表示 dependency 都可以在生命周期中使用。而且，这些dependencies 会传递到依赖的项目中。&#xA;provided 跟compile相似，但是表明了dependency 由JDK或者容器提供，例如Servlet AP和一些Java EE APIs。这个scope 只能作用在编译和测试时，同时没有传递性。</description>
     </item>
   </channel>
