@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/python/</link>
+    <link>/tags/python/</link>
     <description>Recent content in Python on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 09 Oct 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>pycharm导出虚拟环境包</title>
-      <link>//localhost:1313/cn/2023/pycharm%E5%AF%BC%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%8C%85/</link>
+      <link>/cn/2023/pycharm%E5%AF%BC%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%8C%85/</link>
       <pubDate>Mon, 09 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/pycharm%E5%AF%BC%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%8C%85/</guid>
+      <guid>/cn/2023/pycharm%E5%AF%BC%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%8C%85/</guid>
       <description>在Pycharm中Terminal，注意terminal最好是cmd，运行导出命令：终端会标注出(venv)&#xA;(venv) D:\Projects\PyCharmProjects\worklog&amp;gt; pip freeze &amp;gt; requirement.txt 运行离线下载依赖包命令：&#xA;(venv) D:\Projects\PyCharmProjects\worklog&amp;gt; pip download -r requirement.txt -d /whl-packages 在服务器上离线导入whl：&#xA;如果有 后缀为 -cp310-cp310-win_amd64.whl 的whl文件，改为和其他的whl文件一样的后缀即可，如 -py3-none-any.whl&#xA;python3 -m pip install --no-index --find-links=/home/nari/luohao/whl -r req.txt 2、Selenium selenium driver实现后台运行 标准解决方案：使用headless的selenium driver就可以了。&#xA;短频快的解决方案：使用ghost driver。&#xA;解决&amp;rsquo;chromedriver&amp;rsquo; executable needs to be in PATH问题 1.首先需要下载Chromedriver，下载后得到的是一个chromedriver.exe文件。（chromedriver下载地址） 2.将chromedriver.exe拷贝至谷歌浏览器目录（如 C:\Program Files\Google\Chrome\Application）以及python根目录（C:\Python27）。 3.将谷歌浏览器环境变量添加到path（C:\Users\HD003\AppData\Local\Google\Chrome\Application）。 至此，就可以解决 ‘chromedriver’ executable needs to be in PATH问题了。&#xA;填充表单 Selenium专门提供了Select类来处理下拉框。 其实 WebDriver 中提供了一个叫 Select 的方法，可以帮助我们完成这些事情：&#xA;# 导入 Select 类&#xD;from selenium.webdriver.support.ui import Select&#xD;# 找到 name 的选项卡&#xD;select = Select(driver.</description>
     </item>
     <item>
       <title>简单python轮廓</title>
-      <link>//localhost:1313/cn/2020/2020-06-20-python-essential/</link>
+      <link>/cn/2020/2020-06-20-python-essential/</link>
       <pubDate>Sat, 20 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-06-20-python-essential/</guid>
+      <guid>/cn/2020/2020-06-20-python-essential/</guid>
       <description>一些特性 解释型语言： 制表符和四个空格，代码末尾解释器自动加分号&#xA;i = &amp;#39;hello&amp;#39; print(type(i)) print(isinstance(i,str)) print(id(i)) # 查看内存地址 dir(i) # 查看支持的操作 list与tuple： ​&#x9;区别就是tuple是不可变的，除非tuple里边存放了list&#xA;​&#x9;list支持的操作：dir(list)，append，insert，pop&#xA;input()接收输入字符&#xA;elif为else if，为关键字&#xA;字典： Set集合： 唯一性，set可以用于文件去重&#xA;定义函数： def func() 可以return或者不return、函数可递归&#xA;切片slice： list[0:3] ，list[-2:]，支持步径操作，arr[::5]，arr[::10:2]&#xA;enumerate()取到下标和值 列表生成器： 数字、字符串以及字典均可生成列表&#xA;b = [x*x for x in range(1,11)] print(b) c = [x*x for x in range(1,11) if x%2 ==0] print(c) 生成器、异常捕获 模块化 pip install request python中的类 继承object类，私有函数名的声明，类的继承，空成员函数放入pass&#xA;错误与异常类 try，exception&#xA;调试 常用调试pdb，详细用法https://zhuanlan.zhihu.com/p/37294138&#xA;文件读写 建议使用with open as f，（w写入，r读出）的方式，flush()，close()</description>
     </item>
   </channel>
