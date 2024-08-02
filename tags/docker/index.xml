@@ -6,8 +6,15 @@
     <description>Recent content in Docker on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker——centos卸载docker</title>
+      <link>//localhost:1313/cn/2024/centos%E5%8D%B8%E8%BD%BDdocker/</link>
+      <pubDate>Tue, 09 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/cn/2024/centos%E5%8D%B8%E8%BD%BDdocker/</guid>
+      <description>删除服务&#xA;#取消开机自启 [root@CenOS-1 system]# systemctl disable docker #取消注册文件 [root@CenOS-1 system]# rm -rf /etc/systemd/system/docker.service 删除命令&#xA;[root@CenOS-1 system]# rm -rf /usr/bin/containerd [root@CenOS-1 system]# rm -rf /usr/bin/containerd-shim [root@CenOS-1 system]# rm -rf /usr/bin/ctr [root@CenOS-1 system]# rm -rf /usr/bin/runc [root@CenOS-1 system]# rm -rf /usr/bin/docker* 删除配置&#xA;[root@CenOS-1 system]# rm -rf /etc/docker/ 删除镜像或容器&#xA;[root@CenOS-1 system]# rm -rf /var/lib/docker </description>
+    </item>
     <item>
       <title>Docker——常见场景</title>
       <link>//localhost:1313/cn/2022/%E5%B7%A5%E5%85%B7_docker/</link>

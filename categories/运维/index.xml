@@ -6,8 +6,29 @@
     <description>Recent content in 运维 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 23 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/categories/%E8%BF%90%E7%BB%B4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux——切分大文件大文件</title>
+      <link>//localhost:1313/cn/2024/linux%E5%88%87%E5%89%B2%E5%A4%A7%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Tue, 23 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/cn/2024/linux%E5%88%87%E5%89%B2%E5%A4%A7%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</guid>
+      <description>记录几种方式来切分日志&#xA;head 命令是用来获取文本文件的开始n行。&#xA;head -10000 java.log &amp;gt; javaHead.log tail 命令是用来获取文本最后行。&#xA;tail -10000 java.log &amp;gt; javaTail.log sed 命令可以从第N行截取到第M行。（ N &amp;gt; 0 , M &amp;lt; FileLineNumber ）。一般用处不大，只能靠猜。&#xA;sed -n &amp;#39;1,50000p&amp;#39; java.log &amp;gt; javaRange.log spilt 命令&#xA;split -l 300 java.txt javaLog --verbose split -b 10m java.txt javaLog --verbose </description>
+    </item>
+    <item>
+      <title>Linux——测带宽</title>
+      <link>//localhost:1313/cn/2024/iperf%E6%B5%8B%E5%B8%A6%E5%AE%BD/</link>
+      <pubDate>Tue, 23 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/cn/2024/iperf%E6%B5%8B%E5%B8%A6%E5%AE%BD/</guid>
+      <description>如果用ping的话，根据字节数和返回时间计算。&#xA;iPerf安装，尽量选择二进制版本。难点在于找到操作系统对应的版本二进制版本。&#xA;服务端&#xA;iperf3 -s -p 端口 客户端，注意不同网口的ip下，速率一般都不同&#xA;iperf3 -c 服务端IP -p 服务端端口 </description>
+    </item>
+    <item>
+      <title>Linux——查找大文件并删除</title>
+      <link>//localhost:1313/cn/2024/linux%E6%9F%A5%E6%89%BE%E5%A4%A7%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/</link>
+      <pubDate>Fri, 14 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/cn/2024/linux%E6%9F%A5%E6%89%BE%E5%A4%A7%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/</guid>
+      <description>先用 du 和 df 命令定位大文件，逐级往下层目录找&#xA;# 先确定是哪个文件夹占用较多 # 如果文件较多命令执行可能很慢，在知道大概位置的情况下不建议直接对根目录操作 # du的--max-depth=1表示只展示第一个层级的目录和文件 # sort的-h选项和du的-h选项一个意思，-r表示倒叙，默认升序 du -h / --max-depth=1 | sort -hr | head -n 10 #output&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 50G / 28G /var 6.0G /dfs 4.0G /opt 3.0G /root 2.3G /usr 148M /lib 39M /log 30M /etc 29M /boot # 定位到/var目录占用超过50%(磁盘总量50G) # 继续往下层目录找 du -h /var --max-depth=1 | sort -hr | head -n 10 # 继续往下层目录找 du -h /var/lib --max-depth=1 | sort -hr | head -n 10 按文件大小删除</description>
+    </item>
     <item>
       <title>Linux——问题手册</title>
       <link>//localhost:1313/cn/2023/linux%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
