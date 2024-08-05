@@ -6,10 +6,17 @@
     <description>Recent content in 运维 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Aug 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="/categories/%E8%BF%90%E7%BB%B4/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Linux——切分大文件大文件</title>
+      <title>Linux——创建大文件</title>
+      <link>/cn/2024/linux%E5%88%9B%E5%BB%BA%E5%A4%A7%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Mon, 05 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>/cn/2024/linux%E5%88%9B%E5%BB%BA%E5%A4%A7%E6%96%87%E4%BB%B6/</guid>
+      <description>先说结论&#xA;dd 和 truncate 创建的文件是稀疏文件。在计算机世界中，稀疏文件是一种特殊文件，具有不同的表观文件大小（它们可以扩展到的最大大小）和真实文件大小（为磁盘上的数据分配了多少空间）。&#xA;fallocate 命令则不会创建稀疏文件，而且它的速度更快，这也是我比较推荐使用 fallocate 创建大文件的原因。&#xA;dd命令，用于复制和转换文件。创建一个名为 rumenz.img 的 2 GB 大小的文本文件&#xA;dd if=/dev/zero of=rumenz.img bs=2G count=1 可以根据需要来更改块大小和块数。例如，可以使用 bs=1M 和 count=1024 来获得 1024 Mb 的文件。&#xA;truncate命令，缩减或扩充指定文件的大小为指定值。参数所指定的文件如果不存在，那么该命令会创建这个文件。&#xA;truncate 命令将一个文件缩小或者扩展到所需大小。使用 -s 选项来指定文件的大小。&#xA;truncate -s 2G rumenz.img fallocate命令，fallocate用于将块预分配给文件。对于支持fallocate系统调用的文件系统，这可以通过分配块并将其标记为未初始化来快速完成，因此不需要对数据块进行I / O操作。这是创建文件而不是用零填充的更快的方法。大文件几乎可以立即创建，而不必等待任何I / O操作完成。在以下文件系统上支持fallocate系统调用：btrfs，ext4，ocfs2和xfs文件系统（自内核版本v2.6.31起）。&#xA;创建一个 1 GB 的文件&#xA;fallocate -l 1G rumenz.img 使用ls -lh rumenz.img查看生成的文件。</description>
+    </item>
+    <item>
+      <title>Linux——切分大日志文件</title>
       <link>/cn/2024/linux%E5%88%87%E5%89%B2%E5%A4%A7%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</link>
       <pubDate>Tue, 23 Jul 2024 00:00:00 +0000</pubDate>
       <guid>/cn/2024/linux%E5%88%87%E5%89%B2%E5%A4%A7%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</guid>
