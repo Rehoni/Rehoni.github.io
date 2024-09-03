@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,13 +11,15 @@
     <meta name="twitter:card" content="summary">
 
     
-      
-    
-
     
       
     
 
+    
+      
+    
+
+    
     
     
     
@@ -30,7 +33,7 @@
     
 
 
-<link href='//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/styles/monokai-sublime.min.css' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
 
 
 
@@ -43,8 +46,6 @@
 <link rel="stylesheet" href="/css/custom.css" />
 
   </head>
-
-  
   <body class="cn">
     <header class="masthead">
       
@@ -106,6 +107,8 @@
 
 
 
+
+
 <h1 id="oracle递归查询"><strong>Oracle递归查询</strong></h1>
 <pre tabindex="0"><code> select * from
  (select t.EMPLOYEE_ID,
@@ -126,6 +129,7 @@
           where name_full_path = &#39;中国南方电网有限责任公司/广东电网有限责任公司/珠海供电局&#39; and state = 1 and org_level = 3) b on b.ORG_ID = a.ORG_ID) tb
           where tb.rn = 1;
 </code></pre>
+
 
   <footer>
   
@@ -180,20 +184,27 @@ document.addEventListener('keyup', function(e) {
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/java.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/sql.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/css.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/python.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/html.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/bash.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/.properties.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/json.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/shell.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
 
 
 

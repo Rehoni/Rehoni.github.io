@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
     
     <meta name="twitter:card" content="summary">
 
+    
     
       
     
@@ -24,6 +26,7 @@
 
     
     
+    
     <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240611142131498.png">
     
     
@@ -36,7 +39,7 @@
     
 
 
-<link href='//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/styles/monokai-sublime.min.css' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
 
 
 
@@ -49,8 +52,6 @@
 <link rel="stylesheet" href="/css/custom.css" />
 
   </head>
-
-  
   <body class="cn">
     <header class="masthead">
       
@@ -112,6 +113,8 @@
 
 
 
+
+
 <h3 id="统计文件夹下文件的个数">统计文件夹下文件的个数</h3>
 <p>如果运行<code>ls -l</code>会输出当前目录下的文件以及目录的信息。那么只要在当前目录下的输出结果中，统计出是文件的行的数目，就可以统计出当前目录下的文件个数，所以要找出命令ls -l输出的文件的信息与目录的信息的不同之处。</p>
 <p>不难看出，如果是文件的话，该行的字符串信息的第一个字符显示的是“-”，如果是目录的话，该行的字符的第一个显示的是&quot;d&quot;，意即directory，找到这两者之间的区别，运行能够判别第一个字符的命令.</p>
@@ -132,6 +135,7 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>find ./ -type d | wc -l <span style="color:#75715e"># 注意，这里面包含了当前文件夹，所以统计出来减一即可</span>
 </span></span></code></pre></div><h3 id="参考">参考</h3>
 <p><a href="https://blog.csdn.net/zhizhengguan/article/details/108260761">Linux上统计文件夹下文件个数以及目录个数_OceanStar的博客-CSDN博客_linux 统计目录下文件个数</a></p>
+
 
 
   <footer>
@@ -187,20 +191,27 @@ document.addEventListener('keyup', function(e) {
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/java.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/sql.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/css.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/python.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/html.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/bash.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/.properties.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/json.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/shell.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
 
 
 

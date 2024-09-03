@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,13 +11,15 @@
     <meta name="twitter:card" content="summary">
 
     
-      
-    
-
     
       
     
 
+    
+      
+    
+
+    
     
     
     
@@ -30,7 +33,7 @@
     
 
 
-<link href='//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/styles/monokai-sublime.min.css' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
 
 
 
@@ -43,8 +46,6 @@
 <link rel="stylesheet" href="/css/custom.css" />
 
   </head>
-
-  
   <body class="cn">
     <header class="masthead">
       
@@ -106,6 +107,8 @@
 
 
 
+
+
 <h2 id="oracle建分区表自动按月分区">Oracle建分区表自动按月分区</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span> <span style="color:#75715e">-- 自动按月分区
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> <span style="color:#a6e22e">EMS_RATIO</span>
@@ -135,6 +138,7 @@
 </span></span><span style="display:flex;"><span>     partition ems_ratio_partition <span style="color:#66d9ef">values</span> less <span style="color:#a6e22e">than</span> (<span style="color:#a6e22e">to_date</span>(<span style="color:#e6db74">&#39;2020-06-01&#39;</span>,<span style="color:#e6db74">&#39;yyyy-MM-dd&#39;</span>))
 </span></span><span style="display:flex;"><span> )
 </span></span></code></pre></div>
+
 
   <footer>
   
@@ -189,20 +193,27 @@ document.addEventListener('keyup', function(e) {
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/java.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/sql.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/css.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/python.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/html.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/bash.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/.properties.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/json.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/shell.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
 
 
 

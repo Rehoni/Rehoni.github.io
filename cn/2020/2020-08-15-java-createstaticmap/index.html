@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
     
     <meta name="twitter:card" content="summary">
 
+    
     
       
     
@@ -27,6 +29,7 @@ A mutable collection instance is assigned to a final static field, thus can be &
     
     
     
+    
     <meta name="twitter:image" content="/images/logo.png">
     
     
@@ -37,7 +40,7 @@ A mutable collection instance is assigned to a final static field, thus can be &
     
 
 
-<link href='//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/styles/monokai-sublime.min.css' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
 
 
 
@@ -50,8 +53,6 @@ A mutable collection instance is assigned to a final static field, thus can be &
 <link rel="stylesheet" href="/css/custom.css" />
 
   </head>
-
-  
   <body class="cn">
     <header class="masthead">
       
@@ -113,6 +114,8 @@ A mutable collection instance is assigned to a final static field, thus can be &
 
 
 
+
+
 <h3 id="findbugs错误提示"><strong>findbugs错误提示</strong></h3>
 <p>MS_MUTABLE_COLLECTION_PKGPROTECT, Priority: Normal</p>
 <p>XX.XX.XXX.XX is a mutable collection which should be package protected</p>
@@ -139,6 +142,7 @@ A mutable collection instance is assigned to a final static field, thus can be &
 </span></span></code></pre></div><p>如果现在往map里添加元素，则抛出UnsupportedOperationException异常</p>
 <h3 id="参考">参考</h3>
 <p><a href="https://my.oschina.net/MjShao/blog/2872388">java中如何创建不可变并且static的静态集合</a></p>
+
 
 
   <footer>
@@ -194,20 +198,27 @@ document.addEventListener('keyup', function(e) {
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/java.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/sql.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/css.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/python.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/html.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/bash.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/.properties.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/json.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/shell.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
 
 
 

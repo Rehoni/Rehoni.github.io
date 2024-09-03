@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
     
     <meta name="twitter:card" content="summary">
 
+    
     
       
     
@@ -29,6 +31,7 @@ git 有两种协议，一种书 https，还有一种是 ssh 。
     
     
     
+    
     <meta name="twitter:image" content="/images/logo.png">
     
     
@@ -39,7 +42,7 @@ git 有两种协议，一种书 https，还有一种是 ssh 。
     
 
 
-<link href='//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/styles/monokai-sublime.min.css' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
 
 
 
@@ -52,8 +55,6 @@ git 有两种协议，一种书 https，还有一种是 ssh 。
 <link rel="stylesheet" href="/css/custom.css" />
 
   </head>
-
-  
   <body class="cn">
     <header class="masthead">
       
@@ -115,6 +116,8 @@ git 有两种协议，一种书 https，还有一种是 ssh 。
 
 
 
+
+
 <p>这里只说明搭配 <code>Clash</code> 使用的<code>git bash</code>的<code>https</code>终端代理，主要解决的是<code>git clone</code>失败的问题。</p>
 <p>git 有两种协议，一种书 https，还有一种是 ssh 。</p>
 <p>如果是用 https，设置终端代理即可。如果是 ssh，需要单独配置代理。</p>
@@ -134,6 +137,7 @@ git 有两种协议，一种书 https，还有一种是 ssh 。
 </span></span><span style="display:flex;"><span>source ~/.bash_profile
 </span></span></code></pre></div><p>打开代理 proxy_on</p>
 <p>关闭代理 proxy_off</p>
+
 
 
   <footer>
@@ -191,20 +195,27 @@ document.addEventListener('keyup', function(e) {
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/java.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/sql.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/css.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/python.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/html.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/bash.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/.properties.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/json.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/shell.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
 
 
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
     
     <meta name="twitter:card" content="summary">
 
+    
     
       
     
@@ -25,6 +27,7 @@
     
     
     
+    
     <meta name="twitter:image" content="/images/logo.png">
     
     
@@ -35,7 +38,7 @@
     
 
 
-<link href='//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/styles/monokai-sublime.min.css' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
 
 
 
@@ -48,8 +51,6 @@
 <link rel="stylesheet" href="/css/custom.css" />
 
   </head>
-
-  
   <body class="cn">
     <header class="masthead">
       
@@ -108,6 +109,8 @@
 
 
       </header>
+
+
 
 
 
@@ -359,6 +362,7 @@ RUN ln -snf /usr/share/zoneinfo/$TIME_ZONE /etc/localtime &amp;&amp; echo $TIME_
 <p><code>local_unmask</code> 的值为 <code>000</code> 和 <code>011</code> 时的区别在于它们对文件权限的掩码设置不同。 在 Unix 系统中，文件的权限由三个数字组成，分别表示所有者、组和其他用户的读、写和执行权限。这些数字用二进制表示，分别为 <code>4</code>（读）、<code>2</code>（写）和 <code>1</code>（执行）。例如，权限为 <code>rwxr-xr-x</code> 的文件可以表示为 <code>755</code>。 <code>local_unmask</code> 是一个八进制数字，用于设置文件权限掩码。它用于确定文件创建时的默认权限。当 <code>local_unmask</code> 的值为 <code>000</code> 时，表示文件的默认权限不受限制，即完全开放。当 <code>local_unmask</code> 的值为 <code>011</code> 时，表示文件的默认权限受到限制，只有所有者和组可以读写，其他用户只能读取。 因此，当 <code>local_unmask</code> 的值为 <code>000</code> 时，文件创建时的默认权限为 <code>777</code>（完全开放）；当 <code>local_unmask</code> 的值为 <code>011</code> 时，文件创建时的默认权限为 <code>750</code>（所有者和组可以读写，其他用户只能读取）。 需要注意的是，<code>local_unmask</code> 的值仅在文件创建时生效，对于已存在的文件，它不会改变文件的权限。此外，它只影响当前用户创建的文件的默认权限，而不会影响其他用户或系统文件的权限。</p>
 
 
+
   <footer>
   
 <nav class="post-nav">
@@ -414,20 +418,27 @@ document.addEventListener('keyup', function(e) {
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/java.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/sql.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/css.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/python.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/html.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/bash.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/.properties.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/json.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/shell.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
 
 
 

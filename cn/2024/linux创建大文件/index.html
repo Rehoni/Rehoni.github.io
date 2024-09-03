@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
     
     <meta name="twitter:card" content="summary">
 
+    
     
       
     
@@ -29,6 +31,7 @@ dd命令，用于复制和转换文件。创建一个名为 rumenz.img 的 2 &am
     
     
     
+    
     <meta name="twitter:image" content="/images/logo.png">
     
     
@@ -39,7 +42,7 @@ dd命令，用于复制和转换文件。创建一个名为 rumenz.img 的 2 &am
     
 
 
-<link href='//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/styles/monokai-sublime.min.css' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
 
 
 
@@ -52,8 +55,6 @@ dd命令，用于复制和转换文件。创建一个名为 rumenz.img 的 2 &am
 <link rel="stylesheet" href="/css/custom.css" />
 
   </head>
-
-  
   <body class="cn">
     <header class="masthead">
       
@@ -115,6 +116,8 @@ dd命令，用于复制和转换文件。创建一个名为 rumenz.img 的 2 &am
 
 
 
+
+
 <p><strong>先说结论</strong></p>
 <p>dd 和 truncate 创建的文件是稀疏文件。在计算机世界中，稀疏文件是一种特殊文件，具有不同的表观文件大小（它们可以扩展到的最大大小）和真实文件大小（为磁盘上的数据分配了多少空间）。</p>
 <p>fallocate 命令则不会创建稀疏文件，而且它的速度更快，这也是我比较推荐使用 fallocate 创建大文件的原因。</p>
@@ -128,6 +131,7 @@ dd命令，用于复制和转换文件。创建一个名为 rumenz.img 的 2 &am
 <p>创建一个 1 GB 的文件</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>fallocate -l 1G rumenz.img
 </span></span></code></pre></div><p>使用ls -lh rumenz.img查看生成的文件。</p>
+
 
 
   <footer>
@@ -183,20 +187,27 @@ document.addEventListener('keyup', function(e) {
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/java.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/sql.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/css.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/python.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/html.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/bash.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/.properties.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/json.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/shell.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
 
 
 

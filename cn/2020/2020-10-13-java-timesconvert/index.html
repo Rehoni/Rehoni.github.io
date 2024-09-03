@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
     
     <meta name="twitter:card" content="summary">
 
+    
     
       
     
@@ -23,6 +25,7 @@
     
     
     
+    
     <meta name="twitter:image" content="/images/logo.png">
     
     
@@ -33,7 +36,7 @@
     
 
 
-<link href='//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/styles/monokai-sublime.min.css' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
 
 
 
@@ -46,8 +49,6 @@
 <link rel="stylesheet" href="/css/custom.css" />
 
   </head>
-
-  
   <body class="cn">
     <header class="masthead">
       
@@ -109,6 +110,8 @@
 
 
 
+
+
 <h3 id="localdatetime和string的转换">LocalDateTime和String的转换</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// LocalDateTime转为String</span>
 </span></span><span style="display:flex;"><span>String string <span style="color:#f92672">=</span> LocalDateTime.<span style="color:#a6e22e">now</span>().<span style="color:#a6e22e">format</span>(<span style="color:#66d9ef">new</span> DateTimeFormatter.<span style="color:#a6e22e">ofPattern</span>(<span style="color:#e6db74">&#34;yyyy-MM-dd HH:mm:ss.SSSSSS&#34;</span>));
@@ -146,6 +149,7 @@
 </span></span></code></pre></div><p>before函数中封装了compareTo函数，在<code>compareTo(Timestamp t)</code>中对传入的Timestamp做比较。通过<code>long thisTime = this.getTime();</code>获取的时间戳进行比较，<code>compareTo(Date u)</code>也可以传入java.util.Date，不过也是对其做Timestamp的转换后调用<code>compareTo(Timestamp t)</code>做的处理。</p>
 <h3 id="参考">参考</h3>
 <p><a href="https://blog.csdn.net/u010102390/java/article/details/80359847">JAVA比较2个Timestamp类型的时间大小-由此引发的思考</a></p>
+
 
 
   <footer>
@@ -201,20 +205,27 @@ document.addEventListener('keyup', function(e) {
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/java.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/sql.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/css.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/python.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/html.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/bash.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/.properties.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/json.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/shell.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
 
 
 

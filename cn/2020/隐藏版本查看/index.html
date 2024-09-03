@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
     
     <meta name="twitter:card" content="summary">
 
+    
     
       
     
@@ -28,6 +30,7 @@ tar xf &amp;hellip;">
 
     
     
+    
     <meta name="twitter:image" content="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2710e28f-3345-4293-b8b8-ff031b8e05c5/image-20200711115831013.png">
     
     
@@ -40,7 +43,7 @@ tar xf &amp;hellip;">
     
 
 
-<link href='//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/styles/monokai-sublime.min.css' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
 
 
 
@@ -53,8 +56,6 @@ tar xf &amp;hellip;">
 <link rel="stylesheet" href="/css/custom.css" />
 
   </head>
-
-  
   <body class="cn">
     <header class="masthead">
       
@@ -116,6 +117,8 @@ tar xf &amp;hellip;">
 
 
 
+
+
 <h1 id="备份原来的tomcat配置文件"><strong>备份原来的tomcat配置文件</strong></h1>
 <p>在ems用户下，备份原来tomcat下的<code>tomcat/conf</code>目录，注意操作前shutdown掉tomcat</p>
 <pre tabindex="0"><code> cp -r conf/ 目录
@@ -160,6 +163,7 @@ tar xf &amp;hellip;">
 <p><a href="https://stackoverflow.com/questions/14925073/how-to-find-out-running-tomcat-version">how to find out running tomcat version</a></p>
 <p><a href="https://www.cnblogs.com/huey/p/4803414.html">Tomcat - 持久化 Session</a></p>
 <p><a href="https://uzshare.com/view/829790#_1">荐 【漏洞预警】Apache Tomcat Session 反序列化代码执行漏洞修复方案</a></p>
+
 
 
   <footer>
@@ -217,20 +221,27 @@ document.addEventListener('keyup', function(e) {
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/java.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/sql.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/css.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/python.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/html.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/bash.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/.properties.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/json.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/shell.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
 
 
 

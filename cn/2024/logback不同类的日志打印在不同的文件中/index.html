@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
     
     <meta name="twitter:card" content="summary">
 
+    
     
       
     
@@ -25,6 +27,7 @@
     
     
     
+    
     <meta name="twitter:image" content="/images/logo.png">
     
     
@@ -35,7 +38,7 @@
     
 
 
-<link href='//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/styles/monokai-sublime.min.css' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
 
 
 
@@ -48,8 +51,6 @@
 <link rel="stylesheet" href="/css/custom.css" />
 
   </head>
-
-  
   <body class="cn">
     <header class="masthead">
       
@@ -111,6 +112,8 @@
 
 
 
+
+
 <p>定义两个 appender，分别命名为 “CLASS1_FILE” 和 “CLASS2_FILE”。每个appender会将日志输出到指定的文件中，这里分别是 logs/class1.log 和 logs/class2.log。</p>
 <p>定义两个 logger，分别对应 com.example.Class1 和 com.example.Class2 类。这两个 logger 的日志级别都设置为 “info”，并将日志输出到对应的 appender 中。additivity=&ldquo;false&rdquo; 的设置是为了防止日志被父 logger（在这里是 root logger）也处理。</p>
 <p>最后，root logger 设置为只处理 “error” 级别以上的日志，它的日志输出到两个 appender 中。</p>
@@ -145,6 +148,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/root&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/configuration&gt;</span>
 </span></span></code></pre></div>
+
 
   <footer>
   
@@ -199,20 +203,27 @@ document.addEventListener('keyup', function(e) {
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/java.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/sql.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/css.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/python.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/html.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/bash.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/.properties.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/json.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/shell.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
 
 
 

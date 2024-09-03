@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
     
     <meta name="twitter:card" content="summary">
 
+    
     
       
     
@@ -28,6 +30,7 @@
 
     
     
+    
     <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/proxy-flow.png">
     
     
@@ -40,7 +43,7 @@
     
 
 
-<link href='//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/styles/monokai-sublime.min.css' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
 
 
 
@@ -53,8 +56,6 @@
 <link rel="stylesheet" href="/css/custom.css" />
 
   </head>
-
-  
   <body class="cn">
     <header class="masthead">
       
@@ -116,6 +117,8 @@
 
 
 
+
+
 <p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/proxy-flow.png" alt="思路"></p>
 <h1 id="ccproxy">CCProxy</h1>
 <p>主要用于局域网内共享宽带上网，ADSL共享上网、专线代理共享、ISDN代理共享、卫星代理共享、蓝牙代理共享、二级代理和SOCKS5代理等共享代理上网。</p>
@@ -165,6 +168,7 @@ Environment=&#34;HTTP_PROXY=socks5://代理ip:代理端口/&#34;
 </code></pre><p>验证是否配置成功</p>
 <pre tabindex="0"><code>systemctl show --property=Environment docker
 </code></pre><p>另外，Docker 在国内是有镜像加速器的，可以直接从国内的dockerhub拉取公有镜像省去很多无尽的等待时间。</p>
+
 
 
   <footer>
@@ -220,20 +224,27 @@ document.addEventListener('keyup', function(e) {
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
 
 
 
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/java.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/sql.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/css.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/python.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/html.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/bash.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/.properties.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/json.min.js"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.0/languages/shell.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
 
 
 
