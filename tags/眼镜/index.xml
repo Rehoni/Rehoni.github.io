@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>眼镜 on Rehoni | 罗皓</title>
-    <link>/tags/%E7%9C%BC%E9%95%9C/</link>
+    <link>//localhost:1313/tags/%E7%9C%BC%E9%95%9C/</link>
     <description>Recent content in 眼镜 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 18 Mar 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/%E7%9C%BC%E9%95%9C/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/%E7%9C%BC%E9%95%9C/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>眼镜配镜</title>
-      <link>/cn/2023/%E7%9C%BC%E9%95%9C%E9%85%8D%E9%95%9C/</link>
+      <link>//localhost:1313/cn/2023/%E7%9C%BC%E9%95%9C%E9%85%8D%E9%95%9C/</link>
       <pubDate>Sat, 18 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>/cn/2023/%E7%9C%BC%E9%95%9C%E9%85%8D%E9%95%9C/</guid>
+      <guid>//localhost:1313/cn/2023/%E7%9C%BC%E9%95%9C%E9%85%8D%E9%95%9C/</guid>
       <description>眼睛参数 左眼，325 右眼，175 无散光&#xA;实际价格 379 90（镜框，suofeia合金+板材）+210（镜片，万新丽视捷1.60防蓝光）+80（验光和人工）=380&#xA;心理价 150+80+50+30=310 思路：性价比，实惠&#xA;1、镜片 150 高：蔡司泽锐 中：依视路明月万新&#xA;明月 1.56防蓝光，60 不防55 1.61防蓝光，70 不防65，140 1.67防蓝光，140 不防130&#xA;万新 1.56防蓝光，50 不防40 1.61防蓝光，55 不防45，110 1.67防蓝光，65 不防60&#xA;凯米 凯米U6防蓝光 1.56，45不防U2 35 凯米U6防蓝光 1.61，65 不防U2 55，130 凯米U6防蓝光 1.67，75不防U2 65&#xA;2、镜框 80 纯钛，180-380 TR90，100-300 β钛，60-180 合金，80-280 板材，80-200&#xA;3、验光 50 30-70&#xA;4、人工 30 </description>
     </item>
   </channel>

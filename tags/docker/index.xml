@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker on Rehoni | 罗皓</title>
-    <link>/tags/docker/</link>
+    <link>//localhost:1313/tags/docker/</link>
     <description>Recent content in Docker on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 11 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker——centos卸载docker</title>
-      <link>/cn/2024/centos%E5%8D%B8%E8%BD%BDdocker/</link>
+      <link>//localhost:1313/cn/2024/centos%E5%8D%B8%E8%BD%BDdocker/</link>
       <pubDate>Thu, 11 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>/cn/2024/centos%E5%8D%B8%E8%BD%BDdocker/</guid>
+      <guid>//localhost:1313/cn/2024/centos%E5%8D%B8%E8%BD%BDdocker/</guid>
       <description>删除服务&#xA;#取消开机自启 [root@CenOS-1 system]# systemctl disable docker #取消注册文件 [root@CenOS-1 system]# rm -rf /etc/systemd/system/docker.service 删除命令&#xA;[root@CenOS-1 system]# rm -rf /usr/bin/containerd [root@CenOS-1 system]# rm -rf /usr/bin/containerd-shim [root@CenOS-1 system]# rm -rf /usr/bin/ctr [root@CenOS-1 system]# rm -rf /usr/bin/runc [root@CenOS-1 system]# rm -rf /usr/bin/docker* 删除配置&#xA;[root@CenOS-1 system]# rm -rf /etc/docker/ 删除镜像或容器&#xA;[root@CenOS-1 system]# rm -rf /var/lib/docker </description>
     </item>
     <item>
       <title>Docker——常见场景</title>
-      <link>/cn/2022/%E5%B7%A5%E5%85%B7_docker/</link>
+      <link>//localhost:1313/cn/2022/%E5%B7%A5%E5%85%B7_docker/</link>
       <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/%E5%B7%A5%E5%85%B7_docker/</guid>
+      <guid>//localhost:1313/cn/2022/%E5%B7%A5%E5%85%B7_docker/</guid>
       <description>《Docker-从入门到实践》&#xA;1、MySQL docker search mysql docker pull mysql # 进入shell，查看mysql版本信息 docker run -it mysql /bin/bash mysql --help | grep Distrib mysql --version # 后台启动，可以使用-v 挂载目录，比如/data/mysql/logs:/logs docker run -p 3306:3306 --name mysql_test -e MYSQL_ROOT_PASSWORD=123456 -d mysql # 查看端口映射 docker port mysql_test # 进入运行的MySQL容器内部 docker exec -it mysql_test /bin/bash 2、mongodb # 运行，-v 为设置容器的挂载目录，这里是将本机的“/data/mongo”目录挂载到容器中的/data/db中，作为 mongodb 的存储目录 docker run -p 27017:27017 -v ~/docker/mongodb:/data/db --name mongodb_test -d mongo # 进入运行的mongodb容器内部 docker exec -it mongodb_test mongo # 连接数据库（此时不需要用户就可以连接），创建用户 db.</description>
     </item>
     <item>
       <title>windows启用docker</title>
-      <link>/cn/2020/2020-12-03-docker-windowsstartup/</link>
+      <link>//localhost:1313/cn/2020/2020-12-03-docker-windowsstartup/</link>
       <pubDate>Thu, 03 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/2020-12-03-docker-windowsstartup/</guid>
+      <guid>//localhost:1313/cn/2020/2020-12-03-docker-windowsstartup/</guid>
       <description>问题 这次出现这个问题的原因是给电脑上安装了安卓模拟器导致了冲突，后卸载后docker仍不可用，故再排查一次。&#xA;An Error occurred.&#xA;windows 10 docker cannot enable hyper-v service&#xA;1、systeminfo命令 在命令行中执行systeminfo，如果所有列出的Hyper-V要求的值都为Yes，则系统可以运行Hyper-V。&#xA;Hyper-V要求： 虚拟机监视器模式扩展：是&#xD;固件中已启用虚拟化：是&#xD;二级地址转换：是&#xD;执行数据保护可用：是 同样需要四项均为“是”才符合运行Hyper-V虚拟机的要求&#xA;2、启用或关闭Windows功能 3、bios设置 CPU Configuration -&amp;gt; Intel Virtualization Technology，将次设置项修改为enabled。&#xA;如果已经是enabled状态，可以考虑开关一次此设置，再F10保存重启。</description>
     </item>
   </channel>

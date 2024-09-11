@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chrome on Rehoni | 罗皓</title>
-    <link>/tags/chrome/</link>
+    <link>//localhost:1313/tags/chrome/</link>
     <description>Recent content in Chrome on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 11 Feb 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/chrome/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/chrome/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>chrome浏览器相关</title>
-      <link>/cn/2020/chrome/</link>
+      <link>//localhost:1313/cn/2020/chrome/</link>
       <pubDate>Tue, 11 Feb 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/chrome/</guid>
+      <guid>//localhost:1313/cn/2020/chrome/</guid>
       <description>浏览器卡顿 第一步：&#xA;打开 Chrome 谷歌浏览器，进入“设置 → 高级 → 系统”，将 使用硬件加速模式的选项关闭掉，重启浏览器。如果设置后卡顿已有明显改善，那么就此搞定，不然继续第二步。&#xA;第二步：&#xA;在地址栏上输入：chrome://flags/回车，在顶部搜索栏中搜索“gpu”，列表中找到：“GPU rasterization”(GPU 渲染) 以及 “Accelerated 2D canvas”(2D 图形加速) 两项，将它们都设为“Disabled”禁用即可。点击右下角的“ReLaunch”重启浏览器。&#xA;你会发现，做完这两个设置后，流畅的 Chrome 又一次回来了！我这里即便同时开启超过 50 个页面，响应依然飞快，看视频也不再卡顿了。经过几周的使用观察，我认为问题已基本解决。&#xA;扩展程序导出 打开谷歌浏览器 -&amp;gt; 点击右上方设置按钮 -&amp;gt; 更多工具 -&amp;gt; 扩展程序&#xA;开启开发者模式&#xA;找到需要打包的扩展程序，记住扩展ID&#xA;点击左上方打包扩展程序&#xA;注意AppData为隐藏文件夹，需要在文件资源管理器-&amp;gt;查看-&amp;gt;查看隐藏文件&#xA;浏览目录：C:\Users\用户名\AppData\Local\Google\Chrome\User Data\Default\Extensions\扩展ID\版本号&#xA;生成的扩展程序压缩包为 crx 文件&#xA;安装打包好的拓展程序：&#xA;方法一：&#xA;（1）打开谷歌浏览器 -&amp;gt; 点击右上方设置按钮 -&amp;gt; 更多工具 -&amp;gt; 扩展程序（或直接输入：chrome://extensions/）&#xA;（2）将.crx的文件拖拽到浏览器中间，会出现拖拽以安装的提示，安装。&#xA;（3）如果浏览器能直接安装即成功，如果不能安装，或者提示只能通过Chrome网上应用商店安装该程序，请参照方法二。&#xA;方法二：&#xA;（1）将.crx的文件的扩展名改为.zip，&#xA;（2）打开谷歌浏览器 -&amp;gt; 点击右上方设置按钮 -&amp;gt; 更多工具 -&amp;gt; 扩展程序（或直接输入：chrome://extensions/）&#xA;（3）将.zip的文件拖拽到浏览器中即可安装。&#xA;错误代码：ERR_UNSAFE_PORT 用Nginx发布多个站点测试，使用了87、88端口，&#xA;88端口访问正常，87端口就怎么也访问不了，点击更多，提示错误代码：ERR_UNSAFE_PORT&#xA;不想修改浏览器设置的就改用其它端口吧，搜索了一下，Firefox也有类似的端口限制；如果非要使用类似的端口，&#xA;我们要做的是允许访问非常规端口地址，解决办法：选中Google Chrome 快捷方式，右键属性，在”目标”对应文本框添加：</description>
     </item>
   </channel>

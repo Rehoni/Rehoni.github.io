@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Keepalived on Rehoni | 罗皓</title>
-    <link>/tags/keepalived/</link>
+    <link>//localhost:1313/tags/keepalived/</link>
     <description>Recent content in Keepalived on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 30 Jun 2022 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/keepalived/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/keepalived/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>keepalived双网卡双网段热备配置</title>
-      <link>/cn/2022/keepalive/</link>
+      <link>//localhost:1313/cn/2022/keepalive/</link>
       <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/keepalive/</guid>
+      <guid>//localhost:1313/cn/2022/keepalive/</guid>
       <description>参考 nginx keepalived双网卡双网段热备配置&#xA;[keepalived双进程双VIP配置及原理图](keepalived双进程双VIP配置及原理图_花红羊蹄甲的博客-CSDN博客_keepalived 多进程)&#xA;简要实现 一般来说做两套配置即可，&#xA;master：&#xA;! Configuration File for keepalived&#xD;vrrp_script chk_haproxy {&#xD;script &amp;#34;&amp;lt;/dev/tcp/127.0.0.1/80&amp;#34;&#xD;interval 2&#xD;weight -2&#xD;}&#xD;vrrp_instance VI_A {&#xD;state MASTER&#xD;interface eno6&#xD;track_interface {&#xD;eno6&#xD;}&#xD;virtual_router_id 81&#xD;priority 100&#xD;mcast_src_ip 10.228.96.230&#xD;advert_int 1&#xD;authentication {&#xD;auth_type PASS&#xD;auth_pass 1111&#xD;}&#xD;virtual_ipaddress {&#xD;10.228.96.232 label webvip&#xD;}&#xD;track_script {&#xD;chk_haproxy&#xD;}&#xD;}&#xD;vrrp_instance VI_B {&#xD;state MASTER&#xD;interface eno5&#xD;track_interface {&#xD;eno5&#xD;}&#xD;virtual_router_id 82&#xD;priority 100&#xD;mcast_src_ip 198.</description>
     </item>
   </channel>

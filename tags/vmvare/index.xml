@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vmvare on Rehoni | 罗皓</title>
-    <link>/tags/vmvare/</link>
+    <link>//localhost:1313/tags/vmvare/</link>
     <description>Recent content in Vmvare on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 27 Oct 2022 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/vmvare/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/vmvare/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>vmvare设置网络</title>
-      <link>/cn/2022/vmware/</link>
+      <link>//localhost:1313/cn/2022/vmware/</link>
       <pubDate>Thu, 27 Oct 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/vmware/</guid>
+      <guid>//localhost:1313/cn/2022/vmware/</guid>
       <description>设置网络 使用桥接模式，相当于同网段的服务器&#xA;1、dhclient 获取IP&#xA;2、vi /etc/sysconfig/network-scripts/ifcfg-ens33 设置静态IP&#xA;​&#x9;注意这里，设置网关需要和本机的网络IP的网关相同，而不是直接取255、1之类的&#xA;3、systemctl restart network.service 重启网络服务&#xA;4、ping www.baidu.com 以及 ping 本机网络IP&#xA;Linux报错之ping: www.baidu.com: Name or service not known 在网卡设置里，新增DNS设置&#xA;DNS1=8.8.8.8 /etc/resolv.conf配置DNS客户端&#xA;文件/etc/resolv.conf配置DNS客户端，它包含了主机的域名搜索顺序和DNS服务器的地址，每一行应包含一个关键字和一个或者多个的由空格隔开的参数。下面是一个例子文件：&#xA;search mydom.edu.cn nameserver 210.34.0.14 nameserver 210.34.0.2 合法的参数及其意义如下： nameserver: 表明DNS服务器的IP地址。可以有很多行的nameserver，每一个带一个IP地址。在查询时就按nameserver在本文件中的顺序进行，且只有当第一个nameserver没有反应才查询下面的nameserver。 domain: 声明主机的域名。很多程序用到它，如邮件系统；当为没有域名的主机进行DNS查询时，也要用到。如果没有域名，主机名将被使用，删除所有在第一个点(.)前面的内容。 search: 它的多个参数指明域名查询顺序。当要查询没有域名的主机，主机将在由search声明的域中分别查找。domain和search不能共存；如果同时存在，后面出现的将会被使用。 sortlist: 允许将得到域名结果进行特定的排序。它的参数为网络/掩码对，允许任意的排列顺序。 Red Hat中没有提供缺省的/etc/resolv.conf文件，它的内容是根据在安装时给出的动态创建的。</description>
     </item>
   </channel>
