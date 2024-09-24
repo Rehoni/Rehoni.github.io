@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>数据结构算法 on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/</link>
+    <link>/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/</link>
     <description>Recent content in 数据结构算法 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 11 Oct 2021 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>字符串相似度匹配算法</title>
-      <link>//localhost:1313/cn/2021/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</link>
+      <link>/cn/2021/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</link>
       <pubDate>Mon, 11 Oct 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</guid>
+      <guid>/cn/2021/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</guid>
       <description>相似度匹配算法 常见的字符串相似度算法包括编辑距离算法（EditDistance），n-gram算法，JaroWinkler算法以及Soundex算法。本文接下来大略的介绍一下这几种算法，有兴趣的读者可以在互联网找到一些更详细的资料。&#xA;最常见的相似度算法为编辑距离算法（EditDistance），该算法将两个字符串的相似度问题，归结为将其中一个字符串转化成另一个字符串所要付出的代价。转化的代价越高，说明两个字符串的相似度越低。通常可以选择的转化方式包含插入，替换以及删除。&#xA;N-Gram算法则是基于这样的一个假设： 即在字符串中第n个词的出现只与前面n-1个词相关，而与其他任何词都不相关，整个字符串出现的概率就是各个词出现的概率的乘积。 N-gram本身也代表目标字符串中长度为n的子串，举例，“ARM”在“ARMY”中，便是一个3-gram。当两个字符串中，相同的n-gram越多时，两个字串就会被认为更加相似。&#xA;Jaro Winkler则是将n-gram算法更进了一步。将n-gram中的不匹配的部分同时进行了换位的考虑，使得能获得更准确的相似程度。JaroWinkler在比较两个较短字符串的情况下，能够取得很好的结果。&#xA;Soundex算法与前面几种都不太相同。该算法的特点是，它所关注的问题并非两个字符串文本上的相似程度，而是发音的近似。首先，该算法会将两个字符串分别通过一定的hash算法转换成一个hash值，该值由四个字符构成，第一个字符为英文字母，后面三个为数字。进行转化的hash算法并非随机选取，而是利用了该拉丁文字符串的读音近似值。&#xA;当获得了两个字符串的读音上的hash值之后，该算法再对两个hash的相似度进行计算，便可以得出输入字符串的读音相似度。&#xA;Soundex算法的另一个应用场景在于，用户进行模糊查询时，可以通过Soundex值进行过滤，以提高查询性能。&#xA;Levenshtein Distance算法 In this article, we describe the Levenshtein distance, alternatively known as the Edit distance. The algorithm explained here was devised by a Russian scientist, Vladimir Levenshtein, in 1965.&#xA;Levenshtein Distance，也叫编辑距离，是一种度量两个序列(字符串)差异大小的方法。&#xA;两个序列(以单词为例，这里序列也可以表示一个句子)的Levenshtein distance是在使用一个单词修改为另一个单词时，通过编辑单个字符(如插入，删除，修改)所需要的最小次数。&#xA;通常允许三种类型的编辑：&#xA;插入字符c 删除字符c 字符c与c&amp;rsquo; 替换 We know that at the end of the transformation, both Strings will be of equal length and have matching characters at each position.</description>
     </item>
   </channel>

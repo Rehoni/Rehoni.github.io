@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>书单 on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/%E4%B9%A6%E5%8D%95/</link>
+    <link>/tags/%E4%B9%A6%E5%8D%95/</link>
     <description>Recent content in 书单 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 12 Mar 2021 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/%E4%B9%A6%E5%8D%95/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/%E4%B9%A6%E5%8D%95/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>也大书单收集整理</title>
-      <link>//localhost:1313/cn/2021/%E4%B9%9F%E5%A4%A7%E4%B9%A6%E5%8D%95%E6%94%B6%E9%9B%86%E6%95%B4%E7%90%86/</link>
+      <link>/cn/2021/%E4%B9%9F%E5%A4%A7%E4%B9%A6%E5%8D%95%E6%94%B6%E9%9B%86%E6%95%B4%E7%90%86/</link>
       <pubDate>Fri, 12 Mar 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/%E4%B9%9F%E5%A4%A7%E4%B9%A6%E5%8D%95%E6%94%B6%E9%9B%86%E6%95%B4%E7%90%86/</guid>
+      <guid>/cn/2021/%E4%B9%9F%E5%A4%A7%E4%B9%A6%E5%8D%95%E6%94%B6%E9%9B%86%E6%95%B4%E7%90%86/</guid>
       <description>也大书单整理 财富篇 圣经：Thomas Stanley作品——《邻家的百万富翁》（《我们都能成为有钱人》）、陪读：《财富自由》&#xA;实操：《理财新手的投资指南》（也大在线教程）、《哈利·布朗的永久投资组合》、《投资要义》&#xA;避坑：《傻瓜式投资》、《解读基金》、《漫步华尔街》&#xA;自由篇 描述：《富爸爸穷爸爸》、《不上班也有钱》&#xA;方法：《不可撼动的财务自由》&#xA;生活篇 思路：《软技能：代码之外的生存指南》、《每周工作四小时》&#xA;GTD：《搞定I》、《小强升职记》&#xA;断舍离：《怦然心动的人生整理魔法》&#xA;人生智慧：《穷查理宝典》、《富兰克林自传》、《百岁人生：长寿时代的生活和工作》&#xA;链接 1、小程序；2、也大书单；3、也大自己的作品《工薪族财务自由说明书》</description>
     </item>
   </channel>

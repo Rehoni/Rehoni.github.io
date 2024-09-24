@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>滴答清单 on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/%E6%BB%B4%E7%AD%94%E6%B8%85%E5%8D%95/</link>
+    <link>/tags/%E6%BB%B4%E7%AD%94%E6%B8%85%E5%8D%95/</link>
     <description>Recent content in 滴答清单 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 19 Jun 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/%E6%BB%B4%E7%AD%94%E6%B8%85%E5%8D%95/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/%E6%BB%B4%E7%AD%94%E6%B8%85%E5%8D%95/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>滴答清单workflow</title>
-      <link>//localhost:1313/cn/2023/dida/</link>
+      <link>/cn/2023/dida/</link>
       <pubDate>Mon, 19 Jun 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/dida/</guid>
+      <guid>/cn/2023/dida/</guid>
       <description>工作 直接在“看板”中添加，紧急程度使用“优先级”、“日期”来区分。 设定优先级，确保所有大工作的优先级，大工作子任务项目的优先级。&#xA;日常： 直接在“看板”中添加，紧急程度使用“优先级”、“日期”来区分。&#xA;所有日常任务最好做排期，没有排期的放入以下清单，通过扫描来提醒排期 愿望清单：每周一扫描 娱乐清单：每周五扫描 日常清单：每周一扫描，琐碎-&amp;gt;看板琐碎，提升-&amp;gt;看板提升&#xA;排期后，为增加关注可拖拽到“看板”中去。</description>
     </item>
   </channel>
