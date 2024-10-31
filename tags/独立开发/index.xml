@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>独立开发 on Rehoni | 罗皓</title>
-    <link>/tags/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91/</link>
+    <link>//localhost:1313/tags/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91/</link>
     <description>Recent content in 独立开发 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 15 Apr 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>理财体悟</title>
-      <link>/cn/2023/%E7%90%86%E8%B4%A2%E4%BD%93%E6%82%9F/</link>
+      <link>//localhost:1313/cn/2023/%E7%90%86%E8%B4%A2%E4%BD%93%E6%82%9F/</link>
       <pubDate>Mon, 15 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>/cn/2023/%E7%90%86%E8%B4%A2%E4%BD%93%E6%82%9F/</guid>
+      <guid>//localhost:1313/cn/2023/%E7%90%86%E8%B4%A2%E4%BD%93%E6%82%9F/</guid>
       <description>没有任何一件事情，比钱的流向，更能指向一个人的选择。&#xA;1.追求更好而不是更多&#xA;人生理念——求上得中&#xA;基本界限：保证健康的现金流，不能超出支付能力&#xA;2.你想要什么样的生活就要把钱花在哪里&#xA;开支的最高，最低与增量&#xA;3.留出更多的预算给未知的领域&#xA;不要定未知活动的预算，不要对自己的成长设限&#xA;4.记账是我们和金钱沟通的途径</description>
     </item>
     <item>
       <title>独立开发的思考</title>
-      <link>/cn/2023/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/</link>
+      <link>//localhost:1313/cn/2023/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/</link>
       <pubDate>Sun, 08 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>/cn/2023/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/</guid>
+      <guid>//localhost:1313/cn/2023/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/</guid>
       <description>2、如果你打算像我一样独自工作，试着成为一个多面手:什么都懂一点。例如，如果你是一名开发者，不要将自己局限于前端开发，也要尝试开发后端、手机应用和设计，然后学习营销等。利用80/20法则:用20%的努力获得80%的价值。&#xA;6、在构建产品时:关注它给客户带来的核心价值。练习从客户的角度来看待产品，以避免过度设计。与你的客户交谈，让他们参与到你的建设过程中来。</description>
     </item>
   </channel>
