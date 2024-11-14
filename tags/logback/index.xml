@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Logback on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/logback/</link>
+    <link>/tags/logback/</link>
     <description>Recent content in Logback on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 12 Jun 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/logback/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/logback/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>logback不同类的日志打印在不同的文件中</title>
-      <link>//localhost:1313/cn/2024/logback%E4%B8%8D%E5%90%8C%E7%B1%BB%E7%9A%84%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD/</link>
+      <link>/cn/2024/logback%E4%B8%8D%E5%90%8C%E7%B1%BB%E7%9A%84%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD/</link>
       <pubDate>Wed, 12 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2024/logback%E4%B8%8D%E5%90%8C%E7%B1%BB%E7%9A%84%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD/</guid>
+      <guid>/cn/2024/logback%E4%B8%8D%E5%90%8C%E7%B1%BB%E7%9A%84%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD/</guid>
       <description>定义两个 appender，分别命名为 “CLASS1_FILE” 和 “CLASS2_FILE”。每个appender会将日志输出到指定的文件中，这里分别是 logs/class1.log 和 logs/class2.log。&#xA;定义两个 logger，分别对应 com.example.Class1 和 com.example.Class2 类。这两个 logger 的日志级别都设置为 “info”，并将日志输出到对应的 appender 中。additivity=&amp;ldquo;false&amp;rdquo; 的设置是为了防止日志被父 logger（在这里是 root logger）也处理。&#xA;最后，root logger 设置为只处理 “error” 级别以上的日志，它的日志输出到两个 appender 中。&#xA;示例如下：&#xA;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;configuration&amp;gt; &amp;lt;appender name=&amp;#34;CLASS1_FILE&amp;#34; class=&amp;#34;ch.qos.logback.core.rolling.RollingFileAppender&amp;#34;&amp;gt; &amp;lt;file&amp;gt;logs/class1.log&amp;lt;/file&amp;gt; &amp;lt;encoder class=&amp;#34;ch.qos.logback.classic.encoder.PatternLayoutEncoder&amp;#34;&amp;gt; &amp;lt;pattern&amp;gt;%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n&amp;lt;/pattern&amp;gt; &amp;lt;/encoder&amp;gt; &amp;lt;/appender&amp;gt; &amp;lt;appender name=&amp;#34;CLASS2_FILE&amp;#34; class=&amp;#34;ch.qos.logback.core.rolling.RollingFileAppender&amp;#34;&amp;gt; &amp;lt;file&amp;gt;logs/class2.log&amp;lt;/file&amp;gt; &amp;lt;encoder class=&amp;#34;ch.qos.logback.classic.encoder.PatternLayoutEncoder&amp;#34;&amp;gt; &amp;lt;pattern&amp;gt;%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n&amp;lt;/pattern&amp;gt; &amp;lt;/encoder&amp;gt; &amp;lt;/appender&amp;gt; &amp;lt;logger name=&amp;#34;com.example.Class1&amp;#34; level=&amp;#34;info&amp;#34; additivity=&amp;#34;false&amp;#34;&amp;gt; &amp;lt;appender-ref ref=&amp;#34;CLASS1_FILE&amp;#34; /&amp;gt; &amp;lt;/logger&amp;gt; &amp;lt;logger name=&amp;#34;com.</description>
     </item>
   </channel>

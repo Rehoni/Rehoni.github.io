@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tomcat on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/tomcat/</link>
+    <link>/tags/tomcat/</link>
     <description>Recent content in Tomcat on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 02 Dec 2021 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/tomcat/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/tomcat/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>tomcat——静态资源映射</title>
-      <link>//localhost:1313/cn/2021/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84/</link>
+      <link>/cn/2021/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84/</link>
       <pubDate>Thu, 02 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84/</guid>
+      <guid>/cn/2021/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84/</guid>
       <description>方法一 tomcat访问外部的资源，配置静态资源映射&#xA;https://www.cnblogs.com/iyangyuan/p/3316444.html&#xA;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;Context crossContext=&amp;#34;true&amp;#34; docBase=&amp;#34;/users/ems/zhsbdStatic&amp;#34; path=&amp;#34;/zhsbdResources&amp;#34; reloadable=&amp;#34;true&amp;#34;&amp;gt; &amp;lt;/Context&amp;gt; server.xml的Host标签下&#xA;&amp;lt;Host name=&amp;#34;localhost&amp;#34; appBase=&amp;#34;webapps&amp;#34; unpackWARs=&amp;#34;true&amp;#34; autoDeploy=&amp;#34;true&amp;#34;&amp;gt; &amp;lt;!-- 增加虚拟路径，供访问本地图片--&amp;gt; &amp;lt;Context path=&amp;#34;/upload_file&amp;#34; docBase=&amp;#34;D:/upload/img&amp;#34; reloadable=&amp;#34;false&amp;#34; &amp;gt;&amp;lt;/Context&amp;gt; &amp;lt;/Host&amp;gt; 方法二 只适合jar包或者打包了资源的war包，未打包资源的war包丢入服务器的tomcat，是无法通过配置来访问外部资源的&#xA;@Configuration public class WebMvcConfig implements WebMvcConfigurer { /** * Add handlers to serve static resources such as images, js, and, css * files from specific locations under web application root, the classpath, * and others. * * @param registry */ @Override public void addResourceHandlers(ResourceHandlerRegistry registry) { // addResourceHandler 服务的相对路径 // addResourceLocations 本机/部署环境的绝对路径，注意Windows下前缀不同 file:///D:/files/ registry.</description>
     </item>
     <item>
       <title>tomcat——JVM参数说明</title>
-      <link>//localhost:1313/cn/2021/%E8%AE%BE%E7%BD%AEjvm%E5%A4%A7%E5%B0%8F/</link>
+      <link>/cn/2021/%E8%AE%BE%E7%BD%AEjvm%E5%A4%A7%E5%B0%8F/</link>
       <pubDate>Wed, 01 Sep 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/%E8%AE%BE%E7%BD%AEjvm%E5%A4%A7%E5%B0%8F/</guid>
+      <guid>/cn/2021/%E8%AE%BE%E7%BD%AEjvm%E5%A4%A7%E5%B0%8F/</guid>
       <description>JVM参数说明 -server: 一定要作为第一个参数，在多个CPU时性能佳 -Xms：java Heap初始大小。 默认是物理内存的1/64。 -Xmx：java heap最大值。建议均设为物理内存的一半。不可超过物理内存。 -XX:PermSize:设定内存的永久保存区初始大小，缺省值为64M。 -XX:MaxPermSize:设定内存的永久保存区最大 大小，缺省值为64M。 -XX:SurvivorRatio=2 :生还者池的大小,默认是2，如果垃圾回收变成了瓶颈，您可以尝试定制生成池设置 -XX:NewSize: 新生成的池的初始大小。 缺省值为2M。 -XX:MaxNewSize: 新生成的池的最大大小。缺省值为32M。 -verbose:gc 现实垃圾收集信息 -Xloggc:gc.log 指定垃圾收集日志文件 -Xmn：young generation的heap大小，一般设置为Xmx的3、4分之一 -XX:+UseParNewGC ：缩短minor收集的时间 -XX:+UseConcMarkSweepGC ：缩短major收集的时间 此选项在Heap Size 比较大而且Major收集时间较长的情况下使用更合适。 -XX:userParNewGC 可用来设置并行收集【多核CPU】 -XX:ParallelGCThreads 可用来增加并行度【多核CPU】 -XX:UseParallelGC 设置后可以使用并行清除收集器【多核CPU】 常见的内存溢出 Java.lang.OutOfMemoryError: PermGen space PermGen space的全称是Permanent Generation space,是指内存的永久保存区域,这块内存主要是被JVM存放Class和Meta信息的,Class在被Loader时就会被放到PermGen space中,它和存放类实例(Instance)的Heap区域不同,GC(Garbage Collection)不会在主程序运行期对PermGen space进行清理，所以如果你的应用中有很多CLASS的话,就很可能出现PermGen space错误,这种错误常见在web服务器对JSP进行pre compile的时候。如果你的WEB APP下都用了大量的第三方jar, 其大小超过了jvm默认的大小(4M)那么就会产生此错误信息了。&#xA;解决方法： 手动设置MaxPermSize大小&#xA;建议：将相同的第三方jar文件移置到tomcat/shared/lib目录下，这样可以达到减少jar 文档重复占用内存的目的。&#xA;Java.lang.OutOfMemoryError: Java heap space JVM堆的设置是指java程序运行过程中JVM可以调配使用的内存空间的设置.JVM在启动的时候会自动设置Heap size的值，其初始空间(即-Xms)是物理内存的1/64，最大空间(-Xmx)是物理内存的1/4。可以利用JVM提供的-Xmn -Xms -Xmx等选项可进行设置。Heap size 的大小是Young Generation 和Tenured Generaion 之和。 提示：在JVM中如果98％的时间是用于GC且可用的Heap size 不足2％的时候将抛出此异常信息。 提示：==Heap Size 最大不要超过可用物理内存的80％，一般的要将-Xms和-Xmx选项设置为相同，而-Xmn为1/4的-Xmx值==。 解决方法：手动设置Heap size</description>
     </item>
     <item>
       <title>tomcat——简要介绍和部署</title>
-      <link>//localhost:1313/cn/2020/%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/</link>
+      <link>/cn/2020/%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/</guid>
+      <guid>/cn/2020/%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/</guid>
       <description>Linux查看tomcat运行日志 实时查看运行日志了&#xA;cd usr/local/tomcat/logs&#xD;tail -f catalina.out Tomcat部署问题 bin目录 执行tomcat脚本的目录，对setclasspath.bat中的内容进行修改，可以在这里边设置不同的JAVA_HOME和JRE_HOME，直接将设置语句放在文件前边即可。如果有问题，则在calalina.bat文件中也添加这两句。&#xA;set JAVA_HOME = &amp;#34;C:\\Program Files\\Java\\jdk1.8.0_251&amp;#34;&#xD;set JRE_HOME = &amp;#34;C:\\Program Files\\Java\\jre1.8.0_251&amp;#34; 注意因为的jre文件放在“program files”文件下，这个路径中间存在空格，会导致出现”此时不应有files/java/jre“的问题。&#xA;conf目录 配置tomcat的目录&#xA;**server.xml：**中可以配置端口转发和监听器等内容，可以通过修改默认8080端口为其他端口，来解决8080端口被占用的问题。&#xA;**logging.properties：**修改日志的配置，如果出现console窗口出现乱码的问题，可以将UTF-8修改为GBK编码&#xA;java.util.logging.ConsoleHandler.encoding = UTF-8 webapp目录 丢war包的地方&#xA;可以通过server.xml修改webapp的目录</description>
     </item>
     <item>
       <title>tomcat——隐藏版本查看</title>
-      <link>//localhost:1313/cn/2020/%E9%9A%90%E8%97%8F%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B/</link>
+      <link>/cn/2020/%E9%9A%90%E8%97%8F%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B/</link>
       <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/%E9%9A%90%E8%97%8F%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B/</guid>
+      <guid>/cn/2020/%E9%9A%90%E8%97%8F%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B/</guid>
       <description>备份原来的tomcat配置文件 在ems用户下，备份原来tomcat下的tomcat/conf目录，注意操作前shutdown掉tomcat&#xA;cp -r conf/ 目录 在ems用户下，给原来的tomcat压一份包备份，如果无法压缩则用root账户压包&#xA;tar czf old_tomcat.tar.gz -C 目录 放入新的tomcat 官网下载最新的tomcat的tar.gz包，上传到服务器上解压缩&#xA;tar xf apache-tomcat-8.5.57.tar.gz -C 目录 将旧的conf文件夹替换掉新的tomcat的conf文件夹，正常启动新的tomcat即可，删除旧的tomcat文件夹&#xA;查看/隐藏tomcat版本 查看tomcat版本 bin目录下.version.sh lib目录下找到catalina.jar包，解压缩查看里边的org\\apache\\catalina\\util\\ServerInfo.properties文件 lib目录下找到catalina.jar包，解压缩查看里边的org\\apache\\catalina\\MANIFEST.MF文件，仅作为参考（最低版本）。 Manifest-Version: 1.0&#xD;Ant-Version: Apache Ant 1.10.5&#xD;Created-By: 1.8.0_151-b12 (Oracle Corporation)&#xD;Specification-Title: Apache Tomcat&#xD;Specification-Version: 8.5&#xD;Specification-Vendor: Apache Software Foundation&#xD;Implementation-Title: Apache Tomcat&#xD;Implementation-Version: 8.5.42&#xD;Implementation-Vendor: Apache Software Foundation&#xD;X-Compile-Source-JDK: 1.7&#xD;X-Compile-Target-JDK: 1.7 修改tomcat版本 推荐直接修改lib目录下catalina.jar包，解压缩修改里边的org\\apache\\catalina\\util\\ServerInfo.properties文件，然后再重新压成jar包，放入tomcat替换。&#xA;取消session持久化功能 Session 是保存在内存中的，如果服务器重启、宕机的话，Session 就会丢失。有时候，我们需要对 Session 持久化以应对意外的情况发生。例如，客户端与服务器在交互过程中，可能因为 Session 的丢失而造成数据的丢失。还有一种情况，我们需要持久化 Session。如果当前用户的访问量巨大，大量的 Session 便会占用服务器大量的内存，从而使服务器的性能受到影响。如果能将一些闲置时间较长的 Session 换出，存储至磁盘，便可以起到节省内存空间的作用。需要注意的一点是，要持久化 Session，那么 Session 里存放的对象必须是可序列化的，即实现了 java.</description>
     </item>
   </channel>
