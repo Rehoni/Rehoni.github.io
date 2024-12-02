@@ -2,11 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/cn/2024/fire11/</loc>
+    <lastmod>2024-12-02T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/categories/</loc>
-    <lastmod>2024-11-19T00:00:00+00:00</lastmod>
+    <lastmod>2024-12-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/</loc>
-    <lastmod>2024-11-19T00:00:00+00:00</lastmod>
+    <lastmod>2024-12-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/%E8%B4%A2%E5%8A%A1%E5%AE%9E%E8%AF%81/</loc>
+    <lastmod>2024-12-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/categories/%E8%B4%A2%E5%8A%A1%E5%AE%9E%E8%AF%81/</loc>
+    <lastmod>2024-12-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/%E6%84%9F%E6%82%9F/</loc>
     <lastmod>2024-11-19T00:00:00+00:00</lastmod>
@@ -21,12 +30,6 @@
     <lastmod>2024-11-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/cn/2024/fire10/</loc>
-    <lastmod>2024-10-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/%E8%B4%A2%E5%8A%A1%E5%AE%9E%E8%AF%81/</loc>
-    <lastmod>2024-10-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/categories/%E8%B4%A2%E5%8A%A1%E5%AE%9E%E8%AF%81/</loc>
     <lastmod>2024-10-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/cn/2024/fire09/</loc>
