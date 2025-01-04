@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nginx on Rehoni | 罗皓</title>
-    <link>/tags/nginx/</link>
+    <link>//localhost:1313/tags/nginx/</link>
     <description>Recent content in Nginx on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 11 Apr 2022 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Nginx常见问题</title>
-      <link>/cn/2022/nginx%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</link>
+      <link>//localhost:1313/cn/2022/nginx%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</link>
       <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/nginx%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</guid>
+      <guid>//localhost:1313/cn/2022/nginx%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</guid>
       <description>1、一分钟实现文件服务器 在局域网内和同事共享文件的好方法&#xA;1 安装nginx sudo apt-get install nginx&#xA;2 创建conf文件 sudo gedit /etc/nginx/conf.d/file_server.conf&#xA;修改conf文件如下：&#xA;server { listen 80; server_name 10.1.2.3; # 自己PC的ip或者服务器的域名 charset utf-8; # 避免中文乱码 root /home/xx/share; # 存放文件的目录 location / { autoindex on; # 索引 autoindex_exact_size on; # 显示文件大小 autoindex_localtime on; # 显示文件时间 } } 3 使配置生效 sudo rm /etc/nginx/sites-enabled/default 这一行尤为重要 sudo service nginx reload&#xA;4 命令 sudo /etc/init.d/nginx start|stop|reload| sudo service nginx start|stop|reload|&#xA;5 访问 浏览器里直接输入 http://10.1.2.3</description>
     </item>
   </channel>

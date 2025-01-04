@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>随笔 on Rehoni | 罗皓</title>
-    <link>/tags/%E9%9A%8F%E7%AC%94/</link>
+    <link>//localhost:1313/tags/%E9%9A%8F%E7%AC%94/</link>
     <description>Recent content in 随笔 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 05 Jun 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/%E9%9A%8F%E7%AC%94/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/%E9%9A%8F%E7%AC%94/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>幽灵</title>
-      <link>/cn/2024/0605%E5%B9%BD%E7%81%B5/</link>
+      <link>//localhost:1313/cn/2024/0605%E5%B9%BD%E7%81%B5/</link>
       <pubDate>Wed, 05 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>/cn/2024/0605%E5%B9%BD%E7%81%B5/</guid>
+      <guid>//localhost:1313/cn/2024/0605%E5%B9%BD%E7%81%B5/</guid>
       <description>逛了自己收藏的书签里各种博客，只觉波澜壮阔各自精彩，以至于愈发觉得自己不知何时成了个无趣的成年（划掉，或许不是成年的错）人了，不学无术，不折腾器与术，不游名山大川，也无奇思妙想，甚至没有足够的精力，活脱一个游荡在现世的幽灵，只有空空大脑和僵硬躯壳。 ​​​</description>
     </item>
   </channel>
