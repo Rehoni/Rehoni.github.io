@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>年度计划 on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/%E5%B9%B4%E5%BA%A6%E8%AE%A1%E5%88%92/</link>
+    <link>/tags/%E5%B9%B4%E5%BA%A6%E8%AE%A1%E5%88%92/</link>
     <description>Recent content in 年度计划 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 26 Dec 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/%E5%B9%B4%E5%BA%A6%E8%AE%A1%E5%88%92/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/%E5%B9%B4%E5%BA%A6%E8%AE%A1%E5%88%92/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2023计划含总结</title>
-      <link>//localhost:1313/cn/2023/2023%E8%AE%A1%E5%88%92-%E6%80%BB%E7%BB%93/</link>
+      <link>/cn/2023/2023%E8%AE%A1%E5%88%92-%E6%80%BB%E7%BB%93/</link>
       <pubDate>Tue, 26 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/2023%E8%AE%A1%E5%88%92-%E6%80%BB%E7%BB%93/</guid>
+      <guid>/cn/2023/2023%E8%AE%A1%E5%88%92-%E6%80%BB%E7%BB%93/</guid>
       <description>生活日常 ✅完成 ❌失败&#xA;习惯 ❌调整作息，==22:30睡，7:00起床== ❌和爸妈多联系，和朋友多联系（一周） ❌多吃水果（一周） ❌多社交（认识一些新朋友，建立一些有益的社交圈，比如健身crossfit、比如约球） ❌每天记日记（忙的时候可以记录周记，不忙的时候手写） ❌坚持记账（每天记录，每月总结） ✅坚持护肤（洗面奶，爽肤水/精华，保湿乳） ❌坚持减肥，==115-==斤 ❌旅游，==4+==（北方、南方），写游记 ❌攒钱，==40w+==（现在是19w） ✅==装修==，预算15w内 出游 扬州 上海 宁波 沈阳 自我提升 ❌Leetcode==每日==一题打卡、参加周赛==10+==；hackerRank刷题 ❌深入学习spring boot、spring cloud（spring全家桶） ❌深入学习Java（高并发、JVM虚拟机、数据结构算法） ❌看==剑指offer== ❌看专业书籍，==5+== ❌有自己作品、开源项目，==1+== ❌写自己的博客数量，==30+== ✅==简历==（证件照已有） ❌==换一份更好的工作==（955，没有薪资落差最好）：有offer但不满意OR降薪 垃圾桶 坚持吃药（must：米诺地尔+非那雄胺+达林+迪维；other：维生素，凉茶） 学习==篮球== 理财入门，也大资产配置和书单，==n+== </description>
     </item>
     <item>
       <title>2021计划</title>
-      <link>//localhost:1313/cn/2021/2021%E8%AE%A1%E5%88%92/</link>
+      <link>/cn/2021/2021%E8%AE%A1%E5%88%92/</link>
       <pubDate>Thu, 02 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/2021%E8%AE%A1%E5%88%92/</guid>
+      <guid>/cn/2021/2021%E8%AE%A1%E5%88%92/</guid>
       <description>生活日常 ✅完成&#x9;❌失败&#xA;调整作息，==22:30之前睡，7:30之前起床==（尽量） 和爸妈多联系，和朋友多联系（一周） 多吃水果（一周） 多社交（认识一些新朋友，建立一些有益的社交圈，比如健身crossfit、比如约球） ==考驾照== 每天记日记（忙的时候可以记录周记，不忙的时候手写） 坚持记账（每天记录，每月总结） 坚持护肤（洗面奶，爽肤水/精华，保湿乳） 坚持吃药（must：米诺地尔+非那雄胺+达林+迪维；other：维生素，凉茶） 坚持减肥，==115-==斤 旅游，==2+==（北方、南方），出游记 攒钱，==45w+==（现在是20w） 学习==篮球== 自我提升 理财入门，也大资产配置和书单，==n+== leetcode==每日==一题打卡 leetcode参加周赛==10+== spring boot、spring cloud深入学习（spring全家桶） java的深入学习（高并发、jvm虚拟机、数据结构算法） 有自己作品、开源项目，==2+== 写自己的博客数量==30+== 做好自己的简历（证件照） 换一份更好的工作（955，没有薪资落差最好） </description>
     </item>
   </channel>

@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>工具 on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/%E5%B7%A5%E5%85%B7/</link>
+    <link>/tags/%E5%B7%A5%E5%85%B7/</link>
     <description>Recent content in 工具 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 29 Apr 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>qq表情包转微信表情包</title>
-      <link>//localhost:1313/cn/2024/0429qq%E8%A1%A8%E6%83%85%E5%8C%85%E8%BD%AC%E5%BE%AE%E4%BF%A1%E8%A1%A8%E6%83%85%E5%8C%85/</link>
+      <link>/cn/2024/0429qq%E8%A1%A8%E6%83%85%E5%8C%85%E8%BD%AC%E5%BE%AE%E4%BF%A1%E8%A1%A8%E6%83%85%E5%8C%85/</link>
       <pubDate>Mon, 29 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2024/0429qq%E8%A1%A8%E6%83%85%E5%8C%85%E8%BD%AC%E5%BE%AE%E4%BF%A1%E8%A1%A8%E6%83%85%E5%8C%85/</guid>
+      <guid>/cn/2024/0429qq%E8%A1%A8%E6%83%85%E5%8C%85%E8%BD%AC%E5%BE%AE%E4%BF%A1%E8%A1%A8%E6%83%85%E5%8C%85/</guid>
       <description>pc：将表情包图片放在一个文件夹里，下载图片转换工具，将jpg格式转换成gif格式，然后将文件夹内的表情包拖动到微信的文件传输助手或好友聊天框。&#xA;1、将发出来的qq表情包批量存到一个文件夹，QQ可以多选然后批量保存&#xA;2、进入 网站，将文件夹里存的所有图片 jpg 转为 gif 格式，选择压缩所有文件，下载最下方的压缩包zip，解压，得到所有表情包的 gif 文件&#xA;3、全选 gif 文件，粘贴到微信输入框，发送，然后一个个保存即可</description>
     </item>
     <item>
       <title>Windows快捷键</title>
-      <link>//localhost:1313/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</link>
+      <link>/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</link>
       <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid>
+      <guid>/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid>
       <description>Windows快捷键 🚈 Windows桌面和虚拟桌面 贴靠窗口：Win +左/右&amp;gt; Win +上/下&amp;gt;窗口可以变为1/4大小放置在屏幕4个角落&#xA;切换窗口：Alt + Tab&#xA;任务视图：Win + Tab(松开键盘界面不会消失)&#xA;创建新的虚拟桌面：Win + Ctrl + D&#xA;关闭当前虚拟桌面：Win + Ctrl + F4&#xA;切换虚拟桌面：Win + Ctrl +左/右&#xA;输入法 中英文符号切换：ctrl+.&#xA;表情：Win+.或;&#xA;字体 Fira Code 连字 https://github.com/tonsky/FiraCode cascadia code 连字 https://github.com/microsoft/cascadia-code palatino linotype Monaco operator mono mononoki jetbrains mono连字 consolas Ubuntu mono </description>
     </item>
     <item>
       <title>离线服务器通过PC中转连接公网</title>
-      <link>//localhost:1313/cn/2020/%E7%A6%BB%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87pc%E4%B8%AD%E8%BD%AC%E8%BF%9E%E6%8E%A5%E5%85%AC%E7%BD%91/</link>
+      <link>/cn/2020/%E7%A6%BB%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87pc%E4%B8%AD%E8%BD%AC%E8%BF%9E%E6%8E%A5%E5%85%AC%E7%BD%91/</link>
       <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/%E7%A6%BB%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87pc%E4%B8%AD%E8%BD%AC%E8%BF%9E%E6%8E%A5%E5%85%AC%E7%BD%91/</guid>
+      <guid>/cn/2020/%E7%A6%BB%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87pc%E4%B8%AD%E8%BD%AC%E8%BF%9E%E6%8E%A5%E5%85%AC%E7%BD%91/</guid>
       <description>CCProxy 主要用于局域网内共享宽带上网，ADSL共享上网、专线代理共享、ISDN代理共享、卫星代理共享、蓝牙代理共享、二级代理和SOCKS5代理等共享代理上网。&#xA;安装好这个软件之后启动就相当于开启了当前这台安装CCProxy的电脑作为中转服务器，然后挑选一个离线内网服务器可以访问的到的IP地址作为流量中转服务器的代理地址。&#xA;Proxychains4 一个可以在终端进行socks流量转发的工具Proxychains4&#xA;proxychains-ng是proxychains的加强版，主要有以下功能和不足：&#xA;支持http/https/socks4/socks5 支持认证 远端dns查询 多种代理模式 不支持udp/icmp转发 少部分程序和在后台运行的可能无法代理 简单的说就是这个程序 Hook 了 sockets 相关的操作，让普通程序的 sockets 数据走 SOCKS/HTTP 代理。其核心就是利用了 LD_PRELOAD 这个环境变量（Mac 上是 DYLD_INSERT_LIBRARIES）。&#xA;在 Unix 系统中，如果设置了 LD_PRELOAD 环境变量，那么在程序运行时，动态链接器会先加载该环境变量所指定的动态库。也就是说，这个动态库的加载优先于任何其它的库，包括 libc。&#xA;ProxyChains 创建了一个叫 libproxychains4.so（Mac 上是 libproxychains4.dylib）的动态库。里面重写了 connect、close 以及 sendto 等与 socket 相关的函数，通过这些函数发出的数据将会走代理，详细代码可以参考 libproxychains.c。&#xA;在主程序里，它会读取配置文件，查找 libproxychains4 所在位置，把这些信息存入环境变量后执行子程序。这样子程序里对 socket 相关的函数调用就会被 Hook 了，对子程序来说，跟代理相关的东西都是透明的。&#xA;配置 通过源代码安装的配置文件默认在 /etc/proxychains.conf，我们通过改写这个配置文件中的最后几行如下：&#xA;[ProxyList]&#xD;# 一些注释&#xD;# 填入你的代理服务器IP x.x.x.x 和端口&#xD;socks5 x.x.x.x 3030 使用 任意使用某个指令，例如下载某个东西：&#xA;proxychains4 wget 下载地址 同理，它还可以用于梯子的使用。</description>
     </item>
   </channel>
