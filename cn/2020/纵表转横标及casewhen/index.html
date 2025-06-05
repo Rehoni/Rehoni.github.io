@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle——纵表转横表 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Oracle——纵表转横表 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content=" select MONITORINGPOINT,ACQTM,max(coalesce(DECODE(NAME, &amp;#39;EquCa&amp;#39;, MONITORVALUE, null), 0)) as EQUCA,max(coalesce(DECODE(NAME, &amp;#39;LosFact&amp;#39;, MONITORVALUE, null), 0)) as LOSFACT, &amp;hellip;">
+      <meta property="og:description" content=" select MONITORINGPOINT,ACQTM,max(coalesce(DECODE(NAME, &amp;#39;EquCa&amp;#39;, MONITORVALUE, null), 0)) as EQUCA,max(coalesce(DECODE(NAME, &amp;#39;LosFact&amp;#39;, MONITORVALUE, null), 0)) as LOSFACT, &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5c%e7%ba%b5%e8%a1%a8%e8%bd%ac%e6%a8%aa%e6%a0%87%e5%8f%8acasewhen.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle——纵表转横表</h1>
+
+
+<h3>Rehoni / 
+2020-09-01</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="使用decode实现"><strong>使用decode实现</strong></h2>
+<pre tabindex="0"><code> select MONITORINGPOINT,
+                   ACQTM,
+                   max(coalesce(DECODE(NAME, &#39;EquCa&#39;, MONITORVALUE, null), 0))   as EQUCA,
+                   max(coalesce(DECODE(NAME, &#39;LosFact&#39;, MONITORVALUE, null), 0)) as LOSFACT,
+                  max(coalesce(DECODE(NAME, &#39;RisAmp&#39;, MONITORVALUE, null), 0)) as RISAMP,
+                  max(coalesce(DECODE(NAME, &#39;TotAmp&#39;, MONITORVALUE, null), 0)) as TOTAMP,
+                  max(coalesce(DECODE(NAME, &#39;CalAmp&#39;, MONITORVALUE, null), 0)) as CALAMP
+            from IMP_TELEMETERING
+            where MONITORINGTYPEID = &#39;A386&#39; --and MONITORINGPOINT = &#39;0304B13009999A386109001&#39;
+            group by MONITORINGPOINT, ACQTM;
+</code></pre><h2 id="使用case-when实现"><strong>使用case when实现</strong></h2>
+<pre tabindex="0"><code> SELECT
+     E_CODE,
+     E_TIME,
+     SUM( CASE E_TYPE WHEN 0 THEN E_VALUE ELSE 0 END ) AS WATER_ENERGY,--水耗
+     SUM( CASE E_TYPE WHEN 1 THEN E_VALUE ELSE 0 END ) AS ELE_ENERGY,--电耗
+     SUM( CASE E_TYPE WHEN 2 THEN E_VALUE ELSE 0 END ) AS HEAT_ENERGGY--热耗
+ FROM
+     THTF_ENERGY_TEST
+ GROUP BY 
+     E_CODE,E_TIME
+</code></pre><h3 id="嵌套case-when"><strong>嵌套case when</strong></h3>
+<p>注意嵌套case when的时候似乎只能使用一个then，然后就要接else了。</p>
+<pre tabindex="0"><code> case when PATROL_CLASSIFY = 1 then
+     case when  WORK_SITE_NAMES like &#39;%线%&#39; then 2 else 1 end
+     else PATROL_CLASSIFY end grid_type,
+</code></pre><h1 id="参考"><strong>参考</strong></h1>
+<p><a href="https://my.oschina.net/andyfeng/blog/2247175">SQL中的case when then else end用法</a></p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2020/%E8%A7%A6%E5%8F%91%E5%99%A8/">Oracle——触发器写法</a></span>
+  <span class="nav-next"><a href="/cn/2020/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%8F%8A%E5%87%BD%E6%95%B0/">Oracle——存储过程及函数写法</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2020\/%E8%A7%A6%E5%8F%91%E5%99%A8\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%8F%8A%E5%87%BD%E6%95%B0\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

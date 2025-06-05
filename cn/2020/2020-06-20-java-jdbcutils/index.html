@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Java数据库（2）改造jdbc工具类 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Java数据库（2）改造jdbc工具类 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="可以设置一个Object数组，用来占位Preparement的sql里的那些?，数组的长度就是预插入的值的数量，数组里的值就是可以录入到Preparestatement的值。
+[&amp;hellip;] //我们发现，增删改只有SQL语句和传入的参数是不知道的而已，所以让调用该方法的人传递进来 //由于传递进来的参数是各种类型的，而且数目是不确定的，所以使用Object[] public static &amp;hellip;">
+      <meta property="og:description" content="可以设置一个Object数组，用来占位Preparement的sql里的那些?，数组的长度就是预插入的值的数量，数组里的值就是可以录入到Preparestatement的值。
+[&amp;hellip;] //我们发现，增删改只有SQL语句和传入的参数是不知道的而已，所以让调用该方法的人传递进来 //由于传递进来的参数是各种类型的，而且数目是不确定的，所以使用Object[] public static &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5c2020-06-20-java-jdbcutils.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Java数据库（2）改造jdbc工具类</h1>
+
+
+<h3>rehoni / 
+2020-06-20</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h4 id="增删改">增删改</h4>
+<p>可以设置一个Object数组，用来占位Preparement的sql里的那些?，数组的长度就是预插入的值的数量，数组里的值就是可以录入到Preparestatement的值。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">//我们发现，增删改只有SQL语句和传入的参数是不知道的而已，所以让调用该方法的人传递进来</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//由于传递进来的参数是各种类型的，而且数目是不确定的，所以使用Object[]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span>(String sql, Object<span style="color:#f92672">[]</span> objects) {
+</span></span><span style="display:flex;"><span>        Connection connection <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        PreparedStatement preparedStatement <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        ResultSet resultSet <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            connection <span style="color:#f92672">=</span> getConnection();
+</span></span><span style="display:flex;"><span>            preparedStatement <span style="color:#f92672">=</span> connection.<span style="color:#a6e22e">prepareStatement</span>(sql);
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//根据传递进来的参数，设置SQL占位符的值</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> objects.<span style="color:#a6e22e">length</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                preparedStatement.<span style="color:#a6e22e">setObject</span>(i <span style="color:#f92672">+</span> 1, objects<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//执行SQL语句</span>
+</span></span><span style="display:flex;"><span>            preparedStatement.<span style="color:#a6e22e">executeUpdate</span>();
+</span></span><span style="display:flex;"><span>       	 } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h4 id="查询">查询</h4>
+<p>注意这里可以定义一个接口，对select的结果集进行操作，但是不知道需要具体进行操作，调用接口的实现类，接口就可以调用实现的方法。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        1:对于查询语句来说，我们不知道对结果集进行什么操作【常用的就是把数据封装成一个Bean对象，封装成一个List集合】
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        2:我们可以定义一个接口，让调用者把接口的实现类传递进来
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        3:这样接口调用的方法就是调用者传递进来实现类的方法。【策略模式】
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//这个方法的返回值是任意类型的，所以定义为Object。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Object <span style="color:#a6e22e">query</span>(String sql, Object<span style="color:#f92672">[]</span> objects, ResultSetHandler rsh) {
+</span></span><span style="display:flex;"><span>        Connection connection <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        PreparedStatement preparedStatement <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        ResultSet resultSet <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            connection <span style="color:#f92672">=</span> getConnection();
+</span></span><span style="display:flex;"><span>            preparedStatement <span style="color:#f92672">=</span> connection.<span style="color:#a6e22e">prepareStatement</span>(sql);
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//根据传递进来的参数，设置SQL占位符的值</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (objects <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> objects.<span style="color:#a6e22e">length</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                    preparedStatement.<span style="color:#a6e22e">setObject</span>(i <span style="color:#f92672">+</span> 1, objects<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            resultSet <span style="color:#f92672">=</span> preparedStatement.<span style="color:#a6e22e">executeQuery</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//调用调用者传递进来实现类的方法，对结果集进行操作</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> rsh.<span style="color:#a6e22e">hanlder</span>(resultSet);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h4 id="接口">接口</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span> <span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    * 定义对结果集操作的接口，调用者想要对结果集进行什么操作，只要实现这个接口即可
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    * */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ResultSetHandler</span> {
+</span></span><span style="display:flex;"><span>         Object <span style="color:#a6e22e">hanlder</span>(ResultSet resultSet);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h4 id="实现示例">实现示例</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">//接口实现类，对结果集封装成一个Bean对象</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BeanHandler</span> <span style="color:#66d9ef">implements</span> ResultSetHandler {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//要封装成一个Bean对象，首先要知道Bean是什么，这个也是调用者传递进来的。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Class clazz;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">BeanHandler</span>(Class clazz) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">clazz</span> <span style="color:#f92672">=</span> clazz;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Object <span style="color:#a6e22e">hanlder</span>(ResultSet resultSet) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//创建传进对象的实例化</span>
+</span></span><span style="display:flex;"><span>            Object bean <span style="color:#f92672">=</span> clazz.<span style="color:#a6e22e">newInstance</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (resultSet.<span style="color:#a6e22e">next</span>()) {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">//拿到结果集元数据</span>
+</span></span><span style="display:flex;"><span>                ResultSetMetaData resultSetMetaData <span style="color:#f92672">=</span> resultSet.<span style="color:#a6e22e">getMetaData</span>();
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> resultSetMetaData.<span style="color:#a6e22e">getColumnCount</span>(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">//获取到每列的列名</span>
+</span></span><span style="display:flex;"><span>                    String columnName <span style="color:#f92672">=</span> resultSetMetaData.<span style="color:#a6e22e">getColumnName</span>(i<span style="color:#f92672">+</span>1);
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">//获取到每列的数据</span>
+</span></span><span style="display:flex;"><span>                    String columnData <span style="color:#f92672">=</span> resultSet.<span style="color:#a6e22e">getString</span>(i<span style="color:#f92672">+</span>1);
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">//设置Bean属性</span>
+</span></span><span style="display:flex;"><span>                    Field field <span style="color:#f92672">=</span> clazz.<span style="color:#a6e22e">getDeclaredField</span>(columnName);
+</span></span><span style="display:flex;"><span>                    field.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>                    field.<span style="color:#a6e22e">set</span>(bean,columnData);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">//返回Bean对象</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> bean;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2020/2020-06-20-techs-devrules/">基本开发守则</a></span>
+  <span class="nav-next"><a href="/cn/2020/2020-06-20-java-jdbctrycatch/">Java数据库（1）基本概念和try-with-resources</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2020\/2020-06-20-techs-devrules\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/2020-06-20-java-jdbctrycatch\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

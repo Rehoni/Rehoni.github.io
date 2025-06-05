@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on Rehoni | 罗皓</title>
+    <link>/tags/windows/</link>
+    <description>Recent content in Windows on Rehoni | 罗皓</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Sep 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows命令行操作</title>
+      <link>/cn/2022/windows%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</link>
+      <pubDate>Thu, 01 Sep 2022 00:00:00 +0000</pubDate>
+      <guid>/cn/2022/windows%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</guid>
+      <description>1、Windows后台执行bat脚本 通过vb脚本来隐藏dos窗口，后台执行&#xA;@echo off if &amp;#34;%1&amp;#34; == &amp;#34;h&amp;#34; goto begin mshta vbscript:createobject(&amp;#34;wscript.shell&amp;#34;).run(&amp;#34;%~nx0 h&amp;#34;,0)(window.close)&amp;amp;&amp;amp;exit :begin :: redis-server.exe 建立脚本流程&#xA;创建main.vbs文件，调用运行bat，放入后台执行&#xA;Set ws = CreateObject(&amp;#34;Wscript.Shell&amp;#34;) ws.run &amp;#34;cmd /c A.bat&amp;#34;,0 ws.run &amp;#34;cmd /c B.bat&amp;#34;,0 ws.run &amp;#34;cmd /c C.bat&amp;#34;,0 建立主脚本main.bat，循环执行&#xA;@echo off&amp;lt;nul 3&amp;gt;nul :one echo %date:~0,10% %time:~0,-3% 守护进程正在监控系统... start main.vbs ping 127.0.0.1 -n 10&amp;gt;nul goto one 通过ping命令来实现sleep 10秒的操作，每10秒执行main.vbs里边执行的3个脚本。&#xA;start命令&#xA;通过在bat脚本中，使用start命令来后台执行需要执行的脚本或者程序&#xA;start /b a.bat Windows开机自动执行bat脚本&#xA;编写bat脚本放置在以下位置&#xA;C:\\Users\\xxxx\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup 即可实现开机自动执行该脚本&#xA;执行Java脚本&#xA;编写脚本时，如果有多java环境，需要设定好执行的JAVA_HOME，即指定的jdk目录。&#xA;如果jdk目录包含空格，如Program Files这样的目录，可以用&amp;quot;&amp;quot;进行转义；如果转义无用，则可以考虑使用绝对路径。&#xA;@echo off C: cd C:\\Program Files\\Java\\jdk1.</description>
+    </item>
+    <item>
+      <title>windows——后台执行bat脚本</title>
+      <link>/cn/2020/2020-06-29-windows-batrun/</link>
+      <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/cn/2020/2020-06-29-windows-batrun/</guid>
+      <description>Windows后台执行bat脚本 通过vb脚本来隐藏dos窗口，后台执行 @echo off if &amp;#34;%1&amp;#34; == &amp;#34;h&amp;#34; goto begin mshta vbscript:createobject(&amp;#34;wscript.shell&amp;#34;).run(&amp;#34;%~nx0 h&amp;#34;,0)(window.close)&amp;amp;&amp;amp;exit :begin :: redis-server.exe 建立脚本流程 调用运行bat，放入后台执行：main.vbs Set ws = CreateObject(&amp;#34;Wscript.Shell&amp;#34;)&#xD;ws.run &amp;#34;cmd /c A.bat&amp;#34;,0&#xD;ws.run &amp;#34;cmd /c B.bat&amp;#34;,0&#xD;ws.run &amp;#34;cmd /c C.bat&amp;#34;,0 建立主脚本，循环执行：main.bat @echo off&amp;lt;nul 3&amp;gt;nul :one echo %date:~0,10% %time:~0,-3% 守护进程正在监控系统... start main.vbs ping 127.0.0.1 -n 10&amp;gt;nul goto one 通过ping命令来实现sleep 10秒的操作，每10秒执行main.vbs里边执行的3个脚本。&#xA;start命令 通过在bat脚本中，使用start命令来后台执行需要执行的脚本或者程序&#xA;start /b a.bat 参数 描述 /min | /max 指定最小化（/min）或最大化（/max）新的命令提示符窗口。 /elevate 以管理员身份运行应用程序。 /wait 启动应用程序并等待其结束。 /b 启动应用程序而不打开新的命令提示符窗口。 除非应用程序启用了 CTRL + C 处理，否则将忽略 CTRL + C 处理。 使用 CTRL + BREAK 中断应用程序。 /?</description>
+    </item>
+    <item>
+      <title>windows下杀死进程</title>
+      <link>/cn/2020/2020-06-29-windows-killbackendprocess/</link>
+      <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/cn/2020/2020-06-29-windows-killbackendprocess/</guid>
+      <description>taskkill命令 # taskkill /pid[进程码] -t(结束该进程) -f（强制结束该进程以及所有子进程） taskkill /im 进程名称 示例：用taskkill /im tomcat7.exe命令关闭tomcat。&#xA;注：有两种方法查进程的PID码：&#xA;在命令行下用tasklist命令查出进程的PID码 在任务管理器中的查看选项中勾选PID那一项 例如：taskkill /pid 2345 -f -t；&#xA;wmic process wmic process where name=&amp;#34;进程名称&amp;#34; call terminate 这个不需要知道进程的PID码&#xA;ntsd ntsd -c q -p [PID进程码] 参考 如何在windows命令行后台运行某个命令？</description>
+    </item>
+  </channel>
+</rss>

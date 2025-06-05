@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>运维 on Rehoni | 罗皓</title>
+    <link>/categories/%E8%BF%90%E7%BB%B4/</link>
+    <description>Recent content in 运维 on Rehoni | 罗皓</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 05 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/categories/%E8%BF%90%E7%BB%B4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux——创建大文件</title>
+      <link>/cn/2024/linux%E5%88%9B%E5%BB%BA%E5%A4%A7%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Mon, 05 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>/cn/2024/linux%E5%88%9B%E5%BB%BA%E5%A4%A7%E6%96%87%E4%BB%B6/</guid>
+      <description>先说结论&#xA;dd 和 truncate 创建的文件是稀疏文件。在计算机世界中，稀疏文件是一种特殊文件，具有不同的表观文件大小（它们可以扩展到的最大大小）和真实文件大小（为磁盘上的数据分配了多少空间）。&#xA;fallocate 命令则不会创建稀疏文件，而且它的速度更快，这也是我比较推荐使用 fallocate 创建大文件的原因。&#xA;dd命令，用于复制和转换文件。创建一个名为 rumenz.img 的 2 GB 大小的文本文件&#xA;dd if=/dev/zero of=rumenz.img bs=2G count=1 可以根据需要来更改块大小和块数。例如，可以使用 bs=1M 和 count=1024 来获得 1024 Mb 的文件。&#xA;truncate命令，缩减或扩充指定文件的大小为指定值。参数所指定的文件如果不存在，那么该命令会创建这个文件。&#xA;truncate 命令将一个文件缩小或者扩展到所需大小。使用 -s 选项来指定文件的大小。&#xA;truncate -s 2G rumenz.img fallocate命令，fallocate用于将块预分配给文件。对于支持fallocate系统调用的文件系统，这可以通过分配块并将其标记为未初始化来快速完成，因此不需要对数据块进行I / O操作。这是创建文件而不是用零填充的更快的方法。大文件几乎可以立即创建，而不必等待任何I / O操作完成。在以下文件系统上支持fallocate系统调用：btrfs，ext4，ocfs2和xfs文件系统（自内核版本v2.6.31起）。&#xA;创建一个 1 GB 的文件&#xA;fallocate -l 1G rumenz.img 使用ls -lh rumenz.img查看生成的文件。</description>
+    </item>
+    <item>
+      <title>Linux——切分大日志文件</title>
+      <link>/cn/2024/linux%E5%88%87%E5%89%B2%E5%A4%A7%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Tue, 23 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>/cn/2024/linux%E5%88%87%E5%89%B2%E5%A4%A7%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</guid>
+      <description>记录几种方式来切分日志&#xA;head 命令是用来获取文本文件的开始n行。&#xA;head -10000 java.log &amp;gt; javaHead.log tail 命令是用来获取文本最后行。&#xA;tail -10000 java.log &amp;gt; javaTail.log sed 命令可以从第N行截取到第M行。（ N &amp;gt; 0 , M &amp;lt; FileLineNumber ）。一般用处不大，只能靠猜。&#xA;sed -n &amp;#39;1,50000p&amp;#39; java.log &amp;gt; javaRange.log spilt 命令&#xA;split -l 300 java.txt javaLog --verbose split -b 10m java.txt javaLog --verbose </description>
+    </item>
+    <item>
+      <title>Linux——测带宽</title>
+      <link>/cn/2024/iperf%E6%B5%8B%E5%B8%A6%E5%AE%BD/</link>
+      <pubDate>Tue, 23 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>/cn/2024/iperf%E6%B5%8B%E5%B8%A6%E5%AE%BD/</guid>
+      <description>如果用ping的话，根据字节数和返回时间计算。&#xA;iPerf安装，尽量选择二进制版本。难点在于找到操作系统对应的版本二进制版本。&#xA;服务端&#xA;iperf3 -s -p 端口 客户端，注意不同网口的ip下，速率一般都不同&#xA;iperf3 -c 服务端IP -p 服务端端口 </description>
+    </item>
+    <item>
+      <title>Linux——查找大文件并删除</title>
+      <link>/cn/2024/linux%E6%9F%A5%E6%89%BE%E5%A4%A7%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/</link>
+      <pubDate>Fri, 14 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>/cn/2024/linux%E6%9F%A5%E6%89%BE%E5%A4%A7%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/</guid>
+      <description>先用 du 和 df 命令定位大文件，逐级往下层目录找&#xA;# 先确定是哪个文件夹占用较多 # 如果文件较多命令执行可能很慢，在知道大概位置的情况下不建议直接对根目录操作 # du的--max-depth=1表示只展示第一个层级的目录和文件 # sort的-h选项和du的-h选项一个意思，-r表示倒叙，默认升序 du -h / --max-depth=1 | sort -hr | head -n 10 #output&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 50G / 28G /var 6.0G /dfs 4.0G /opt 3.0G /root 2.3G /usr 148M /lib 39M /log 30M /etc 29M /boot # 定位到/var目录占用超过50%(磁盘总量50G) # 继续往下层目录找 du -h /var --max-depth=1 | sort -hr | head -n 10 # 继续往下层目录找 du -h /var/lib --max-depth=1 | sort -hr | head -n 10 按文件大小删除</description>
+    </item>
+    <item>
+      <title>Linux——问题手册</title>
+      <link>/cn/2023/linux%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Sat, 04 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>/cn/2023/linux%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <description>问题1、tar打包排除 具体描述&#xA;tar压缩文件夹时排除文件夹中的某些文件和文件夹，如tomcat压缩，排除logs文件夹&#xA;解决方案和原理&#xA;使用exclude，注意--exclude=tomcat/logs的logs是没有斜杠的。&#xA;--exclude=&amp;lt;范本样式&amp;gt;：排除符合范本样式的文件； tar -zcvf tomcatbak.tar.gz --exclude=tomcat/logs tomcat tar --exclude=webapps/ycsbd-service --exclude=webapps/video-service --exclude=webapps/robot-service -zcvf webapps.tar.gz webapps 问题2、df、du查看文件和文件夹大小 查看目前所有文件系统的可用空间及使用情形&#xA;df -h 查看当前目录总共占的容量&#xA;du -sh 查看当前目录下一级子文件和子目录占用的磁盘容量：&amp;ndash;max-depth&#xA;du -lh --max-depth=1 du -h --max-depth=0 your_dest_dir/* 统计当前文件夹(目录)大小，并按文件大小排序：&#xA;du -sh * | sort -n 查看指定文件大小可以使用du -sh或du -a：&#xA;du -sh your_dest_file 列出当前目录中的目录名不包括某字符串的目录的总大小：&#xA;du -sh --exclude=&amp;#39;exclude_file_name&amp;#39; 问题3、hostname修改服务器名称 解决方案和原理&#xA;# 临时修改 hostname test ``#退出shell，在进入即可修改成功 # 永久修改 vi /etc/hostname #里边直接加名字即可 问题4、修改用户默认目录 解决方案和原理&#xA;vi /etc/passwd # /users/ems为ems的用户默认目录，修改为目标目录即可 ems:x:1000:501::/users/ems:/bin/tcsh 问题5、查看服务器内存 解决方案和原理</description>
+    </item>
+    <item>
+      <title>mkcert生成局域网互信</title>
+      <link>/cn/2023/mkcert%E7%94%9F%E6%88%90%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BA%92%E4%BF%A1/</link>
+      <pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>/cn/2023/mkcert%E7%94%9F%E6%88%90%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BA%92%E4%BF%A1/</guid>
+      <description>按照github网站，参考readme&#xA;服务端 一般是服务器，即网页发布方&#xA;先执行 mkcert -install 再执行，如果有域名输入域名，没有则写自己ip即可 mkcert example.com &amp;#34;*.example.com&amp;#34; example.test localhost 127.0.0.1 ::1&#xD;The certificate is at &amp;#34;./example.com+5.pem&amp;#34; and the key at &amp;#34;./example.com+5-key.pem&amp;#34; ✅ 得到的pem文件为证书，key为密钥 如果是haproxy，则在 ssl crt 后边写入该 pem 文件绝对路径，重新发布网页即可 注意haproxy的pem格式，是有两段，一段为 CERTIFICATE，一段为RSA PRIVATE KEY&#xA;要将3中的pem文件后补全key的内容，并且key的段始段尾都需要增加 RSA三个字母保持一致。&#xA;注意下边这段话，意思是访问时要对mkcert的CA进行授信&#xA;Using certificates from real certificate authorities (CAs) for development can be dangerous or impossible (for hosts like example.test, localhost or 127.0.0.1), but self-signed certificates cause trust errors. Managing your own CA is the best solution, but usually involves arcane commands, specialized knowledge and manual steps.</description>
+    </item>
+    <item>
+      <title>Linux——查找大文件和删除</title>
+      <link>/cn/2023/%E6%9F%A5%E6%89%BE%E5%A4%A7%E6%96%87%E4%BB%B6%E5%92%8C%E5%88%A0%E9%99%A4/</link>
+      <pubDate>Sun, 08 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>/cn/2023/%E6%9F%A5%E6%89%BE%E5%A4%A7%E6%96%87%E4%BB%B6%E5%92%8C%E5%88%A0%E9%99%A4/</guid>
+      <description>发现问题 如果是数据库，在客户端操作(比如navicat)数据库的时候，会弹窗报错No space left on device，java应用也会在日志里报这个错； 如果是spring-boot spring-cloud，eureka状态会显示DOWN； 其他应用程序应该也会出现不同的down，比如连不上、响应速度非常慢等等。&#xA;问题验证 直接使用df命令查看磁盘占用情况：&#xA;df -h&#xD;#output&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&#xD;Filesystem Size Used Avail Use% Mounted on&#xD;/dev/mapper/vg_192-lv_root 50G 44G 3.4G 100% / 发现是真的，解决办法有两种：&#xA;扩容，可以参考这里：Linux 磁盘扩容 查找大文件，确认是什么原因导致磁盘被占满，要么更改一些策略，比如kafka日志清理策略、CDH集群健康日志清理策略等，要么删除大文件。 这里记录查找并删除大文件。&#xA;查找大文件 使用du和df命令定位大文件：&#xA;# 先确定是哪个文件夹占用较多 # 如果文件较多命令执行可能很慢，在知道大概位置的情况下不建议直接对根目录操作 # du的--max-depth=1表示只展示第一个层级的目录和文件 # sort的-h选项和du的-h选项一个意思，-r表示倒叙，默认升序 du -h / --max-depth=1 | sort -hr | head -n 10 #output&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 50G / 28G /var 6.0G /dfs 4.0G /opt 3.0G /root 2.3G /usr 148M /lib 39M /log 30M /etc 29M /boot #output&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; # 定位到/var目录占用超过50%(磁盘总量50G) # 继续往下层目录找 du -h /var --max-depth=1 | sort -hr | head -n 10 #output&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 28G /var 24G /var/lib 3.</description>
+    </item>
+    <item>
+      <title>Linux——开机启动和后台运行</title>
+      <link>/cn/2022/%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E5%92%8C%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</link>
+      <pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate>
+      <guid>/cn/2022/%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E5%92%8C%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</guid>
+      <description>执行脚本 流程：后台运行脚本调用自启动脚本，判断执行脚本是否正在运行，调用执行脚本。&#xA;创建xxxx.sh脚本包装java -jar命令的执行&#xA;cd /users/ems/Jar/imp java -jar -Xms1024m -Xmx1536m -XX:PermSize=512m -XX:MaxPermSize=2048m imp.jar -propath imp.properties &amp;gt; /users/ems/Jar/logs/imp-logs.txt # -vmargs 说明后面是VM的参数，所以后面的其实都是JVM的参数了 # -Xms128m JVM初始分配的堆内存 # -Xmx512m JVM最大允许分配的堆内存，按需分配 # -XX:PermSize=64M JVM初始分配的非堆内存 # -XX:MaxPermSize=128M JVM最大允许分配的非堆内存，按需分配 自启脚本 start_ratio(){ sh /users/ems/Jar/bin/ratio.sh &amp;amp; sleep 120 } stop_ratio(){ PROCESS=`ps -ef |grep ratio.jar|grep -v grep|grep -v PPID|awk &amp;#39;{ print $2}&amp;#39;` for i in $PROCESS do echo &amp;#34;&amp;gt;&amp;gt;&amp;gt;RatioExec is running!begin to shutdown...&amp;#34; echo &amp;#34;Kill the process [ $i ]&amp;#34; kill -9 $i done } restart_ratio(){ stop_ratio start_ratio } COUNT=$(ps -ef |grep ratio.</description>
+    </item>
+    <item>
+      <title>keepalived双网卡双网段热备配置</title>
+      <link>/cn/2022/keepalive/</link>
+      <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
+      <guid>/cn/2022/keepalive/</guid>
+      <description>参考 nginx keepalived双网卡双网段热备配置&#xA;[keepalived双进程双VIP配置及原理图](keepalived双进程双VIP配置及原理图_花红羊蹄甲的博客-CSDN博客_keepalived 多进程)&#xA;简要实现 一般来说做两套配置即可，&#xA;master：&#xA;! Configuration File for keepalived&#xD;vrrp_script chk_haproxy {&#xD;script &amp;#34;&amp;lt;/dev/tcp/127.0.0.1/80&amp;#34;&#xD;interval 2&#xD;weight -2&#xD;}&#xD;vrrp_instance VI_A {&#xD;state MASTER&#xD;interface eno6&#xD;track_interface {&#xD;eno6&#xD;}&#xD;virtual_router_id 81&#xD;priority 100&#xD;mcast_src_ip 10.228.96.230&#xD;advert_int 1&#xD;authentication {&#xD;auth_type PASS&#xD;auth_pass 1111&#xD;}&#xD;virtual_ipaddress {&#xD;10.228.96.232 label webvip&#xD;}&#xD;track_script {&#xD;chk_haproxy&#xD;}&#xD;}&#xD;vrrp_instance VI_B {&#xD;state MASTER&#xD;interface eno5&#xD;track_interface {&#xD;eno5&#xD;}&#xD;virtual_router_id 82&#xD;priority 100&#xD;mcast_src_ip 198.</description>
+    </item>
+    <item>
+      <title>Linux——chrony 服务器集群对时</title>
+      <link>/cn/2021/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6/</link>
+      <pubDate>Wed, 15 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>/cn/2021/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6/</guid>
+      <description>chronyd相关命令&#xA;# 查看 ntp_servers chronyc sources -v # 查看 ntp_servers 状态 chronyc sourcestats -v # 查看 ntp 详细信息 chronyc tracking -v # 查看 NTP 服务器的在线和离线状态 chronyc activity chronyc activity -v # 查看 Chrony 服务的日志 journalctl -u chronyd # 强制同步下系统时钟 chronyc -a makestep M&#xA;这表示信号源的模式。*^表示服务器，=表示对等方，＃*表示本地连接的参考时钟。&#xA;S&#xA;此列指示源的状态。&#xA;* 表示chronyd当前同步到的源。&#xD;+ 表示可接受的信号源，与选定的信号源组合在一起。&#xD;- 表示被合并算法排除的可接受源。&#xD;？ 指示已失去连接性或其数据包未通过所有测试的源。它也显示在启动时，直到从中至少收集了3个样本为止。&#xD;x 表示chronyd认为是虚假行情的时钟（即，其时间与大多数其他来源不一致）。&#xD;〜 表示时间似乎具有太多可变性的来源。 Name/IP address&#xA;这显示了源的名称或IP地址，或参考时钟的参考ID。&#xA;Stratum&#xA;这显示了来源的层，如其最近收到的样本中所报告的那样。层1表示一台具有本地连接的参考时钟的计算机。与第1层计算机同步的计算机位于第2层。与第2层计算机同步的计算机位于第3层，依此类推。&#xA;Poll&#xA;这显示轮询源的速率，以秒为单位的时间间隔的以2为底的对数。因此，值为6表示每64秒进行一次测量。chronyd会根据当前情况自动更改轮询速率。&#xA;Reach&#xA;这显示了源的可达性寄存器以八进制数字打印。寄存器有8位，并在每个从源接收或丢失的数据包上更新。值377表示从最后八次传输中收到了对所有用户的有效答复。&#xA;LastRx&#xA;此列显示多长时间前从来源接收到了最后一个好的样本（在下一列中显示）。未通过某些测试的测量将被忽略。通常以秒为单位。字母m，h，d或y表示分钟，小时，天或年。&#xA;Last sample</description>
+    </item>
+    <item>
+      <title>Linux——批量删除文件</title>
+      <link>/cn/2021/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Fri, 25 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>/cn/2021/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6/</guid>
+      <description>脚本如下&#xA;#!/bin/csh #FaultRecordData CLEAR set basepath = /users/ems/FaultRecordData set mfile = &amp;#34;&amp;#34; foreach mfile (${basepath}/*) if(-d $mfile) then echo &amp;#34;$mfile&amp;#34; #cd ${mfile}/checkreport/bak if($status == 0) then #find -mtime +31 -name &amp;#34;*.*&amp;#34; -exec rm -rf {} \\; echo &amp;#34;delete check report files &amp;#34; ls -t *.* | awk &amp;#39;{if(NR&amp;gt;=30){print $0}}&amp;#39; | xargs rm -rf endif #cd ${mfile}/comtrade/bak if($status == 0) then #find -mtime +31 -name &amp;#34;*.*&amp;#34; -exec rm -rf {} \\; echo &amp;#34;delete comtrade files &amp;#34; ls -t *.</description>
+    </item>
+    <item>
+      <title>Linux——统计文件夹下文件的个数</title>
+      <link>/cn/2021/%E7%BB%9F%E8%AE%A1%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%96%87%E4%BB%B6%E6%95%B0%E9%87%8F/</link>
+      <pubDate>Thu, 24 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>/cn/2021/%E7%BB%9F%E8%AE%A1%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%96%87%E4%BB%B6%E6%95%B0%E9%87%8F/</guid>
+      <description>统计文件夹下文件的个数 如果运行ls -l会输出当前目录下的文件以及目录的信息。那么只要在当前目录下的输出结果中，统计出是文件的行的数目，就可以统计出当前目录下的文件个数，所以要找出命令ls -l输出的文件的信息与目录的信息的不同之处。&#xA;不难看出，如果是文件的话，该行的字符串信息的第一个字符显示的是“-”，如果是目录的话，该行的字符的第一个显示的是&amp;quot;d&amp;quot;，意即directory，找到这两者之间的区别，运行能够判别第一个字符的命令.&#xA;ls -l&#xA;ls -l | grep &amp;#34;^-&amp;#34; 其中“^-”是一个正则化项，表示字符串的第一个字符，提取第一个字符为-的，就是文件。&#xA;运行两次管道命令，即ls -l | grep “^-” | wc -l，就能统计文件夹下文件的个数&#xA;统计文件夹下目录的个数 ls -l | grep &amp;#34;^d&amp;#34; | wc -l 统计文件夹下文件个数，包括子文件 ls -lR | grep &amp;#34;^-&amp;#34;| wc -l 统计文件夹下目录个数，包括子目录 ls -lR | grep &amp;#34;^d&amp;#34;| wc -l 递归统计出文件夹下所有文件的数目 find ./ -type f| wc -l 递归统计出文件夹下所有子文件夹的数目 find ./ -type d | wc -l # 注意，这里面包含了当前文件夹，所以统计出来减一即可 参考 Linux上统计文件夹下文件个数以及目录个数_OceanStar的博客-CSDN博客_linux 统计目录下文件个数</description>
+    </item>
+    <item>
+      <title>linux下批量杀死java进程</title>
+      <link>/cn/2020/2020-06-29-linux-killjavathread/</link>
+      <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/cn/2020/2020-06-29-linux-killjavathread/</guid>
+      <description>批量杀死java进程，需要运用ps, grep, cut 和 kill 一起操作。&#xA;ps -ef|grep LOCAL=NO|grep -v grep|cut -c 9-15|xargs kill -9 关键字为LOCAL=NO&#xA;管道符”|”用来隔开两个命令，管道符左边命令的输出会作为管道符右边命令的输入。&#xA;“ps -ef” 是linux里查看所有进程的命令。这时检索出的进程将作为下一条命令”grep LOCAL=NO”的输入。&#xA;“grep LOCAL=NO” 的输出结果是，所有含有关键字”LOCAL=NO”的进程。&#xA;“grep -v grep” 是在列出的进程中去除含有关键字”grep”的进程。&#xA;“cut -c 9-15” 是截取输入行的第9个字符到第15个字符，而这正好是进程号PID。&#xA;“xargs kill -9” 中的 xargs 命令是用来把前面命令的输出结果（PID）作为”kill -9”命令的参数，并执行该命令。”kill -9”会强行杀掉指定进程。&#xA;另一种方法可以使用awk&#xA;ps x|grep LOCAL=NO|grep -v grep |awk &amp;#39;{print $1}&amp;#39;|xargs kill -9 参考 linux下如何批量杀JAVA进程或某个进程方法</description>
+    </item>
+    <item>
+      <title>windows——后台执行bat脚本</title>
+      <link>/cn/2020/2020-06-29-windows-batrun/</link>
+      <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/cn/2020/2020-06-29-windows-batrun/</guid>
+      <description>Windows后台执行bat脚本 通过vb脚本来隐藏dos窗口，后台执行 @echo off if &amp;#34;%1&amp;#34; == &amp;#34;h&amp;#34; goto begin mshta vbscript:createobject(&amp;#34;wscript.shell&amp;#34;).run(&amp;#34;%~nx0 h&amp;#34;,0)(window.close)&amp;amp;&amp;amp;exit :begin :: redis-server.exe 建立脚本流程 调用运行bat，放入后台执行：main.vbs Set ws = CreateObject(&amp;#34;Wscript.Shell&amp;#34;)&#xD;ws.run &amp;#34;cmd /c A.bat&amp;#34;,0&#xD;ws.run &amp;#34;cmd /c B.bat&amp;#34;,0&#xD;ws.run &amp;#34;cmd /c C.bat&amp;#34;,0 建立主脚本，循环执行：main.bat @echo off&amp;lt;nul 3&amp;gt;nul :one echo %date:~0,10% %time:~0,-3% 守护进程正在监控系统... start main.vbs ping 127.0.0.1 -n 10&amp;gt;nul goto one 通过ping命令来实现sleep 10秒的操作，每10秒执行main.vbs里边执行的3个脚本。&#xA;start命令 通过在bat脚本中，使用start命令来后台执行需要执行的脚本或者程序&#xA;start /b a.bat 参数 描述 /min | /max 指定最小化（/min）或最大化（/max）新的命令提示符窗口。 /elevate 以管理员身份运行应用程序。 /wait 启动应用程序并等待其结束。 /b 启动应用程序而不打开新的命令提示符窗口。 除非应用程序启用了 CTRL + C 处理，否则将忽略 CTRL + C 处理。 使用 CTRL + BREAK 中断应用程序。 /?</description>
+    </item>
+    <item>
+      <title>windows下杀死进程</title>
+      <link>/cn/2020/2020-06-29-windows-killbackendprocess/</link>
+      <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/cn/2020/2020-06-29-windows-killbackendprocess/</guid>
+      <description>taskkill命令 # taskkill /pid[进程码] -t(结束该进程) -f（强制结束该进程以及所有子进程） taskkill /im 进程名称 示例：用taskkill /im tomcat7.exe命令关闭tomcat。&#xA;注：有两种方法查进程的PID码：&#xA;在命令行下用tasklist命令查出进程的PID码 在任务管理器中的查看选项中勾选PID那一项 例如：taskkill /pid 2345 -f -t；&#xA;wmic process wmic process where name=&amp;#34;进程名称&amp;#34; call terminate 这个不需要知道进程的PID码&#xA;ntsd ntsd -c q -p [PID进程码] 参考 如何在windows命令行后台运行某个命令？</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Linux——切分大日志文件 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Linux——切分大日志文件 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="记录几种方式来切分日志
+head 命令是用来获取文本文件的开始n行。
+[&amp;hellip;] head -10000 java.log &amp;gt; javaHead.log tail 命令是用来获取文本最后行。
+[&amp;hellip;] tail -10000 java.log &amp;gt; javaTail.log sed 命令可以从第N行截取到第M行。（ N &amp;gt; 0 , M &amp;lt; &amp;hellip;">
+      <meta property="og:description" content="记录几种方式来切分日志
+head 命令是用来获取文本文件的开始n行。
+[&amp;hellip;] head -10000 java.log &amp;gt; javaHead.log tail 命令是用来获取文本最后行。
+[&amp;hellip;] tail -10000 java.log &amp;gt; javaTail.log sed 命令可以从第N行截取到第M行。（ N &amp;gt; 0 , M &amp;lt; &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2024%5clinux%e5%88%87%e5%89%b2%e5%a4%a7%e6%97%a5%e5%bf%97%e6%96%87%e4%bb%b6.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Linux——切分大日志文件</h1>
+
+
+<h3>rehoni / 
+2024-07-23</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>记录几种方式来切分日志</p>
+<p><code>head</code> 命令是用来获取文本文件的开始n行。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>head -10000 java.log &gt; javaHead.log
+</span></span></code></pre></div><p><code>tail</code> 命令是用来获取文本最后行。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tail -10000 java.log &gt; javaTail.log
+</span></span></code></pre></div><p><code>sed</code> 命令可以从第N行截取到第M行。（ N &gt; 0 , M &lt; FileLineNumber ）。一般用处不大，只能靠猜。</p>
+<pre tabindex="0"><code>sed -n &#39;1,50000p&#39; java.log &gt; javaRange.log
+</code></pre><p><code>spilt</code> 命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>split -l <span style="color:#ae81ff">300</span> java.txt javaLog --verbose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>split -b 10m java.txt javaLog --verbose
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2024/iperf%E6%B5%8B%E5%B8%A6%E5%AE%BD/">Linux——测带宽</a></span>
+  <span class="nav-next"><a href="/cn/2024/fire07/">2024年07月钱月记：时间飞逝、一事无成</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2024\/iperf%E6%B5%8B%E5%B8%A6%E5%AE%BD\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2024\/fire07\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

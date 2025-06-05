@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>vmvare设置网络 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="vmvare设置网络 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="使用桥接模式，相当于同网段的服务器
+1、dhclient 获取IP
+2、vi /etc/sysconfig/network-scripts/ifcfg-ens33 设置静态IP
+​	注意这里，设置网关需要和本机的网络IP的网关相同，而不是直接取255、1之类的
+3、systemctl restart network.service 重启网络服务
+4、ping www.baidu.com &amp;hellip;">
+      <meta property="og:description" content="使用桥接模式，相当于同网段的服务器
+1、dhclient 获取IP
+2、vi /etc/sysconfig/network-scripts/ifcfg-ens33 设置静态IP
+​	注意这里，设置网关需要和本机的网络IP的网关相同，而不是直接取255、1之类的
+3、systemctl restart network.service 重启网络服务
+4、ping www.baidu.com &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2022%5cvmware.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>vmvare设置网络</h1>
+
+
+<h3>rehoni / 
+2022-10-27</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="设置网络">设置网络</h2>
+<p>使用桥接模式，相当于同网段的服务器</p>
+<p>1、dhclient 获取IP</p>
+<p>2、vi /etc/sysconfig/network-scripts/ifcfg-ens33 设置静态IP</p>
+<p>​	注意这里，设置网关需要和本机的网络IP的网关相同，而不是直接取255、1之类的</p>
+<p>3、systemctl restart network.service 重启网络服务</p>
+<p>4、ping <a href="https://www.baidu.com">www.baidu.com</a> 以及 ping 本机网络IP</p>
+<h3 id="linux报错之ping-wwwbaiducom-name-or-service-not-known">Linux报错之ping: <a href="https://www.baidu.com">www.baidu.com</a>: Name or service not known</h3>
+<p>在网卡设置里，新增DNS设置</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#a6e22e">DNS1</span><span style="color:#f92672">=</span><span style="color:#e6db74">8.8.8.8</span>
+</span></span></code></pre></div><p><code>/etc/resolv.conf</code>配置DNS客户端</p>
+<p>文件/etc/resolv.conf配置DNS客户端，它包含了主机的域名搜索顺序和DNS服务器的地址，每一行应包含一个关键字和一个或者多个的由空格隔开的参数。下面是一个例子文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#a6e22e">search mydom.edu.cn</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">nameserver 210.34.0.14</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">nameserver 210.34.0.2</span>
+</span></span></code></pre></div><p>合法的参数及其意义如下：
+nameserver: 表明DNS服务器的IP地址。可以有很多行的nameserver，每一个带一个IP地址。在查询时就按nameserver在本文件中的顺序进行，且只有当第一个nameserver没有反应才查询下面的nameserver。
+domain: 声明主机的域名。很多程序用到它，如邮件系统；当为没有域名的主机进行DNS查询时，也要用到。如果没有域名，主机名将被使用，删除所有在第一个点(.)前面的内容。
+search: 它的多个参数指明域名查询顺序。当要查询没有域名的主机，主机将在由search声明的域中分别查找。domain和search不能共存；如果同时存在，后面出现的将会被使用。
+sortlist: 允许将得到域名结果进行特定的排序。它的参数为网络/掩码对，允许任意的排列顺序。
+Red Hat中没有提供缺省的/etc/resolv.conf文件，它的内容是根据在安装时给出的动态创建的。</p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2022/%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E5%92%8C%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/">Linux——开机启动和后台运行</a></span>
+  <span class="nav-next"><a href="/cn/2022/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882/">后端——问题小书（2022）</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2022\/%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E5%92%8C%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2022\/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

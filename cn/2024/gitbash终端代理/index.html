@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>gitbash终端代理 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="gitbash终端代理 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="这里只说明搭配 Clash 使用的git bash的https终端代理，主要解决的是git clone失败的问题。
+git 有两种协议，一种书 https，还有一种是 ssh 。
+如果是用 https，设置终端代理即可。如果是 ssh，需要单独配置代理。
+[&amp;hellip;] cat &amp;gt; ~/.bash_profile &amp;lt;&amp;lt; EOF function proxy_on() { &amp;hellip;">
+      <meta property="og:description" content="这里只说明搭配 Clash 使用的git bash的https终端代理，主要解决的是git clone失败的问题。
+git 有两种协议，一种书 https，还有一种是 ssh 。
+如果是用 https，设置终端代理即可。如果是 ssh，需要单独配置代理。
+[&amp;hellip;] cat &amp;gt; ~/.bash_profile &amp;lt;&amp;lt; EOF function proxy_on() { &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2024%5cgitbash%e7%bb%88%e7%ab%af%e4%bb%a3%e7%90%86.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>gitbash终端代理</h1>
+
+
+<h3>rehoni / 
+2024-07-14</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>这里只说明搭配 <code>Clash</code> 使用的<code>git bash</code>的<code>https</code>终端代理，主要解决的是<code>git clone</code>失败的问题。</p>
+<p>git 有两种协议，一种书 https，还有一种是 ssh 。</p>
+<p>如果是用 https，设置终端代理即可。如果是 ssh，需要单独配置代理。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat &gt; ~/.bash_profile <span style="color:#e6db74">&lt;&lt; EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">function proxy_on() {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    export http_proxy=http://127.0.0.1:7890
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    export https_proxy=\$http_proxy
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    echo -e &#34;终端代理已开启。&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">function proxy_off(){
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    unset http_proxy https_proxy
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    echo -e &#34;终端代理已关闭。&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>source ~/.bash_profile
+</span></span></code></pre></div><p>打开代理 proxy_on</p>
+<p>关闭代理 proxy_off</p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2024/centos%E5%8D%B8%E8%BD%BDdocker/">Docker——centos卸载docker</a></span>
+  <span class="nav-next"><a href="/cn/2024/iperf%E6%B5%8B%E5%B8%A6%E5%AE%BD/">Linux——测带宽</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2024\/centos%E5%8D%B8%E8%BD%BDdocker\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2024\/iperf%E6%B5%8B%E5%B8%A6%E5%AE%BD\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

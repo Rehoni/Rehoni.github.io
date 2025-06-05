@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>proxychains代理windows - Rehoni | 罗皓</title>
+    <meta property="og:title" content="proxychains代理windows - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="在 linux 下为了终端命令绕过防火墙我们可以使用 proxychains 结合 socksv5 代理进行使用，在windows下有没有类似工具呢，有！大佬写了一个 proxychains for windows 版可以使用，下面就是简要的设置过程
+参考：Proxychains for Windows 自述文件
+[&amp;hellip;] 注意：一些协议估计没法代理，详情见作者项目文档
+">
+      <meta property="og:description" content="在 linux 下为了终端命令绕过防火墙我们可以使用 proxychains 结合 socksv5 代理进行使用，在windows下有没有类似工具呢，有！大佬写了一个 proxychains for windows 版可以使用，下面就是简要的设置过程
+参考：Proxychains for Windows 自述文件
+[&amp;hellip;] 注意：一些协议估计没法代理，详情见作者项目文档
+">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2023%5cproxychains%20for%20windows.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>proxychains代理windows</h1>
+
+
+<h3>rehoni / 
+2023-10-07</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>在 linux 下为了终端命令绕过防火墙我们可以使用 <a href="https://github.com/rofl0r/proxychains-ng">proxychains</a> 结合 socksv5 代理进行使用，在windows下有没有类似工具呢，有！大佬写了一个 <a href="https://github.com/shunf4/proxychains-windows">proxychains for windows</a> 版可以使用，下面就是简要的设置过程</p>
+<p>参考：<a href="https://github.com/shunf4/proxychains-windows/blob/master/README_zh-Hans.md">Proxychains for Windows 自述文件</a></p>
+<ol>
+<li>去 <a href="https://github.com/shunf4/proxychains-windows/releases">https://github.com/shunf4/proxychains-windows/releases</a> 下一个最新版如 <code>proxychains_0.6.8_win32_x64.zip</code>，解压到任意目录，我为了方便解压到<code>D:\proxychains</code></li>
+<li>将 <code>proxychains_win32_x64.exe</code> 重命名 <code>proxychains</code></li>
+<li>编辑目录下 <code>proxychains.conf</code> 配置文件，根据自己实际情况改，例如 <code>socks5 127.0.0.1 1081</code></li>
+<li>编辑系统环境变量将 <code>D:\proxychains</code> 加入系统 PATH 变量。</li>
+<li>新建一个系统变量名称 <code>PROXYCHAINS_CONF_FILE</code> 值 <code>D:\proxychains\proxychains.conf</code> 根据情况自己修改</li>
+<li>打开一个新的 cmd，使用方法 <code>proxychains command</code>，如 <code>proxychains go get github.com/StackExchange/wmi</code></li>
+</ol>
+<p><strong>注意：一些协议估计没法代理，详情见作者项目文档</strong></p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2023/%E5%B7%A5%E5%85%B7_ssh/">SSH可视化工具比较</a></span>
+  <span class="nav-next"><a href="/cn/2023/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/">独立开发的思考</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2023\/%E5%B7%A5%E5%85%B7_ssh\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2023\/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

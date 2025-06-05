@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle——连接远程数据库 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Oracle——连接远程数据库 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content=" sqlplus swgk/Nr_9000@10.151.51.251:1522/zhsjhl 在tnsnames.ora文件中添加tns监听
+">
+      <meta property="og:description" content=" sqlplus swgk/Nr_9000@10.151.51.251:1522/zhsjhl 在tnsnames.ora文件中添加tns监听
+">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2021%5c%e8%bf%9c%e7%a8%8b%e8%bf%9e%e6%8e%a5%e6%95%b0%e6%8d%ae%e5%ba%93%e5%8f%8adblink.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle——连接远程数据库</h1>
+
+
+<h3>Rehoni / 
+2021-04-21</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<pre tabindex="0"><code> sqlplus swgk/Nr_9000@10.151.51.251:1522/zhsjhl
+</code></pre><p>在<code>tnsnames.ora</code>文件中添加tns监听</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> ORA-12504：TNS：监听程序在CONNECT_DATA中未获得SERVICE_NAME
+</span></span><span style="display:flex;"><span> zhsjhl <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">(</span>DESCRIPTION <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">(</span>ADDRESS_LIST <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">(</span>ADDRESS <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>PROTOCOL <span style="color:#f92672">=</span> TCP<span style="color:#f92672">)(</span>HOST <span style="color:#f92672">=</span> 10.151.51.251<span style="color:#f92672">)(</span>PORT <span style="color:#f92672">=</span> 1522<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">(</span>CONNECT_DATA <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">(</span>SERVICE_NAME <span style="color:#f92672">=</span> zhsjhl<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">)</span>
+</span></span></code></pre></div><h1 id="创建库之间的链接">创建库之间的链接</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span> <span style="color:#66d9ef">grant</span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">database</span> link,<span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> link <span style="color:#66d9ef">to</span> huilk;
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> link link1 <span style="color:#66d9ef">connect</span> <span style="color:#66d9ef">to</span> swgk identified <span style="color:#66d9ef">by</span> Nr_9000;
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> link link2 <span style="color:#66d9ef">connect</span> <span style="color:#66d9ef">to</span> swgk identified <span style="color:#66d9ef">by</span> Nr_9000 <span style="color:#66d9ef">using</span> <span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> (DESCRIPTION =
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     (ADDRESS_LIST =
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       (ADDRESS = (PROTOCOL = TCP)(HOST = 10.151.51.251)(PORT = 1522))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     )
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     (CONNECT_DATA =
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       (SERVICE_NAME = zhsjhl)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     )
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   )&#39;</span>;
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> SJHL_ZH.NZWOT_SP_SO_RISK_DESCRIPTION<span style="color:#f92672">@</span>link2;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">database</span> link link1;
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2021/2021-04-12-fire9/">2021年03月财务实证</a></span>
+  <span class="nav-next"><a href="/cn/2021/oracle%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Oracle——问题小书</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2021\/2021-04-12-fire9\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2021\/oracle%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle——查找和去除重复数据 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Oracle——查找和去除重复数据 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="查询两个字段是否是一对一的关系：count_a != count_b时，不是一对一
+[&amp;hellip;] select count(distinct a) count_a,count(distinct b) count_b from table t; 假设count_a&amp;gt;count_b，那么查询重复的a的记录：
+[&amp;hellip;] select a,count(a) count_a &amp;hellip;">
+      <meta property="og:description" content="查询两个字段是否是一对一的关系：count_a != count_b时，不是一对一
+[&amp;hellip;] select count(distinct a) count_a,count(distinct b) count_b from table t; 假设count_a&amp;gt;count_b，那么查询重复的a的记录：
+[&amp;hellip;] select a,count(a) count_a &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5c2020-06-29-oracle-removerepeatdata.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle——查找和去除重复数据</h1>
+
+
+<h3>Rehoni / 
+2020-06-29</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="查找重复根据字段"><strong>查找重复（根据字段）</strong></h2>
+<p>查询两个字段是否是一对一的关系：count_a != count_b时，不是一对一</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span> <span style="color:#66d9ef">select</span> <span style="color:#a6e22e">count</span>(<span style="color:#66d9ef">distinct</span> a) count_a,<span style="color:#a6e22e">count</span>(<span style="color:#66d9ef">distinct</span> b) count_b <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">table</span> t;
+</span></span></code></pre></div><p>假设count_a&gt;count_b，那么查询重复的a的记录：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span> <span style="color:#66d9ef">select</span> a,<span style="color:#a6e22e">count</span>(a) count_a
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">table</span> t
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> t.a
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">having</span> <span style="color:#a6e22e">count</span>(a)<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><p>那么查询对应的表的记录为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">table</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">where</span> a <span style="color:#66d9ef">in</span> (
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">select</span> a,<span style="color:#a6e22e">count</span>(a) count_a
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">table</span> t
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> t.a
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">having</span> <span style="color:#a6e22e">count</span>(a)<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><h2 id="去除重复"><strong>去除重复</strong></h2>
+<h3 id="全表重复"><strong>全表重复</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> maindevicetemp <span style="color:#66d9ef">as</span> (
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">from</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE
+</span></span><span style="display:flex;"><span> );
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> truncate <span style="color:#66d9ef">table</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> maindevicetemp;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">table</span> maindevicetemp;
+</span></span></code></pre></div><h3 id="部分重复"><strong>部分重复</strong></h3>
+<p>直接删除查出来的代码，1. 可以通过把查出来的表放入临时表的操作来提高效率；2. 可以通过选择隐藏字段rowid，取最大的rowid（而不用group by &hellip; having count(*) &gt;1 的操作）为最新的记录。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> geamaindevice <span style="color:#66d9ef">as</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">select</span> a.OBJECT_ID, <span style="color:#a6e22e">max</span>(a.ROWID) dataid
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">from</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE a
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> a.OBJECT_ID;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> geamaindevice;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">from</span> ELECTRANS.GEA_DM_RP_MAIN_DEVICE a
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">where</span> a.ROWID <span style="color:#f92672">&lt;&gt;</span> (
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">select</span> b.dataid <span style="color:#66d9ef">from</span> geamaindevice b
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">where</span> a.OBJECT_ID <span style="color:#f92672">=</span> b.OBJECT_ID
+</span></span><span style="display:flex;"><span>     );
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2020/2020-06-29-windows-batrun/">windows——后台执行bat脚本</a></span>
+  <span class="nav-next"><a href="/cn/2020/2020-06-29-linux-killjavathread/">linux下批量杀死java进程</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2020\/2020-06-29-windows-batrun\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/2020-06-29-linux-killjavathread\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

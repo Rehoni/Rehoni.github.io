@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle——索引操作 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Oracle——索引操作 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="查找索引
+[&amp;hellip;] -- 查看某个表的索引 SELECT * from all_indexes WHERE table_name=upper(&amp;#39;table_name&amp;#39;); -- 查看索引在哪个字段 select * from user_ind_columns where table_name=upper(&amp;#39;table_name&amp;#39;); -- 查看某个用户下 &amp;hellip;">
+      <meta property="og:description" content="查找索引
+[&amp;hellip;] -- 查看某个表的索引 SELECT * from all_indexes WHERE table_name=upper(&amp;#39;table_name&amp;#39;); -- 查看索引在哪个字段 select * from user_ind_columns where table_name=upper(&amp;#39;table_name&amp;#39;); -- 查看某个用户下 &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5c%e5%88%9b%e5%bb%ba%e5%92%8c%e5%88%a0%e9%99%a4%e7%b4%a2%e5%bc%95.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle——索引操作</h1>
+
+
+<h3>Rehoni / 
+2020-11-26</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>查找索引</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 查看某个表的索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span>  all_indexes <span style="color:#66d9ef">WHERE</span>  <span style="color:#66d9ef">table_name</span><span style="color:#f92672">=</span><span style="color:#66d9ef">upper</span>(<span style="color:#e6db74">&#39;table_name&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 查看索引在哪个字段
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> user_ind_columns <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">table_name</span><span style="color:#f92672">=</span><span style="color:#66d9ef">upper</span>(<span style="color:#e6db74">&#39;table_name&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 查看某个用户下面所有的索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span>  all_indexes <span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">owner</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SR&#39;</span>;
+</span></span></code></pre></div><p>创建和删除索引</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 删除普通索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">index</span>  <span style="color:#960050;background-color:#1e0010">索引名字</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">--创建普通索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">index</span>  <span style="color:#960050;background-color:#1e0010">索引名</span>  <span style="color:#66d9ef">on</span>  <span style="color:#960050;background-color:#1e0010">表名</span>(<span style="color:#960050;background-color:#1e0010">索引对应的列名</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 创建组合索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">index</span> index_name <span style="color:#66d9ef">on</span> <span style="color:#66d9ef">table_name</span>(column_name_1,column_name_2);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">--删除主键索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span>  <span style="color:#960050;background-color:#1e0010">表名</span>  <span style="color:#66d9ef">drop</span>  <span style="color:#66d9ef">constraint</span>  <span style="color:#960050;background-color:#1e0010">索引名</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">--创建主键索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">alter</span>  <span style="color:#66d9ef">table</span>  <span style="color:#960050;background-color:#1e0010">表名</span>  <span style="color:#66d9ef">add</span> <span style="color:#66d9ef">constraint</span>  <span style="color:#960050;background-color:#1e0010">表名</span>  <span style="color:#66d9ef">add</span> <span style="color:#66d9ef">constraint</span>  <span style="color:#960050;background-color:#1e0010">索引名</span>   <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span> (<span style="color:#960050;background-color:#1e0010">主键</span>);
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2020/%E8%8E%B7%E5%8F%96%E6%AF%8F%E4%B8%AA%E5%88%86%E7%BB%84%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%9C%80%E5%A4%A7%E7%9A%84%E4%B8%80%E6%9D%A1/">Oracle——获取每个分组中日期最大的一条</a></span>
+  <span class="nav-next"><a href="/cn/2020/2020-12-03-docker-windowsstartup/">windows启用docker</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2020\/%E8%8E%B7%E5%8F%96%E6%AF%8F%E4%B8%AA%E5%88%86%E7%BB%84%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%9C%80%E5%A4%A7%E7%9A%84%E4%B8%80%E6%9D%A1\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/2020-12-03-docker-windowsstartup\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

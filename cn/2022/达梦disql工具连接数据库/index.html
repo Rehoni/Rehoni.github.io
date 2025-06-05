@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>达梦——disql工具连接数据库 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="达梦——disql工具连接数据库 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="DIsql 是 DM 数据库自带的一个命令行客户端工具，用来与 DM 数据库服务器进行交互。
+工具语法如下：
+[&amp;hellip;] DIsql [ [&amp;lt;option&amp;gt;] [&amp;lt;logon&amp;gt; | /NOLOG] [&amp;lt;start&amp;gt;] ] &amp;lt;option&amp;gt;::=HELP|-H|-S &amp;hellip;">
+      <meta property="og:description" content="DIsql 是 DM 数据库自带的一个命令行客户端工具，用来与 DM 数据库服务器进行交互。
+工具语法如下：
+[&amp;hellip;] DIsql [ [&amp;lt;option&amp;gt;] [&amp;lt;logon&amp;gt; | /NOLOG] [&amp;lt;start&amp;gt;] ] &amp;lt;option&amp;gt;::=HELP|-H|-S &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2022%5c%e8%be%be%e6%a2%a6disql%e5%b7%a5%e5%85%b7%e8%bf%9e%e6%8e%a5%e6%95%b0%e6%8d%ae%e5%ba%93.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>达梦——disql工具连接数据库</h1>
+
+
+<h3>rehoni / 
+2022-04-04</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>DIsql 是 DM 数据库自带的一个命令行客户端工具，用来与 DM 数据库服务器进行交互。</p>
+<p>工具语法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>DIsql <span style="color:#f92672">[</span> <span style="color:#f92672">[</span>&lt;option&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;logon&gt; | /NOLOG<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;start&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>&lt;option&gt;::<span style="color:#f92672">=</span>HELP|-H|-S
+</span></span><span style="display:flex;"><span>&lt;logon&gt;::<span style="color:#f92672">=</span>&lt;username&gt;<span style="color:#f92672">[</span>/&lt;password&gt;<span style="color:#f92672">][</span>*&lt;MPP_TYPE&gt;<span style="color:#f92672">][</span>@&lt;server&gt;<span style="color:#f92672">][</span>:&lt;port&gt;<span style="color:#f92672">][</span>?<span style="color:#f92672">{</span>UDP|TCP<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">][</span><span style="color:#75715e">#&lt;sslpath&gt;@ssl_pwd]</span>
+</span></span><span style="display:flex;"><span>&lt;start&gt;::<span style="color:#f92672">=</span>&lt;<span style="color:#e6db74">`</span>运行脚本&gt;|&lt;start 运行脚本&gt;|&lt;直接执行语句&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#e6db74">`</span>运行脚本&gt;::<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>&lt;file_path&gt; <span style="color:#f92672">[</span>&lt;PARAMETER_VALUE&gt;<span style="color:#f92672">{</span> &lt;PARAMETER_VALUE&gt;<span style="color:#f92672">}]</span>
+</span></span><span style="display:flex;"><span>&lt;start 运行脚本&gt;::<span style="color:#f92672">=</span>START &lt;file_path&gt; <span style="color:#f92672">[</span>&lt;PARAMETER_VALUE&gt;<span style="color:#f92672">{</span> &lt;PARAMETER_VALUE&gt;<span style="color:#f92672">}]</span>
+</span></span><span style="display:flex;"><span>&lt;直接执行语句&gt;::<span style="color:#f92672">=</span> -E “&lt;SQL 语句&gt;<span style="color:#f92672">{</span>;&lt;SQL 语句&gt;<span style="color:#f92672">}</span>”
+</span></span></code></pre></div><p>关于这些选项的详细解释可以参考DM的官方手册。</p>
+<p>本博客主要看Disql 连接DM实例的三种不同方式。</p>
+<h3 id="1-dm-服务器上直接连接">1. DM 服务器上直接连接</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>dave@www.cndba.cn ~<span style="color:#f92672">]</span>$ disql SYSDBA/SYSDBA
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>服务器<span style="color:#f92672">[</span>LOCALHOST:5236<span style="color:#f92672">]</span>:处于普通打开状态
+</span></span><span style="display:flex;"><span>登录使用时间: 9.409<span style="color:#f92672">(</span>毫秒<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>disql V7.6.0.95-Build<span style="color:#f92672">(</span>2018.09.13-97108<span style="color:#f92672">)</span>ENT 
+</span></span><span style="display:flex;"><span>Connected to: DM 7.1.6.95
+</span></span><span style="display:flex;"><span>SQL&gt;
+</span></span></code></pre></div><p>这种方式只能连接到本地实例。</p>
+<h3 id="2-使用ip地址和端口连接">2. 使用IP地址和端口连接</h3>
+<p>这种方式可以连接到任意服务器，只要IP地址和端口正确即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>dave@www.cndba.cn ~<span style="color:#f92672">]</span>$ disql SYSDBA/SYSDBA@192.168.20.191:5236
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>服务器<span style="color:#f92672">[</span>192.168.20.191:5236<span style="color:#f92672">]</span>:处于普通打开状态
+</span></span><span style="display:flex;"><span>登录使用时间: 9.463<span style="color:#f92672">(</span>毫秒<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>disql V7.6.0.95-Build<span style="color:#f92672">(</span>2018.09.13-97108<span style="color:#f92672">)</span>ENT 
+</span></span><span style="display:flex;"><span>Connected to: DM 7.1.6.95
+</span></span><span style="display:flex;"><span>SQL&gt; conn SYSDBA/SYSDBA@192.168.20.191:5236
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>服务器<span style="color:#f92672">[</span>192.168.20.191:5236<span style="color:#f92672">]</span>:处于普通打开状态
+</span></span><span style="display:flex;"><span>登录使用时间: 10.516<span style="color:#f92672">(</span>毫秒<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>SQL&gt;
+</span></span></code></pre></div><p>这种方式不足的地方就是每次都需要输入IP地址和端口，不是很方便。</p>
+<h3 id="3-使用service-name-连接">3. 使用service name 连接</h3>
+<p>在之前的博客里我们讲了dm service 的配置文件：dm_svc.conf 文件。</p>
+<blockquote>
+<p>DM7 达梦数据库 物理结构 说明
+<a href="https://www.cndba.cn/dave/article/3571">https://www.cndba.cn/dave/article/3571</a></p>
+</blockquote>
+<p>在linux 系统中，dm_svc.conf 文件在/etc 目录下。官方给的配置 dm_svc.conf 示例如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 全局配置区</span>
+</span></span><span style="display:flex;"><span>O2000<span style="color:#f92672">=(</span>192.168.0.1:5000,192.168.0.2:5236<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>O3000<span style="color:#f92672">=(</span>192.168.0.1:5236,192.168.0.3:4350<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>TIME_ZONE<span style="color:#f92672">=(</span>+8:00<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>LOGIN_ENCRYPT<span style="color:#f92672">=(</span>0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>DIRECT<span style="color:#f92672">=(</span>Y<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 服务配置区</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>O2000<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>TIME_ZONE<span style="color:#f92672">=(</span>+9:00<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>LOGIN_MODE<span style="color:#f92672">=(</span>2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>SWITCH_TIME<span style="color:#f92672">=(</span>3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>SWITCH_INTERVAL<span style="color:#f92672">=(</span>10<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>如果对 dm_svc.conf 的配置项进行了修改，需要重启客户端程序，修改的配置才能生效。</p>
+<p>我们配置我们自己的DM service：</p>
+<blockquote>
+<p>dave=(192.168.20.191:5236)</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>dave@www.cndba.cn log<span style="color:#f92672">]</span>$ cd /etc
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>dave@www.cndba.cn etc<span style="color:#f92672">]</span>$ cat dm_svc.conf 
+</span></span><span style="display:flex;"><span>TIME_ZONE<span style="color:#f92672">=(</span>480<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>LANGUAGE<span style="color:#f92672">=(</span>cn<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>dave@www.cndba.cn etc<span style="color:#f92672">]</span>$ 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>dave@www.cndba.cn etc<span style="color:#f92672">]</span>$ 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>dave@www.cndba.cn etc<span style="color:#f92672">]</span>$ cat dm_svc.conf 
+</span></span><span style="display:flex;"><span>dave<span style="color:#f92672">=(</span>192.168.20.191:5236<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>TIME_ZONE<span style="color:#f92672">=(</span>480<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>LANGUAGE<span style="color:#f92672">=(</span>cn<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>dave@www.cndba.cn etc<span style="color:#f92672">]</span>$ <span style="color:#f92672">[</span>dave@www.cndba.cn etc<span style="color:#f92672">]</span>$ disql SYSDBA/SYSDBA@dave
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>服务器<span style="color:#f92672">[</span>192.168.20.191:5236<span style="color:#f92672">]</span>:处于普通打开状态
+</span></span><span style="display:flex;"><span>登录使用时间: 9.839<span style="color:#f92672">(</span>毫秒<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>disql V7.6.0.95-Build<span style="color:#f92672">(</span>2018.09.13-97108<span style="color:#f92672">)</span>ENT 
+</span></span><span style="display:flex;"><span>Connected to: DM 7.1.6.95
+</span></span><span style="display:flex;"><span>SQL&gt; conn SYSDBA/SYSDBA@DAVE
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>服务器<span style="color:#f92672">[</span>192.168.20.191:5236<span style="color:#f92672">]</span>:处于普通打开状态
+</span></span><span style="display:flex;"><span>登录使用时间: 9.074<span style="color:#f92672">(</span>毫秒<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>SQL&gt;
+</span></span></code></pre></div><p>连接成功，这里service 居然还不区分大小写。</p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2022/%E8%BE%BE%E6%A2%A6%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">达梦——用户管理</a></span>
+  <span class="nav-next"><a href="/cn/2022/%E8%BE%BE%E6%A2%A6%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5/">达梦——集群连接</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2022\/%E8%BE%BE%E6%A2%A6%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2022\/%E8%BE%BE%E6%A2%A6%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

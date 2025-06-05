@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>MAVEN的relativePath标签说明 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="MAVEN的relativePath标签说明 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="从父级仓库查找依赖版本
+MAVEN构建jar包时候查找顺序：relativePath元素中的地址&amp;gt;本地仓库&amp;gt;远程仓库
+[&amp;hellip;] 父模块配置 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt; &amp;hellip;">
+      <meta property="og:description" content="从父级仓库查找依赖版本
+MAVEN构建jar包时候查找顺序：relativePath元素中的地址&amp;gt;本地仓库&amp;gt;远程仓库
+[&amp;hellip;] 父模块配置 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt; &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2023%5cmaven.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>MAVEN的relativePath标签说明</h1>
+
+
+<h3>rehoni / 
+2023-06-23</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="relativepath标签说明">relativePath标签说明</h2>
+<p>从父级仓库查找依赖版本</p>
+<p>MAVEN构建jar包时候查找顺序：relativePath元素中的地址&gt;本地仓库&gt;远程仓库</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>父模块配置
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;groupId&gt;</span>org.projectlombok<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;artifactId&gt;</span>lombok<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;version&gt;</span>1.18.12<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>子模块 <span style="color:#f92672">&lt;parent&gt;</span> 没有配置 `<span style="color:#f92672">&lt;relativePath/&gt;</span>`
+</span></span><span style="display:flex;"><span>如果`<span style="color:#f92672">&lt;dependencies&gt;</span>`中依赖没有指定版本，编译时不能获取父`<span style="color:#f92672">&lt;dependencyManagement&gt;</span>`中定义的版本。
+</span></span></code></pre></div><h3 id="工作案例">工作案例</h3>
+<p>不带，有默认值，就是从父级目录查找pom.xml，也就是../ 目录查找pom，如果这个父级元素不在这个目录就会报错。</p>
+<p>但你这个父级肯定不是在这个位置，而是在远程仓库中，或者本地仓库中。 如果带了，而不指定位置，那就是只从远程仓库中查找。 如果带了，也指定了位置，那就是先从指定位置查找，然后本地仓库，最后远程仓库。</p>
+<p>不带这个，一般是用于模块项目，就是建一个父项目，然后很多子项目。一般创建模块子项目的时候，是不带的，比如我们pcs9000V1版本是这样的。</p>
+<p>但是如果父项目是外部依赖，并不是项目的父项目，才会用到relativePath，比如你创建一个springboot项目的时候，父依赖如果是spring-boot-starter-parent，那么就会加relativePath这个标签，来指定父依赖的来源是远程仓库。
+比如我们现在的pcs9000V2、pcs9000V3中的父元素nrcloud，以及nrcloud中的父元素spring-boot-starter-parent。</p>
+<h2 id="dependencies与dependencymanagement的区别">dependencies与dependencyManagement的区别</h2>
+<p>dependencies即使在子项目中不写该依赖项，那么子项目仍然会从父项目中继承该依赖项（全部继承）</p>
+<p>dependencyManagement里只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本，才会从父项目中继承该项，并且version和scope都读取自父pom;另外如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!--父项目1--&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dependencyManagement&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependencies&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&lt;!--这个要子项目引入才能使用--&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;groupId&gt;</span>com.alibaba<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;artifactId&gt;</span>fastjson<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;version&gt;</span>1.2.61<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependencies&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependencyManagement&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!--子项目：添加一个fastjson--&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;dependencies&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;groupId&gt;</span>com.alibaba<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;artifactId&gt;</span>fastjson<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/dependencies&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!--父项目2--&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dependencies&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!--这个依赖，子项目一定会依赖，可以直接使用--&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.commons<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;artifactId&gt;</span>commons-lang3<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;version&gt;</span>3.8.1<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependencies&gt;</span>
+</span></span></code></pre></div><h2 id="dependency-scope"><strong>Dependency scope</strong></h2>
+<p><strong>用来限制Dependency的作用范围的, 影响maven项目在各个生命周期时导入的package的状态。</strong></p>
+<p>自从2.0.9后，新增了1种，现在有了6种<strong>scope</strong>:</p>
+<ul>
+<li>
+<p><strong>compile</strong>
+默认的<strong>scope</strong>，表示 dependency 都可以在生命周期中使用。而且，这些dependencies 会传递到依赖的项目中。</p>
+</li>
+<li>
+<p><strong>provided</strong>
+跟compile相似，但是表明了dependency 由JDK或者容器提供，例如Servlet AP和一些Java EE APIs。这个<strong>scope</strong> 只能作用在编译和测试时，同时没有传递性。</p>
+<p><strong>使用这个时，不会将包打入本项目中，只是依赖过来。</strong></p>
+<p><strong>使用默认或其他时，会将依赖的项目打成jar包，放入本项目的Lib里</strong></p>
+<p>when building a web application for the Java Enterprise Edition, you would set the dependency on the Servlet API and related Java EE APIs to scope <code>provided</code> because the web container provides those classes. This scope is only available on the compilation and test classpath, and is not transitive.</p>
+</li>
+<li>
+<p><strong>runtime</strong>
+表示dependency不作用在编译时，但会作用在运行和测试时</p>
+</li>
+<li>
+<p><strong>test</strong>
+表示dependency作用在测试时，不作用在运行时。</p>
+</li>
+<li>
+<p><strong>system</strong>
+跟provided 相似，但是<strong>在系统中要以外部JAR包的形式提供</strong>，maven不会在repository查找它。</p>
+</li>
+<li>
+<p><strong>import</strong> <em>(Maven 2.0.9</em> <em>之后新增)</em>
+<strong>它只使用在<!-- raw HTML omitted -->中</strong>，表示从其它的pom中导入<strong>dependency</strong>的配置，例如：  This <strong>scope</strong> is only used on a dependency of type pom in the <!-- raw HTML omitted --> section. It indicates that the specified POM should be replaced with the dependencies in that POM&rsquo;s <!-- raw HTML omitted --> section. Since they are replaced, dependencies with a <strong>scope</strong> of <strong>import</strong> do not actually participate in limiting the transitivity of a dependency.</p>
+</li>
+</ul>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2023/dida/">滴答清单workflow</a></span>
+  <span class="nav-next"><a href="/cn/2023/%E5%92%B3%E5%97%BD%E7%94%A8%E8%8D%AF/">咳嗽用药</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2023\/dida\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2023\/%E5%92%B3%E5%97%BD%E7%94%A8%E8%8D%AF\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>logback不同类的日志打印在不同的文件中 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="logback不同类的日志打印在不同的文件中 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="定义两个 appender，分别命名为 “CLASS1_FILE” 和 “CLASS2_FILE”。每个appender会将日志输出到指定的文件中，这里分别是 logs/class1.log 和 logs/class2.log。
+定义两个 logger，分别对应 com.example.Class1 和 com.example.Class2 类。这两个 logger &amp;hellip;">
+      <meta property="og:description" content="定义两个 appender，分别命名为 “CLASS1_FILE” 和 “CLASS2_FILE”。每个appender会将日志输出到指定的文件中，这里分别是 logs/class1.log 和 logs/class2.log。
+定义两个 logger，分别对应 com.example.Class1 和 com.example.Class2 类。这两个 logger &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2024%5clogback%e4%b8%8d%e5%90%8c%e7%b1%bb%e7%9a%84%e6%97%a5%e5%bf%97%e6%89%93%e5%8d%b0%e5%9c%a8%e4%b8%8d%e5%90%8c%e7%9a%84%e6%96%87%e4%bb%b6%e4%b8%ad.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>logback不同类的日志打印在不同的文件中</h1>
+
+
+<h3>Rehoni / 
+2024-06-12</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>定义两个 appender，分别命名为 “CLASS1_FILE” 和 “CLASS2_FILE”。每个appender会将日志输出到指定的文件中，这里分别是 logs/class1.log 和 logs/class2.log。</p>
+<p>定义两个 logger，分别对应 com.example.Class1 和 com.example.Class2 类。这两个 logger 的日志级别都设置为 “info”，并将日志输出到对应的 appender 中。additivity=&ldquo;false&rdquo; 的设置是为了防止日志被父 logger（在这里是 root logger）也处理。</p>
+<p>最后，root logger 设置为只处理 “error” 级别以上的日志，它的日志输出到两个 appender 中。</p>
+<p>示例如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;appender</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;CLASS1_FILE&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;ch.qos.logback.core.rolling.RollingFileAppender&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;file&gt;</span>logs/class1.log<span style="color:#f92672">&lt;/file&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;encoder</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;ch.qos.logback.classic.encoder.PatternLayoutEncoder&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;pattern&gt;</span>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n<span style="color:#f92672">&lt;/pattern&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/encoder&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/appender&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;appender</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;CLASS2_FILE&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;ch.qos.logback.core.rolling.RollingFileAppender&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;file&gt;</span>logs/class2.log<span style="color:#f92672">&lt;/file&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;encoder</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;ch.qos.logback.classic.encoder.PatternLayoutEncoder&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;pattern&gt;</span>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n<span style="color:#f92672">&lt;/pattern&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/encoder&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/appender&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;logger</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;com.example.Class1&#34;</span> <span style="color:#a6e22e">level=</span><span style="color:#e6db74">&#34;info&#34;</span> <span style="color:#a6e22e">additivity=</span><span style="color:#e6db74">&#34;false&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;appender-ref</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;CLASS1_FILE&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/logger&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;logger</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;com.example.Class2&#34;</span> <span style="color:#a6e22e">level=</span><span style="color:#e6db74">&#34;info&#34;</span> <span style="color:#a6e22e">additivity=</span><span style="color:#e6db74">&#34;false&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;appender-ref</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;CLASS2_FILE&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/logger&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;root</span> <span style="color:#a6e22e">level=</span><span style="color:#e6db74">&#34;error&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;appender-ref</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;CLASS1_FILE&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;appender-ref</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;CLASS2_FILE&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/root&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2024/0612todo%E4%B9%8B%E6%88%91%E8%A7%81/">todo之我见</a></span>
+  <span class="nav-next"><a href="/cn/2024/linux%E6%9F%A5%E6%89%BE%E5%A4%A7%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/">Linux——查找大文件并删除</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2024\/0612todo%E4%B9%8B%E6%88%91%E8%A7%81\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2024\/linux%E6%9F%A5%E6%89%BE%E5%A4%A7%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

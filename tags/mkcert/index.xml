@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mkcert on Rehoni | 罗皓</title>
+    <link>/tags/mkcert/</link>
+    <description>Recent content in Mkcert on Rehoni | 罗皓</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 12 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/mkcert/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mkcert生成局域网互信</title>
+      <link>/cn/2023/mkcert%E7%94%9F%E6%88%90%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BA%92%E4%BF%A1/</link>
+      <pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>/cn/2023/mkcert%E7%94%9F%E6%88%90%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BA%92%E4%BF%A1/</guid>
+      <description>按照github网站，参考readme&#xA;服务端 一般是服务器，即网页发布方&#xA;先执行 mkcert -install 再执行，如果有域名输入域名，没有则写自己ip即可 mkcert example.com &amp;#34;*.example.com&amp;#34; example.test localhost 127.0.0.1 ::1&#xD;The certificate is at &amp;#34;./example.com+5.pem&amp;#34; and the key at &amp;#34;./example.com+5-key.pem&amp;#34; ✅ 得到的pem文件为证书，key为密钥 如果是haproxy，则在 ssl crt 后边写入该 pem 文件绝对路径，重新发布网页即可 注意haproxy的pem格式，是有两段，一段为 CERTIFICATE，一段为RSA PRIVATE KEY&#xA;要将3中的pem文件后补全key的内容，并且key的段始段尾都需要增加 RSA三个字母保持一致。&#xA;注意下边这段话，意思是访问时要对mkcert的CA进行授信&#xA;Using certificates from real certificate authorities (CAs) for development can be dangerous or impossible (for hosts like example.test, localhost or 127.0.0.1), but self-signed certificates cause trust errors. Managing your own CA is the best solution, but usually involves arcane commands, specialized knowledge and manual steps.</description>
+    </item>
+  </channel>
+</rss>

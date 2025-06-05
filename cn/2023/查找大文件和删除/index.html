@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Linux——查找大文件和删除 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Linux——查找大文件和删除 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="如果是数据库，在客户端操作(比如navicat)数据库的时候，会弹窗报错No space left on device，java应用也会在日志里报这个错； 如果是spring-boot spring-cloud，eureka状态会显示DOWN； 其他应用程序应该也会出现不同的down，比如连不上、响应速度非常慢等等。
+[&amp;hellip;] 直接使用df命令查看磁盘占用情况：
+df -h &amp;hellip;">
+      <meta property="og:description" content="如果是数据库，在客户端操作(比如navicat)数据库的时候，会弹窗报错No space left on device，java应用也会在日志里报这个错； 如果是spring-boot spring-cloud，eureka状态会显示DOWN； 其他应用程序应该也会出现不同的down，比如连不上、响应速度非常慢等等。
+[&amp;hellip;] 直接使用df命令查看磁盘占用情况：
+df -h &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2023%5c%e6%9f%a5%e6%89%be%e5%a4%a7%e6%96%87%e4%bb%b6%e5%92%8c%e5%88%a0%e9%99%a4.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Linux——查找大文件和删除</h1>
+
+
+<h3>rehoni / 
+2023-10-08</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="发现问题">发现问题</h2>
+<p>如果是数据库，在客户端操作(比如navicat)数据库的时候，会弹窗报错No space left on device，java应用也会在日志里报这个错；
+如果是spring-boot spring-cloud，eureka状态会显示DOWN；
+其他应用程序应该也会出现不同的down，比如连不上、响应速度非常慢等等。</p>
+<h2 id="问题验证">问题验证</h2>
+<p>直接使用df命令查看磁盘占用情况：</p>
+<pre tabindex="0"><code>df -h
+#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+Filesystem                  Size  Used Avail Use% Mounted on
+/dev/mapper/vg_192-lv_root   50G   44G  3.4G  100% /
+</code></pre><p>发现是真的，解决办法有两种：</p>
+<p>扩容，可以参考这里：<a href="http://blog.csdn.net/a349458532/article/details/52117618">Linux 磁盘扩容</a>
+查找大文件，确认是什么原因导致磁盘被占满，要么更改一些策略，比如kafka日志清理策略、CDH集群健康日志清理策略等，要么删除大文件。
+这里记录查找并删除大文件。</p>
+<h3 id="查找大文件">查找大文件</h3>
+<p>使用<code>du</code>和<code>df</code>命令定位大文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 先确定是哪个文件夹占用较多</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果文件较多命令执行可能很慢，在知道大概位置的情况下不建议直接对根目录操作</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># du的--max-depth=1表示只展示第一个层级的目录和文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sort的-h选项和du的-h选项一个意思，-r表示倒叙，默认升序</span>
+</span></span><span style="display:flex;"><span>du -h / --max-depth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> | sort -hr | head -n <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>50G /
+</span></span><span style="display:flex;"><span>28G    /var
+</span></span><span style="display:flex;"><span>6.0G   /dfs
+</span></span><span style="display:flex;"><span>4.0G   /opt
+</span></span><span style="display:flex;"><span>3.0G   /root
+</span></span><span style="display:flex;"><span>2.3G   /usr
+</span></span><span style="display:flex;"><span>148M   /lib
+</span></span><span style="display:flex;"><span>39M    /log
+</span></span><span style="display:flex;"><span>30M    /etc
+</span></span><span style="display:flex;"><span>29M    /boot
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定位到/var目录占用超过50%(磁盘总量50G)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 继续往下层目录找</span>
+</span></span><span style="display:flex;"><span>du -h /var --max-depth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> | sort -hr | head -n <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>28G    /var
+</span></span><span style="display:flex;"><span>24G    /var/lib
+</span></span><span style="display:flex;"><span>3.8G   /var/log
+</span></span><span style="display:flex;"><span>371M   /var/cache
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 继续/var/lib</span>
+</span></span><span style="display:flex;"><span>du -h /var/lib --max-depth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> | sort -hr | head -n <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>24G    /var/lib
+</span></span><span style="display:flex;"><span>10G    /var/lib/mongo
+</span></span><span style="display:flex;"><span>8.4G   /var/lib/cloudera-service-monitor
+</span></span><span style="display:flex;"><span>4.5G   /var/lib/cloudera-host-monitor
+</span></span><span style="display:flex;"><span>319M   /var/lib/mysql
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 最后发现是mongo 数据量太多以及cdh集群健康数据太多</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 可以设置mongo journal使用smallfile，否则文件到达1G并且文件所记载的写操作都被使用过了才会删除</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># cdh日志默认在文件达到10G的时候才会回滚，这里也可以做文章</span>
+</span></span></code></pre></div><h3 id="删除大文件">删除大文件</h3>
+<p>假设找到了对应的文件夹或文件并且可以删除，可以直接使用<code>rm</code>删除，也可以按照时间删除，比如一些日志文件，需要删除靠前的日志，较新的日志暂时还不能删除。</p>
+<h4 id="按文件大小删除">按文件大小删除</h4>
+<p>比如需要删除超过500M的文件，而不是删除整个文件夹：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 建一个临时文件夹做测试</span>
+</span></span><span style="display:flex;"><span>cd /tmp
+</span></span><span style="display:flex;"><span>mkdir test
+</span></span><span style="display:flex;"><span>cd test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 建几个大文件试试</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># seek表示跳过文件中指定大小的部分，实际上并没有写入任何数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 生成1000G的文件</span>
+</span></span><span style="display:flex;"><span>dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/zero of<span style="color:#f92672">=</span>test-big1 bs<span style="color:#f92672">=</span>1G count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> seek<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 生成1000M的文件</span>
+</span></span><span style="display:flex;"><span>dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/zero of<span style="color:#f92672">=</span>test-big2 bs<span style="color:#f92672">=</span>1M count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> seek<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#查找 -size参数值中+表示&gt; -表示&lt; 不写表示等于</span>
+</span></span><span style="display:flex;"><span>find /tmp/test -type f -size +200M
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>/tmp/test/test-big2
+</span></span><span style="display:flex;"><span>/tmp/test/test-big1
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>find /tmp/test -type f -size +2000M
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>/tmp/test/test-big1
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>find /tmp/test -type f -size -2000M
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>/tmp/test/test-big2
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 删除</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># {} \;不能丢</span>
+</span></span><span style="display:flex;"><span>find /tmp/test -type f -size +2000M -exec rm -rf <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span>
+</span></span><span style="display:flex;"><span>ls
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>test-big2
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+</span></span></code></pre></div><h4 id="按时间和名称删除">按时间和名称删除</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 删除修改时间距今超过10天的以.gz结尾的文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -mtime参数值中 0表示修改时间在24小时内 +x表示修改时间距今超过x天 -x表示距今少于x天 不写正负号表示等于</span>
+</span></span><span style="display:flex;"><span>find tmp/test/* -mtime +10  -name <span style="color:#e6db74">&#34;*.gz&#34;</span> -exec rm -rf <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span>
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2023/%E4%B8%80%E7%82%B9%E6%84%9F%E6%82%9F/">一点感悟</a></span>
+  <span class="nav-next"><a href="/cn/2023/kafka/">kafka备忘</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2023\/%E4%B8%80%E7%82%B9%E6%84%9F%E6%82%9F\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2023\/kafka\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>windows启用docker - Rehoni | 罗皓</title>
+    <meta property="og:title" content="windows启用docker - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="这次出现这个问题的原因是给电脑上安装了安卓模拟器导致了冲突，后卸载后docker仍不可用，故再排查一次。
+[&amp;hellip;] An Error occurred.
+windows 10 docker cannot enable hyper-v service
+[&amp;hellip;] 在命令行中执行systeminfo，如果所有列出的Hyper-V要求的值都为Yes，则系统可以运行Hyper-V。 &amp;hellip;">
+      <meta property="og:description" content="这次出现这个问题的原因是给电脑上安装了安卓模拟器导致了冲突，后卸载后docker仍不可用，故再排查一次。
+[&amp;hellip;] An Error occurred.
+windows 10 docker cannot enable hyper-v service
+[&amp;hellip;] 在命令行中执行systeminfo，如果所有列出的Hyper-V要求的值都为Yes，则系统可以运行Hyper-V。 &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5c2020-12-03-docker-windowsstartup.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>windows启用docker</h1>
+
+
+<h3>rehoni / 
+2020-12-03</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h3 id="问题">问题</h3>
+<p>这次出现这个问题的原因是给电脑上安装了安卓模拟器导致了冲突，后卸载后docker仍不可用，故再排查一次。</p>
+<blockquote>
+<p>An Error occurred.</p>
+<p>windows 10 docker cannot enable hyper-v service</p>
+</blockquote>
+<h3 id="1systeminfo命令">1、systeminfo命令</h3>
+<p>在命令行中执行<code>systeminfo</code>，如果所有列出的Hyper-V要求的值都为Yes，则系统可以运行Hyper-V。</p>
+<pre tabindex="0"><code>Hyper-V要求：    虚拟机监视器模式扩展：是
+				固件中已启用虚拟化：是
+				二级地址转换：是
+				执行数据保护可用：是
+</code></pre><p>同样需要四项均为“<strong>是</strong>”才符合运行Hyper-V虚拟机的要求</p>
+<h3 id="2启用或关闭windows功能">2、启用或关闭Windows功能</h3>
+<p><img src="/images/image-20201203142557473.png" alt="image-20201203142557473"></p>
+<h3 id="3bios设置">3、bios设置</h3>
+<p>CPU Configuration -&gt; Intel Virtualization Technology，将次设置项修改为<code>enabled</code>。</p>
+<p>如果已经是<code>enabled</code>状态，可以考虑开关一次此设置，再F10保存重启。</p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2020/%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/">Oracle——索引操作</a></span>
+  <span class="nav-next"><a href="/cn/2020/2020-12-03-fire5/">2020年11月财务实证</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2020\/%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/2020-12-03-fire5\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

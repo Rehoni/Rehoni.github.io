@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>tomcat——JVM参数说明 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="tomcat——JVM参数说明 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="-server: 一定要作为第一个参数，在多个CPU时性能佳 -Xms：java Heap初始大小。 默认是物理内存的1/64。 -Xmx：java heap最大值。建议均设为物理内存的一半。不可超过物理内存。 -XX:PermSize:设定内存的永久保存区初始大小，缺省值为64M。 -XX:MaxPermSize:设定内存的永久保存区最大 大小，缺省值为64M。 &amp;hellip;">
+      <meta property="og:description" content="-server: 一定要作为第一个参数，在多个CPU时性能佳 -Xms：java Heap初始大小。 默认是物理内存的1/64。 -Xmx：java heap最大值。建议均设为物理内存的一半。不可超过物理内存。 -XX:PermSize:设定内存的永久保存区初始大小，缺省值为64M。 -XX:MaxPermSize:设定内存的永久保存区最大 大小，缺省值为64M。 &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2021%5c%e8%ae%be%e7%bd%aeJVM%e5%a4%a7%e5%b0%8f.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>tomcat——JVM参数说明</h1>
+
+
+<h3>rehoni / 
+2021-09-01</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h3 id="jvm参数说明">JVM参数说明</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>-server: 一定要作为第一个参数，在多个CPU时性能佳 
+</span></span><span style="display:flex;"><span>-Xms：java Heap初始大小。 默认是物理内存的1/64。
+</span></span><span style="display:flex;"><span>-Xmx：java heap最大值。建议均设为物理内存的一半。不可超过物理内存。 
+</span></span><span style="display:flex;"><span>-XX:PermSize:设定内存的永久保存区初始大小，缺省值为64M。
+</span></span><span style="display:flex;"><span>-XX:MaxPermSize:设定内存的永久保存区最大 大小，缺省值为64M。
+</span></span><span style="display:flex;"><span>-XX:SurvivorRatio<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>  :生还者池的大小,默认是2，如果垃圾回收变成了瓶颈，您可以尝试定制生成池设置
+</span></span><span style="display:flex;"><span>-XX:NewSize: 新生成的池的初始大小。 缺省值为2M。
+</span></span><span style="display:flex;"><span>-XX:MaxNewSize: 新生成的池的最大大小。缺省值为32M。
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>-verbose:gc 现实垃圾收集信息 
+</span></span><span style="display:flex;"><span>-Xloggc:gc.log 指定垃圾收集日志文件 
+</span></span><span style="display:flex;"><span>-Xmn：young generation的heap大小，一般设置为Xmx的3、4分之一 
+</span></span><span style="display:flex;"><span>-XX:+UseParNewGC ：缩短minor收集的时间 
+</span></span><span style="display:flex;"><span>-XX:+UseConcMarkSweepGC ：缩短major收集的时间 此选项在Heap Size 比较大而且Major收集时间较长的情况下使用更合适。
+</span></span><span style="display:flex;"><span>-XX:userParNewGC 可用来设置并行收集【多核CPU】
+</span></span><span style="display:flex;"><span>-XX:ParallelGCThreads 可用来增加并行度【多核CPU】
+</span></span><span style="display:flex;"><span>-XX:UseParallelGC 设置后可以使用并行清除收集器【多核CPU】
+</span></span></code></pre></div><h3 id="常见的内存溢出">常见的内存溢出</h3>
+<h4 id="javalangoutofmemoryerror-permgen-space">Java.lang.OutOfMemoryError: PermGen space</h4>
+<p>PermGen space的全称是Permanent Generation space,是指内存的永久保存区域,这块内存主要是被JVM存放Class和Meta信息的,Class在被Loader时就会被放到PermGen space中,它和存放类实例(Instance)的Heap区域不同,GC(Garbage Collection)不会在主程序运行期对PermGen space进行清理，所以如果你的应用中有很多CLASS的话,就很可能出现PermGen space错误,这种错误常见在web服务器对JSP进行pre compile的时候。如果你的WEB APP下都用了大量的第三方jar, 其大小超过了jvm默认的大小(4M)那么就会产生此错误信息了。</p>
+<p>解决方法： 手动设置MaxPermSize大小</p>
+<p>建议：将相同的第三方jar文件移置到tomcat/shared/lib目录下，这样可以达到减少jar 文档重复占用内存的目的。</p>
+<h4 id="javalangoutofmemoryerror-java-heap-space">Java.lang.OutOfMemoryError: Java heap space</h4>
+<p>JVM堆的设置是指java程序运行过程中JVM可以调配使用的内存空间的设置.JVM在启动的时候会自动设置Heap size的值，其初始空间(即-Xms)是物理内存的1/64，最大空间(-Xmx)是物理内存的1/4。可以利用JVM提供的-Xmn -Xms -Xmx等选项可进行设置。Heap size 的大小是Young Generation 和Tenured Generaion 之和。
+提示：在JVM中如果98％的时间是用于GC且可用的Heap size 不足2％的时候将抛出此异常信息。
+提示：==Heap Size 最大不要超过可用物理内存的80％，一般的要将-Xms和-Xmx选项设置为相同，而-Xmn为1/4的-Xmx值==。
+解决方法：手动设置Heap size</p>
+<h3 id="linux下修改jvm内存大小">Linux下修改JVM内存大小</h3>
+<p>要添加在tomcat 的bin 下catalina.sh 里，位置cygwin=false前 。注意引号要带上。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># OS specific support. $var _must_ be set to either true or false.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>JAVA_OPTS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-Xms256m -Xmx512m -Xss1024K -XX:PermSize=128m -XX:MaxPermSize=256m&#34;</span>
+</span></span><span style="display:flex;"><span>cygwin<span style="color:#f92672">=</span>false
+</span></span></code></pre></div><h3 id="windows下修改jvm内存大小">Windows下修改JVM内存大小</h3>
+<h4 id="解压版本的tomcat">解压版本的Tomcat</h4>
+<p>要通过startup.bat启动tomcat才能加载配置</p>
+<p>要添加在tomcat 的bin 下catalina.bat 里</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>rem Guess CATALINA_HOME <span style="color:#66d9ef">if</span> not defined
+</span></span><span style="display:flex;"><span>set CURRENT_DIR<span style="color:#f92672">=</span>%cd% <span style="color:#75715e">#后面添加</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set JAVA_OPTS<span style="color:#f92672">=</span>-Xms256m -Xmx512m -XX:PermSize<span style="color:#f92672">=</span>128M -XX:MaxNewSize<span style="color:#f92672">=</span>256m -XX:MaxPermSize<span style="color:#f92672">=</span>256m -Djava.awt.headless<span style="color:#f92672">=</span>true
+</span></span></code></pre></div><h4 id="安装版的tomcat">安装版的Tomcat</h4>
+<p>windows服务执行的是bin/tomcat.exe.他读取注册表中的值,而不是catalina.bat的设置.</p>
+<p>修改注册表<code>HKEY_LOCAL_MACHINE/SOFTWARE/Apache Software Foundation/Tomcat Service Manager/Tomcat5/Parameters/JavaOptions</code></p>
+<p>原值为</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>-Dcatalina.home<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;C:/ApacheGroup/Tomcat 5.0&#34;</span>
+</span></span><span style="display:flex;"><span>-Djava.endorsed.dirs<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;C:/ApacheGroup/Tomcat 5.0/common/endorsed&#34;</span>
+</span></span><span style="display:flex;"><span>-Xrs
+</span></span></code></pre></div><p>加入 -Xms300m -Xmx350m 重启tomcat服务,设置生效</p>
+<h3 id="注意">注意</h3>
+<p>Xmx 与PermSize的和不可超过JVM可获得的总内存</p>
+<p>PermSize不可大于Xmx</p>
+<h3 id="参考">参考</h3>
+<p><a href="https://www.cnblogs.com/SmallStrange/p/11156285.html">Tomcat 设置JVM内存大小 - 乖怪丶 - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://www.cnblogs.com/JoePotter/p/13695704.html">JAVA_OPTS设置详解及Tomcat配置参数配置 - JoePotter - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://blog.csdn.net/qq_40162735/article/details/85278829">Tomcat 内存配置 及 配置参数详解_Keen to coding 的博客-CSDN博客_tomcat内存配置</a></p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2021/%E5%8F%82%E4%BF%9D%E8%81%8C%E5%B7%A5%E6%8A%80%E8%83%BD%E6%8F%90%E5%8D%87%E8%A1%A5%E8%B4%B4/">参保职工技能提升补贴</a></span>
+  <span class="nav-next"><a href="/cn/2021/202108/">2021年08月财务实证</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2021\/%E5%8F%82%E4%BF%9D%E8%81%8C%E5%B7%A5%E6%8A%80%E8%83%BD%E6%8F%90%E5%8D%87%E8%A1%A5%E8%B4%B4\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2021\/202108\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

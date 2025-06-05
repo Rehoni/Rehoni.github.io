@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>SSH可视化工具比较 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="SSH可视化工具比较 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="putty （只是为了升级 ssh 协议，偶尔配合 winscp 用）
+传文件基本用 xftp （因为支持 ctrl c 、v ），偶尔用 winscp
+[&amp;hellip;] 建议将此文件夹压缩为一个zip
+[&amp;hellip;] 一、点击配置文件目录
+二、找到此目录
+三、修改配置文件
+四、将&amp;quot;application.masterPassword&amp;quot; : false(需要重启客户 &amp;hellip;">
+      <meta property="og:description" content="putty （只是为了升级 ssh 协议，偶尔配合 winscp 用）
+传文件基本用 xftp （因为支持 ctrl c 、v ），偶尔用 winscp
+[&amp;hellip;] 建议将此文件夹压缩为一个zip
+[&amp;hellip;] 一、点击配置文件目录
+二、找到此目录
+三、修改配置文件
+四、将&amp;quot;application.masterPassword&amp;quot; : false(需要重启客户 &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143310583.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2023%5c%e5%b7%a5%e5%85%b7_ssh.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>SSH可视化工具比较</h1>
+
+
+<h3>rehoni / 
+2023-09-22</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mobaxterm</td>
+<td>颜色比较丰富：javalog有颜色区分<!-- raw HTML omitted -->有传文件窗口：拖拽<!-- raw HTML omitted -->隧道好用<!-- raw HTML omitted -->经服务器代理的ssh也能拖拽传文件</td>
+<td>偶尔传文件传不上去<!-- raw HTML omitted -->能不关闭会话切换编码，但略繁琐</td>
+</tr>
+<tr>
+<td>windterm</td>
+<td>配色丰富：javalog有颜色区分<!-- raw HTML omitted -->历史命令<!-- raw HTML omitted -->有传文件窗口：拖拽</td>
+<td>经服务器代理的ssh不能拖拽传文件<!-- raw HTML omitted -->隧道容易出问题<!-- raw HTML omitted -->未找到不关闭会话切换编码的办法</td>
+</tr>
+<tr>
+<td>xshell</td>
+<td>不关闭会话切换编码比较方便<!-- raw HTML omitted -->能从xftp直接打开</td>
+<td>复制粘贴命令比较繁琐</td>
+</tr>
+<tr>
+<td>tabby</td>
+<td>好看<!-- raw HTML omitted -->传文件比较繁琐</td>
+<td>未找到切换编码的地方<!-- raw HTML omitted -->javalog无颜色</td>
+</tr>
+</tbody>
+</table>
+<p>putty （只是为了升级 ssh 协议，偶尔配合 winscp 用）</p>
+<p>传文件基本用 xftp （因为支持 ctrl c 、v ），偶尔用 winscp</p>
+<h1 id="windterm">windterm</h1>
+<h2 id="v260出现部分bug">v2.6.0出现部分bug</h2>
+<ol>
+<li>下载的Java log文件是二进制编辑器看不了</li>
+<li>日志里突然挂个乱码</li>
+</ol>
+<h2 id="导出会话和配置">导出会话和配置</h2>
+<p>建议将此文件夹压缩为一个zip</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143310583.png" alt="image-20240816143310583"></p>
+<h2 id="关闭主密码">关闭主密码</h2>
+<p>一、点击配置文件目录</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143341312.png" alt="image-20240816143341312"></p>
+<p>二、找到此目录</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143353193.png" alt="image-20240816143353193"></p>
+<p>三、修改配置文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143535575.png" alt="image-20240816143535575"></p>
+<p>四、将&quot;application.masterPassword&quot; : false(需要重启客户端)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143547573.png" alt="image-20240816143547573"></p>
+<h2 id="锁屏密码关闭">锁屏密码关闭</h2>
+<p>修改global\wind.config将application.lockScreenTimeout设置为0或负数即可(需要重启客户端)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143612543.png" alt="image-20240816143612543"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143620151.png" alt="image-20240816143620151"></p>
+<h2 id="菜单栏-消失-不见了-唤起">菜单栏 消失 不见了 唤起</h2>
+<p>先按Alt+W，再按Alt+M</p>
+<h1 id="mobaxterm">mobaxterm</h1>
+<h2 id="中文复制乱码问题">中文复制乱码问题</h2>
+<p>比如服务器locale 为 GB18080，切换terminal font setting 为 ISO-885901</p>
+<p>ls之后，中文正常显示，鼠标选中复制乱码</p>
+<p>切utf-8，鼠标选中复制不乱码，但是此时如果再ls，乱码</p>
+<h2 id="设置保持ssh连接">设置保持SSH连接</h2>
+<p>在设置里点选<code>setting&gt;SSH&gt;sessions setting&gt;勾选ssh Keepalive</code></p>
+<h2 id="配置ssh隧道">配置ssh隧道</h2>
+<p>如图所示，本地与远程服务器之间存在防火墙，防火墙只允许SSH端口通过，为访问远程服务器，我们可以借助MobaXterm来与SSH服务器建立隧道，使得防火墙外的用户能够访问远程服务器</p>
+<p><em><em><em>*</em>*****具体配置：******</em>*</em>*</p>
+<p>1.打开MobaXterm，在工具中找到MobaSSHtunnal</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143738425.png" alt="image-20240816143738425"></p>
+<p>2.点击建立新的隧道</p>
+<p>3.代理配置</p>
+<p><strong>Local port forwarding 方式</strong></p>
+<p>此方式代理到本地的端口，可以通过本地端口ssh到指定IP的remote server，并且能够进行文件传输。</p>
+<p><strong>典型案例</strong></p>
+<p><strong>SSH文件上传</strong>：此配置为 localhost:2223 映射到了 198.87.105.56:22，所以建立ssh会话，localhost:2223，即对应了198.87.105.56:22。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ssh ems@localhost:2223 
+</span></span></code></pre></div><p><strong>GATEWAY转发</strong>：此配置为 localhost:2223 映射到了 198.87.105.56:8001，所以前端调试建立代理，localhost:2223，即对应了198.87.105.56:8001。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">const</span> <span style="color:#960050;background-color:#1e0010">devServer</span> <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#960050;background-color:#1e0010">new</span> <span style="color:#960050;background-color:#1e0010">WebpackDevServer(</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">proxy:</span> <span style="color:#960050;background-color:#1e0010">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">context:</span> <span style="color:#960050;background-color:#1e0010">[&#39;/auth-service&#39;,</span> <span style="color:#960050;background-color:#1e0010">&#39;/per-service&#39;,</span> <span style="color:#960050;background-color:#1e0010">&#39;/audit-service&#39;],</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">target:</span> <span style="color:#960050;background-color:#1e0010">&#39;http:</span><span style="color:#75715e">//localhost:2223&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }<span style="color:#960050;background-color:#1e0010">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">})</span>
+</span></span></code></pre></div><p><strong>故此种方式只支持单个端口映射，因此也不需要用ProxySwitchOmega</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143801303.png" alt="image-20240816143801303"></p>
+<p><strong>Dynamic port forwarding 方式</strong></p>
+<p>此方式代理到本地的端口，可以通过本地端口访问remote server的web和服务；</p>
+<p>此方式更加灵活，通过SOCKS proxy 的方式，进行动态端口代理；</p>
+<p>但是需要结合<strong>电脑代理设置</strong>，或浏览器插件<strong>ProxySwitchOmega</strong>进行代理才能访问。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143817318.png" alt="image-20240816143817318"></p>
+<p>建立此种隧道后，可直接访问 198.87.105.56:8000（不用修改为localhost的ip）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143835242.png" alt="image-20240816143835242"></p>
+<p>4.添加私钥</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143846949.png" alt="image-20240816143846949"></p>
+<p>5.点击启动/停止启动/关闭代理</p>
+<p><strong>综上，可以同时启用两个tunnel，一个local形式用于ssh代理和文件传输，一个dynamic形式配合switchOmiga用于web访问</strong></p>
+<h2 id="关闭自动弹出sftp">关闭自动弹出sftp</h2>
+<p>关闭自动弹出SFTP</p>
+<p>Moba在连接上远程电脑之后，将自动打开左侧的SFTP侧边栏。有时我们并不需要SFTP，同时主窗口是黑色的，SFTP又是白色的，显得有点刺眼，因此可以将自动弹出SFTP功能关闭掉。</p>
+<p>在菜单栏点击 「settings」 &ndash;&gt; 「Configuration」，在弹出的对话框中选择 「SSH」，再将 「automaticall switch to SSH-browser tab after login」 前面的对勾去掉即可。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143859627.png" alt="image-20240816143859627"></p>
+<h1 id="winscp">winscp</h1>
+<h2 id="导出会话">导出会话</h2>
+<p>会得到一个winscp.ini文件，实现导入和导出</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143908050.png" alt="image-20240816143908050"></p>
+<h1 id="xshell">xshell</h1>
+<h2 id="配置ssh隧道-1">配置ssh隧道</h2>
+<p>假设这里的跳板机为192.168.1.25，可以通过本机笔记本ssh，</p>
+<p>目标内网机为192.168.1.26，不可以通过本机笔记本ssh，但是可以通过跳板机ssh</p>
+<p>1、打开Xshell,建立<a href="https://so.csdn.net/so/search?q=%E8%B7%B3%E6%9D%BF%E6%9C%BA&amp;spm=1001.2101.3001.7020">跳板机</a>的SSH连接，如下所示：
+<img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143918030.png" alt="image-20240816143918030"></p>
+<p>2、输入用户名和密码，也可以在连接的时候进行输入。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143924993.png" alt="image-20240816143924993">
+3、 <strong>（关键）</strong> 建立隧道。这个是核心步骤，首先类型、源主机使用默认值即可，侦听端口可以根据实际情况选择，我这里选择了2222，目标主机是指需要连接的<a href="https://so.csdn.net/so/search?q=%E5%86%85%E7%BD%91&amp;spm=1001.2101.3001.7020">内网</a>机器的IP，这里是192.168.1.26，目标端口号，默认是22，如果修改了目标机器的SSH端口，使用改后的端口即可。
+<img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143933537.png" alt="image-20240816143933537">
+4、打开跳板机会话，如下所示。</p>
+<blockquote>
+<p>使用隧道连接内网机器时，必须保证跳板机会话是打开的。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816143958795.png" alt="image-20240816143958795">
+5、建立内网机器的连接，如下所示。需要注意的是，其中的主机一定要填写localhost，端口号要填写第三步中侦听端口填写的值，即2222。
+<img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816144011533.png" alt="image-20240816144011533">
+6、点击连接，输入用户名密码，即可连接到内网的机器上了，如下图所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240816144020057.png" alt="image-20240816144020057"></p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2023/workflow/">生活工作流体系</a></span>
+  <span class="nav-next"><a href="/cn/2023/proxychains-for-windows/">proxychains代理windows</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2023\/workflow\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2023\/proxychains-for-windows\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

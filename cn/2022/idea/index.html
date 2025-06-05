@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>IDEA小技巧 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="IDEA小技巧 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="IntelliJ IDEA 简体中文专题教程
+IDEA类和方法注释模板设置（非常详细）
+[&amp;hellip;] File | Settings | Build, Execution, Deployment | Compiler | Annotation Processors，enable annotation processing
+[&amp;hellip;] [&amp;hellip;] 自动build &amp;hellip;">
+      <meta property="og:description" content="IntelliJ IDEA 简体中文专题教程
+IDEA类和方法注释模板设置（非常详细）
+[&amp;hellip;] File | Settings | Build, Execution, Deployment | Compiler | Annotation Processors，enable annotation processing
+[&amp;hellip;] [&amp;hellip;] 自动build &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20220705134935141.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2022%5cidea.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>IDEA小技巧</h1>
+
+
+<h3>rehoni / 
+2022-07-23</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="1快捷键和设置">1、快捷键和设置</h2>
+<h3 id="idea相关资源">IDEA相关资源</h3>
+<p><a href="https://github.com/judasn/IntelliJ-IDEA-Tutorial">IntelliJ IDEA 简体中文专题教程</a></p>
+<p><a href="https://blog.csdn.net/xiaoliulang0324/article/details/79030752">IDEA类和方法注释模板设置（非常详细）</a></p>
+<h3 id="1启用注解处理器">1、启用注解处理器</h3>
+<p>File | Settings | Build, Execution, Deployment | Compiler | Annotation Processors，enable annotation processing</p>
+<h3 id="2properties中文乱码">2、Properties中文乱码</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20220705134935141.png" alt="image-20220705134935141"></p>
+<h3 id="3build-project-automatically">3、build project automatically</h3>
+<p>自动build project，如果和maven-profile 混用时，最好关闭</p>
+<p>否则在clean之后，reimport时，会自动使用idea的build，导致maven-profile失效，不同profile的配置文件未能正确排除。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/2022-08-07-21-43-41-image.png" alt=""></p>
+<h3 id="4行注释设置不从行首开始在代码之前">4、行注释设置，不从行首开始，在代码之前</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/2022-07-29-09-13-15-image.png" alt=""></p>
+<h3 id="5intellij-idea取消自动删除空格">5、IntelliJ IDEA取消自动删除空格：</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/6873a29f9b1bb5c10fa121aa0012df49b90.jpg" alt="6873a29f9b1bb5c10fa121aa0012df49b90.jpg"></p>
+<h3 id="6提高idea的运存">6、提高idea的运存</h3>
+<pre tabindex="0"><code>-Xms2048m 
+-Xmx4096m
+-XX:ReservedCodeCacheSize=2048m
+-XX:+UseConcMarkSweepGC
+</code></pre><p><code>-Xms</code> 初始堆内存，调大该内存可以让启动速度更快，以省去分配内存的时间</p>
+<p><code>-Xmx</code> 最大堆内存，如果遇到 <code>OutOfMemoryError</code> 可以调大该数值，最大不要超过系统 1/4</p>
+<pre tabindex="0"><code>-XX:+UseConcMarkSweepGC` 参数用来调整 GC 算法。使用该算法利用多个线程在后台进行 GC，以避免应用程序停止。当分配超过 4GB 的堆内存时，可以尝试使用 `-XX:+UseG1GC
+</code></pre><p><code>-XX:ReservedCodeCacheSize=510m</code> 设置编译器最大的 code cache，另外一个相关的 JVM 参数是 <code>-XX:InitialCodeCacheSize</code> JetBrains 推荐这里使用 240m</p>
+<p><code>-XX:SoftRefLRUPolicyMSPerMB=[value]</code> 参数用来控制每 M 空间中 soft reference 保证存活的毫秒数。默认的时间是 1000，JetBrains 推荐 50</p>
+<p><code>-Dsun.io.useCanonCaches=[boolean]</code> 该参数是否开启文件名及路径缓存，默认 java 会缓存文件名 30 秒，JetBrains 建议关闭</p>
+<h3 id="7列模式">7、列模式</h3>
+<p>shift+alt+insert，开启关闭列模式；或者按住ALT，左键进行拖选。</p>
+<h3 id="0其他">0、其他</h3>
+<ul>
+<li>语言编码提示：File | Settings | Editor | Inlay Hints | Java</li>
+<li>设置IDE默认设置：File | New Project Setup | Settings for New Projects</li>
+<li>连接服务器：deploy连接服务器，打开ssh session，上传文件或下载文件</li>
+<li>连接数据库：database连接数据库，可以使用大部分datagrip的功能</li>
+<li>设置命令行参数：<a href="https://blog.csdn.net/u013713294/article/details/53020293">IDEA中如何给main方法附带参数_DiamondDownload的博客-CSDN博客_idea带参数运行main</a></li>
+<li>断点调试：<a href="http://www.cnblogs.com/Bowu/p/4026117.html">Intellij IDEA调试功能使用总结</a></li>
+<li>缩写：有很多可以记住一下，比如说<code>sout</code>，比如说<code>psvm</code>，使用<code>ctrl+j</code>可以查看</li>
+<li>设置换行的宽度限制：<code>File | Settings | Editor | Code Style| General</code>，设置hard on wrap的长度，勾选Wrap on typing。如果<code>Wrap on typing</code>更改为<code>Yes</code>，那么当你输入内容超过限制线时会自动换行，否则只有当你使用格式化快捷键<code>Ctrl+Alt+L</code>时才会手动换行。</li>
+<li>显示内存：show memory indicator</li>
+<li>堆叠tabs：取消勾选File | Settings | Editor | General | Editor Tabs | Show tabs in one row</li>
+<li>设置自动参数提示：File | Settings | Editor | General | Code Completion | Parameter Info | show full method signatures，其他的选线也可以看情况进行勾选，提示可以按 <code>ctrl + p</code> 呼出</li>
+<li>开启/关闭默认打开项目：File | Settings | Appearance &amp; Behavior | System Settings | Reopen projects on startup</li>
+<li>自动导入功能：文件 | 设置 | 编辑器 | 常规 | 自动导入 ，配置java的动态添加和动态优化</li>
+</ul>
+<h2 id="2远程调试">2、远程调试</h2>
+<p><strong>Java远程调试</strong></p>
+<p>写服务端程序，在开发环境下打开远程调试还是非常有用的，还原现场非常容易，让请求方再发个请求即可。如果下来本地调试的话很多环境与管理服务的地址配置什么的都可能不一样，增加了可变因素。</p>
+<p>在需要启动服务调试的jvm启动参数中加入（注意：参数要排在启动类名的前面）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>-Xdebug -Xrunjdwp:transport<span style="color:#f92672">=</span>dt_socket,server<span style="color:#f92672">=</span>y,suspend<span style="color:#f92672">=</span>n,address<span style="color:#f92672">=</span><span style="color:#ae81ff">1234</span>
+</span></span></code></pre></div><blockquote>
+<p>dt_socket：使用的通信方式</p>
+<p>server：是主动连接调试器还是作为服务器等待调试器连接</p>
+<p>suspend：是否在启动JVM时就暂停，并等待调试器连接</p>
+<p>address：地址和端口，地址可以省略，两者用冒号分隔</p>
+</blockquote>
+<p>根据文档和stackoverflow上的讨论，JVM 1.5以后的版本应该使用类似下面的命令（老的还是可以使用的）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>-agentlib:jdwp<span style="color:#f92672">=</span>transport<span style="color:#f92672">=</span>dt_socket,server<span style="color:#f92672">=</span>y,suspend<span style="color:#f92672">=</span>n,address<span style="color:#f92672">=</span><span style="color:#ae81ff">1234</span>
+</span></span></code></pre></div><p>就是一个agentlib就行了，后面的参数都没有变，如果用intellij的远程调试配置的话，它会默认给出这两种参数，让你放到服务器的JVM参数里。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20210624193258735.png" alt="image-20210624193258735"></p>
+<p>需要远程调试的时候，打包好==jar包==（推荐jar包，tomcat部署需要在tomcat中配置，比较麻烦），执行命令即可</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>java -jar -agentlib:jdwp<span style="color:#f92672">=</span>transport<span style="color:#f92672">=</span>dt_socket,server<span style="color:#f92672">=</span>y,suspend<span style="color:#f92672">=</span>n,address<span style="color:#f92672">=</span><span style="color:#ae81ff">18833</span> myApp.jar
+</span></span></code></pre></div><p><strong>参考</strong>：<a href="https://www.cnblogs.com/lailailai/p/4560399.html">Java 远程调试 - 卖程序的小歪 - 博客园 (cnblogs.com)</a></p>
+<h2 id="3ignored-pom-文件问题">3、ignored Pom 文件问题</h2>
+<p><strong>具体描述</strong></p>
+<p>创建了一个之前删除了的<strong>同名的module名称</strong>。但是，却弹出被忽略(Ignored)的Ignored pom.xml文件。</p>
+<p><strong>解决方案和原理</strong></p>
+<p>由于相同名称的module在之前被创建过，因此在IDEA中留有痕迹。重新创建一个新的同名module会让IDEA误以为是之前被删除掉的module，所以才自动将这个pom.xml文件忽略了</p>
+<p>1、进入File | Settings | Build, Execution, Deployment | Build Tools | Maven | Ignored Files</p>
+<p>2、找到<strong>lgnored file</strong>，<strong>把右边已选中的选项取消勾选</strong>，然后点击 ok</p>
+<p>3、reimport maven project</p>
+<h2 id="4java开发插件">4、Java开发插件</h2>
+<ol>
+<li>
+<p>Alibaba Cloud Toolkit</p>
+</li>
+<li>
+<p>Alibaba Java Coding Guidelines</p>
+</li>
+<li>
+<p>BetterIntelliJ</p>
+</li>
+<li>
+<p>Chinese language pack</p>
+</li>
+<li>
+<p>CodeGlance</p>
+</li>
+<li>
+<p>Codota</p>
+</li>
+<li>
+<p>Free Mybatis plugin</p>
+</li>
+<li>
+<p>File Watcher</p>
+</li>
+<li>
+<p>Grep Console</p>
+</li>
+<li>
+<p>Spring Boot Assistant</p>
+</li>
+<li>
+<p>Gruvbox Theme</p>
+</li>
+<li>
+<p>GsonFormatPlus</p>
+<p>json转实体类</p>
+<p><a href="https://github.com/mars-men/GsonFormatPlus">https://github.com/mars-men/GsonFormatPlus</a></p>
+</li>
+<li>
+<p>Hiberbee Theme</p>
+</li>
+<li>
+<p>Key Promoter X</p>
+</li>
+<li>
+<p>Maven Helper</p>
+</li>
+<li>
+<p>Mybatis Log</p>
+</li>
+<li>
+<p>MybatisX</p>
+</li>
+<li>
+<p>Nyan Progress Bar</p>
+</li>
+<li>
+<p>One dark Theme</p>
+</li>
+<li>
+<p>Rainbow Brackets</p>
+</li>
+<li>
+<p>RESTful Toolkit</p>
+</li>
+<li>
+<p>Statistic</p>
+</li>
+<li>
+<p>stopCoding</p>
+</li>
+<li>
+<p>String manipulation</p>
+</li>
+<li>
+<p>Translation</p>
+</li>
+<li>
+<p>WakaTime</p>
+</li>
+</ol>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2022/keepalive/">keepalived双网卡双网段热备配置</a></span>
+  <span class="nav-next"><a href="/cn/2022/git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/">Git——提交规范</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2022\/keepalive\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2022\/git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

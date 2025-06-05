@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>达梦——表空间管理 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="达梦——表空间管理 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="DM7表空间概述
+[&amp;hellip;] 在DM7数据库中，表空间是一种逻辑存储结构，数据库的对象如表、索引等在逻辑上都是存储在指定的表空间中。数据库在初始化的时候，系统会自动创建5个默认表空间，SYSTEM，MAIN，ROLL，TEMP和HMAIN表空间。其中SYSTEM表空间是系统表空间，存储有数据字典信息，用户数据不能存放在该表空间上。ROLL，TEMP和HMAIN表空间，由系统自动维护，不需 &amp;hellip;">
+      <meta property="og:description" content="DM7表空间概述
+[&amp;hellip;] 在DM7数据库中，表空间是一种逻辑存储结构，数据库的对象如表、索引等在逻辑上都是存储在指定的表空间中。数据库在初始化的时候，系统会自动创建5个默认表空间，SYSTEM，MAIN，ROLL，TEMP和HMAIN表空间。其中SYSTEM表空间是系统表空间，存储有数据字典信息，用户数据不能存放在该表空间上。ROLL，TEMP和HMAIN表空间，由系统自动维护，不需 &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2022%5c%e8%be%be%e6%a2%a6%e8%a1%a8%e7%a9%ba%e9%97%b4%e7%ae%a1%e7%90%86.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>达梦——表空间管理</h1>
+
+
+<h3>rehoni / 
+2022-04-01</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h3 id="表空间管理dm7">表空间管理（DM7）</h3>
+<p>DM7表空间概述</p>
+<blockquote>
+<p>在DM7数据库中，表空间是一种逻辑存储结构，数据库的对象如表、索引等在逻辑上都是存储在指定的表空间中。数据库在初始化的时候，系统会自动创建5个默认表空间，SYSTEM，MAIN，ROLL，TEMP和HMAIN表空间。其中SYSTEM表空间是系统表空间，存储有数据字典信息，用户数据不能存放在该表空间上。ROLL，TEMP和HMAIN表空间，由系统自动维护，不需要用户干预。初始的MAIN表空间为用户默认表空间。表空间只是一种逻辑结构，对应的物理存储结构为数据文件。也即是，用户的数据是存储在表空间对应的数据文件上面。DM7数据库中，物理存储结构的数据文件后缀为DBF。系统提供v$tablespace和 v$datafile视图查询表空间和数据文件。</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 查询表空间
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> v$tablespace;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 查询数据文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> v$datafile;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 查询表空间对应的数据文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span>
+</span></span><span style="display:flex;"><span>ts.NAME,
+</span></span><span style="display:flex;"><span>df.PATH
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span>
+</span></span><span style="display:flex;"><span>V$TABLESPACE <span style="color:#66d9ef">AS</span> ts,
+</span></span><span style="display:flex;"><span>V$DATAFILE <span style="color:#66d9ef">AS</span> df
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span>
+</span></span><span style="display:flex;"><span>ts.ID <span style="color:#f92672">=</span> df.GROUP_ID;
+</span></span></code></pre></div><h4 id="21表空间创建与删除">2.1表空间创建与删除</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 创建表空间，最简洁形式
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 仅指定数据文件路径，以及数据文件初始大小，单位为（MB）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 注意大小仅为数字，不能带M符号
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> TABLESPACE bookshop DATAFILE <span style="color:#e6db74">&#39;/opt/bookshop1.dbf&#39;</span> <span style="color:#66d9ef">SIZE</span> <span style="color:#ae81ff">128</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 以上创建表空间语句，自动指定如下属性：
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>autoextend <span style="color:#66d9ef">on</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>maxsize <span style="color:#ae81ff">33554431</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CACHE</span> <span style="color:#f92672">=</span> NORMAL
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">属性分别指：数据文件自动扩展，扩展最大大小，数据页的缓冲池名称</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 创建表空间，指定非自动扩展
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> TABLESPACE bookshop DATAFILE <span style="color:#e6db74">&#39;/opt/bookshop1.dbf&#39;</span> <span style="color:#66d9ef">SIZE</span> <span style="color:#ae81ff">128</span> autoextend <span style="color:#66d9ef">off</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 删除表空间
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">drop</span> tablespace bookshop;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">删除表空间时，改表空间上必须没有数据库对象，否则会删除失败</span>
+</span></span></code></pre></div><h4 id="22表空间扩展">2.2表空间扩展</h4>
+<p>当未指定表空间自动扩展，或是某一操作系统目录空间不足，数据库需要新的空间时，可以对表空间进行扩展操作。扩展有两种操作，一是新增数据文件；另外一种是增大已有的数据文件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 新增数据文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> TABLESPACE bookshop <span style="color:#66d9ef">ADD</span> DATAFILE <span style="color:#e6db74">&#39;/opt/book2.dbf&#39;</span> <span style="color:#66d9ef">SIZE</span> <span style="color:#ae81ff">64</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 增大已有数据文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> TABLESPACE bookshop RESIZE DATAFILE <span style="color:#e6db74">&#39;/opt/book.dbf&#39;</span> <span style="color:#66d9ef">TO</span> <span style="color:#ae81ff">1024</span>;
+</span></span></code></pre></div><h4 id="23表空间数据文件路径修改">2.3表空间数据文件路径修改</h4>
+<p>当已有操作系统目录空间不足，需要将存放在该目录下的数据库数据文件更新目录时，可以使用如下语句。使用本方法的前提是，表空间必须处在脱机状态：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 表空间脱机处理
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> TABLESPACE bookshop OFFLINE;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 更改数据文件路径
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> TABLESPACE bookshop <span style="color:#66d9ef">RENAME</span> DATAFILE <span style="color:#e6db74">&#39;/opt/book.dbf&#39;</span> <span style="color:#66d9ef">TO</span> <span style="color:#e6db74">&#39;/data/book.dbf&#39;</span>;
+</span></span></code></pre></div><p>当该表空间有事务操作时，脱机处理会失败。更改数据文件路径，系统会自动修改控制文件，并将操作系统文件移动到新的路径。</p>
+<p>&ndash;在使用脱机处理失效时，可以将数据库系统进行关闭处理，然后手动修改控制文件，并移动数据文件至新的目录后，重新启动数据库系统。</p>
+<h3 id="3dm7表空间监控">3.DM7表空间监控</h3>
+<p>监控表空间使用空间情况：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- DM7 查询表空间使用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span>
+</span></span><span style="display:flex;"><span>t.name tablespace_name,
+</span></span><span style="display:flex;"><span>d.free_size<span style="color:#f92672">*</span>SF_GET_PAGE_SIZE()<span style="color:#f92672">/</span><span style="color:#ae81ff">1024</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">||</span><span style="color:#e6db74">&#39;M&#39;</span> free_space,
+</span></span><span style="display:flex;"><span>d.total_size<span style="color:#f92672">*</span>SF_GET_PAGE_SIZE()<span style="color:#f92672">/</span><span style="color:#ae81ff">1024</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">||</span><span style="color:#e6db74">&#39;M&#39;</span> total_space,
+</span></span><span style="display:flex;"><span>d.free_size<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span><span style="color:#f92672">/</span>d.total_size <span style="color:#e6db74">&#34;% FREE&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span>
+</span></span><span style="display:flex;"><span>v$tablespace t,
+</span></span><span style="display:flex;"><span>v$datafile d
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span>
+</span></span><span style="display:flex;"><span>t.id<span style="color:#f92672">=</span>d.group_id;
+</span></span></code></pre></div><h3 id="4dm7表空间备份">4.DM7表空间备份</h3>
+<p>DM7数据库支持用户表空间的备份还原操作。表空间备份需要在联机状态下执行，并且需要开启数据库归档模式。这是因为，表空间的数据库对象的字典信息是存储在数据库的系统SYSTEM表空间中。表空间的还原恢复，只能在备份源库上联机执行。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 表空间全量备份
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>BACKUP TABLESPACE t1 <span style="color:#66d9ef">FULL</span> <span style="color:#66d9ef">TO</span> TS_BAK BAKFILE <span style="color:#e6db74">&#39;/opt/tablespace_bak.bak&#39;</span> ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 表空间还原
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> TABLESPACE t1 OFFLINE;
+</span></span><span style="display:flex;"><span>RESTORE TABLESPACE t1 <span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">&#39;/opt/tablespace_bak.bak&#39;</span> IDENTIFIED <span style="color:#66d9ef">BY</span> ABCDEF;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> TABLESPACE t1 ONLINE;
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2022/%E5%B7%A5%E5%85%B7_vscode/">VsCode小技巧</a></span>
+  <span class="nav-next"><a href="/cn/2022/%E8%BE%BE%E6%A2%A6%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">达梦——用户管理</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2022\/%E5%B7%A5%E5%85%B7_vscode\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2022\/%E8%BE%BE%E6%A2%A6%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

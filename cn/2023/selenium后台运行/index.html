@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>selenium driver实现后台运行 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="selenium driver实现后台运行 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="标准解决方案：使用headless的selenium driver就可以了。
+短频快的解决方案：使用ghost driver。
+[&amp;hellip;] 1.首先需要下载Chromedriver，下载后得到的是一个chromedriver.exe文件。（chromedriver下载地址） 2.将chromedriver.exe拷贝至谷歌浏览器目录（如 C:\Program &amp;hellip;">
+      <meta property="og:description" content="标准解决方案：使用headless的selenium driver就可以了。
+短频快的解决方案：使用ghost driver。
+[&amp;hellip;] 1.首先需要下载Chromedriver，下载后得到的是一个chromedriver.exe文件。（chromedriver下载地址） 2.将chromedriver.exe拷贝至谷歌浏览器目录（如 C:\Program &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2023%5cselenium%e5%90%8e%e5%8f%b0%e8%bf%90%e8%a1%8c.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>selenium driver实现后台运行</h1>
+
+
+<h3>rehoni / 
+2023-10-13</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>标准解决方案：使用headless的selenium driver就可以了。</p>
+<p>短频快的解决方案：使用ghost driver。</p>
+<h3 id="解决chromedriver-executable-needs-to-be-in-path问题">解决&rsquo;chromedriver&rsquo; executable needs to be in PATH问题</h3>
+<p>1.首先需要下载Chromedriver，下载后得到的是一个chromedriver.exe文件。（chromedriver下载地址）
+2.将chromedriver.exe拷贝至谷歌浏览器目录（如 C:\Program Files\Google\Chrome\Application）以及python根目录（C:\Python27）。
+3.将谷歌浏览器环境变量添加到path（C:\Users\HD003\AppData\Local\Google\Chrome\Application）。
+至此，就可以解决 ‘chromedriver’ executable needs to be in PATH问题了。</p>
+<h3 id="填充表单">填充表单</h3>
+<p>Selenium专门提供了Select类来处理下拉框。 其实 WebDriver 中提供了一个叫 Select 的方法，可以帮助我们完成这些事情：</p>
+<pre tabindex="0"><code># 导入 Select 类
+from selenium.webdriver.support.ui import Select
+
+# 找到 name 的选项卡
+select = Select(driver.find_element_by_name(&#39;status&#39;))
+
+# 
+select.select_by_index(1)
+select.select_by_value(&#34;0&#34;)
+select.select_by_visible_text(u&#34;未审核&#34;)
+</code></pre><p>以上是三种选择下拉框的方式，它可以根据索引来选择，可以根据值来选择，可以根据文字来选择。注意：</p>
+<blockquote>
+<p>index 索引从 0 开始
+value是option标签的一个属性值，并不是显示在下拉框中的值
+visible_text是在option标签文本的值，是显示在下拉框的值</p>
+</blockquote>
+<p>全部取消选择怎么办呢？很简单:</p>
+<pre tabindex="0"><code>select.deselect_all()
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2023/mkcert%E7%94%9F%E6%88%90%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BA%92%E4%BF%A1/">mkcert生成局域网互信</a></span>
+  <span class="nav-next"><a href="/cn/2023/%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B/">表达能力的思考</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2023\/mkcert%E7%94%9F%E6%88%90%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BA%92%E4%BF%A1\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2023\/%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

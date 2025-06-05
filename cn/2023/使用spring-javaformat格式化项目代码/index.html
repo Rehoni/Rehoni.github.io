@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>使用spring-javaformat格式化项目代码 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="使用spring-javaformat格式化项目代码 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="一步步降低代码复杂度
+GitHub仓库
+[&amp;hellip;] 1、根pom下引入插件
+[&amp;hellip;] &amp;lt;build&amp;gt; &amp;lt;plugins&amp;gt; &amp;lt;plugin&amp;gt; &amp;lt;groupId&amp;gt;io.spring.javaformat&amp;lt;/groupId&amp;gt; &amp;hellip;">
+      <meta property="og:description" content="一步步降低代码复杂度
+GitHub仓库
+[&amp;hellip;] 1、根pom下引入插件
+[&amp;hellip;] &amp;lt;build&amp;gt; &amp;lt;plugins&amp;gt; &amp;lt;plugin&amp;gt; &amp;lt;groupId&amp;gt;io.spring.javaformat&amp;lt;/groupId&amp;gt; &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20230922191109583.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2023%5c%e4%bd%bf%e7%94%a8spring-javaformat%e6%a0%bc%e5%bc%8f%e5%8c%96%e9%a1%b9%e7%9b%ae%e4%bb%a3%e7%a0%81.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>使用spring-javaformat格式化项目代码</h1>
+
+
+<h3>rehoni / 
+2023-11-01</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="参考">参考</h2>
+<p><a href="https://blog.csdn.net/j16421881/article/details/105608591">一步步降低代码复杂度</a></p>
+<p><a href="https://github.com/spring-io/spring-javaformat">GitHub仓库</a></p>
+<h2 id="maven">maven</h2>
+<p>1、根pom下引入插件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;build&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;plugins&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;plugin&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;groupId&gt;</span>io.spring.javaformat<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;artifactId&gt;</span>spring-javaformat-maven-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;version&gt;</span>0.0.39<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;/plugin&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;/plugins&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/build&gt;</span>
+</span></span></code></pre></div><p>2、修改.m2/settings.xml</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;pluginGroups&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;pluginGroup&gt;</span>io.spring.javaformat<span style="color:#f92672">&lt;/pluginGroup&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/pluginGroups&gt;</span>
+</span></span></code></pre></div><p>3、支持java8</p>
+<p>根pom同级下新增.springjavaformatconfig文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#a6e22e">java-baseline</span><span style="color:#f92672">=</span><span style="color:#e6db74">8</span>
+</span></span></code></pre></div><p>4、安装idea的插件</p>
+<p>这个网址下载，https://mvnrepository.com/artifact/io.spring.javaformat/spring-javaformat-intellij-idea-plugin/0.0.39</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20230922191109583.png" alt="image-20230922191109583"></p>
+<p>然后idea安装插件，选择下载好的jar包，导入插件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20230922191658212.png" alt="image-20230922191658212"></p>
+<p>5、验证</p>
+<ul>
+<li>
+<p>有此插件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20230831175341196.png" alt="image-20230831175341196"></p>
+</li>
+<li>
+<p>格式化代码<code>ctrl+alt+L</code>能生效</p>
+</li>
+<li>
+<p>有此标志</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20230831175303072.png" alt="image-20230831175303072"></p>
+<h2 id="checkstyle">checkStyle</h2>
+<p>1、maven引入插件（此步骤好像非必须）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>			<span style="color:#f92672">&lt;plugin&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.maven.plugins<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;artifactId&gt;</span>maven-checkstyle-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;version&gt;</span>3.1.1<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;dependencies&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;groupId&gt;</span>com.puppycrawl.tools<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;artifactId&gt;</span>checkstyle<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;version&gt;</span>9.3<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;groupId&gt;</span>io.spring.javaformat<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;artifactId&gt;</span>spring-javaformat-checkstyle<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;version&gt;</span>0.0.39<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;/dependencies&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;executions&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;execution&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;id&gt;</span>checkstyle-validation<span style="color:#f92672">&lt;/id&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;phase&gt;</span>validate<span style="color:#f92672">&lt;/phase&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;inherited&gt;</span>true<span style="color:#f92672">&lt;/inherited&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;configLocation&gt;</span>io/spring/javaformat/checkstyle/checkstyle.xml<span style="color:#f92672">&lt;/configLocation&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;includeTestSourceDirectory&gt;</span>true<span style="color:#f92672">&lt;/includeTestSourceDirectory&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;goals&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;goal&gt;</span>check<span style="color:#f92672">&lt;/goal&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;/goals&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;/execution&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;/executions&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/plugin&gt;</span>
+</span></span></code></pre></div><p>2、IDEA 安装 plugin</p>
+<p>3、下载 checkstyle 和 config 的jar包</p>
+<p>checkstyle 包下载地址 <a href="https://mvnrepository.com/artifact/io.spring.javaformat/spring-javaformat-checkstyle/0.0.39">https://mvnrepository.com/artifact/io.spring.javaformat/spring-javaformat-checkstyle/0.0.39</a></p>
+<p>config 包下载地址 <a href="https://mvnrepository.com/artifact/io.spring.javaformat/spring-javaformat-config/0.0.39">https://mvnrepository.com/artifact/io.spring.javaformat/spring-javaformat-config/0.0.39</a></p>
+<p>3、IDEA 配置 plugin</p>
+<ul>
+<li>
+<p>注意checkstyle的配置最好和官方一致，9.3。试过10.12.2，无法生效。</p>
+</li>
+<li>
+<p>创建配置文件到本地</p>
+<p>按照官方文档提供的配置</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE module PUBLIC
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">		&#34;-//Checkstyle//DTD Checkstyle Configuration 1.3//EN&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">		&#34;https://checkstyle.org/dtds/configuration_1_3.dtd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;module</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;com.puppycrawl.tools.checkstyle.Checker&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;module</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;io.spring.javaformat.checkstyle.SpringChecks&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/module&gt;</span>
+</span></span></code></pre></div></li>
+<li>
+<p>导入第三方检查</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20230831183447975.png" alt="image-20230831183447975"></p>
+<p>4、验证</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240612142717493.png" alt="image-20240612142717493"></p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2023/%E4%B9%B0%E8%A1%A3%E6%9C%8D%E5%85%B3%E9%94%AE%E8%AF%8D/">买衣服关键词</a></span>
+  <span class="nav-next"><a href="/cn/2023/linux%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Linux——问题手册</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2023\/%E4%B9%B0%E8%A1%A3%E6%9C%8D%E5%85%B3%E9%94%AE%E8%AF%8D\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2023\/linux%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

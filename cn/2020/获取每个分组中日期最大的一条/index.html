@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle——获取每个分组中日期最大的一条 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Oracle——获取每个分组中日期最大的一条 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="在报表开发中，经常遇到这样的问题：分组后，只需要每个分组最新的一条数据，其他的就不要了
+此时的思路应该是：对分组进行排序，并编号，然后select编号为1的记录即可。
+">
+      <meta property="og:description" content="在报表开发中，经常遇到这样的问题：分组后，只需要每个分组最新的一条数据，其他的就不要了
+此时的思路应该是：对分组进行排序，并编号，然后select编号为1的记录即可。
+">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5c%e8%8e%b7%e5%8f%96%e6%af%8f%e4%b8%aa%e5%88%86%e7%bb%84%e4%b8%ad%e6%97%a5%e6%9c%9f%e6%9c%80%e5%a4%a7%e7%9a%84%e4%b8%80%e6%9d%a1.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle——获取每个分组中日期最大的一条</h1>
+
+
+<h3>Rehoni / 
+2020-11-26</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>在报表开发中，经常遇到这样的问题：分组后，只需要每个分组最新的一条数据，其他的就不要了</p>
+<p>此时的思路应该是：对分组进行排序，并编号，然后select编号为1的记录即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> rn,a,b,<span style="color:#66d9ef">c</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">from</span> (<span style="color:#66d9ef">select</span> ROW_NUMBER() OVER(PARTITION <span style="color:#66d9ef">BY</span> a <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> b <span style="color:#66d9ef">DESC</span>) rn,a,b,<span style="color:#66d9ef">c</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">table</span>)
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">where</span> rn <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2020/2020-11-24-java-restwithres/">Java线程定时得到结果退出示例</a></span>
+  <span class="nav-next"><a href="/cn/2020/%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/">Oracle——索引操作</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2020\/2020-11-24-java-restwithres\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

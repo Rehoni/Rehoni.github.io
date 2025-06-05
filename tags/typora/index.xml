@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Typora on Rehoni | 罗皓</title>
+    <link>/tags/typora/</link>
+    <description>Recent content in Typora on Rehoni | 罗皓</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 06 Jun 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/typora/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Typora配置Github图床</title>
+      <link>/cn/2024/typora%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</link>
+      <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>/cn/2024/typora%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</guid>
+      <description>1、github&#xA;创建 github 私有仓库&#xA;生成一个 token 用于 PicGo 操作你的仓库：&#xA;访问：https://github.com/settings/tokens&#xA;然后点击 Generate new token。&#xA;2、picgo/picList&#xA;图床，选择“Github”作为图床服务。&#xA;在 Github 设置页面中，填写你的 Github 仓库信息，包括仓库名称、分支、文件夹等。&#xA;确保仓库是公开可访问的，并且已经创建了用于存储图片的文件夹。&#xA;可以启用 CDN 加速：https://cdn.jsdelivr.net/gh/user/repo@version/file&#xA;picList 可以开启删除云端功能，记得在设置中配置代理加速&#xA;3、typora&#xA;插入图片时规则——上传图片，并勾选对本地位置的图片应用上述规则&#xA;上传服务勾选 PicGo 或者 PicList，选中安装路径即可。&#xA;typora 如果显示图片比较慢，可以开启 typora 代理：Launch Arguments (Windows / Linux)</description>
+    </item>
+    <item>
+      <title>Typora使用指南</title>
+      <link>/cn/2024/typora%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</link>
+      <pubDate>Tue, 06 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>/cn/2024/typora%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</guid>
+      <description>Typora使用指南 1、快捷键 参考知乎：完全使用指南&#xA;收起侧边栏 ctrl + shift + L/3 段落内代码 ctrl + shift +· 代码块 ctrl + shift + k 折叠 删除线 like this，~~like this~~&#xA;下划线 Ctrl + U 或者加上标签`&amp;lt;u&amp;gt;Underline&amp;lt;/u&amp;gt;` 。 添加/删除表格行 Command/Ctrl+Enter添加行&#xA;Shift+Command/Ctrl+L删除行&#xA;鼠标拽住表头可以进行拖拽。&#xA;强调 ==like this==，==like this==&#xA;To use this feature, please enable it first in the Preference Panel -&amp;gt; Markdown Tab. Then, use == to wrap highlight content. For example: ==highlight==.&#xA;表格内行内换行 shift + Enter会以插入一个&amp;lt;br/&amp;gt;的形式，进行换行。&#xA;2、一些高级用法 Typora，世界上最漂亮的写作App - 马索萌的文章 - 知乎 https://zhuanlan.</description>
+    </item>
+  </channel>
+</rss>

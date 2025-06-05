@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>tomcat——静态资源映射 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="tomcat——静态资源映射 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="tomcat访问外部的资源，配置静态资源映射
+https://www.cnblogs.com/iyangyuan/p/3316444.html
+[&amp;hellip;] &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;Context crossContext=&amp;#34;true&amp;#34; &amp;hellip;">
+      <meta property="og:description" content="tomcat访问外部的资源，配置静态资源映射
+https://www.cnblogs.com/iyangyuan/p/3316444.html
+[&amp;hellip;] &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;Context crossContext=&amp;#34;true&amp;#34; &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2021%5c%e9%9d%99%e6%80%81%e8%b5%84%e6%ba%90%e6%98%a0%e5%b0%84.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>tomcat——静态资源映射</h1>
+
+
+<h3>rehoni / 
+2021-12-02</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h3 id="方法一">方法一</h3>
+<p>tomcat访问外部的资源，配置静态资源映射</p>
+<p><a href="https://www.cnblogs.com/iyangyuan/p/3316444.html">https://www.cnblogs.com/iyangyuan/p/3316444.html</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;Context</span> <span style="color:#a6e22e">crossContext=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#a6e22e">docBase=</span><span style="color:#e6db74">&#34;/users/ems/zhsbdStatic&#34;</span> <span style="color:#a6e22e">path=</span><span style="color:#e6db74">&#34;/zhsbdResources&#34;</span> <span style="color:#a6e22e">reloadable=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&lt;/Context&gt;</span>
+</span></span></code></pre></div><p>server.xml的Host标签下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;Host</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;localhost&#34;</span>  <span style="color:#a6e22e">appBase=</span><span style="color:#e6db74">&#34;webapps&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">unpackWARs=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#a6e22e">autoDeploy=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">&lt;!-- 增加虚拟路径，供访问本地图片--&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;Context</span> <span style="color:#a6e22e">path=</span><span style="color:#e6db74">&#34;/upload_file&#34;</span> <span style="color:#a6e22e">docBase=</span><span style="color:#e6db74">&#34;D:/upload/img&#34;</span> <span style="color:#a6e22e">reloadable=</span><span style="color:#e6db74">&#34;false&#34;</span> <span style="color:#f92672">&gt;&lt;/Context&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/Host&gt;</span>
+</span></span></code></pre></div><h3 id="方法二">方法二</h3>
+<p><strong>只适合jar包或者打包了资源的war包</strong>，未打包资源的war包丢入服务器的tomcat，是无法通过配置来访问外部资源的</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WebMvcConfig</span> <span style="color:#66d9ef">implements</span> WebMvcConfigurer {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Add handlers to serve static resources such as images, js, and, css
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * files from specific locations under web application root, the classpath,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * and others.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param registry
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addResourceHandlers</span>(ResourceHandlerRegistry registry) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// addResourceHandler 服务的相对路径</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// addResourceLocations 本机/部署环境的绝对路径，注意Windows下前缀不同 file:///D:/files/</span>
+</span></span><span style="display:flex;"><span>        registry.<span style="color:#a6e22e">addResourceHandler</span>(<span style="color:#e6db74">&#34;/oiisResources/**&#34;</span>).<span style="color:#a6e22e">addResourceLocations</span>(<span style="color:#e6db74">&#34;file:/users/ems/websophic/static/&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2021/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">搭建个人密码管理体系</a></span>
+  <span class="nav-next"><a href="/cn/2021/2021%E8%AE%A1%E5%88%92/">2021计划</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2021\/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2021\/2021%E8%AE%A1%E5%88%92\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

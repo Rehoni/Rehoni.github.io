@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Docker——常见场景 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Docker——常见场景 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="《Docker-从入门到实践》
+[&amp;hellip;] docker search mysql docker pull mysql # 进入shell，查看mysql版本信息 docker run -it mysql /bin/bash mysql --help | grep Distrib mysql --version # 后台启动，可以使用-v 挂载目录，比 &amp;hellip;">
+      <meta property="og:description" content="《Docker-从入门到实践》
+[&amp;hellip;] docker search mysql docker pull mysql # 进入shell，查看mysql版本信息 docker run -it mysql /bin/bash mysql --help | grep Distrib mysql --version # 后台启动，可以使用-v 挂载目录，比 &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2022%5c%e5%b7%a5%e5%85%b7_docker.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Docker——常见场景</h1>
+
+
+<h3>rehoni / 
+2022-04-11</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p><a href="https://yeasy.gitbook.io/docker_practice/">《Docker-从入门到实践》</a></p>
+<h2 id="1mysql">1、MySQL</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker search mysql
+</span></span><span style="display:flex;"><span>docker pull mysql
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 进入shell，查看mysql版本信息</span>
+</span></span><span style="display:flex;"><span>docker run -it mysql /bin/bash
+</span></span><span style="display:flex;"><span>mysql --help | grep Distrib
+</span></span><span style="display:flex;"><span>mysql --version
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 后台启动，可以使用-v 挂载目录，比如/data/mysql/logs:/logs</span>
+</span></span><span style="display:flex;"><span>docker run -p 3306:3306 --name mysql_test -e MYSQL_ROOT_PASSWORD<span style="color:#f92672">=</span><span style="color:#ae81ff">123456</span> -d mysql
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看端口映射</span>
+</span></span><span style="display:flex;"><span>docker port mysql_test
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 进入运行的MySQL容器内部</span>
+</span></span><span style="display:flex;"><span>docker exec -it mysql_test /bin/bash
+</span></span></code></pre></div><h2 id="2mongodb">2、mongodb</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 运行，-v 为设置容器的挂载目录，这里是将本机的“/data/mongo”目录挂载到容器中的/data/db中，作为 mongodb 的存储目录</span>
+</span></span><span style="display:flex;"><span>docker run -p 27017:27017 -v ~/docker/mongodb:/data/db --name mongodb_test -d mongo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 进入运行的mongodb容器内部</span>
+</span></span><span style="display:flex;"><span>docker exec -it mongodb_test  mongo
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 连接数据库（此时不需要用户就可以连接），创建用户</span>
+</span></span><span style="display:flex;"><span>db.createUser<span style="color:#f92672">({</span>
+</span></span><span style="display:flex;"><span>    user: <span style="color:#e6db74">&#39;root&#39;</span>,pwd:<span style="color:#e6db74">&#39;123456&#39;</span>,
+</span></span><span style="display:flex;"><span>    roles:<span style="color:#f92672">[</span> <span style="color:#f92672">{</span> role: <span style="color:#e6db74">&#34;userAdminAnyDatabase&#34;</span>, db: <span style="color:#e6db74">&#34;admin&#34;</span> <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">})</span>;d
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#创建完用户我们就要重新启动mongo服务，并且指定auth</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#删除已经运行的mongo容器：</span>
+</span></span><span style="display:flex;"><span>docker rm -f mongodb_test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#指定验证启动mongo容器：</span>
+</span></span><span style="display:flex;"><span>docker run -p 27017:27017 -v ~/docker/mongodb:/data/db --name mongodb_test -d mongo --auth
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#连接数据库（需要用户名密码，即需要auth才能操作）</span>
+</span></span></code></pre></div><h2 id="3powerjob">3、powerjob</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>              --restart<span style="color:#f92672">=</span>always <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       --name powerjob-server <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       -p 7700:7700 -p 10086:10086 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       --net<span style="color:#f92672">=</span>host <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       -e TZ<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Asia/Shanghai&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       -e JVMOPTIONS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       -e PARAMS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--spring.profiles.active=product --spring.datasource.core.jdbc-url=jdbc:mysql://127.0.0.1:3306/powerjob-product?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;allowMultiQueries=true&amp;useSSL=false --spring.datasource.core.username=root --spring.datasource.core.password=123456 --spring.data.mongodb.uri=mongodb://127.0.0.1:27017/powerjob-product&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       -v ~/docker/powerjob-server:/root/powerjob/server -v ~/.m2:/root/.m2 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       tjqq/powerjob-server:latest
+</span></span></code></pre></div><h2 id="4从容器中拷贝文件到宿主机中">4、从容器中拷贝文件到宿主机中</h2>
+<p><strong>先上语法：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker cp <span style="color:#f92672">[</span>OPTIONS<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>CONTAINER_ID<span style="color:#f92672">]</span>:<span style="color:#f92672">[</span>SRC_PATH<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>DEST_PATH<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>语法是这么个写法，在实际的操作中，在写容器内的路径的时候并不能<strong>自动补全</strong>，所以实际上还需要还要先进入到容器才行。</p>
+<p>1.在服务器上用有权限的用户，执行 docker ps 查看全部容器。</p>
+<p>2.复制id对应容器的id，并执行 docker exec -it [容器id] /bin/bash 进入容器</p>
+<p>3.假设我要复制的是common.log文件，那么我进入容器后就用find ./ -name &ldquo;common.log&quot;命令找到那个文件所在目录，假设查找结果是 ./mwbase/applogs/rtlog/OLS/common.log，执行exit退出docker容器</p>
+<p>4.退出容器后，我希望复制到宿主机的/home/rhlog目录下重命名为yyy.log,那么最后的命令就是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker cp 容器id:容器内文件路径 目标路径
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#示例</span>
+</span></span><span style="display:flex;"><span>docker cp 6741xxxxxxxx:/xxxx/xxx/xxx/xxxx/common.log /home/rhlog/yyy.log  <span style="color:#75715e">#注意没有&#34;.&#34;</span>
+</span></span></code></pre></div><p>执行结果可以看到/home/rhlog目录拷贝得到了yyy.log，这样文件就拷贝出来辣。</p>
+<h2 id="5linux服务器离线二进制安装docker">5、linux服务器离线二进制安装docker</h2>
+<p>安装包下载地址 <a href="https://download.docker.com/linux/static/stable/x86_64/">https://download.docker.com/linux/static/stable/x86_64/</a></p>
+<p>简易安装Docker，且普通用户可以访问docker</p>
+<p>解压docker的安装包，并将文件夹内所有可执行程序放置到**/usr/bin**</p>
+<p>创建docker组，并将普通用户加入到docker组内</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>groupadd docker
+</span></span><span style="display:flex;"><span>usermod -aG docker ems
+</span></span></code></pre></div><p>启动docker</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nohup dockerd &gt;/dev/null &amp;
+</span></span></code></pre></div><p>普通用户执行docker命令，查看输出</p>
+<p>如果执行失败，将docker相关可执行文件权限修改至777，但这一操作会存在安全风险，慎用</p>
+<p>当然也可以使用<strong>systemd</strong>管理</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cp docker-18.03.1-ce/* /usr/local/bin/
+</span></span><span style="display:flex;"><span>cat &gt;/usr/lib/systemd/system/docker.service <span style="color:#e6db74">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">[Unit]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Description=Docker Application Container Engine
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Documentation=http://docs.docker.io
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">[Service]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Environment=&#34;PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EnvironmentFile=-/run/flannel/docker
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">ExecStart=/usr/local/bin/dockerd --log-level=error
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">ExecReload=/bin/kill -s HUP $MAINPID
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Restart=on-failure
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">RestartSec=5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">LimitNOFILE=infinity
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">LimitNPROC=infinity
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">LimitCORE=infinity
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Delegate=yes
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">KillMode=process
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">[Install]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">WantedBy=multi-user.target
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span></code></pre></div><h2 id="6docker导入导出">6、docker导入导出</h2>
+<p>image导入导出</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 镜像保存</span>
+</span></span><span style="display:flex;"><span>docker save <span style="color:#f92672">[</span>image-id or image name<span style="color:#f92672">]</span> &gt; specific_image.tar
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># example</span>
+</span></span><span style="display:flex;"><span>docker save apsara_sdk:latest &gt; apsara_sdk.tar
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 镜像导入</span>
+</span></span><span style="display:flex;"><span>docker load &lt; apsara_sdk.tar
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 因为镜像的大小比较大，（如果从二区直接透过隔离装置传输会传不成功，所以）需要将tar 文件进行切分，按照以下的步骤</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 先将 apsara_sdk.tar 文件进行压缩</span>
+</span></span><span style="display:flex;"><span>tar czvf apsara_sdk.tar.gz apsara_sdk.tar
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 将文件 apsara_sdk.tar.gz 进行拆分 </span>
+</span></span><span style="display:flex;"><span>split -b 10M -d -a <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h2 id="7普通用户允许使用docker">7、普通用户允许使用docker</h2>
+<p>创建docker组并将用户加入docker组，将docker相关的可执行文件权限改成755，重启docker</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>groupadd docker
+</span></span><span style="display:flex;"><span>gpasswd -a ems docker
+</span></span><span style="display:flex;"><span>cd /usr/bin <span style="color:#f92672">&amp;&amp;</span> chmod <span style="color:#ae81ff">755</span> docker*
+</span></span><span style="display:flex;"><span>systemctl restart docker
+</span></span></code></pre></div><h2 id="8容器时区不一致">8、容器时区不一致</h2>
+<pre tabindex="0"><code>date -R                          //查看linux主机时间和时区
+date exec [container] date -R    // 查看容器时间和时区
+</code></pre><p><img src="/images/1031555-20190326224503023-317257802.png" alt="img"></p>
+<p>2者的时间差了8个小时</p>
+<p>解决方案</p>
+<p>1、利用Dockerfile创建镜像时。在Dockerfile中加入</p>
+<pre tabindex="0"><code>ENV TIME_ZONE=Asia/Shanghai 
+RUN ln -snf /usr/share/zoneinfo/$TIME_ZONE /etc/localtime &amp;&amp; echo $TIME_ZONE &gt; /etc/timezone
+</code></pre><p>2、容器创建时。加入时区挂载选项：-v /etc/localtime:/etc/localtime。实例：</p>
+<pre tabindex="0"><code>docker run -d -p 6379:6379 -v /etc/localtime:/etc/localtime --name test-redis redis
+</code></pre><p><img src="/images/1031555-20190326230759302-1170402185.png" alt="img"></p>
+<p>3、容器已启动时。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker exec -it container /bin/bash // 进入交互模式，container为容器ID或名称，下同
+</span></span><span style="display:flex;"><span>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</span></span><span style="display:flex;"><span>docker restart container // 重启容器
+</span></span><span style="display:flex;"><span>docker exec container date -R // 查看时区
+</span></span></code></pre></div><p><img src="/images/1031555-20190326233117686-295290646.png" alt="img"></p>
+<h2 id="9centos在线安装docker">9、centos在线安装docker</h2>
+<h3 id="docker安装">Docker安装</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">### CentOS8 默认是会读取centos.org的mirrorlist的，所以一般来说是不需要配置镜像的。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### (Refer to: https://www.linuxidc.com/Linux/2019-10/161212.htm)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># step 1: 安装必要的一些系统工具</span>
+</span></span><span style="display:flex;"><span>sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># step 2: 更新 container.io 包, 否则可能会报 `package docker-ce-3:19.03.13-3.el7.x86_64 requires containerd.io &gt;= 1.2.2-3, ...`的错</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 可在 https://mirrors.aliyun.com/docker-ce/linux/centos/8/x86_64/stable/Packages/ 下找最新版安装</span>
+</span></span><span style="display:flex;"><span>sudo dnf install -y --allowerasing https://mirrors.aliyun.com/docker-ce/linux/centos/8/x86_64/stable/Packages/containerd.io-1.3.7-3.1.el8.x86_64.rpm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Step 3: 安装Docker-CE</span>
+</span></span><span style="display:flex;"><span>sudo yum install -y docker-ce
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Step 4: 开启Docker服务并设置开机自启</span>
+</span></span><span style="display:flex;"><span>sudo systemctl start docker <span style="color:#f92672">&amp;&amp;</span> sudo systemctl enable docker
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试, 如输出下图结果则安装成功</span>
+</span></span><span style="display:flex;"><span>docker version
+</span></span></code></pre></div><h3 id="docker-compose-安装">Docker-compose 安装</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 方法一 (Refer to: https://docs.docker.com/compose/install/)</span>
+</span></span><span style="display:flex;"><span>sudo curl -L <span style="color:#e6db74">&#34;https://github.com/docker/compose/releases/download/1.27.4/docker-compose-</span><span style="color:#66d9ef">$(</span>uname -s<span style="color:#66d9ef">)</span><span style="color:#e6db74">-</span><span style="color:#66d9ef">$(</span>uname -m<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> -o /usr/local/bin/docker-compose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo chmod +x /usr/local/bin/docker-compose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 方法二 (Refer to: https://docs.docker.com/compose/install/#install-using-pip)</span>
+</span></span><span style="display:flex;"><span>sudo pip3 install docker-compose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试, 如输出下图结果则安装成功</span>
+</span></span><span style="display:flex;"><span>docker-compose --version
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出：docker-compose version 1.27.4, build xxx</span>
+</span></span></code></pre></div><h3 id="修改docker镜像源">修改docker镜像源</h3>
+<p>docker中国 <a href="https://registry.docker-cn.com">https://registry.docker-cn.com</a></p>
+<p>网易 <a href="http://hub-mirror.c.163.com">http://hub-mirror.c.163.com</a></p>
+<p>中科大 <a href="https://docker.mirrors.ustc.edu.cn">https://docker.mirrors.ustc.edu.cn</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo vim /etc/docker/daemon.json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;registry-mirrors&#34;</span>: <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;https://docker.mirrors.ustc.edu.cn&#34;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo systemctl daemon-reload
+</span></span><span style="display:flex;"><span>sudo service docker restart
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># docker search nginx</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看配置的源</span>
+</span></span><span style="display:flex;"><span>docker info|grep Mirrors -A <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="docker在centos7上daemon启动失败的一个解决方案">docker在centos7上daemon启动失败的一个解决方案</h3>
+<pre tabindex="0"><code>SELinux is not supported with the overlay graph driver
+</code></pre><p><img src="/images/image-20201231100214991.png" alt="image-20201231100214991"></p>
+<h2 id="10win10启动docker">10、win10启动docker</h2>
+<h3 id="问题">问题</h3>
+<p>这次出现这个问题的原因是给电脑上安装了安卓模拟器导致了冲突，后卸载后docker仍不可用，故再排查一次。</p>
+<blockquote>
+<p>An Error occurred.</p>
+<p>windows 10 docker cannot enable hyper-v service</p>
+</blockquote>
+<h3 id="1systeminfo命令">1、systeminfo命令</h3>
+<p>在命令行中执行<code>systeminfo</code>，如果所有列出的Hyper-V要求的值都为Yes，则系统可以运行Hyper-V。</p>
+<pre tabindex="0"><code>Hyper-V要求：    虚拟机监视器模式扩展：是
+                固件中已启用虚拟化：是
+                二级地址转换：是
+                执行数据保护可用：是
+</code></pre><p>同样需要四项均为“<strong>是</strong>”才符合运行Hyper-V虚拟机的要求</p>
+<h3 id="2启用或关闭windows功能">2、启用或关闭Windows功能</h3>
+<p><img src="/images/image-20201203142557473.png" alt="image-20201203142557473"></p>
+<h3 id="3bios设置">3、bios设置</h3>
+<p>CPU Configuration -&gt; Intel Virtualization Technology，将次设置项修改为<code>enabled</code>。</p>
+<p>如果已经是<code>enabled</code>状态，可以考虑开关一次此设置，再F10保存重启。</p>
+<h2 id="11docker启动code-server">11、docker启动code-server</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>docker run -it --name code-server -p 127.0.0.1:8080:8080 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -v <span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/.config:/home/coder/.config&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -v <span style="color:#e6db74">&#34;</span>$PWD<span style="color:#e6db74">:/home/coder/project&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -u <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>id -u<span style="color:#66d9ef">)</span><span style="color:#e6db74">:</span><span style="color:#66d9ef">$(</span>id -g<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -e <span style="color:#e6db74">&#34;DOCKER_USER=</span>$USER<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  codercom/code-server:latest
+</span></span></code></pre></div><h2 id="12rabbitmq">12、rabbitmq</h2>
+<h2 id="13报错error-failed-to-setup-ip-tables-unable-to-enable-skip-dnat-rule">13、报错ERROR: Failed to Setup IP tables: Unable to enable SKIP DNAT rule</h2>
+<p>执行<code>docker-compose up -d</code>时出现ERROR: Failed to Setup IP tables: Unable to enable SKIP DNAT rule</p>
+<p>原因是因为防火墙关闭之后需要重启docker服务。</p>
+<p>执行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>service docker restart
+</span></span></code></pre></div><p>即可。</p>
+<h2 id="14docker开启允许远程访问">14、docker开启允许远程访问</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>vi /usr/lib/systemd/system/docker.service
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加</span>
+</span></span><span style="display:flex;"><span>-H tcp://0.0.0.0:2375 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>systemctl daemon-reload    
+</span></span><span style="display:flex;"><span>service docker restart 
+</span></span></code></pre></div><h2 id="15postgre">15、postgre</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --name some-postgres -p 15432:5432 -e POSTGRES_PASSWORD<span style="color:#f92672">=</span>mysecretpassword -d postgres
+</span></span></code></pre></div><h2 id="16docker网络排查">16、docker网络排查</h2>
+<ol>
+<li>
+<p>修改ip会对docker网络造成影响吗？</p>
+<p>修改 IP 地址可能会对 Docker 网络造成影响，具体取决于修改的方式和网络配置。 如果你修改了 Docker 主机的 IP 地址，那么 Docker 容器的网络配置也可能会受到影响。例如，如果 Docker 容器使用了主机的网络，那么容器的 IP 地址也会随之改变。 如果你修改了 Docker 容器的 IP 地址，那么容器的网络配置也会受到影响。例如，如果容器使用了固定的 IP 地址，那么修改容器的 IP 地址可能会导致容器无法连接到网络。 因此，在修改 IP 地址之前，建议你先备份网络配置，并确保你了解修改 IP 地址可能会对网络造成的影响。如果你不确定如何修改 IP 地址，最好先咨询系统管理员或查阅相关文档。</p>
+</li>
+<li>
+<p>创建容器 nrec_vsftpd_implicit_ssl WARNING: IPv4 forwarding is disabled. Networking will not work.</p>
+<p>这段信息表示警告：IPv4 转发已禁用，网络将无法正常工作。 在 Docker 中，如果 IPv4 转发被禁用，那么容器将无法访问外部网络，也无法被外部网络访问。这可能会导致容器中的应用程序无法正常工作。 要解决这个问题，你可以在 Docker 主机上启用 IPv4 转发。在 Linux 系统中，可以通过编辑 <code>/etc/sysctl.conf</code> 文件来启用 IPv4 转发，添加以下内容： <code>bash net.ipv4.ip_forward = 1 </code> 然后，使用 <code>sysctl -p</code> 命令使更改生效： <code>bash sysctl -p </code> 这样，IPv4 转发就被启用了，容器中的应用程序应该能够正常访问外部网络和被外部网络访问。 需要注意的是，启用 IPv4 转发可能会带来一些安全风险，因此在生产环境中使用时需要谨慎考虑。如果你不确定如何处理这些安全风险，最好先咨询系统管理员或查阅相关文档。</p>
+</li>
+<li>
+<p>/etc/sysctl.conf 这个文件是配置什么的？</p>
+<p><code>/etc/sysctl.conf</code> 是一个系统配置文件，用于配置系统参数和内核选项。它包含了一些系统内核参数的设置，这些参数可以影响系统的性能、安全性和功能。</p>
+<p>在 <code>sysctl.conf</code> 文件中，你可以设置各种系统参数，例如网络设置、内存管理、文件系统、系统日志等。这些参数的设置可以通过编辑 <code>sysctl.conf</code> 文件来完成，也可以通过命令行工具 <code>sysctl</code> 来进行动态设置。</p>
+<p>需要注意的是，修改 <code>sysctl.conf</code> 文件可能会对系统造成潜在的风险，因此在进行任何更改之前，建议你先备份系统配置，并谨慎操作。如果你不确定如何修改系统参数，最好先咨询系统管理员或查阅相关文档。</p>
+</li>
+</ol>
+<h2 id="17docker的ftps相关">17、docker的ftps相关</h2>
+<pre tabindex="0"><code>docker run -d -v /users/ems/websophic/files/ftp:/home/vsftpd -p 10012:21 -p 30000-30020:30000-30020 -e FTP_USER=ems -e FTP_PASS=Nems-9700 -e PASV_ADDRESS=198.124.0.200 -e PASV_MIN_PORT=30000 -e PASV_MAX_PORT=30020 -e REVERSE_LOOKUP_ENABLE=NO -e LOCAL_UMASK=000 -e FILE_OPEN_MODE=0666 --name nrec_vsftpd_implicit_ssl --restart=always nrec_vsftpd:implicit_ssl
+</code></pre><h4 id="vsftpd镜像会把对应的服务器文件夹权限改写成ftpftp相当于这个镜像创建了个新的用户">vsftpd镜像会把对应的服务器文件夹权限改写成ftp/ftp，相当于这个镜像创建了个新的用户</h4>
+<p>可以在启动时增加了 file_open_mode和local_umask，可以给其他用户也带上这个访问权限的来着</p>
+<h4 id="file_open_mode的0666和0777的区别">FILE_OPEN_MODE的0666和0777的区别</h4>
+<p><code>FILE_OPEN_MODE</code> 的值为 <code>0666</code> 和 <code>0777</code> 时的区别在于它们对文件权限的设置不同。 在 Unix 系统中，文件的权限由三个数字组成，分别表示所有者、组和其他用户的读、写和执行权限。这些数字用二进制表示，分别为 <code>4</code>（读）、<code>2</code>（写）和 <code>1</code>（执行）。例如，<code>0666</code> 表示所有者和组用户具有读写权限，其他用户具有读权限；而 <code>0777</code> 表示所有者具有读写执行权限，组用户和其他用户具有读写执行权限。 因此，当 <code>FILE_OPEN_MODE</code> 的值为 <code>0666</code> 时，打开的文件将具有以下权限： - 所有者：读（4）、写（2）、执行（1） - 组用户：读（4）、写（2）、执行（1） - 其他用户：读（4）、写（2） 而当 <code>FILE_OPEN_MODE</code> 的值为 <code>0777</code> 时，打开的文件将具有以下权限： - 所有者：读（4）、写（2）、执行（1） - 组用户：读（4）、写（2）、执行（1） - 其他用户：读（4）、写（2）、执行（1） 请注意，具体的文件权限可能会受到系统的 umask 设置和文件的默认权限的影响。</p>
+<h4 id="local_unmask-的000和011-的区别">local_unmask 的000和011 的区别：</h4>
+<p><code>local_unmask</code> 的值为 <code>000</code> 和 <code>011</code> 时的区别在于它们对文件权限的掩码设置不同。 在 Unix 系统中，文件的权限由三个数字组成，分别表示所有者、组和其他用户的读、写和执行权限。这些数字用二进制表示，分别为 <code>4</code>（读）、<code>2</code>（写）和 <code>1</code>（执行）。例如，权限为 <code>rwxr-xr-x</code> 的文件可以表示为 <code>755</code>。 <code>local_unmask</code> 是一个八进制数字，用于设置文件权限掩码。它用于确定文件创建时的默认权限。当 <code>local_unmask</code> 的值为 <code>000</code> 时，表示文件的默认权限不受限制，即完全开放。当 <code>local_unmask</code> 的值为 <code>011</code> 时，表示文件的默认权限受到限制，只有所有者和组可以读写，其他用户只能读取。 因此，当 <code>local_unmask</code> 的值为 <code>000</code> 时，文件创建时的默认权限为 <code>777</code>（完全开放）；当 <code>local_unmask</code> 的值为 <code>011</code> 时，文件创建时的默认权限为 <code>750</code>（所有者和组可以读写，其他用户只能读取）。 需要注意的是，<code>local_unmask</code> 的值仅在文件创建时生效，对于已存在的文件，它不会改变文件的权限。此外，它只影响当前用户创建的文件的默认权限，而不会影响其他用户或系统文件的权限。</p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2022/nginx%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">Nginx常见问题</a></span>
+  <span class="nav-next"><a href="/cn/2022/keepalive/">keepalived双网卡双网段热备配置</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2022\/nginx%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2022\/keepalive\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Linux——问题手册 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Linux——问题手册 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="具体描述
+tar压缩文件夹时排除文件夹中的某些文件和文件夹，如tomcat压缩，排除logs文件夹
+解决方案和原理
+使用exclude，注意--exclude=tomcat/logs的logs是没有斜杠的。
+[&amp;hellip;] --exclude=&amp;lt;范本样式&amp;gt;：排除符合范本样式的文件； tar -zcvf tomcatbak.tar.gz --exclude=tomcat/logs &amp;hellip;">
+      <meta property="og:description" content="具体描述
+tar压缩文件夹时排除文件夹中的某些文件和文件夹，如tomcat压缩，排除logs文件夹
+解决方案和原理
+使用exclude，注意--exclude=tomcat/logs的logs是没有斜杠的。
+[&amp;hellip;] --exclude=&amp;lt;范本样式&amp;gt;：排除符合范本样式的文件； tar -zcvf tomcatbak.tar.gz --exclude=tomcat/logs &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/webp.webp">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2023%5cLinux%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Linux——问题手册</h1>
+
+
+<h3>rehoni / 
+2023-11-04</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="问题1tar打包排除">问题1、tar打包排除</h2>
+<p><strong>具体描述</strong></p>
+<p>tar压缩文件夹时排除文件夹中的某些文件和文件夹，如tomcat压缩，排除logs文件夹</p>
+<p><strong>解决方案和原理</strong></p>
+<p>使用exclude，注意<code>--exclude=tomcat/logs</code>的logs是没有斜杠的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>--exclude<span style="color:#f92672">=</span>&lt;范本样式&gt;：排除符合范本样式的文件；
+</span></span><span style="display:flex;"><span>tar -zcvf tomcatbak.tar.gz --exclude<span style="color:#f92672">=</span>tomcat/logs tomcat
+</span></span><span style="display:flex;"><span> tar --exclude<span style="color:#f92672">=</span>webapps/ycsbd-service --exclude<span style="color:#f92672">=</span>webapps/video-service --exclude<span style="color:#f92672">=</span>webapps/robot-service -zcvf webapps.tar.gz webapps
+</span></span></code></pre></div><h2 id="问题2dfdu查看文件和文件夹大小">问题2、df、du查看文件和文件夹大小</h2>
+<ol>
+<li>
+<p>查看目前所有文件系统的可用空间及使用情形</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>df -h
+</span></span></code></pre></div></li>
+<li>
+<p>查看当前目录总共占的容量</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>du -sh
+</span></span></code></pre></div></li>
+<li>
+<p>查看当前目录下一级子文件和子目录占用的磁盘容量：&ndash;max-depth</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>du -lh --max-depth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>du -h --max-depth<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> your_dest_dir/*
+</span></span></code></pre></div></li>
+<li>
+<p>统计当前文件夹(目录)大小，并按文件大小排序：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>du -sh * | sort -n
+</span></span></code></pre></div></li>
+<li>
+<p>查看指定文件大小可以使用du -sh或du -a：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>du -sh your_dest_file
+</span></span></code></pre></div></li>
+<li>
+<p>列出当前目录中的目录名不包括某字符串的目录的总大小：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>du -sh --exclude<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;exclude_file_name&#39;</span>
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="问题3hostname修改服务器名称">问题3、hostname修改服务器名称</h2>
+<p><strong>解决方案和原理</strong></p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 临时修改</span>
+</span></span><span style="display:flex;"><span>hostname test  <span style="color:#e6db74">``</span><span style="color:#75715e">#退出shell，在进入即可修改成功</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 永久修改</span>
+</span></span><span style="display:flex;"><span>vi /etc/hostname <span style="color:#75715e">#里边直接加名字即可</span>
+</span></span></code></pre></div></blockquote>
+<h2 id="问题4修改用户默认目录">问题4、修改用户默认目录</h2>
+<p><strong>解决方案和原理</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vi /etc/passwd <span style="color:#75715e"># /users/ems为ems的用户默认目录，修改为目标目录即可</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ems:x:1000:501::/users/ems:/bin/tcsh
+</span></span></code></pre></div><h2 id="问题5查看服务器内存">问题5、查看服务器内存</h2>
+<p><strong>解决方案和原理</strong></p>
+<p>1、free</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>free -h <span style="color:#75715e"># free -m 或 free -g</span>
+</span></span></code></pre></div><p>2、top</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>top
+</span></span></code></pre></div><p><strong>参考</strong></p>
+<p><a href="https://www.cnblogs.com/hanmk/p/10556989.html">如何查看linux服务器内存使用情况 - 我是冰霜 - 博客园 (cnblogs.com)</a></p>
+<h2 id="问题6sudosu损坏">问题6、sudo/su损坏</h2>
+<p><strong>具体描述</strong></p>
+<p>普通用户ems（可sudo提权）/管理员用户root</p>
+<p>因为服务器root用户不允许直接ssh，只能通过ems用户ssh上传文件，不小心把/usr/bin目录修改成ems用户及用户组，不小心把/usr/bin 改成 ems:ems了，然后su，sudo都没法用了，切不了root。</p>
+<p><strong>解决方案和原理</strong></p>
+<p>切换tty，然后用root登陆，把权限改回来。</p>
+<p>直接 alt + control + F2，F3等等（f1 到 f7 应该都是可以的），一个一个切换过去</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chown root:root -R /usr/bin
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 注意这样是不行的，对比其他机器就能发现，/usr/bin里的文件/文件夹权限是不同的，例如 su 和sudo就是</span>
+</span></span><span style="display:flex;"><span>chmod <span style="color:#ae81ff">4755</span> su
+</span></span><span style="display:flex;"><span>chmod <span style="color:#ae81ff">4755</span> sudo
+</span></span></code></pre></div></blockquote>
+<p>可以查看一下系统日志，/var/log/message；然后切另外一个shell 执行su，查看日志的问题。</p>
+<h2 id="问题7bash脚本运行失败坏的解释器">问题7、bash脚本运行失败、坏的解释器</h2>
+<p><strong>具体描述</strong></p>
+<p>执行脚本的时候执行脚本解释器异常</p>
+<blockquote>
+<p>/bin/bash^M: 坏的解释器：没有那个文件或目录</p>
+</blockquote>
+<p><strong>解决方案和原理</strong></p>
+<p>1、看是否有chmod</p>
+<p>2、将在win下编辑的时候，换行结尾是\n\r ， 而在linux下 是\n，所以才会有 多出来的\r，转义</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -i <span style="color:#e6db74">&#39;s/\r$//&#39;</span> build.sh
+</span></span></code></pre></div></blockquote>
+<p>3、用Windows的notepad++或者vscode，把文件从Windows格式修改为UNIX格式，把行尾序列从CRLF改为LF</p>
+<h2 id="问题8useradd添加用户并指定根目录">问题8、useradd添加用户并指定根目录</h2>
+<p><strong>参考</strong></p>
+<p>1）管理用户（user）的工具或命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>useradd    注：添加用户
+</span></span><span style="display:flex;"><span>adduser    注：添加用户
+</span></span><span style="display:flex;"><span>passwd     注：为用户设置密码
+</span></span><span style="display:flex;"><span>usermod    注：修改用户命令，可以通过usermod 来修改登录名、用户的家目录等等；
+</span></span><span style="display:flex;"><span>pwcov      注：同步用户从/etc/passwd 到/etc/shadow
+</span></span><span style="display:flex;"><span>pwck       注：pwck是校验用户配置文件/etc/passwd 和/etc/shadow 文件内容是否合法或完整；
+</span></span><span style="display:flex;"><span>pwunconv   注：是pwcov 的立逆向操作，是从/etc/shadow和 /etc/passwd 创建/etc/passwd ，然后会删除 /etc/shadow 文件；
+</span></span><span style="display:flex;"><span>finger     注：查看用户信息工具
+</span></span><span style="display:flex;"><span>id         注：查看用户的UID、GID及所归属的用户组
+</span></span><span style="display:flex;"><span>chfn       注：更改用户信息工具
+</span></span><span style="display:flex;"><span>su         注：用户切换工具
+</span></span><span style="display:flex;"><span>sudo       注：sudo 是通过另一个用户来执行命令（execute a command as another user），su 是用来切换用户，然后通过切换到的用户来完成相应的任务，但sudo 能后面直接执行命令，比如sudo 不需要root 密码就可以执行root 赋与的执行只有root才能执行相应的命令；但得通过visudo 来编辑/etc/sudoers来实现；
+</span></span><span style="display:flex;"><span>visudo     注：visodo 是编辑 /etc/sudoers 的命令；也可以不用这个命令，直接用vi 来编辑 /etc/sudoers 的效果是一样的；
+</span></span><span style="display:flex;"><span>sudoedit   注：和sudo 功能差不多；
+</span></span></code></pre></div><p>2）管理用户组（group）的工具或命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>groupadd    注：添加用户组；
+</span></span><span style="display:flex;"><span>groupdel    注：删除用户组；
+</span></span><span style="display:flex;"><span>groupmod    注：修改用户组信息
+</span></span><span style="display:flex;"><span>groups      注：显示用户所属的用户组
+</span></span><span style="display:flex;"><span>grpck
+</span></span><span style="display:flex;"><span>grpconv     注：通过/etc/group和/etc/gshadow 的文件内容来同步或创建/etc/gshadow ，如果/etc/gshadow 不存在则创建；
+</span></span><span style="display:flex;"><span>grpunconv   注：通过/etc/group 和/etc/gshadow 文件内容来同步或创建/etc/group ，然后删除gshadow文件；
+</span></span></code></pre></div><p><strong>解决方案和原理</strong></p>
+<p>指定根目录、用户组</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># -d指定目录文件夹</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -m新账号名</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -c comment 指定一段注释性描述。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -g 用户组 指定用户所属的用户组。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -G 用户组，用户组 指定用户所属的附加组。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -s Shell文件 指定用户的登录Shell。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。</span>
+</span></span><span style="display:flex;"><span>useradd -d /users/uk -m uk -G ems
+</span></span><span style="display:flex;"><span>passwd uk
+</span></span><span style="display:flex;"><span>su uk
+</span></span><span style="display:flex;"><span>pwd
+</span></span></code></pre></div><p>添加用户组</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 确认一下是否存在 ems 这个用户组</span>
+</span></span><span style="display:flex;"><span>grep ems /etc/group
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加用户组</span>
+</span></span><span style="display:flex;"><span>groupadd ems
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建用户添加进用户组</span>
+</span></span><span style="display:flex;"><span>useradd -G ems uk
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 为确保已经将该用户正确的添加到 ems 用户组中，可以查看该用户的属性</span>
+</span></span><span style="display:flex;"><span>id uk
+</span></span></code></pre></div><h2 id="问题9umask授权文件夹多用户读写权限">问题9、umask授权文件夹多用户读写权限</h2>
+<p><strong>解决方案和原理</strong></p>
+<p>允许Linux上的目录/users/uk（uk的用户主目录）能被多个用户进行读写，</p>
+<p>用户ems（组ems）</p>
+<p>用户uk（组uk）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 切换root</span>
+</span></span><span style="display:flex;"><span>su root
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 将用户uk添加进用户组ems</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -a 代表 append， 也就是将用户添加到新用户组中而不必离开原有的其他用户组。</span>
+</span></span><span style="display:flex;"><span>usermod -a -G ems uk
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置目录为</span>
+</span></span><span style="display:flex;"><span>chmod -R <span style="color:#ae81ff">774</span> /users/uk
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 验证，可以进入uk的home并且进行操作了</span>
+</span></span><span style="display:flex;"><span>su ems
+</span></span><span style="display:flex;"><span>cd /users/uk
+</span></span><span style="display:flex;"><span>ll
+</span></span></code></pre></div><p>==存在一个问题==</p>
+<p>如果是uk自己账户建立的文件夹/文件，需要设置一下umask为0022即可</p>
+<p>参考：问题13、umask修改用户创建文件/文件夹默认权限</p>
+<h2 id="问题10ssh-keygen建立sshscp免密">问题10、ssh-keygen建立ssh/scp免密</h2>
+<p>a服务器，创建公钥</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh-keygen -t rsa -P <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 发送公钥</span>
+</span></span><span style="display:flex;"><span>scp ~/.ssh/id_rsa.pub uk@198.120.100.99:/home/uk
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#这样也可以</span>
+</span></span><span style="display:flex;"><span>ssh-copy-id user@host 
+</span></span></code></pre></div><p>b服务器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh-keygen -t rsa -P <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 防止出现/.ssh/authorized_keys: No such file or directory</span>
+</span></span><span style="display:flex;"><span>cat /home/uk/id_rsa.pub &gt;&gt; /home/uk/.ssh/authorized_keys
+</span></span></code></pre></div><p>验证</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh uk@198.120.100.99
+</span></span><span style="display:flex;"><span>scp -r /users/uk/txbdmb uk@198.120.100.99:/home/uk/docker_share/data/cfg/
+</span></span></code></pre></div><p>这样更简单，只需要在a服务器进行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh-copy-id root@198.120.100.99 <span style="color:#75715e">#这样也可以</span>
+</span></span><span style="display:flex;"><span>scada1:/users/ems&gt; ssh-copy-id root@198.120.100.99
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span>, to filter out any that are already installed
+</span></span><span style="display:flex;"><span>/usr/bin/ssh-copy-id: INFO: <span style="color:#ae81ff">1</span> key<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> remain to be installed -- <span style="color:#66d9ef">if</span> you are prompted now it is to install the new keys
+</span></span><span style="display:flex;"><span>root@198.120.100.99<span style="color:#e6db74">&#39;s password:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Number of key(s) added: 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Now try logging into the machine, with:   &#34;ssh &#39;</span>root@198.120.100.99<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">and check to make sure that only the key(s) you wanted were added.
+</span></span></span></code></pre></div><h2 id="问题11chmod文件读写权限">问题11、chmod文件读写权限</h2>
+<p>在Linux中要修改一个文件夹或文件的权限我们需要用到linux chmod命令来做，下面我写了几个简单的实例大家可参考一下。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod <span style="color:#f92672">[</span>who<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>+ | - | <span style="color:#f92672">=]</span> <span style="color:#f92672">[</span>mode<span style="color:#f92672">]</span> 文件名
+</span></span><span style="display:flex;"><span>命令中各选项的含义为
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>u 表示“用户（user）”，即文件或目录的所有者。
+</span></span><span style="display:flex;"><span>g 表示“同组（group）用户”，即与文件属主有相同组ID的所有用户。
+</span></span><span style="display:flex;"><span>o 表示“其他（others）用户”。
+</span></span><span style="display:flex;"><span>a 表示“所有（all）用户”。它是系统默认值。
+</span></span><span style="display:flex;"><span>操作符号可以是：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>+ 添加某个权限。
+</span></span><span style="display:flex;"><span>- 取消某个权限。
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=</span> 赋予给定权限并取消其他所有权限（如果有的话）。
+</span></span><span style="display:flex;"><span>设置mode所表示的权限可用下述字母的任意组合：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r 可读。
+</span></span><span style="display:flex;"><span>w 可写。
+</span></span><span style="display:flex;"><span>x 可执行。
+</span></span><span style="display:flex;"><span>X 只有目标文件对某些用户是可执行的或该目标文件是目录时才追加x 属性。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>s 在文件执行时把进程的属主或组ID置为该文件的文件属主。方式“u＋s”设置文件的用户ID位，“g＋s”设置组ID位。
+</span></span><span style="display:flex;"><span>t 保存程序的文本到交换设备上。
+</span></span><span style="display:flex;"><span>u 与文件属主拥有一样的权限。
+</span></span><span style="display:flex;"><span>g 与和文件属主同组的用户拥有一样的权限。
+</span></span><span style="display:flex;"><span>o 与其他用户拥有一样的权限。
+</span></span></code></pre></div><p>文件：读文件内容（r）、写数据到文件（w）、作为命令执行文件（x）。</p>
+<p>目录：读包含在目录中的文件名称（r）、写信息到目录中去（增加和删除索引点的连结）、搜索目录（能用该目录名称作为路径名去访问它所包含的文件和子目录）</p>
+<p>具体说就是：</p>
+<p>（1）有只读权限的用户不能用cd进入该目录：还必须有执行权限才能进入。</p>
+<p>（2）有执行权限的用户只有在知道文件名，并拥有读权利的情况下才可以访问目录下的文件。</p>
+<p>（3）必须有读和执行权限才可以ls列出目录清单，或使用cd命令进入目录。</p>
+<p>（4）有目录的写权限，可以创建、删除或修改目录下的任何文件或子目录，即使使该文件或子目录属于其他用户也是如此。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>在终端输入:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ls -l xxx.xxx （xxx.xxx是文件名）
+</span></span><span style="display:flex;"><span>那么就会出现相类似的信息，主要都是这些：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-rw-rw-r--
+</span></span><span style="display:flex;"><span>一共有10位数
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>其中： 最前面那个 – 代表的是类型
+</span></span><span style="display:flex;"><span>中间那三个 rw- 代表的是所有者（user）
+</span></span><span style="display:flex;"><span>然后那三个 rw- 代表的是组群（group）
+</span></span><span style="display:flex;"><span>最后那三个 r– 代表的是其他人（other）
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>然后我再解释一下后面那9位数：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r 表示文件可以被读（read）
+</span></span><span style="display:flex;"><span>w 表示文件可以被写（write）
+</span></span><span style="display:flex;"><span>x 表示文件可以被执行（如果它是程序的话）
+</span></span><span style="display:flex;"><span>- 表示相应的权限还没有被授予
+</span></span></code></pre></div><p>现在该说说修改文件权限了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>在终端输入：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>chmod o w xxx.xxx
+</span></span><span style="display:flex;"><span>表示给其他人授予写xxx.xxx这个文件的权限
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>chmod go-rw xxx.xxx
+</span></span><span style="display:flex;"><span>表示删除xxx.xxx中组群和其他人的读和写的权限
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>其中：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>u 代表所有者（user）
+</span></span><span style="display:flex;"><span>g 代表所有者所在的组群（group）
+</span></span><span style="display:flex;"><span>o 代表其他人，但不是u和g （other）
+</span></span><span style="display:flex;"><span>a 代表全部的人，也就是包括u，g和o
+</span></span><span style="display:flex;"><span>r 表示文件可以被读（read）
+</span></span><span style="display:flex;"><span>w 表示文件可以被写（write）
+</span></span><span style="display:flex;"><span>x 表示文件可以被执行（如果它是程序的话）
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>其中：rwx也可以用数字来代替
+</span></span><span style="display:flex;"><span>r ————4
+</span></span><span style="display:flex;"><span>w ———–2
+</span></span><span style="display:flex;"><span>x ————1
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">\-</span> ————0
+</span></span><span style="display:flex;"><span>行动：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>表示添加权限
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">\-</span> 表示删除权限
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=</span> 表示使之成为唯一的权限
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>当大家都明白了上面的东西之后，那么我们常见的以下的一些权限就很容易都明白了：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-rw——- <span style="color:#f92672">(</span>600<span style="color:#f92672">)</span> 只有所有者才有读和写的权限
+</span></span><span style="display:flex;"><span>-rw-r–r– <span style="color:#f92672">(</span>644<span style="color:#f92672">)</span> 只有所有者才有读和写的权限，组群和其他人只有读的权限
+</span></span><span style="display:flex;"><span>-rwx—— <span style="color:#f92672">(</span>700<span style="color:#f92672">)</span> 只有所有者才有读，写，执行的权限
+</span></span><span style="display:flex;"><span>-rwxr-xr-x <span style="color:#f92672">(</span>755<span style="color:#f92672">)</span> 只有所有者才有读，写，执行的权限，组群和其他人只有读和执行的权限
+</span></span><span style="display:flex;"><span>-rwx–x–x <span style="color:#f92672">(</span>711<span style="color:#f92672">)</span> 只有所有者才有读，写，执行的权限，组群和其他人只有执行的权限
+</span></span><span style="display:flex;"><span>-rw-rw-rw- <span style="color:#f92672">(</span>666<span style="color:#f92672">)</span> 每个人都有读写的权限
+</span></span><span style="display:flex;"><span>-rwxrwxrwx <span style="color:#f92672">(</span>777<span style="color:#f92672">)</span> 每个人都有读写和执行的权限
+</span></span><span style="display:flex;"><span>-rwxrwxr--<span style="color:#f92672">(</span>774<span style="color:#f92672">)</span> 所有者和组群才有读，写，执行的权限，其他人只有读的权限
+</span></span></code></pre></div><h2 id="问题12用户锁定解锁及锁定查看">问题12、用户锁定、解锁及锁定查看</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@l01 ~<span style="color:#f92672">]</span><span style="color:#75715e"># passwd -S pispread</span>
+</span></span><span style="display:flex;"><span>pispread PS 2020-04-30 <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">99999</span> <span style="color:#ae81ff">15</span> -1 <span style="color:#f92672">(</span>Password set, SHA512 crypt.<span style="color:#f92672">)</span>用户锁定
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@l01 ~<span style="color:#f92672">]</span><span style="color:#75715e"># passwd -l pispread</span>
+</span></span><span style="display:flex;"><span>Locking password <span style="color:#66d9ef">for</span> user pispread.
+</span></span><span style="display:flex;"><span>passwd: Success查看用户
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@l01 ~<span style="color:#f92672">]</span><span style="color:#75715e"># passwd -S pispread</span>
+</span></span><span style="display:flex;"><span>pispread LK 2020-04-30 <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">99999</span> <span style="color:#ae81ff">15</span> -1 <span style="color:#f92672">(</span>Password locked.<span style="color:#f92672">)</span>用户解锁
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@l01 ~<span style="color:#f92672">]</span><span style="color:#75715e"># passwd -u pispread</span>
+</span></span><span style="display:flex;"><span>Unlocking password <span style="color:#66d9ef">for</span> user pispread.
+</span></span><span style="display:flex;"><span>passwd: Success查看用户
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@l01 ~<span style="color:#f92672">]</span><span style="color:#75715e"># passwd -S pispread</span>
+</span></span><span style="display:flex;"><span>pispread PS 2020-04-30 <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">99999</span> <span style="color:#ae81ff">15</span> -1 <span style="color:#f92672">(</span>Password set, SHA512 crypt.<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>如果是root用户锁定，可以考虑使用能够提权的普通用户ems</p>
+<p>pam_tally2解锁用户</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>scada1:/users/ems&gt; sudo su
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>sudo<span style="color:#f92672">]</span> password <span style="color:#66d9ef">for</span> ems:
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@scada1 ems<span style="color:#f92672">]</span><span style="color:#75715e"># pam_tally2 --user=root --reset</span>
+</span></span><span style="display:flex;"><span>Login           Failures Latest failure     From
+</span></span><span style="display:flex;"><span>root               <span style="color:#ae81ff">11</span>    09/15/21 12:02:35  pts/0
+</span></span></code></pre></div><h2 id="问题13umask修改用户创建文件文件夹默认权限">问题13、umask修改用户创建文件/文件夹默认权限</h2>
+<p>umask，umask的值越大，新建文件和文件夹的权限就越小，系统就越安全。</p>
+<ul>
+<li>临时生效，退出后就会失效：umask 数字</li>
+<li>永久生效：只对当前用户永久生效。编辑用户家目录的隐藏文件“.bashrc”，添加“umask 数字”，退出从新登陆后生效。如不想退出，使用“source 文件路径”可立马生效。</li>
+<li>对全部用户永久生效（不建议）：修改“/etc/bashrc”,添加“umask 数字”，“source 文件路径”立马生效。<strong>可是，不建议修改此文件，会不稳定！！！</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 直观的查看默认权限</span>
+</span></span><span style="display:flex;"><span>umask -S
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 临时修改默认权限</span>
+</span></span><span style="display:flex;"><span>umask <span style="color:#ae81ff">0022</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 永久生效</span>
+</span></span><span style="display:flex;"><span>vi ~/.bashrc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 直接添加一行 umask 0022，保存退出之后查看</span>
+</span></span><span style="display:flex;"><span>source ~/.bashrc
+</span></span><span style="display:flex;"><span>umask 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 对全部用户永久生效</span>
+</span></span><span style="display:flex;"><span>vi /etc/bashrc
+</span></span></code></pre></div><p><code>umask 0022</code></p>
+<p>第一个0表示是文件或目录的特殊权限</p>
+<p>第二个0表示文件或目录的拥有者有所有的rwx权限</p>
+<p>第三个2表示文件或目录的所属组被拿走了w权限，及所属组的权限是r-x</p>
+<p>第四个2表示文件或目录的其他人被拿走了w权限，及其他人的权限是r-x</p>
+<p>新建目录的默认权限是：rwxr-xr-x</p>
+<p>新建文件的默认权限是：rw-r–r&ndash;（Linux中文件默认都会拿走x权限）</p>
+<p><strong>文件权限计算方法</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/webp.webp" alt="img"></p>
+<p><strong>目录权限计算方法</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/webp.webp" alt="img"></p>
+<h2 id="问题14chage修改密码有效期">问题14、chage修改密码有效期</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>-m：密码可更改的最小天数。为零时代表任何时候都可以更改密码。
+</span></span><span style="display:flex;"><span>-M：密码保持有效的最大天数。
+</span></span><span style="display:flex;"><span>-w：用户密码到期前，提前收到警告信息的天数。
+</span></span><span style="display:flex;"><span>-E：帐号到期的日期。过了这天，此帐号将不可用。
+</span></span><span style="display:flex;"><span>-d：上一次更改的日期。
+</span></span><span style="display:flex;"><span>-i：停滞时期。如果一个密码已过期这些天，那么此帐号将不可用。
+</span></span><span style="display:flex;"><span>-l：例出当前的设置。由非特权用户来确定他们的密码或帐号何时过期。
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chage -M <span style="color:#ae81ff">99999</span> root
+</span></span><span style="display:flex;"><span>chage -l root
+</span></span><span style="display:flex;"><span>chage -I <span style="color:#ae81ff">5</span> root
+</span></span></code></pre></div><h2 id="问题15lsof查看端口占用情况">问题15、lsof查看端口占用情况</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>su root
+</span></span><span style="display:flex;"><span>lsof -i:8080：查看8080端口占用
+</span></span><span style="display:flex;"><span>lsof abc.txt：显示开启文件abc.txt的进程
+</span></span><span style="display:flex;"><span>lsof -c abc：显示abc进程现在打开的文件
+</span></span><span style="display:flex;"><span>lsof -c -p 1234：列出进程号为1234的进程所打开的文件
+</span></span><span style="display:flex;"><span>lsof -g gid：显示归属gid的进程情况
+</span></span><span style="display:flex;"><span>lsof +d /usr/local/：显示目录下被进程开启的文件
+</span></span><span style="display:flex;"><span>lsof +D /usr/local/：同上，但是会搜索目录下的目录，时间较长
+</span></span><span style="display:flex;"><span>lsof -d 4：显示使用fd为4的进程
+</span></span><span style="display:flex;"><span>lsof -i -U：显示所有打开的端口和UNIX domain文件
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>netstat -tunlp | grep 端口号
+</span></span><span style="display:flex;"><span>-t <span style="color:#f92672">(</span>tcp<span style="color:#f92672">)</span> 仅显示tcp相关选项
+</span></span><span style="display:flex;"><span>-u <span style="color:#f92672">(</span>udp<span style="color:#f92672">)</span>仅显示udp相关选项
+</span></span><span style="display:flex;"><span>-n 拒绝显示别名，能显示数字的全部转化为数字
+</span></span><span style="display:flex;"><span>-l 仅列出在Listen<span style="color:#f92672">(</span>监听<span style="color:#f92672">)</span>的服务状态
+</span></span><span style="display:flex;"><span>-p 显示建立相关链接的程序名
+</span></span><span style="display:flex;"><span>netstat -ntlp   //查看当前所有tcp端口
+</span></span><span style="display:flex;"><span>netstat -ntulp | grep <span style="color:#ae81ff">80</span>   //查看所有80端口使用情况
+</span></span><span style="display:flex;"><span>netstat -ntulp | grep <span style="color:#ae81ff">3306</span>   //查看所有3306端口使用情况
+</span></span></code></pre></div><h2 id="问题16ethtool修改网卡速率">问题16、ethtool修改网卡速率</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt; uname -a
+</span></span><span style="display:flex;"><span>Linux web1 3.10.0-514.el7.x86_64 <span style="color:#75715e">#1 SMP Wed Oct 19 11:24:13 EDT 2016 x86_64 x86_64 x86_64 GNU/Linux</span>
+</span></span><span style="display:flex;"><span>&gt; ethtool -s eno1 speed <span style="color:#ae81ff">100</span> duplex full autoneg off
+</span></span><span style="display:flex;"><span>Cannot set new settings: Operation not supported
+</span></span><span style="display:flex;"><span>  not setting speed
+</span></span><span style="display:flex;"><span>  not setting duplex
+</span></span><span style="display:flex;"><span>  not setting autoneg
+</span></span></code></pre></div><pre tabindex="0"><code>ethtool -s eno1 speed 1000 duplex full autoneg off 
+</code></pre><h2 id="问题17sftp配置失败排查">问题17、sftp配置失败排查</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>service vsftpd status
+</span></span><span style="display:flex;"><span>journalctl -xe
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># vsftpd.service: control process exited, code=exited status=1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 怀疑是配置出现问题，修改配置 listen_ipv6=NO 并进行重启即可</span>
+</span></span><span style="display:flex;"><span>service vsftpd restart
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sftp</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 但是若在设置 vsftpd.conf 的 listen_ipv6=NO 的同时仍然设置 listen=NO 会出下如下问题：</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># can&#39;t get client address: Socket operation on non-socket</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 配置的时候需要注意设置  listen=YES</span>
+</span></span><span style="display:flex;"><span>vi vsftpd.conf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> listen<span style="color:#f92672">=</span>YES
+</span></span><span style="display:flex;"><span> listen_ipv6<span style="color:#f92672">=</span>NO
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>service vsftpd status
+</span></span><span style="display:flex;"><span>netstat -anp |grep <span style="color:#ae81ff">21</span>
+</span></span></code></pre></div><p>vsftpd.conf中的userlist_enable和userlist_deny两个配置项各自起什么作用，两者如何搭配使用?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>user_config_dir<span style="color:#f92672">=</span>/etc/vsftpd/users
+</span></span><span style="display:flex;"><span>userlist_enable<span style="color:#f92672">=</span>YES
+</span></span><span style="display:flex;"><span>userlist_file<span style="color:#f92672">=</span>/etc/vsftpd/denied_users
+</span></span></code></pre></div><ol>
+<li>userlist_enable和userlist_deny两个选项联合起来针对的是：本地全体用户（除去ftpusers中的用户）和出现在user_list文件中的用户以及不在在user_list文件中的用户这三类用户集合进行的设置。</li>
+<li>当且仅当userlist_enable=YES时：userlist_deny项的配置才有效，user_list文件才会被使用；当其为NO时，无论userlist_deny项为何值都是无效的，本地全体用户（除去ftpusers中的用户）都可以登入FTP</li>
+<li>当userlist_enable=YES时，userlist_deny=YES时：user_list是一个<strong>黑名单</strong>，即：所有出现在名单中的用户都会被拒绝登入；</li>
+<li>当userlist_enable=YES时，userlist_deny=NO时：user_list是一个<strong>白名单</strong>，即：只有出现在名单中的用户才会被准许登入(user_list之外的用户都被拒绝登入)；另外需要特别提醒的是：<strong>使用白名单后，匿名用户将无法登入！除非显式在user_list中加入一行：anonymous</strong></li>
+</ol>
+<h2 id="问题18curl下载文件到本地">问题18、curl下载文件到本地</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh -o filename.suffix
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>--silent 不打印输出
+</span></span><span style="display:flex;"><span>--progress 打印下载进度
+</span></span><span style="display:flex;"><span>-o 重命名
+</span></span></code></pre></div><h2 id="问题19端口测试通不通四种方法">问题19、端口测试通不通（四种方法）</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> <span style="color:#75715e"># 1、wget ip:port</span>
+</span></span><span style="display:flex;"><span> wget ip:port
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#2、telnet </span>
+</span></span><span style="display:flex;"><span> telnet ip port
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#3、curl</span>
+</span></span><span style="display:flex;"><span> curl -v ip:port
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#4、ssh</span>
+</span></span><span style="display:flex;"><span> ssh -v -p port username@ip
+</span></span><span style="display:flex;"><span> -v 调试模式<span style="color:#f92672">(</span>会打印日志<span style="color:#f92672">)</span>.
+</span></span><span style="display:flex;"><span> -p 指定端口
+</span></span></code></pre></div><h2 id="问题20同步远程服务器上文件到本地文件名中有特殊字符存疑">问题20、同步远程服务器上文件到本地（文件名中有特殊字符）【存疑】</h2>
+<p>scp、rsync两种方式</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 怀疑是部分linux操作系统下文件名需要转义才能传输</span>
+</span></span><span style="display:flex;"><span>scp root@198.87.103.240:/root/hello291#2813#123.txt /users/ems/
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 转义后的写法</span>
+</span></span><span style="display:flex;"><span>scp root@198.87.103.240:<span style="color:#e6db74">&#39;/root/hello291\#2813\#123.txt&#39;</span> /users/ems/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 注意rsync时文件名中的#（应该）不需要做转义</span>
+</span></span><span style="display:flex;"><span>rsync -vzrtopg --progress -e ssh --delete root@198.87.103.240:/root/hello291#2813#123.txt /users/ems/
+</span></span></code></pre></div><p>因怀疑是部分linux操作系统下文件名需要转义才能传输，怀疑不同的操作系统的同类型shell（测试的两个环境为不同国产操作系统麒麟和凝思的同tcsh，存在scp需要转义和不需要转义的情况），也会有该问题产生。</p>
+<h2 id="问题21查看当前shell">问题21、查看当前shell</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>scada11:/users/ems&gt; echo $0
+</span></span><span style="display:flex;"><span>-tcsh
+</span></span><span style="display:flex;"><span>scada11:/users/ems&gt; echo $SHELL
+</span></span><span style="display:flex;"><span>/bin/tcsh
+</span></span><span style="display:flex;"><span>scada11:/users/ems&gt; cat  /etc/shells
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /etc/shells: valid login shells</span>
+</span></span><span style="display:flex;"><span>/bin/sh
+</span></span><span style="display:flex;"><span>/bin/dash
+</span></span><span style="display:flex;"><span>/bin/bash
+</span></span><span style="display:flex;"><span>/bin/rbash
+</span></span><span style="display:flex;"><span>/bin/ksh93
+</span></span><span style="display:flex;"><span>/bin/mksh
+</span></span><span style="display:flex;"><span>/bin/mksh-static
+</span></span><span style="display:flex;"><span>/usr/bin/screen
+</span></span><span style="display:flex;"><span>/bin/tcsh
+</span></span><span style="display:flex;"><span>/usr/bin/tcsh
+</span></span><span style="display:flex;"><span>scada11:/users/ems&gt;
+</span></span></code></pre></div><p>修改用户默认shell</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 使用chsh命令修改某用户的默认shell</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>merle@bogon ~ ❯❯❯ chsh                                                                                                                
+</span></span><span style="display:flex;"><span>Changing shell <span style="color:#66d9ef">for</span> merle.
+</span></span><span style="display:flex;"><span>New shell <span style="color:#f92672">[</span>/bin/bash<span style="color:#f92672">]</span>: /bin/zsh
+</span></span><span style="display:flex;"><span>密码：
+</span></span><span style="display:flex;"><span>Shell changed.
+</span></span><span style="display:flex;"><span>merle@bogon ~ ❯❯❯
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 再次查看该用户设置</span>
+</span></span><span style="display:flex;"><span>merle@bogon ~ ❯❯❯ grep merle /etc/passwd                                                                                               
+</span></span><span style="display:flex;"><span>merle:x:1000:1000:merle:/home/merle:/bin/zsh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用usermod命令</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>usermod -s /bin/zsh merle
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 再次查看该用户设置</span>
+</span></span><span style="display:flex;"><span>merle@bogon ~ ❯❯❯ grep merle /etc/passwd                                                                                               
+</span></span><span style="display:flex;"><span>merle:x:1000:1000:merle:/home/merle:/bin/zsh  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 可以在创建用户的时候指定默认shell.</span>
+</span></span><span style="display:flex;"><span>useradd -s /bin/zsh username
+</span></span></code></pre></div><h2 id="问题23查看linux系统版本">问题23、查看linux系统版本</h2>
+<p>一、查看Linux系统版本的命令（3种方法）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 1、cat /etc/issue，此命令也适用于所有的Linux发行版。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>　　<span style="color:#f92672">[</span>root@S-CentOS home<span style="color:#f92672">]</span><span style="color:#75715e"># cat /etc/issue</span>
+</span></span><span style="display:flex;"><span>　　CentOS release 6.5 <span style="color:#f92672">(</span>Final<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>　　Kernel <span style="color:#ae81ff">\r</span> on an <span style="color:#ae81ff">\m</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2、cat /etc/redhat-release，这种方法只适合Redhat系的Linux：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>　　<span style="color:#f92672">[</span>root@S-CentOS home<span style="color:#f92672">]</span><span style="color:#75715e"># cat /etc/redhat-release</span>
+</span></span><span style="display:flex;"><span>　　CentOS release 6.5 <span style="color:#f92672">(</span>Final<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3、lsb_release -a，即可列出所有版本信息：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>　　<span style="color:#f92672">[</span>root@S-CentOS ~<span style="color:#f92672">]</span><span style="color:#75715e"># lsb_release -a</span>
+</span></span><span style="display:flex;"><span>　　LSB Version: :base-4.0-amd64:base-4.0-noarch:core-4.0-amd64:core-4.0-noarch:graphics-4.0-amd64:graphics-4.0-noarch:printing-4.0-amd64:printing-4.0-noarch
+</span></span><span style="display:flex;"><span>　　Distributor ID: CentOS
+</span></span></code></pre></div><p>二、查看Linux内核版本命令（两种方法）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat /proc/version
+</span></span><span style="display:flex;"><span>uname -a
+</span></span></code></pre></div><h2 id="问题24查看操作系统编码">问题24、查看操作系统编码</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 查看</span>
+</span></span><span style="display:flex;"><span>locale
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 修改</span>
+</span></span><span style="display:flex;"><span>vi /etc/sysconfig/i18n
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>然后，如改成中文编码：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>LANG<span style="color:#f92672">=</span>en_US.UTF-8
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>改为
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>LANG<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;zh_CN.GBK&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>source /etc/sysconfig/i18n
+</span></span></code></pre></div><h2 id="问题25系统路径usrlibsystemdsystem和etcsystemdsystem的区别">问题25、系统路径/usr/lib/systemd/system和/etc/systemd/system的区别？</h2>
+<p>使用<code>man systemd.unit</code>命令，可以看到详细的解释。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240611142926854.png" alt="image-20240611142926854"></p>
+<p>大体区别：</p>
+<ul>
+<li><code>/usr/lib/systemd/system</code>： 安装包相关配置，一般是供应商提供的操作系统资源。通常，只允许包管理工具(yum/dnf/rpm/apt)进行包安装的过程中操作此路径；</li>
+<li><code>/lib/systemd/system</code>： 指向<code>/usr/lib/systemd/system</code>。</li>
+<li><code>/etc/systemd/system</code>：本地配置文件，系统管理员手动软件安装包或脚本放置于此。</li>
+</ul>
+<h2 id="问题26crontab示例">问题26、crontab示例</h2>
+<p>Linux Crontab 格式</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">MIN</span> <span style="color:#a6e22e">HOUR</span> <span style="color:#a6e22e">DOM</span> <span style="color:#a6e22e">MON</span> <span style="color:#a6e22e">DOW</span> <span style="color:#a6e22e">CMD</span>
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+<th>允许值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MIN</td>
+<td>分钟字段</td>
+<td>0 到 59</td>
+</tr>
+<tr>
+<td>HOUR</td>
+<td>小时字段</td>
+<td>0 到 23</td>
+</tr>
+<tr>
+<td>DOM</td>
+<td>每月的某一天</td>
+<td>1-31</td>
+</tr>
+<tr>
+<td>MON</td>
+<td>月份字段</td>
+<td>1-12</td>
+</tr>
+<tr>
+<td>DOW</td>
+<td>星期几</td>
+<td>0-6</td>
+</tr>
+<tr>
+<td>CMD</td>
+<td>命令</td>
+<td>要执行的任何命令。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1.为特定时间安排作业</strong></p>
+<p>cron 的基本用法是在特定的时间执行一个作业，如下所示。这将在<strong>6 月 10 日上午 08:30</strong>执行完整备份 shell 脚本（完整备份）。
+``
+请注意，时间字段使用 24 小时格式。因此，对于上午 8 点使用 8，对于晚上 8 点使用 20。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#ae81ff">30</span> <span style="color:#ae81ff">08</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">06</span> <span style="color:#f92672">*</span> <span style="color:#960050;background-color:#1e0010">/home/ramesh/full-backup</span>
+</span></span></code></pre></div><ul>
+<li><strong>30</strong> – 30 分钟</li>
+<li><strong>08</strong> – 08 上午</li>
+<li><strong>10</strong> – 第 10 天</li>
+<li><strong>06</strong> – 第 6 个月（六月）</li>
+<li>***** – 一周中的每一天</li>
+</ul>
+<p><strong>2. 为多个实例安排作业（例如，一天两次）</strong></p>
+<p>以下脚本每天进行两次增量备份。
+``
+本示例在每天的 11:00 和 16:00 执行指定的增量备份 shell 脚本（incremental-backup）。字段中的逗号分隔值指定该命令需要在所有提到的时间内执行。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#ae81ff">00</span> <span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">16</span> <span style="color:#f92672">*</span> <span style="color:#f92672">*</span> <span style="color:#f92672">*</span> <span style="color:#960050;background-color:#1e0010">/home/ramesh/bin/incremental-backup</span>
+</span></span></code></pre></div><ul>
+<li><strong>00</strong> – 第 0 分钟（一小时的顶部）</li>
+<li>上午<strong>11,16</strong> – 11 点和下午 4 点</li>
+<li>***** – 每天</li>
+<li>***** – 每个月</li>
+<li>***** – 一周中的每一天</li>
+</ul>
+<p><strong>3. 安排特定时间范围的工作（例如仅在工作日）</strong></p>
+<p>如果您希望在特定时间范围内每小时安排一次作业，请使用以下内容。</p>
+<p><strong>每天工作时间的 Cron Job</strong></p>
+<p>本示例在每天上午 9 点至下午 6 点的工作时间内（包括周末）检查数据库的状态</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#ae81ff">00</span> <span style="color:#ae81ff">09</span><span style="color:#f92672">-</span><span style="color:#ae81ff">18</span> <span style="color:#f92672">*</span> <span style="color:#f92672">*</span> <span style="color:#f92672">*</span> <span style="color:#960050;background-color:#1e0010">/home/ramesh/bin/check-db-status</span>
+</span></span></code></pre></div><ul>
+<li><strong>00</strong> – 第 0 分钟（一小时的顶部）</li>
+<li><strong>09-18</strong> – 9 am, 10 am, 11 am, 12 am, 1 pm, 2 pm, 3 pm, 4 pm, 5 pm, 6 pm</li>
+<li>***** – 每天</li>
+<li>***** – 每个月</li>
+<li>***** – 一周中的每一天</li>
+</ul>
+<p><strong>Cron Job 每个工作日的工作时间</strong></p>
+<p>本示例在每个工作日（即不包括周六和周日）的工作时间上午 9 点至下午 6 点检查数据库的状态</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#ae81ff">00</span> <span style="color:#ae81ff">09</span><span style="color:#f92672">-</span><span style="color:#ae81ff">18</span> <span style="color:#f92672">*</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">-</span><span style="color:#ae81ff">5</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">home</span><span style="color:#f92672">/</span><span style="color:#a6e22e">ramesh</span><span style="color:#f92672">/</span><span style="color:#a6e22e">bin</span><span style="color:#f92672">/</span><span style="color:#a6e22e">check</span><span style="color:#f92672">-</span><span style="color:#a6e22e">db</span><span style="color:#f92672">-</span><span style="color:#a6e22e">status</span>
+</span></span></code></pre></div><ul>
+<li><strong>00</strong> – 第 0 分钟（一小时的顶部）</li>
+<li><strong>09-18</strong> – 9 am, 10 am, 11 am, 12 am, 1 pm, 2 pm, 3 pm, 4 pm, 5 pm, 6 pm</li>
+<li>***** – 每天</li>
+<li>***** – 每个月</li>
+<li>**1-5 -**周一、周二、周三、周四和周五（每个工作日）</li>
+</ul>
+<p><strong>4. 如何查看 Crontab 条目？</strong></p>
+<ul>
+<li><strong>查看当前登录用户的 Crontab 条目</strong></li>
+</ul>
+<p>要查看您的 crontab 条目，请从您的 unix 帐户键入 crontab -l，如下所示。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">ramesh</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">dev</span><span style="color:#f92672">-</span><span style="color:#a6e22e">db$</span> <span style="color:#a6e22e">crontab</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">l</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">yearly</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">home</span><span style="color:#f92672">/</span><span style="color:#a6e22e">ramesh</span><span style="color:#f92672">/</span><span style="color:#a6e22e">annual</span><span style="color:#f92672">-</span><span style="color:#a6e22e">maintenance</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#960050;background-color:#1e0010">/10 * * * * /home/ramesh/check-disk-space</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">Note</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">This</span> <span style="color:#a6e22e">displays</span> <span style="color:#a6e22e">crontab</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">the</span> <span style="color:#a6e22e">current</span> <span style="color:#a6e22e">logged</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">user</span>]
+</span></span></code></pre></div><ul>
+<li><strong>查看根 Crontab 条目</strong></li>
+</ul>
+<p>以 root 用户 (su – root) 登录并执行 crontab -l ，如下所示。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">root</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">dev</span><span style="color:#f92672">-</span><span style="color:#a6e22e">db</span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">crontab</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">l</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">no</span> <span style="color:#a6e22e">crontab</span> <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">root</span>
+</span></span></code></pre></div><ul>
+<li><strong>Crontab HowTo：查看其他 Linux 用户的 Crontab 条目</strong></li>
+</ul>
+<p>要查看其他 Linux 用户的 crontab 条目，请登录到 root 并使用**-u {username} -l**，如下所示。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">root</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">dev</span><span style="color:#f92672">-</span><span style="color:#a6e22e">db</span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">crontab</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">u</span> <span style="color:#a6e22e">sathiya</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">l</span> 
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">monthly</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">home</span><span style="color:#f92672">/</span><span style="color:#a6e22e">sathiya</span><span style="color:#f92672">/</span><span style="color:#a6e22e">monthly</span><span style="color:#f92672">-</span><span style="color:#a6e22e">backup</span> 
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">00</span> <span style="color:#ae81ff">09</span><span style="color:#f92672">-</span><span style="color:#ae81ff">18</span> <span style="color:#f92672">*</span> <span style="color:#f92672">*</span> <span style="color:#f92672">*</span> <span style="color:#960050;background-color:#1e0010">/home/sathiya/check-db-status</span>
+</span></span></code></pre></div><p><strong>5. 如何编辑 Crontab 条目？</strong></p>
+<ul>
+<li><strong>编辑当前登录用户的 Crontab 条目</strong></li>
+</ul>
+<p>要编辑 crontab 条目，请使用 crontab -e，如下所示。默认情况下，这将编辑当前登录的用户 crontab。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">ramesh</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">dev</span><span style="color:#f92672">-</span><span style="color:#a6e22e">db$</span> <span style="color:#a6e22e">crontab</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">e</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">yearly</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">home</span><span style="color:#f92672">/</span><span style="color:#a6e22e">ramesh</span><span style="color:#f92672">/</span><span style="color:#a6e22e">centos</span><span style="color:#f92672">/</span><span style="color:#a6e22e">bin</span><span style="color:#f92672">/</span><span style="color:#a6e22e">annual</span><span style="color:#f92672">-</span><span style="color:#a6e22e">maintenance</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#960050;background-color:#1e0010">/10 * * * * /home/ramesh/debian/bin/check-disk-space</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">~</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;/tmp/crontab.XXXXyjWkHw&#34;</span> <span style="color:#ae81ff">2</span><span style="color:#a6e22e">L</span>, <span style="color:#ae81ff">83</span><span style="color:#a6e22e">C</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">Note</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">This</span> <span style="color:#a6e22e">will</span> <span style="color:#a6e22e">open</span> <span style="color:#a6e22e">the</span> <span style="color:#a6e22e">crontab</span> <span style="color:#a6e22e">file</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">Vim</span> <span style="color:#a6e22e">editor</span> <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">editing</span>.
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Please</span> <span style="color:#a6e22e">note</span> <span style="color:#a6e22e">cron</span> <span style="color:#a6e22e">created</span> <span style="color:#a6e22e">a</span> <span style="color:#a6e22e">temporary</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">tmp</span><span style="color:#f92672">/</span><span style="color:#a6e22e">crontab</span>.<span style="color:#a6e22e">XX</span>... ]
+</span></span></code></pre></div><p>当你用 :wq 保存上述临时文件时，它会保存 crontab 并显示以下消息，表明 crontab 修改成功。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">~</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;crontab.XXXXyjWkHw&#34;</span> <span style="color:#ae81ff">2</span><span style="color:#a6e22e">L</span>, <span style="color:#ae81ff">83</span><span style="color:#a6e22e">C</span> <span style="color:#a6e22e">written</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">crontab</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">installing</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">crontab</span>
+</span></span></code></pre></div><ul>
+<li><strong>编辑根 Crontab 条目</strong></li>
+</ul>
+<p>以 root 用户 (su – root) 登录并执行 crontab -e，如下所示。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">root</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">dev</span><span style="color:#f92672">-</span><span style="color:#a6e22e">db</span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">crontab</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">e</span>
+</span></span></code></pre></div><ul>
+<li><strong>编辑其他 Linux 用户的 Crontab 文件条目</strong></li>
+</ul>
+<p>要编辑其他 Linux 用户的 crontab 条目，请登录到 root 并使用**-u {username} -e**，如下所示。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">root</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">dev</span><span style="color:#f92672">-</span><span style="color:#a6e22e">db</span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">crontab</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">u</span> <span style="color:#a6e22e">sathiya</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">e</span> 
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">monthly</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">home</span><span style="color:#f92672">/</span><span style="color:#a6e22e">sathiya</span><span style="color:#f92672">/</span><span style="color:#a6e22e">fedora</span><span style="color:#f92672">/</span><span style="color:#a6e22e">bin</span><span style="color:#f92672">/</span><span style="color:#a6e22e">monthly</span><span style="color:#f92672">-</span><span style="color:#a6e22e">backup</span> 
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">00</span> <span style="color:#ae81ff">09</span><span style="color:#f92672">-</span><span style="color:#ae81ff">18</span> <span style="color:#f92672">*</span> <span style="color:#f92672">*</span> <span style="color:#f92672">*</span> <span style="color:#960050;background-color:#1e0010">/home/sathiya/ubuntu/bin/check-db-status </span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">~</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">~</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">~</span> 
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;/tmp/crontab.XXXXyjWkHw&#34;</span> <span style="color:#ae81ff">2</span><span style="color:#a6e22e">L</span>, <span style="color:#ae81ff">83</span><span style="color:#a6e22e">C</span>
+</span></span></code></pre></div><p><strong>6. 使用 Cron 每分钟安排一个作业。</strong></p>
+<p>理想情况下，您可能不需要每分钟安排一次作业。但是理解这个例子将帮助你理解本文下面提到的其他例子。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">*</span> <span style="color:#f92672">*</span> <span style="color:#f92672">*</span> <span style="color:#f92672">*</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">CMD</span>
+</span></span></code></pre></div><p>* 表示所有可能的单位——即全年每小时的每一分钟。除了直接使用这个 *，您会发现它在以下情况下非常有用。</p>
+<ul>
+<li>当您在分钟字段中指定 */5 时，表示每 5 分钟一次。</li>
+<li>当您在分钟字段中指定 0-10/2 时，意味着在前 10 分钟内每 2 分钟一次。</li>
+<li>因此，上述约定可用于所有其他 4 个字段。</li>
+</ul>
+<p><strong>7. 每 10 分钟安排一个后台 Cron 作业。</strong></p>
+<p>如果您想每 10 分钟检查一次磁盘空间，请使用以下方法。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#960050;background-color:#1e0010">/10 * * * * /home/ramesh/check-disk-space</span>
+</span></span></code></pre></div><p>它全年每 10 分钟执行一次指定的命令 check-disk-space。但是您可能需要仅在办公时间执行命令，反之亦然。上面的例子展示了如何做这些事情。
+<code> 我们可以使用单个关键字来指定它，而不是在 5 个字段中指定值，如下所述。 </code>
+在某些特殊情况下，您可以使用 @ 后跟关键字来代替上述 5 个字段，例如重新启动、午夜、每年、每小时。</p>
+<table>
+<thead>
+<tr>
+<th>关键词</th>
+<th>相等的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@yearly</td>
+<td>0 0 1 1 *</td>
+</tr>
+<tr>
+<td>@daily</td>
+<td>0 0 * * *</td>
+</tr>
+<tr>
+<td>@hourly</td>
+<td>0 * * * *</td>
+</tr>
+<tr>
+<td>@reboot</td>
+<td>Run at startup.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>8. 使用@yearly 在每年的第一分钟安排工作</strong></p>
+<p>如果您希望在每年的第一分钟执行一项工作，那么您可以使用**@yearly** cron 关键字，如下所示。</p>
+<p>这将在每年 1 月 1 日的 00:00 使用年度维护 shell 脚本执行系统年度维护。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">yearly</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">home</span><span style="color:#f92672">/</span><span style="color:#a6e22e">ramesh</span><span style="color:#f92672">/</span><span style="color:#a6e22e">red</span><span style="color:#f92672">-</span><span style="color:#a6e22e">hat</span><span style="color:#f92672">/</span><span style="color:#a6e22e">bin</span><span style="color:#f92672">/</span><span style="color:#a6e22e">annual</span><span style="color:#f92672">-</span><span style="color:#a6e22e">maintenance</span>
+</span></span></code></pre></div><p><strong>9. 使用@monthly 安排每个月开始的 Cron 作业</strong></p>
+<p>它与上面的@yearly 相似。但是使用**@monthly** cron 关键字每月执行一次命令。</p>
+<p>这将在每月 1 日的 00:00 执行 shell 脚本磁带备份。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">monthly</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">home</span><span style="color:#f92672">/</span><span style="color:#a6e22e">ramesh</span><span style="color:#f92672">/</span><span style="color:#a6e22e">suse</span><span style="color:#f92672">/</span><span style="color:#a6e22e">bin</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tape</span><span style="color:#f92672">-</span><span style="color:#a6e22e">backup</span>
+</span></span></code></pre></div><p><strong>10. 每天使用@daily 安排后台作业</strong></p>
+<p>使用**@daily** cron 关键字，这将在每天 00:00 使用 cleanup-logs shell 脚本执行每日日志文件清理。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">daily</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">home</span><span style="color:#f92672">/</span><span style="color:#a6e22e">ramesh</span><span style="color:#f92672">/</span><span style="color:#a6e22e">arch</span><span style="color:#f92672">-</span><span style="color:#a6e22e">linux</span><span style="color:#f92672">/</span><span style="color:#a6e22e">bin</span><span style="color:#f92672">/</span><span style="color:#a6e22e">cleanup</span><span style="color:#f92672">-</span><span style="color:#a6e22e">logs</span> <span style="color:#e6db74">&#34;day started&#34;</span>
+</span></span></code></pre></div><p><strong>11.如何在每次重启后使用@reboot 执行 Linux 命令？</strong></p>
+<p>使用**@reboot** cron 关键字，这将在机器每次启动后执行一次指定的命令。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">reboot</span> <span style="color:#a6e22e">CMD</span>
+</span></span></code></pre></div><p><strong>12. 如何使用 MAIL 关键字禁用/重定向 Crontab 邮件输出？</strong></p>
+<p>默认情况下，crontab 将作业输出发送给安排作业的用户。如果要将输出重定向到特定用户，请在 crontab 中添加或更新 MAIL 变量，如下所示。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">ramesh</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">dev</span><span style="color:#f92672">-</span><span style="color:#a6e22e">db$</span> <span style="color:#a6e22e">crontab</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">l</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">MAIL</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ramesh&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">yearly</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">home</span><span style="color:#f92672">/</span><span style="color:#a6e22e">ramesh</span><span style="color:#f92672">/</span><span style="color:#a6e22e">annual</span><span style="color:#f92672">-</span><span style="color:#a6e22e">maintenance</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#960050;background-color:#1e0010">/10 * * * * /home/ramesh/check-disk-space</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">Note</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Crontab</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">the</span> <span style="color:#a6e22e">current</span> <span style="color:#a6e22e">logged</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">user</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">MAIL</span> <span style="color:#a6e22e">variable</span>]
+</span></span></code></pre></div><p>如果您不希望将邮件发送到任何地方，即停止通过电子邮件发送 crontab 输出，请在 crontab 中添加或更新 MAIL 变量，如下所示。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">MAIL</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+</span></span></code></pre></div><p><strong>13. 如何使用 Crontab 每秒执行一次 Linux Cron 作业。</strong></p>
+<p>您不能安排每秒一次的 cronjob。因为在 cron 中，您可以指定的最小单位是分钟。在典型的场景中，我们大多数人没有理由每秒在系统中运行任何作业。</p>
+<p><strong>14.在Crontab中指定PATH变量</strong></p>
+<p>以上所有例子我们都指定了需要执行的Linux命令或shell-script的绝对路径。</p>
+<p>例如，如果您只想指定tape-backup，而不是指定/home/ramesh/tape-backup，则将路径/home/ramesh 添加到crontab 中的PATH 变量中，如下所示。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">ramesh</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">dev</span><span style="color:#f92672">-</span><span style="color:#a6e22e">db$</span> <span style="color:#a6e22e">crontab</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">l</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">PATH</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">/bin:/sbin:/usr/bin:/usr/sbin:/home/ramesh</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">yearly</span> <span style="color:#a6e22e">annual</span><span style="color:#f92672">-</span><span style="color:#a6e22e">maintenance</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#960050;background-color:#1e0010">/10 * * * * check-disk-space</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">Note</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Crontab</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">the</span> <span style="color:#a6e22e">current</span> <span style="color:#a6e22e">logged</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">user</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">PATH</span> <span style="color:#a6e22e">variable</span>]
+</span></span></code></pre></div><p><strong>15. 从 Cron 文件安装 Crontab</strong></p>
+<p>除了直接编辑 crontab 文件之外，您还可以先将所有条目添加到 cron 文件中。在文件中包含所有这些条目后，您可以将它们上传或安装到 cron，如下所示。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">ramesh</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">dev</span><span style="color:#f92672">-</span><span style="color:#a6e22e">db$</span> <span style="color:#a6e22e">crontab</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">l</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">no</span> <span style="color:#a6e22e">crontab</span> <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">ramesh</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span> <span style="color:#a6e22e">cat</span> <span style="color:#a6e22e">cron</span><span style="color:#f92672">-</span><span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">txt</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">yearly</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">home</span><span style="color:#f92672">/</span><span style="color:#a6e22e">ramesh</span><span style="color:#f92672">/</span><span style="color:#a6e22e">annual</span><span style="color:#f92672">-</span><span style="color:#a6e22e">maintenance</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#960050;background-color:#1e0010">/10 * * * * /home/ramesh/check-disk-space</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ramesh</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">dev</span><span style="color:#f92672">-</span><span style="color:#a6e22e">db$</span> <span style="color:#a6e22e">crontab</span> <span style="color:#a6e22e">cron</span><span style="color:#f92672">-</span><span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">txt</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ramesh</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">dev</span><span style="color:#f92672">-</span><span style="color:#a6e22e">db$</span> <span style="color:#a6e22e">crontab</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">l</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">yearly</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">home</span><span style="color:#f92672">/</span><span style="color:#a6e22e">ramesh</span><span style="color:#f92672">/</span><span style="color:#a6e22e">annual</span><span style="color:#f92672">-</span><span style="color:#a6e22e">maintenance</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#960050;background-color:#1e0010">/10 * * * * /home/ramesh/check-disk-space</span>
+</span></span></code></pre></div><p>**注意：**这会将 cron-file.txt 安装到您的 crontab，这也将删除您的旧 cron 条目。因此，从 cron-file.txt 上传 cron 条目时请注意。</p>
+<p><strong>==crontab 语法格式中特殊符号含义如下表==</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>特殊符号    含义
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">*</span>    *号，表示任意时间都，实际就是“每”的意思
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span>    减号表示分隔符，表示一个时间范围，区间段，如17-19点，例如：每天的17，18，19点的00分执行任务。00 17-19 <span style="font-style:italic">* *</span> * cmd
+</span></span><span style="display:flex;"><span>，    逗号，表示分隔时段的意思例如每天的5点10点00分执行任务，00 5,10 <span style="font-style:italic">* *</span> * cmd
+</span></span><span style="display:flex;"><span>/n    n代表数字，即“每隔n单位时间”，例如：每10分钟执行一次任务可以写成/*10 <span style="font-style:italic">* *</span> <span style="font-style:italic">* *</span> cmd，其中，/10,的范围是0-59，因此也可以写成0-59/10
+</span></span></code></pre></div><p><strong>==定时任务日志==</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 不记录日志,在每一行定时任务后面加上： </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 日志记录追加到指定文件</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt; /path/mylog.log  2&gt;&amp;<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>说明：
+</span></span><span style="display:flex;"><span>&gt; /dev/null 将输出重定向到/dev/null，这是个空设备，也就是忽略其输出。 
+</span></span><span style="display:flex;"><span>2&gt;&amp;<span style="color:#ae81ff">1</span>  是将错误输出到标准输出，如果在控制台调试，也就是屏幕上，方便调试。
+</span></span><span style="display:flex;"><span>有3个默认的i/o，0是标准输入，一般是键盘；1是标准输出，一般是屏幕了；2是标准错误。
+</span></span></code></pre></div><h2 id="问题27ping不通或丢包时如何进行链路测试">问题27、ping不通或丢包时如何进行链路测试？</h2>
+<p><strong>问题描述</strong></p>
+<p>在云服务器上访问其他网络资源时，出现网络卡顿。执行ping命令，存在丢包或时延过高的问题。</p>
+<p><strong>原因分析</strong></p>
+<p>丢包或时延较高可能是链路拥塞、链路节点故障、服务器负载高、系统设置问题等原因引起。</p>
+<p>在排除云服务器自身原因后，您可以使用Tracert或MTR工具进行进一步诊断。</p>
+<p>使用网络诊断工具MTR可以帮助您确认网络问题的根因。</p>
+<p><strong>Linux操作系统MTR介绍和使用</strong></p>
+<p><strong>安装MTR</strong></p>
+<p>目前现有的Linux发行版本都预装了MTR，如果您的Linux云服务器没有安装MTR，则可以执行以下命令进行安装：</p>
+<ul>
+<li>
+<p>CentOS 操作系统：</p>
+<pre tabindex="0"><code>yum install mtr
+</code></pre></li>
+<li>
+<p>Ubuntu 操作系统：</p>
+<pre tabindex="0"><code>sudo apt-get install mtr
+</code></pre></li>
+</ul>
+<p><strong>MTR相关参数说明</strong></p>
+<ul>
+<li>-h/&ndash;help：显示帮助菜单。</li>
+<li>-v/&ndash;version：显示MTR版本信息。</li>
+<li>-r/&ndash;report：结果以报告形式输出。</li>
+<li>-p/&ndash;split：与 &ndash;report相对，分别列出每次追踪的结果。</li>
+<li>-c/&ndash;report-cycles：设置每秒发送的数据包数量，默认是10。</li>
+<li>-s/&ndash;psize：设置数据包的大小。</li>
+<li>-n/&ndash;no-dns：不对IP地址做域名解析。</li>
+<li>-a/&ndash;address：用户设置发送数据包的IP地址，主要用户单一主机多个IP地址的场景。</li>
+<li>-4：IPv4。</li>
+<li>-6：IPv6。</li>
+</ul>
+<p>以本机到IP为119.xx.xx.xx的服务器为例。</p>
+<p>执行以下命令，以报告形式输出MTR的诊断报告。</p>
+<p><strong>mtr 119.xx.xx.xx &ndash; report</strong></p>
+<p>回显信息如下：</p>
+<pre tabindex="0"><code>[root@ecs-0609 ~]# mtr 119.xx.xx.xx --report
+Start: Thu Aug 22 15:41:22 2019
+HOST: ecs-652                     Loss%   Snt   Last   Avg  Best  Wrst StDev
+  1.|-- 100.70.0.1                 0.0%    10    3.0   3.4   2.8   7.5   1.3
+  2.|-- 10.242.7.174               0.0%    10   52.4  51.5  34.2  58.9   6.3
+  3.|-- 10.242.7.237               0.0%    10    3.2   5.0   2.7  20.8   5.5
+  4.|-- 10.230.2.146               0.0%    10    1.0   1.0   1.0   1.1   0.0
+  5.|-- 192.168.21.1               0.0%    10    3.5   4.2   2.8  11.6   2.5
+  6.|-- 10.242.7.238               0.0%    10   35.3  34.5   6.0  56.4  22.6
+  7.|-- 10.242.7.173               0.0%    10    3.3   4.7   3.1  14.7   3.6
+  8.|-- ???                       100.0    10    0.0   0.0   0.0   0.0   0.0
+</code></pre><p>主要输出的信息如下：</p>
+<ul>
+<li>HOST：节点的IP地址或域名。</li>
+<li>Loss%：丢包率。</li>
+<li>Snt：每秒发送的数量包的数量。</li>
+<li>Last：最近一次的响应时间。</li>
+<li>Avg：平均响应时间。</li>
+<li>Best：最短的响应时间。</li>
+<li>Wrst：最长的响应时间。</li>
+<li>StDev：标准偏差，偏差值越高，说明各个数据包在该节点的响应时间相差越大。</li>
+</ul>
+<p><strong>WinMTR和MTR的报告分析处理</strong></p>
+<p>以下图为例分析WinMTR和MTR的报告。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240611143026752.png" alt="image-20240611143026752"></p>
+<ul>
+<li>服务器本地网络：即图中A区域，代表本地局域网和本地网络提供商网络。
+<ul>
+<li>如果客户端本地网络中的节点出现异常，则需要对本地网络进行相应的排查分析。</li>
+<li>如果本地网络提供商网络出现异常，则需要向当地运营商反馈问题。</li>
+</ul>
+</li>
+<li>运营商骨干网络：即图中B区域，如果该区域出现异常，可以根据异常节点的IP查询其所属的运营商，向对应运营商进行反馈。</li>
+<li>目标端本地网络：即图中C区域，即目标服务器所属提供商的网络。
+<ul>
+<li>如果丢包发生在目的服务器，则可能是目的服务器的网络配置原因，请检查目的服务器的防火墙配置。</li>
+<li>如果丢包发生在接近目的服务器的几跳，则可能是目标服务器所属提供商的网络问题。</li>
+</ul>
+</li>
+</ul>
+<p><strong>常见的链路异常案例</strong></p>
+<ul>
+<li>
+<p>目标主机配置不当</p>
+<p>如下示例所示，数据包在目标地址出现了100%的丢包。从数据上看是数据包没有到达，其实很有可能是目标服务器网络配置原因，需检查目的服务器的防火墙配置。</p>
+<pre tabindex="0"><code>Host                                        Loss%   Snt   Last   Avg  Best  Wrst StDev 
+1. ???
+2. ???
+3. 1XX.X.X.X                                0.0%     10  521.3  90.1   2.7 521.3 211.3
+4. 11X.X.X.X                                0.0%     10    2.9   4.7   1.6  10.6   3.9
+5. 2X.X.X.X                                 80.0%    10    3.0   3.0   3.0   3.0   0.0
+6. 2X.XX.XX.XX                              0.0%     10    1.7   7.2   1.6  34.9  13.6
+7. 1XX.1XX.XX.X                             0.0%     10    5.2   5.2   5.1   5.2   0.0
+8. 2XX.XX.XX.XX                             0.0%     10    5.3   5.2   5.1   5.3   0.1
+9. 1XX.1XX.XX.X                             100.0%   10    0.0   0.0   0.0   0.0   0.0
+</code></pre></li>
+<li>
+<p>ICMP限速</p>
+<p>如下示例所示，在第5跳出现丢包，但后续节点均未见异常。所以推断是该节点ICMP限速所致。该场景对最终客户端到目标服务器的数据传输不会有影响，分析时可以忽略此种场景。</p>
+<pre tabindex="0"><code>Host                                        Loss%   Snt   Last   Avg  Best  Wrst StDev 
+1. 1XX.XX.XX.XX                             0.0%    10    0.3   0.6   0.3   1.2   0.3
+2. 1XX.XX.XX.XX                         0.0%    10    0.4   1.0   0.4   6.1   1.8
+3. 1XX.XX.XX.XX                              0.0%    10    0.8   2.7   0.8  19.0   5.7
+4. 1XX.XX.XX.XX                             0.0%    10    6.7   6.8   6.7   6.9   0.1
+5. 1XX.XX.XX.XX                             0.0%    10   27.2  25.3  23.1  26.4   2.9
+6. 1XX.XX.XX.XX                                0.0%    10   39.1  39.4  39.1  39.7   0.2
+7. 1XX.XX.XX.XX                         0.0%    10   39.6  40.4  39.4  46.9   2.3
+8. 1XX.XX.XX.XX                          0.0%    10   39.6  40.5  39.5  46.7   2.2
+</code></pre></li>
+<li>
+<p>环路</p>
+<p>如下示例所示，数据包在第5跳之后出现了循环跳转，导致最终无法到达目标服务器。出现此场景是由于运营商相关节点路由配置异常所致，需联系相应节点归属运营商处理。</p>
+<pre tabindex="0"><code>Host                                        Loss%   Snt   Last   Avg  Best  Wrst StDev 
+1. 1XX.XX.XX.XX                          0.0%    10    0.3   0.6   0.3   1.2   0.3
+2. 1XX.XX.XX.XX                         0.0%    10    0.4   1.0   0.4   6.1   1.8
+3. 1XX.XX.XX.XX                             0.0%    10    0.8   2.7   0.8  19.0   5.7
+4. 1XX.XX.XX.XX                               0.0%    10    6.7   6.8   6.7   6.9   0.1
+5. 1XX.XX.XX.65                             0.0%    10    0.0   0.0   0.0   0.0   0.0
+6. 1XX.XX.XX.65                                0.0%    10    0.0   0.0   0.0   0.0   0.0
+7. 1XX.XX.XX.65                             0.0%    10    0.0   0.0   0.0   0.0   0.0
+8. 1XX.XX.XX.65                             0.0%    10    0.0   0.0   0.0   0.0   0.0
+9. ???                                      0.0%    10    0.0   0.0   0.0   0.0   0.0
+</code></pre></li>
+<li>
+<p>链路中断</p>
+<p>如下示例所示，数据包在第4跳之后就无法收到任何反馈。这通常是由于相应节点中断所致。建议结合反向链路测试做进一步确认。该场景需要联系相应节点归属运营商处理。</p>
+<pre tabindex="0"><code>Host                                        Loss%   Snt   Last   Avg  Best  Wrst StDev 
+1. 1XX.XX.XX.XX                           0.0%    10    0.3   0.6   0.3   1.2   0.3
+2. 1XX.XX.XX.XX                         0.0%    10    0.4   1.0   0.4   6.1   1.8
+3. 1XX.XX.XX.XX                                0.0%    10    0.8   2.7   0.8  19.0   5.7
+4. 1XX.XX.XX.XX                                0.0%    10    6.7   6.8   6.7   6.9   0.1
+5. 1XX.XX.XX.XX                             0.0%    10    0.0   0.0   0.0   0.0   0.0
+6. 1XX.XX.XX.XX                                0.0%    10    0.0   0.0   0.0   0.0   0.0
+7. 1XX.XX.XX.XX                             0.0%    10    0.0   0.0   0.0   0.0   0.0
+8. 1XX.XX.XX.XX                             0.0%    10    0.0   0.0   0.0   0.0   0.0
+9 1XX.XX.XX.XX                              0.0%    10    0.0   0.0   0.0   0.0   0.0
+</code></pre></li>
+</ul>
+<h2 id="问题28linux几种常见的shellshbashcshtcshash">问题28、linux几种常见的Shell：sh、bash、csh、tcsh、ash</h2>
+<p>Shell 就是这样的一款软件，不同的组织机构开发了不同的 Shell，它们各有所长，有的占用资源少，有的支持高级编程功能，有的兼容性好，有的重视用户体验。</p>
+<blockquote>
+<p>Shell 既是一种脚本编程语言，也是一个连接内核和用户的软件。</p>
+</blockquote>
+<p>常见的 Shell 有 sh、bash、csh、tcsh、ash 等。</p>
+<p><strong>sh</strong></p>
+<p>sh 的全称是 Bourne shell，由 AT&amp;T 公司的 Steve Bourne开发，为了纪念他，就用他的名字命名了。</p>
+<p>sh 是 UNIX 上的标准 shell，很多 UNIX 版本都配有 sh。sh 是第一个流行的 Shell。</p>
+<p><strong>csh</strong></p>
+<p>sh 之后另一个广为流传的 shell 是由柏克莱大学的 Bill Joy 设计的，这个 shell 的语法有点类似C语言，所以才得名为 C shell ，简称为 csh。</p>
+<p>Bill Joy 是一个风云人物，他创立了 BSD 操作系统，开发了 vi 编辑器，还是 Sun 公司的创始人之一。</p>
+<blockquote>
+<p>BSD 是 UNIX 的一个重要分支，后人在此基础上发展出了很多现代的操作系统，最著名的有 FreeBSD、OpenBSD 和 NetBSD，就连 Mac OS X 在很大程度上也基于BSD。</p>
+</blockquote>
+<p><strong>tcsh</strong></p>
+<p>tcsh 是 csh 的增强版，加入了命令补全功能，提供了更加强大的语法支持。</p>
+<p><strong>ash</strong></p>
+<p>一个简单的轻量级的 Shell，占用资源少，适合运行于低内存环境，但是与下面讲到的 bash shell 完全兼容。</p>
+<p><strong>bash</strong></p>
+<p>bash shell 是 Linux 的默认 shell，本教程也基于 bash 编写。</p>
+<p>bash 由 GNU 组织开发，保持了对 sh shell 的兼容性，是各种 Linux 发行版默认配置的 shell。</p>
+<blockquote>
+<p>bash 兼容 sh 意味着，针对 sh 编写的 Shell 代码可以不加修改地在 bash 中运行。</p>
+</blockquote>
+<p>尽管如此，bash 和 sh 还是有一些不同之处：</p>
+<ul>
+<li>一方面，bash 扩展了一些命令和参数；</li>
+<li>另一方面，bash 并不完全和 sh 兼容，它们有些行为并不一致，但在大多数企业运维的情况下区别不大，特殊场景可以使用 bash 代替 sh。</li>
+</ul>
+<h2 id="问题29tmpfs使用">问题29、tmpfs使用</h2>
+<p><strong>优势：</strong></p>
+<p>\1.  动态文件系统的大小</p>
+<p>\2.  读写速度快。典型的tmpfs文件系统会完全驻留在RAM中，读写几乎是瞬间完成。</p>
+<p>\3.  Tmpfs中的数据在重新启动之后不会保留，因为虚拟内存本质上是易失的，所以有必要做些脚本做诸如加载、绑定的操作。</p>
+<p><strong>/dev/shm如何修改大小</strong></p>
+<p>​    关于/dev/shm容量的问题，在linux下，默认/dev/shm为实际物理内存的1/2，使用df –h命令查看。实际上它不会真正的占用这块内存。如果/dev/shm下没有任何文件，它实际占用的内存就是0字节；如果它最大为1G，里面放有100M的文件，那么剩余的900M任然可以被其他应用程序所使用，但是已经占用的这100M内存空间是不会被系统回收重新划分的。</p>
+<p>​    <strong>临时调整tmpfs大小，重启后失效</strong></p>
+<p>默认的最大一半内存在某些场合可能不够用，并且默认的额inode数量很低，一般都要调高些，可以用下面的命令来实现</p>
+<p>#mount–o size=1500m –o nr_inodes=1000000 –o noatime,nodiratime –o remount /dev/shm</p>
+<p>在2G的机器上，/dev/shm最大尺寸调整到1.5G，并且inode数量调整到1000000，这意味着大致可存入100万个小文件</p>
+<p>​    <strong>永久修改tmpfs大小，修改/etc/fstab文件</strong></p>
+<p>tmpfs /dev/shm tmpfsdefaults,size=1500M 0 0</p>
+<p>修改之后remount</p>
+<p>#mount –o remount  /dev/shm</p>
+<p>注意：</p>
+<p>这里一定要注意，修改的size一定要是整数，否则在remount时候会遇到如下问题</p>
+<p><strong>三、/dev/shm应用</strong></p>
+<p>首先在/dev/shm建个tmp文件夹，然后与实际/tmp绑定，把/dev/shm绑定到/tmp目录上
+#mkdir /dev/shm/tmp
+　　#chmod 777 /dev/shm/tmp
+　　#mount –bind /dev/shm/tmp/tmp（–bind ）
+　　在使用mount –bind olderdirnewerdir命令来挂载一个目录到另一个目录后，newerdir的权限和所有者等所有信息会发生变化。挂载后的目录继承了被挂载目录的所有属性，除了名称。Oracle 11g的amm内存管理模式就是使用/dev/shm，所以有时候修改MEMORY_TARGET或者MEMORY_MAX_TARGET会出现ORA-00845的错误</p>
+<h2 id="问题30linux符号连接的层数过多">问题30、Linux符号连接的层数过多</h2>
+<p>ln创建符号链接的时候一定要使用绝对路径,
+例如:
+/usr/local/cxxt/config-tools
+需要创建到 /usr/bin/config-tools
+如果你当前目录在 cxxt目录下， 执行
+ln -s ./config-tools /usr/bin/config-tools
+这时候运行 config-tools
+符号连接的层数过多</p>
+<p>使用ln 命令使用绝对路径就可以了
+ln -s /usr/local/cxxt/config-tools /usr/bin/config-tools</p>
+<p>ln 命令
+用途 : 链接文件。
+语法
+1&gt;将某个文件链接到一个文件上
+ln [ -f | -n] [ -s ] SourceFile [ TargetFile ]
+2&gt;将一个或多个文件链接到一个目录上
+ln [ -f | -n] [ -s ] SourceFile … TargetDirectory
+描述
+ln 命令将在 SourceFile 参数中指定的文件链接到在 TargetFile 参数中指定的文件，或将其链接到在 TargetDirectory 参数中指定的另</p>
+<p>一个目录中的文件。
+在缺省情况下，ln 命令会创建硬链接。如果需要使用 ln 命令来创建符号链接，请指明 -s 标志。</p>
+<h2 id="问题31解决-log-output-is-incomplete-or-unavailable-问题">问题31、解决 Log output is incomplete or unavailable 问题</h2>
+<p>最近遇到一件很奇怪的事情，那就是systemctl status xxx总是无法正常显示journal日记，提示</p>
+<blockquote>
+<pre tabindex="0"><code>Warning: Journal has been rotated since unit was started. Log output is incomplete or unavailable.
+</code></pre></blockquote>
+<p>后来才发现是journalctl这逼给删掉了，journal会统计日记大小，到了某种程度就自动删掉</p>
+<p>解决办法很简单</p>
+<blockquote>
+<pre tabindex="0"><code>journalctl --vacuum-size=1G
+</code></pre></blockquote>
+<p>最大可存放1GB journal，搞定了</p>
+<h2 id="问题32使用yumdownloadonly下载rpm包及依赖包">问题32、使用yumdownloadonly下载RPM包及依赖包</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yum install yum-plugin-downloadonly -y
+</span></span><span style="display:flex;"><span>yum install  --downloadonly --downloaddir<span style="color:#f92672">=</span>/tmp/libgudev1   libgudev1
+</span></span><span style="display:flex;"><span>rpm -Uvh --force --nodeps *.rpm
+</span></span></code></pre></div><h2 id="问题33手工离线安装部署rabbitmqredhat-73">问题33、手工离线安装部署RabbitMQ（redhat 7.3）</h2>
+<p><a href="https://support.huaweicloud.com/bestpractice-ecs/zh-cn_topic_0143982115.html">手工部署RabbitMQ（CentOS 7.4）_弹性云服务器 ECS_最佳实践_华为云 (huaweicloud.com)</a></p>
+<h3 id="准备依赖包">准备依赖包</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>yum -y install make gcc gcc-c++ kernel-devel m4 ncurses-devel openssl-devel unixODBC unixODBC-devel httpd python-simplejson
+</span></span></code></pre></div><h3 id="erlangotp安装">erlang/OTP安装</h3>
+<p>根据需要安装的rabbitmq版本，查询erlang版本矩阵，进行安装</p>
+<p><a href="http://erlang.org/download/">erlang下载地址</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>tar -zxvf otp_src_25.0.1.tar.gz
+</span></span><span style="display:flex;"><span>su root
+</span></span><span style="display:flex;"><span>cp -r otp_src_25.0.1 /usr/local/
+</span></span><span style="display:flex;"><span>cd /usr/local/
+</span></span><span style="display:flex;"><span>mv otp_src_25.0.1/ erlang/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cd erlang
+</span></span><span style="display:flex;"><span>./configure  --prefix<span style="color:#f92672">=</span>/usr/local/erlang --enable-smp-support  --enable-threads  --enable-sctp --enable-kernel-poll --enable-hipe  --with-ssl --without-javac
+</span></span><span style="display:flex;"><span>make <span style="color:#f92672">&amp;&amp;</span> make install
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vi /etc/profile
+</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>$PATH:/usr/local/erlang/bin
+</span></span><span style="display:flex;"><span>source /etc/profile
+</span></span></code></pre></div><h3 id="rabbitmq二进制安装">rabbitmq二进制安装</h3>
+<p>参考文档<a href="https://www.rabbitmq.com/install-generic-unix.html">Generic Binary Build (&ldquo;Generic UNIX Build&rdquo;) — RabbitMQ</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>上传 rabbitmq-server-generic-unix-3.10.5.tar.xz
+</span></span><span style="display:flex;"><span>tar -Jxvf rabbitmq-server-generic-unix-3.10.5.tar.xz
+</span></span><span style="display:flex;"><span>su root
+</span></span><span style="display:flex;"><span>cp -r rabbitmq_server-3.10.5/ /usr/local/
+</span></span><span style="display:flex;"><span>cd /usr/local/
+</span></span><span style="display:flex;"><span>mv rabbitmq_server-3.10.5/ rabbitmq
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加环境变量 PATH</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># cd /usr/local/rabbitmq/</span>
+</span></span><span style="display:flex;"><span>vim /etc/profile 添加如下配置：
+</span></span><span style="display:flex;"><span>export RABBITMQ_HOME<span style="color:#f92672">=</span>/usr/local/rabbitmq
+</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>$PATH:/usr/local/rabbitmq/sbin
+</span></span><span style="display:flex;"><span>source /etc/profile
+</span></span><span style="display:flex;"><span>【配置 rabbitmq】
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># cd /usr/local/rabbitmq/ebin</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># vim rabbit.app</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>找到：<span style="color:#f92672">{</span>loopback_users, <span style="color:#f92672">[</span>&lt;&lt;<span style="color:#e6db74">&#34;guest&#34;</span>&gt;&gt;<span style="color:#f92672">]}</span>,修改为：<span style="color:#f92672">{</span>loopback_users, <span style="color:#f92672">[</span>guest<span style="color:#f92672">]}</span>
+</span></span><span style="display:flex;"><span>保存退出
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>【启动 rabbitmq】：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>rabbitmq-server -detached
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># netstat -tnlp|grep 5672</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># rabbitmqctl status</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># rabbitmqctl cluster_status  -- 状态查看</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>启用管理插件
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># rabbitmq-plugins enable rabbitmq_management</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>查看防火墙状态，若为开启active <span style="color:#f92672">(</span>running<span style="color:#f92672">)</span>状态则关闭防火墙，否则管理页面可能访问不了，或者将对应端口添加到firewalld白名单
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># systemctl status firewalld</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># systemctl stop firewalld</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>访问：http://ip_address:15672/，输入用户/密码：guest/guest，如果页面访问登录正常则表明安装成功。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># rabbitmqctl shutdown  -- 关闭rabbitmq服务</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 配置文件位置</span>
+</span></span><span style="display:flex;"><span>$RABBITMQ_HOME/etc/rabbitmq/rabbitmq.conf
+</span></span><span style="display:flex;"><span>$RABBITMQ_HOME/etc/rabbitmq/rabbitmq-env.conf
+</span></span></code></pre></div><h2 id="问题34linux添加环境变量">问题34、linux添加环境变量</h2>
+<p><strong>添加环境变量之前需要明白以下几点：</strong></p>
+<p>1、Linux的环境变量是保存在变量PATH中(window 也是保存在PATH中)，可通过命令 echo $PATH 输出查看</p>
+<p>2、Linux环境变量值之间是通过冒号分隔的( : )</p>
+<p>　　其格式为：PATH=$PATH:&lt;PATH 1&gt;:&lt;PATH 2&gt;:&lt;PATH 3&gt;:&mdash;&mdash;:<!-- raw HTML omitted --></p>
+<p><strong>临时添加环境变量PATH：</strong></p>
+<p>可通过export命令，如</p>
+<p>export PATH=/usr/local/nginx/sbin/:$PATH，将/usr/local/nginx/sbin/目录临时添加到环境变量中</p>
+<p><strong>当前用户永久添加环境变量：</strong></p>
+<p>编辑.bashrc文件 vim ~/.bashrc  <strong>&laquo;&mdash;- 通过这种方式，在关闭xshell后，添加的环境变量仍然生效</strong></p>
+<p>文件末尾添加：export PATH=&quot;/usr/local/nginx/sbin/:$PATH&quot;</p>
+<p>source ~/.bashrc</p>
+<p><strong>所有用户永久添加环境变量：</strong></p>
+<p>　　编辑/etc/profile文件 vim /etc/profile  <strong>&laquo;&mdash;- 通过这种方式，在关闭xshell后，添加的环境变量不生效</strong></p>
+<p>　　文件末尾添加：export PATH=&quot;/usr/local/nginx/sbin/:$PATH&quot;</p>
+<p>　　source /etc/profile</p>
+<p>总结：</p>
+<p>　　linux添加环境变量注意几点：</p>
+<p>　　　　1、变量之前使用冒号分隔</p>
+<p>　　　　2、使用命令export</p>
+<p>　　　　3、export时，需要有$PATH</p>
+<p>　　　　4、在文件的末尾添加</p>
+<p>　　　　5、配置文件有，/etc/profile 和 ~/.bashrc</p>
+<p>　　　　6、添加bin或者sbin目录即可</p>
+<h2 id="问题35linux的ssh配置主要防断连">问题35、linux的ssh配置，主要防断连</h2>
+<p>修改服务器中/etc/ssh/sshd_config 文件，</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>LoginGraceTime<span style="color:#f92672">=</span>2m
+</span></span><span style="display:flex;"><span>TCPKeepAlive<span style="color:#f92672">=</span>yes 
+</span></span></code></pre></div><p>然后使用service sshd restart来重启sshd服务，这样就可以了。</p>
+<h2 id="问题36vim">问题36、vim</h2>
+<h3 id="1复制">1、复制</h3>
+<pre tabindex="0"><code>1）单行复制
+在命令模式下，将光标移动到将要复制的行处，按“yy”进行复制；
+2）多行复制 在命令模式下，将光标移动到将要复制的首行处，按“nyy”复制n行；其中n为1、2、3……
+</code></pre><p>【yy】 复制光标所在的那一行
+【nyy】 复制光标所在的向下n行</p>
+<h3 id="2粘贴">2、粘贴</h3>
+<pre tabindex="0"><code>在命令模式下，将光标移动到将要粘贴的行处，按“p”进行粘贴
+</code></pre><p>【p,P】 p为将已经复制的数据在光标下一行粘贴；P为将已经复制的数据在光标上一行粘贴</p>
+<h3 id="3删除">3、删除</h3>
+<p>删除一行：dd</p>
+<p>删除一个单词/光标之后的单词剩余部分：dw</p>
+<p>删除当前字符：x</p>
+<p>光标之后的该行部分：d$</p>
+<p>文本删除</p>
+<p>dd 删除一行</p>
+<p>d$ 删除以当前字符开始的一行字符</p>
+<p>ndd 删除以当前行开始的n行</p>
+<p>dw 删除以当前字符开始的一个字</p>
+<p>ndw 删除以当前字符开始的n个字</p>
+<h3 id="4查找">4、查找</h3>
+<p>在 normal 模式下按下 <code>/</code> 即可进入查找模式，输入要查找的字符串并按下回车。 Vim 会跳转到第一个匹配。按下 <code>n</code> 查找下一个，按下 <code>N</code> 查找上一个。</p>
+<p>Vim 查找支持正则表达式，例如 <code>/vim$</code> 匹配行尾的 <code>&quot;vim&quot;</code>。 需要查找特殊字符需要转义，例如 <code>/vim\$</code> 匹配 <code>&quot;vim$&quot;</code>。</p>
+<blockquote>
+<p>注意查找回车应当用 <code>\n</code>，而替换为回车应当用 <code>\r</code>（相当于 <code>&lt;CR&gt;</code>）。</p>
+</blockquote>
+<p>【/word】 在文件中查找内容为word的字符串（向下查找）
+【?word】 在文件中查找内容为word的字符串（向上查找）
+【[n]】 表示重复查找动作，即查找下一个
+【[N]】 反向查找下一个</p>
+<p>搜索后，我们打开别的文件，发现也被高亮了，怎么关闭高亮？</p>
+<p>命令模式下，输入:nohlsearch  也可以:set nohlsearch； 当然，可以简写，noh或者set noh。</p>
+<h3 id="5设置行号">5、设置行号</h3>
+<p>如果编辑后，又想显示行号，同样操作按一下esc键，并输入:（冒号），输入set number  ，并按回车键，完成后即显示行号</p>
+<h3 id="6跳到指定行">6、跳到指定行</h3>
+<p>在知道所查找的内容在文件中的具体位置时可以使用以下命令直接定位：
+跳到文件指定行：比如跳到66行</p>
+<p>66+G（也就是66+shift+g）
+当然你可以选择另一种跳转方式：</p>
+<p>命令行输入“ : n ” 然后回车
+跳到文件第一行：gg （两个小写的G）</p>
+<p>跳到文件最后一行：shift+g （也就是G）</p>
+<h3 id="7文件上下翻转">7、文件上下翻转</h3>
+<p>页翻转可以直接使用PgUp和PgDn</p>
+<p>向前滚动一屏：Ctrl+F</p>
+<p>向后滚动一屏：Ctrl+B</p>
+<p>向前滚动半屏：Ctrl+D（向下）</p>
+<p>向后滚动半屏：Ctrl+U（向上）</p>
+<p>向下滚动一行，保持当前光标不动：Ctrl+E</p>
+<p>向上滚动一行，保持当前光标不动：Ctrl+Y</p>
+<p>当前行滚动：
+当前行移动到屏幕顶部并滚动：Z+Enter
+滚动指定行到屏幕顶部： 10Z+Enter（指定第十行）
+当前行移动到屏幕中央并滚动：Z + .
+当前行移动到屏幕底部并滚动：Z + -
+当前屏幕操作：
+H：大写h，移动到当前屏幕首行；nH移动到首行下的第n行
+M：大写m，移动到当前屏幕中间行
+L：大写l，移动到当前屏幕末行；nL移动到末行上面的第n行</p>
+<h3 id="8撤销上一步操作">**8、**撤销上一步操作</h3>
+<p>【u】 撤消上一个操作
+【[Ctrl] + r】 多次撤消
+【.】 这是小数点键，重复上一个操作</p>
+<p>缩进：</p>
+<p>插入模式下，ctrl+shift+d 减少缩进，ctrl+shift+t 增加缩进</p>
+<h3 id="9vim编辑">9、vim编辑</h3>
+<p>1、进入插入模式（６个命令）
+【i】 从目前光标所在处插入
+【I】 从目前光标
+【a】 从当前光标所在的下一个字符处开始插入
+【A】 从光标所在行的最后一个字符处开始插入
+【o】 英文小写字母o，在目前光标所在行的下一行处插入新的一行并开始插入
+【O】 英文大写字母O，在目前光标所在行的上一行处插入新的一行并开始插入</p>
+<p>2、进入替换模式（2个命令）
+【r】 只会替换光标所在的那一个字符一次
+【R】 会一直替换光标所在字符，直到按下[ESC]键为止
+【[ESC]】 退出编辑模式回到一般模式</p>
+<p>3、一般模式切换到命令行模式
+【:w】 保存文件
+【:w!】 若文件为只读，强制保存文件
+【:q】 离开vi
+【:q!】 不保存强制离开vi
+【:wq】 保存后离开
+【:wq!】 强制保存后离开
+【:! command】 暂时离开vi到命令行下执行一个命令后的显示结果
+【:set nu】 显示行号
+【:set nonu】 取消显示行号
+【:w newfile】 另存为
+【:set fileencoding】 查看当前文件编码格式
+【:set fileencoding=utf-8】 设置当前文件编码格式为utf-8，也可以设置成其他编码格式
+【:set fileformat】 查看当前文件的断行格式（dos\windows,unix或macintosh）
+【:set fileformat=unix】 将当前文件的断行格式设置为unix格式</p>
+<h3 id="10多窗口功能">10、多窗口功能</h3>
+<p>【:sp [filename]】 打开一个新窗口，显示新文件，若只输入:sp，则两窗口显示同一个文件
+【[Ctrl] + w + j】 光标移动到下方窗口
+【[Ctrl] + w + k】 光标移动到上方窗口
+【[Ctrl] + w + q】 离开当前窗口</p>
+<h3 id="11缩进">11、缩进</h3>
+<p>批量缩进</p>
+<p>在程序代码界面，按esc，退出编辑模式，到命令模式，并在英语输入法下输入“：”</p>
+<p>将所要批量缩进的行号写上，按照格式：“行号1，行号2&gt;”输入命令，如要将2至9行批量缩进一个tab值，则命令为“2,9&gt;”</p>
+<p>输入完毕后，按回车可以执行，就可以看到2至9行全部缩进了一个tab值了，同样的，如果要缩回来一个tab值，则用命令“行号1，行号2&lt;”即可</p>
+<p>可视模式缩进</p>
+<p>方法二是在可视模式下选择要移动的列，操作为，esc从编辑模式退到命令模式，将光标移到需要缩进的行的行首，然后按shift+v，可以看到该行已被选中，且左下角提示为“可视”</p>
+<p>此时，按键盘上的上下左右方向键，如这里按向下的箭头，选中所有需要批量缩进的行</p>
+<p>选择好了之后，按shift+&gt;,是向前缩进一个tab值，按shift+&lt;，则是缩回一个tab值，</p>
+<h3 id="12替换">12、替换</h3>
+<p><code>:s</code>（substitute）命令用来查找和替换字符串。语法如下：</p>
+<pre tabindex="0"><code>:{作用范围}s/{目标}/{替换}/{替换标志}
+</code></pre><p>例如 <code>:%s/foo/bar/g</code> 会在全局范围(<code>%</code>)查找 <code>foo</code> 并替换为 <code>bar</code>，所有出现都会被替换（<code>g</code>）。</p>
+<h2 id="问题37安装docker-compose">问题37、安装docker-compose</h2>
+<h3 id="手动安装">手动安装</h3>
+<p>官网选择版本 <a href="https://github.com/docker/compose/releases">https://github.com/docker/compose/releases</a>  选择相应版本,下载docker-compose-Linux-x86_64到本地或者<a href="https://cloud.tencent.com/product/cvm?from=10680">服务器</a>中  更名为<code>docker-compose</code>,并移动到 /usr/local/bin 目录下</p>
+<p>添加执行权限</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>chmod +x /usr/local/bin/docker-compose
+</span></span></code></pre></div><p>检查docker compose版本</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>docker-compose version
+</span></span></code></pre></div><h2 id="问题38touch修改文件时间">问题38、touch修改文件时间</h2>
+<p>只能修改当前层级，每一层都得进行修改</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span> <span style="color:#75715e"># 查看文件时间</span>
+</span></span><span style="display:flex;"><span> stat 文件名
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># 修改当前层级所有文件，不能修改其他层级</span>
+</span></span><span style="display:flex;"><span> touch -t 202209210314.32 *
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> 202209210354.16
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># 修改 ..</span>
+</span></span><span style="display:flex;"><span> touch -t 202209210314.32 ..
+</span></span></code></pre></div><h2 id="39安装python">39、安装python</h2>
+<h3 id="在线">在线</h3>
+<ul>
+<li>
+<p>在 Debian 的衍生產品，例如 Ubuntu，使用 <code>apt</code>。</p>
+<pre tabindex="0"><code>$ sudo apt-get install python3
+</code></pre></li>
+<li>
+<p>在 Red Hat 和衍生產品，請使用 <code>yum</code>。</p>
+<pre tabindex="0"><code>$ sudo yum install python3
+</code></pre></li>
+<li>
+<p>在 SUSE 和衍生產品，請使用 <code>zypper</code>。</p>
+<pre tabindex="0"><code>$ sudo zypper install python3
+</code></pre></li>
+</ul>
+<h3 id="离线">离线</h3>
+<p>1.查看当前python环境版本</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>python --version
+</span></span></code></pre></div><p>**2.**首先安装编译安装时需要的依赖包，编译python源码时，需要一些依赖包，一次安装完毕</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc make libffi-devel
+</span></span></code></pre></div><p>3.根据需要下载对应的Python版本：</p>
+<p>服务器下载较慢时，可以在官网下载到本地之后，再上传到服务器。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>wget https://www.python.org/ftp/3.7.0/Python-3.7.2.tgz
+</span></span></code></pre></div><p>4.解压python安装包</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd opt
+</span></span><span style="display:flex;"><span>tar -zxvf Python-3.x.tgz
+</span></span></code></pre></div><p>5.新建一个python3的安装目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e">#创建编译安装目录</span>
+</span></span><span style="display:flex;"><span>mkdir /usr/local/python3
+</span></span></code></pre></div><p>6.编译安装</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd Python-3.x
+</span></span><span style="display:flex;"><span>./configure --prefix<span style="color:#f92672">=</span>/usr/local/python3
+</span></span><span style="display:flex;"><span>make <span style="color:#f92672">&amp;&amp;</span> make install
+</span></span></code></pre></div><ol start="7">
+<li>创建软连接</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ln -s /usr/local/python3/bin/python3 /usr/local/bin/python3
+</span></span><span style="display:flex;"><span>ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip3
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 验证是否成功</span>
+</span></span><span style="display:flex;"><span>python3 -V
+</span></span><span style="display:flex;"><span>pip3 -V
+</span></span></code></pre></div><h2 id="40后台进程日志定向输出">40、后台进程日志定向输出</h2>
+<p><strong>后台运行命令</strong>
+在命令行加上&amp;，表示进程到后台执行，如 cmd &amp;
+日志输出重定向命令，如　cmp &gt; out.log &amp;
+Linux默认定义两个变量：1和2;
+1表示标准输出
+2表示错误输出
+如 cmd 1&gt;info.log 2&gt;error.log &amp;
+其中　cmp &gt; out.log &amp;　与　cmp 1&gt; out.log &amp; 是一样的
+如果想忽略某个输入，则输出到/dev/null设备即可</p>
+<p>如　cmd 1&gt;info.log 2&gt;/dev/null.log &amp;</p>
+<p>如果想将2中的日志和1中的日志写入同一个文件，则命令如:　cmd 1&gt;info.log 2&gt;&amp;1 &amp;
+其中2&gt;&amp;1的&amp;符号表示错误输出重定向到标准输出</p>
+<p><em>但这种后台shell窗口退出ssh登陆或vnc登陆，进程就自动结束，如果想继续运行，请加上 nohup命令
+如 nohup cmd 1&gt;info.log 2&gt;&amp;1 &amp;</em></p>
+<h2 id="41systemctl">41、systemctl</h2>
+<pre tabindex="0"><code>systemctl list-units nrcloud-*
+
+systemctl stop nrcloud-*
+
+systemctl disable nrcloud-*
+
+systemctl start nrcloud-*
+</code></pre><h2 id="42rm-提示-参数列表过长">42、rm 提示 参数列表过长</h2>
+<p>1、rm  -rf *  改为:</p>
+<pre tabindex="0"><code>find . -name &#34;*&#34; | xargs rm -rf &#39;*&#39; 就行了。
+</code></pre><p>2、rm test* -rf 改为:</p>
+<pre tabindex="0"><code>find . -name &#34;test*&#34; | xargs rm -rf &#34;test*&#34;
+</code></pre><p>3、如果文件名或文件夹名中有空格使用下列方法</p>
+<pre tabindex="0"><code>find . -name &#34;today*&#34; -print0 | xargs -0 rm -rf
+</code></pre><p>参数-print0，于默认的-print相比，输出的序列不是以空格分隔，而是以null字符分隔。而xargs也有一个参数-0，可以接受以null而非空格间隔的输入流</p>
+<h2 id="43tmp目录自动清理">43、/tmp目录自动清理</h2>
+<p><a href="https://so.csdn.net/so/search?q=CentOS7&amp;spm=1001.2101.3001.7020">CentOS7</a>下，系统使用systemd管理易变与临时文件，与之相关的系统服务有3个：</p>
+<pre tabindex="0"><code class="language-ssh" data-lang="ssh">systemd-tmpfiles-setup.service  ：Create Volatile Files and Directories
+systemd-tmpfiles-setup-dev.service：Create static device nodes in /dev
+systemd-tmpfiles-clean.service ：Cleanup of Temporary Directories
+</code></pre><p>配置文件也有3个地方：</p>
+<pre tabindex="0"><code class="language-ssh" data-lang="ssh">/etc/tmpfiles.d/*.conf
+/run/tmpfiles.d/*.conf
+/usr/lib/tmpfiles.d/*.conf
+</code></pre><p>/tmp目录的清理规则主要取决于/usr/lib/tmpfiles.d/tmp.conf文件的设定，默认的配置内容为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#75715e">#  This file is part of systemd.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  systemd is free software; you can redistribute it and/or modify it</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  under the terms of the GNU Lesser General Public License as published by</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  the Free Software Foundation; either version 2.1 of the License, or</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  (at your option) any later version.</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># See tmpfiles.d(5) for details</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Clear tmp directories separately, to make them easier to override</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">v /tmp 1777 root root 7d</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">v /var/tmp 1777 root root 30d</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Exclude namespace mountpoints created with PrivateTmp=yes</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">x /tmp/systemd-private-%b-*</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">X /tmp/systemd-private-%b-*/tmp</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">x /var/tmp/systemd-private-%b-*</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">X /var/tmp/systemd-private-%b-*/tmp</span>
+</span></span></code></pre></div><p>如你不想让系统自动清理/tmp下以tomcat开头的目录，那么增加下面这条内容到配置文件中即可：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#a6e22e">x /tmp/tomcat.*</span>
+</span></span></code></pre></div><h2 id="44rm-提示-参数列表过长-解决方法">44、rm 提示 参数列表过长 解决方法</h2>
+<p>在Linux或者AIX中删除大量文件时，直接用rm * 可能会出现  参数列表过长，的错误。</p>
+<p>这时可以用find命令来结合使用。</p>
+<p>例：
+1、<code>rm  -rf  *</code>  改为:
+<code>find . -name &quot;*&quot; | xargs rm -rf '*'</code> 就行了。</p>
+<p>2、<code>rm test* -rf</code> 改为:
+<code>find . -name &quot;test*&quot; | xargs rm -rf &quot;test*&quot;</code></p>
+<p>3、如果文件名或文件夹名中有空格使用下列方法</p>
+<p><code>find . -name &quot;today*&quot; -print0 | xargs -0 rm -rf</code></p>
+<p>参数-print0，于默认的-print相比，输出的序列不是以空格分隔，而是以null字符分隔。而xargs也有一个参数-0，可以接受以null而非空格间隔的输入流</p>
+<h2 id="45linux查看系统开机时间">45、Linux查看系统开机时间</h2>
+<p>1：who 命令查看</p>
+<pre tabindex="0"><code class="language-ssh" data-lang="ssh">who -b 查看最后一次系统启动的时间。
+who -r 查看当前系统运行时间
+</code></pre><p>2：last reboot命令查看</p>
+<p>last reboot可以看到Linux系统历史启动的时间。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>last -x | grep shutdown <span style="color:#75715e">#以关机时间段显示</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果只需要查看最后一次Linux系统启动的时间，</span>
+</span></span><span style="display:flex;"><span>last -1 reboot
+</span></span><span style="display:flex;"><span>last reboot | head -1
+</span></span></code></pre></div><p>3：TOP命令查看</p>
+<p>up后表示系统到目前运行了多久时间。反过来推算系统重启时间</p>
+<p>4：w命令查看</p>
+<p>同top</p>
+<p>5：uptime 命令查看</p>
+<p>6：查看/proc/uptime</p>
+<pre tabindex="0"><code class="language-ssh" data-lang="ssh">cat /proc/uptime
+date -d &#34;`cut -f1 -d. /proc/uptime` seconds ago&#34;
+date -d &#34;$(awk -F. &#39;{print $1}&#39; /proc/uptime) second ago&#34; +&#34;%Y-%m-%d %H:%M:%S&#34; 
+</code></pre><h2 id="46批量替换文件中内容perlsedshell">46、批量替换文件中内容(perl,sed,shell)</h2>
+<p><strong>方法1：</strong></p>
+<p>这两天在构建一个应用的使用用到了maven,由于project很大,足足有700多个 pom.xml文件,更郁闷的是在很多pom.xml文件里都单独指定了资源库的url,我需要把这些资源库的url统一指定到nexus本地中央库.
+手 工一个个改文件配置有点不太实际,所以google了一下,找到批量替换文件内容的好方法,命令结构如下:
+find -name &lsquo;要查找的文件名&rsquo; | xargs perl -pi -e &rsquo;s|被替换的字符串|替换后的字符串|g&rsquo;下面这个例子就是将当前目录及所有子目录下的所有pom.xml文件中的”<strong><a href="http://repo1.maven.org/maven2">http://repo1.maven.org/maven2</a></strong>“ 替换为”<strong>http://localhost:8081/nexus/content/groups/public</strong>“.
+find -name &lsquo;pom.xml&rsquo; | xargs perl -pi -e &rsquo;s|http://repo1.maven.org/maven2|http://localhost:8081/nexus/content /groups/public|g&rsquo;这里用到了Perl语言,
+perl -pi -e 在Perl 命令中加上-e 选项，后跟一行代码，那它就会像运行一个普通的Perl 脚本那样运行该代码.
+从命令行中使用Perl 能够帮助实现一些强大的、实时的转换。认真研究正则表达式，并正确地使用，将会为您省去大量的手工编辑工作。</p>
+<p><strong>find -name &lsquo;pom.xml&rsquo; | xargs perl -pi -e &rsquo;s|http://repo1.maven.org/maven2|http://localhost:8081/nexus/content/groups/public|g&rsquo;</strong></p>
+<p><strong>方法2：</strong></p>
+<p>Linux下批量替换多个文件中的字符串的简单方法。用sed命令可以批量替换多个文件中的字符串。
+用sed命令可以批量替换多个文件中的 字符串。
+sed -i &ldquo;s/原字符串/新字符串/g&rdquo; <code>grep 原字符串 -rl 所在目录</code>
+例如：我要把mahuinan替换 为huinanma，执行命令：
+sed -i &ldquo;s/mahuinan/huinanma/g&rdquo; &lsquo;grep mahuinan -rl /www&rsquo;
+这是目前linux最简单的批量替换字符串命令了！
+具体格式如下：
+sed -i &ldquo;s/oldString/newString/g&rdquo; <code>grep oldString -rl /path</code>
+实例代码：sed -i &ldquo;s/大小多少/日月水火/g&rdquo; <code>grep 大小多少 -rl /usr/aa</code>
+<strong>sed -i &ldquo;s/大小多少/日月水火/g&rdquo; <code>grep 大小多少 -rl ./</code></strong></p>
+<p><strong>方法3：</strong></p>
+<p>在日程的开发过程中，可能大家会遇到将某个变量名修改 为另一个变量名的情况，如果这个变量是一个局部变量的话，vi足以胜任，但是如果是某个全局变量的话，并且在很多文件中进行了使用，这个时候使用vi就是 一个不明智的选择。这里给出一个简单的shell命令，可以一次性将所有文件中的指定字符串进行修改：</p>
+<p><strong>grep &ldquo;abc&rdquo; * -R | awk -F: &lsquo;{print $1}&rsquo; | sort | uniq | xargs sed -i &rsquo;s/abc/abcde/g&rsquo;</strong></p>
+<p>批量替换 配置文件中的IP：</p>
+<p><strong>grep &ldquo;<strong><strong>[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}</strong></strong>&rdquo; * -R | awk -F: &lsquo;{print $1}&rsquo; | sort | uniq | xargs</strong> <strong>sed -i &rsquo;s/[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/172.0.0.1/g&rsquo;</strong></p>
+<p>from: <a href="http://blog.zol.com.cn/1395/article_1394052.html">http://blog.zol.com.cn/1395/article_1394052.html</a></p>
+<p><strong>补充说明</strong>：
+sed -i &ldquo;s/oldString/newString/g&rdquo; <code>grep oldString -rl /path</code><br>
+对多个文件的处理可能不支持，需要用 <strong>xargs</strong>, 搞定。
+变种如下：
+grepoldString -rl /path | xargssed -i &ldquo;s/oldString/newString/g&rdquo;</p>
+<p><strong>注意</strong>：
+在 <code>grep oldString -rl /path</code>  中 <code> 为1前边的翻引号</code>，而不是enter 前的&rsquo;</p>
+<h2 id="47统计特定开头文件夹的个数">47、统计特定开头文件夹的个数</h2>
+<p>例如查找某目录下以main开头的文件夹个数</p>
+<pre tabindex="0"><code>find -type d -name &#34;main*&#34; |wc -l
+</code></pre><p>排除特定开头文件夹后的个数,例如排除上级文件夹和当前文件夹和隐藏文件夹，都是以.开头的</p>
+<pre tabindex="0"><code>find -type d ! -name &#34;.*&#34; |wc -l
+</code></pre><p>查找指定目录文件夹的个数</p>
+<pre tabindex="0"><code>find /path -type d |wc -l
+</code></pre><p>同样可以实现统计特定文件的个数</p>
+<pre tabindex="0"><code>find -type f　-name &#34;*.txt&#34; |wc -l
+</code></pre><p>自己灵活运用, wc -l统计输出的行数</p>
+<p>如果要统计当前目录下和子目录下的文件或者文件夹个数，具体请搜索以下命令</p>
+<pre tabindex="0"><code>ls -lR|grep &#34;^-&#34;| wc -l
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2023/%E4%BD%BF%E7%94%A8spring-javaformat%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/">使用spring-javaformat格式化项目代码</a></span>
+  <span class="nav-next"><a href="/cn/2023/%E6%89%93%E5%B7%A5%E7%A2%8E%E7%A2%8E%E5%BF%B5/">打工碎碎念</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2023\/%E4%BD%BF%E7%94%A8spring-javaformat%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2023\/%E6%89%93%E5%B7%A5%E7%A2%8E%E7%A2%8E%E5%BF%B5\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

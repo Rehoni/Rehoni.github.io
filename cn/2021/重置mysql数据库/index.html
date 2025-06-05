@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>MySQL——重置mysql数据库 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="MySQL——重置mysql数据库 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="1、删掉 data 文件夹，这个文件夹的具体位置是 my.ini 里决定的数据库数据的存放位置，一般默认都是数据库的根目录。
+遇到删除不了的情况，打开服务-&amp;gt;关闭mysql服务
+2、使用命令初始化data数据
+[&amp;hellip;] mysqld --initialize --console 会重新生成一个密码，用这个密码就可以重新登录数据库了
+3、登录数据库注意
+[&amp;hellip;] &amp;hellip;">
+      <meta property="og:description" content="1、删掉 data 文件夹，这个文件夹的具体位置是 my.ini 里决定的数据库数据的存放位置，一般默认都是数据库的根目录。
+遇到删除不了的情况，打开服务-&amp;gt;关闭mysql服务
+2、使用命令初始化data数据
+[&amp;hellip;] mysqld --initialize --console 会重新生成一个密码，用这个密码就可以重新登录数据库了
+3、登录数据库注意
+[&amp;hellip;] &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240611143410189.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2021%5c%e9%87%8d%e7%bd%aemysql%e6%95%b0%e6%8d%ae%e5%ba%93.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>MySQL——重置mysql数据库</h1>
+
+
+<h3>Rehoni / 
+2021-08-05</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>1、删掉 <strong>data</strong> 文件夹，这个文件夹的具体位置是 <strong>my.ini</strong> 里决定的数据库数据的存放位置，一般默认都是数据库的根目录。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240611143410189.png" alt="image-20240611143410189"></p>
+<p>遇到删除不了的情况，打开服务-&gt;关闭mysql服务</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240611143420184.png" alt="image-20240611143420184"></p>
+<p>2、使用命令初始化data数据</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysqld --initialize --console
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240611143428046.png" alt="image-20240611143428046"></p>
+<p>会重新生成一个密码，用这个密码就可以重新登录数据库了</p>
+<p>3、登录数据库注意</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysql -uroot -p
+</span></span><span style="display:flex;"><span>show databases; <span style="color:#75715e"># 无法使用，会提示你修改密码</span>
+</span></span><span style="display:flex;"><span>alter user <span style="color:#e6db74">&#39;root&#39;</span>@<span style="color:#e6db74">&#39;localhost&#39;</span> identified by <span style="color:#e6db74">&#39;root&#39;</span>;
+</span></span></code></pre></div><p>报错ERROR 2003 (HY000): Can&rsquo;t connect to MySQL server on &rsquo;localhost&rsquo; (10061)，因为数据库服务没有启动，重新开启数据库服务，已有的mysql80服务估计无法正常启动，因此需要mysqld -nstall 重新安装一下，安装服务默认名为mysql</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 服务-&gt;开启mysql服务</span>
+</span></span><span style="display:flex;"><span>net start mysql <span style="color:#75715e"># 启动mysql服务</span>
+</span></span><span style="display:flex;"><span>net start mysql80 <span style="color:#75715e"># 无法启动</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果找不到mysql服务</span>
+</span></span><span style="display:flex;"><span>mysqld -install
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 删除原来无用的服务</span>
+</span></span><span style="display:flex;"><span>sc delete mysql80
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2021/202107/">2021年07月财务实证</a></span>
+  <span class="nav-next"><a href="/cn/2021/%E5%8F%82%E4%BF%9D%E8%81%8C%E5%B7%A5%E6%8A%80%E8%83%BD%E6%8F%90%E5%8D%87%E8%A1%A5%E8%B4%B4/">参保职工技能提升补贴</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2021\/202107\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2021\/%E5%8F%82%E4%BF%9D%E8%81%8C%E5%B7%A5%E6%8A%80%E8%83%BD%E6%8F%90%E5%8D%87%E8%A1%A5%E8%B4%B4\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

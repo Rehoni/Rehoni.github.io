@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>tomcat——隐藏版本查看 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="tomcat——隐藏版本查看 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="在ems用户下，备份原来tomcat下的tomcat/conf目录，注意操作前shutdown掉tomcat
+cp -r conf/ 目录 在ems用户下，给原来的tomcat压一份包备份，如果无法压缩则用root账户压包
+tar czf old_tomcat.tar.gz -C 目录 放入新的tomcat 官网下载最新的tomcat的tar.gz包，上传到服务器上解压缩
+tar xf &amp;hellip;">
+      <meta property="og:description" content="在ems用户下，备份原来tomcat下的tomcat/conf目录，注意操作前shutdown掉tomcat
+cp -r conf/ 目录 在ems用户下，给原来的tomcat压一份包备份，如果无法压缩则用root账户压包
+tar czf old_tomcat.tar.gz -C 目录 放入新的tomcat 官网下载最新的tomcat的tar.gz包，上传到服务器上解压缩
+tar xf &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2710e28f-3345-4293-b8b8-ff031b8e05c5/image-20200711115831013.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5c%e9%9a%90%e8%97%8f%e7%89%88%e6%9c%ac%e6%9f%a5%e7%9c%8b.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>tomcat——隐藏版本查看</h1>
+
+
+<h3>rehoni / 
+2020-09-01</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="备份原来的tomcat配置文件"><strong>备份原来的tomcat配置文件</strong></h1>
+<p>在ems用户下，备份原来tomcat下的<code>tomcat/conf</code>目录，注意操作前shutdown掉tomcat</p>
+<pre tabindex="0"><code> cp -r conf/ 目录
+</code></pre><p>在ems用户下，给原来的tomcat压一份包备份，如果无法压缩则用root账户压包</p>
+<pre tabindex="0"><code> tar czf old_tomcat.tar.gz -C 目录
+</code></pre><h1 id="放入新的tomcat"><strong>放入新的tomcat</strong></h1>
+<p>官网下载最新的tomcat的tar.gz包，上传到服务器上解压缩</p>
+<pre tabindex="0"><code> tar xf apache-tomcat-8.5.57.tar.gz -C 目录
+</code></pre><p>将旧的conf文件夹替换掉新的tomcat的conf文件夹，正常启动新的tomcat即可，删除旧的tomcat文件夹</p>
+<h1 id="查看隐藏tomcat版本"><strong>查看/隐藏tomcat版本</strong></h1>
+<h2 id="查看tomcat版本"><strong>查看tomcat版本</strong></h2>
+<ol>
+<li>bin目录下<code>.version.sh</code></li>
+<li>lib目录下找到<code>catalina.jar</code>包，解压缩查看里边的<code>org\\apache\\catalina\\util\\ServerInfo.properties</code>文件</li>
+<li>lib目录下找到<code>catalina.jar</code>包，解压缩查看里边的<code>org\\apache\\catalina\\MANIFEST.MF</code>文件，仅作为参考（最低版本）。</li>
+</ol>
+<pre tabindex="0"><code> Manifest-Version: 1.0
+ Ant-Version: Apache Ant 1.10.5
+ Created-By: 1.8.0_151-b12 (Oracle Corporation)
+ Specification-Title: Apache Tomcat
+ Specification-Version: 8.5
+ Specification-Vendor: Apache Software Foundation
+ Implementation-Title: Apache Tomcat
+ Implementation-Version: 8.5.42
+ Implementation-Vendor: Apache Software Foundation
+ X-Compile-Source-JDK: 1.7
+ X-Compile-Target-JDK: 1.7
+</code></pre><h2 id="修改tomcat版本"><strong>修改tomcat版本</strong></h2>
+<p>推荐直接修改lib目录下<code>catalina.jar</code>包，解压缩修改里边的<code>org\\apache\\catalina\\util\\ServerInfo.properties</code>文件，然后再重新压成jar包，放入tomcat替换。</p>
+<h1 id="取消session持久化功能"><strong>取消session持久化功能</strong></h1>
+<blockquote>
+<p>Session 是保存在内存中的，如果服务器重启、宕机的话，Session 就会丢失。有时候，我们需要对 Session 持久化以应对意外的情况发生。例如，客户端与服务器在交互过程中，可能因为 Session 的丢失而造成数据的丢失。还有一种情况，我们需要持久化 Session。如果当前用户的访问量巨大，大量的 Session 便会占用服务器大量的内存，从而使服务器的性能受到影响。如果能将一些闲置时间较长的 Session 换出，存储至磁盘，便可以起到节省内存空间的作用。需要注意的一点是，要持久化 Session，那么 Session 里存放的对象必须是可序列化的，即实现了 java.io.Serializable 接口。Tomcat 通过两个 Session 管理类来实现 Session 的持久化：org.apache.catalina.session.StandardManager 和 org.apache.catalina.session。 可以通过 $CATALINA_HOME/conf/context.xml 的 <!-- raw HTML omitted --> 节点来配置 Session 的持久化方式。Tomcat 默认已经启动了持久化配置，若要禁用持久化功能，只需在 <!-- raw HTML omitted -->节点里配置 <!-- raw HTML omitted -->。</p>
+</blockquote>
+<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2710e28f-3345-4293-b8b8-ff031b8e05c5/image-20200711115831013.png" alt="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2710e28f-3345-4293-b8b8-ff031b8e05c5/image-20200711115831013.png"></p>
+<p>修改完context.xml之后报错，tomcat启动服务全down了，排查当天的Catalina日志时，发现问题如下：</p>
+<pre tabindex="0"><code> 11-Jul-2020 14:22:51.050 严重 [localhost-startStop-1] org.apache.catalina.startup.ContextConfig.processContextConfig 解析context.xml错误，[/zhsbd_deployment]
+     com.sun.org.apache.xerces.internal.impl.io.MalformedByteSequenceException: 1 字节的 UTF-8 序列的字节 1 无效。
+         at com.sun.org.apache.xerces.internal.impl.io.UTF8Reader.invalidByte(UTF8Reader.java:701)
+         at com.sun.org.apache.xerces.internal.impl.io.UTF8Reader.read(UTF8Reader.java:567)
+</code></pre><p>目测是那一行中文注释引起的，删除中文注释后，tomcat正常启动，所有服务正常。</p>
+<h1 id="参考"><strong>参考</strong></h1>
+<p><a href="https://stackoverflow.com/questions/14925073/how-to-find-out-running-tomcat-version">how to find out running tomcat version</a></p>
+<p><a href="https://www.cnblogs.com/huey/p/4803414.html">Tomcat - 持久化 Session</a></p>
+<p><a href="https://uzshare.com/view/829790#_1">荐 【漏洞预警】Apache Tomcat Session 反序列化代码执行漏洞修复方案</a></p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2020/terminal/">windows配置terminal</a></span>
+  <span class="nav-next"><a href="/cn/2020/%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/">tomcat——简要介绍和部署</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2020\/terminal\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

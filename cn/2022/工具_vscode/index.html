@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>VsCode小技巧 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="VsCode小技巧 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="安装插件:Transformer
+ctrl &#43; a 全选文字
+ctrl &#43; shift &#43; P 打开命令窗口
+输入：
+Transform:Unique Lines //删除重复行
+Transform:Sort Lines //排序
+[&amp;hellip;] 一般通过正则筛选特征文本后，点击菜单上的，选择-&amp;gt;选择所有匹配项，后复制即可
+[&amp;hellip;] 按住alt&#43;shift 点选；命令调出列 &amp;hellip;">
+      <meta property="og:description" content="安装插件:Transformer
+ctrl &#43; a 全选文字
+ctrl &#43; shift &#43; P 打开命令窗口
+输入：
+Transform:Unique Lines //删除重复行
+Transform:Sort Lines //排序
+[&amp;hellip;] 一般通过正则筛选特征文本后，点击菜单上的，选择-&amp;gt;选择所有匹配项，后复制即可
+[&amp;hellip;] 按住alt&#43;shift 点选；命令调出列 &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20221129135600905.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2022%5c%e5%b7%a5%e5%85%b7_vscode.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>VsCode小技巧</h1>
+
+
+<h3>rehoni / 
+2022-03-06</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h3 id="删除重复行并排序">删除重复行并排序</h3>
+<p>安装插件:Transformer</p>
+<p>ctrl + a 全选文字</p>
+<p>ctrl + shift + P 打开命令窗口</p>
+<p>输入：</p>
+<p>Transform:Unique Lines //删除重复行</p>
+<p>Transform:Sort Lines //排序</p>
+<h3 id="提取指定特征的文本">提取指定特征的文本</h3>
+<p>一般通过正则筛选特征文本后，点击菜单上的，选择-&gt;选择所有匹配项，后复制即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20221129135600905.png" alt="image-20221129135600905"></p>
+<h3 id="行首行尾处理">行首行尾处理</h3>
+<ol>
+<li>列模式，编辑软件应该都有；</li>
+<li>搜索时，选择正则表达式，行首<code>^</code>，行尾<code>$</code>,匹配之后进行全部替换；在正则表达式模式下，替换成<code>/n</code>可以实现换行。</li>
+</ol>
+<h3 id="vscode列模式">vscode列模式</h3>
+<p>按住alt+shift 点选；命令调出列模式选择。</p>
+<h3 id="转化大小写">转化大小写</h3>
+<p>需要自定义一个快捷键</p>
+<h3 id="搜索移动和折叠"><strong>搜索、移动和折叠</strong></h3>
+<p>ctrl+f，下方有替换栏；左侧栏有全局搜索；</p>
+<p>选中代码块，tab可以整体右移；shift + tab整体左移；</p>
+<p>softWrap设置vscode折叠代码；</p>
+<h3 id="vscode格式化vue的格式"><strong>vscode格式化vue的格式</strong></h3>
+<h3 id="分号单引号问题"><strong>分号，单引号问题</strong></h3>
+<p>Setting.json里边修改设置</p>
+<pre tabindex="0"><code> &#34;vetur.format.defaultFormatterOptions&#34;: {
+     &#34;js-beautify-html&#34;: {
+     // force-aligned | force-expand-multiline
+     &#34;wrap_attributes&#34;: &#34;force-aligned&#34;
+ },
+ &#34;prettyhtml&#34;: {
+     &#34;printWidth&#34;: 100,
+     &#34;singleQuote&#34;: false,
+     &#34;wrapAttributes&#34;: false,
+     &#34;sortAttributes&#34;: true
+ },
+ // --- 解决问题 ---
+ &#34;prettier&#34;: {
+     &#34;semi&#34;: false,
+     &#34;singleQuote&#34;: true
+ }
+ // --- 解决问题 ---
+ }
+</code></pre><h3 id="x-invalid-end-tag问题"><strong>x-invalid-end-tag问题</strong></h3>
+<p>在.eslintrc.js中rules添加配置</p>
+<pre tabindex="0"><code>&#39;vue/no-parsing-error&#39;: [2, { &#39;x-invalid-end-tag&#39;: false }]
+</code></pre><p>在setting.json中添加配置</p>
+<pre tabindex="0"><code>&#34;veturvalidation.template&#34;: false
+</code></pre><h3 id="函数括号后的空格问题"><strong>函数括号后的空格问题</strong></h3>
+<p>使用 VSCode 自带的 ts 格式化，配置以下内容：</p>
+<p>因为更改了defaultFormatter，所以以上的单引号格式化失效</p>
+<pre tabindex="0"><code> &#34;vetur.format.defaultFormatter.js&#34;: &#34;vscode-typescript&#34;
+ &#34;javascript.format.insertSpaceBeforeFunctionParenthesis&#34;: true
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2022/%E5%B7%A5%E5%85%B7_git/">Git——常见问题</a></span>
+  <span class="nav-next"><a href="/cn/2022/%E8%BE%BE%E6%A2%A6%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/">达梦——表空间管理</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2022\/%E5%B7%A5%E5%85%B7_git\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2022\/%E8%BE%BE%E6%A2%A6%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

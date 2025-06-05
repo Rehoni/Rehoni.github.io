@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Linux——批量删除文件 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Linux——批量删除文件 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="脚本如下
+">
+      <meta property="og:description" content="脚本如下
+">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2021%5c%e6%89%b9%e9%87%8f%e5%88%a0%e9%99%a4%e6%96%87%e4%bb%b6.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Linux——批量删除文件</h1>
+
+
+<h3>rehoni / 
+2021-06-25</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>脚本如下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> <span style="color:#75715e">#!/bin/csh</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#FaultRecordData CLEAR</span>
+</span></span><span style="display:flex;"><span> set basepath <span style="color:#f92672">=</span> /users/ems/FaultRecordData
+</span></span><span style="display:flex;"><span> set mfile <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span> foreach mfile <span style="color:#f92672">(</span><span style="color:#e6db74">${</span>basepath<span style="color:#e6db74">}</span>/*<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>-d $mfile<span style="color:#f92672">)</span> <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span> echo <span style="color:#e6db74">&#34;</span>$mfile<span style="color:#e6db74">&#34;</span> 
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#cd ${mfile}/checkreport/bak</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>$status <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#find -mtime +31 -name &#34;*.*&#34; -exec rm -rf {} \\;</span>
+</span></span><span style="display:flex;"><span> echo <span style="color:#e6db74">&#34;delete check report files &#34;</span>
+</span></span><span style="display:flex;"><span> ls -t *.* | awk <span style="color:#e6db74">&#39;{if(NR&gt;=30){print $0}}&#39;</span> | xargs rm -rf
+</span></span><span style="display:flex;"><span> endif
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#cd ${mfile}/comtrade/bak</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>$status <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#find -mtime +31 -name &#34;*.*&#34; -exec rm -rf {} \\;</span>
+</span></span><span style="display:flex;"><span> echo <span style="color:#e6db74">&#34;delete comtrade files &#34;</span>
+</span></span><span style="display:flex;"><span> ls -t *.* | awk <span style="color:#e6db74">&#39;{if(NR&gt;=30){print $0}}&#39;</span> | xargs rm -rf
+</span></span><span style="display:flex;"><span> endif
+</span></span><span style="display:flex;"><span> endif
+</span></span><span style="display:flex;"><span> end
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#IMFData CLEAR</span>
+</span></span><span style="display:flex;"><span> cd /users/ems/IMPData/bak
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>$status <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#find -mtime +1 -name &#34;*.*&#34; -exec rm -rf {} \\;</span>
+</span></span><span style="display:flex;"><span> echo <span style="color:#e6db74">&#34;delete impdata files &#34;</span>
+</span></span><span style="display:flex;"><span> ls -t *.* | awk <span style="color:#e6db74">&#39;{if(NR&gt;=30){print $0}}&#39;</span> | xargs rm -rf
+</span></span><span style="display:flex;"><span> endif
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#EMSData CLEAR</span>
+</span></span><span style="display:flex;"><span> cd /users/ems/EMS_MODEL/CIM
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>$status <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#find -mtime +31 -name &#34;*.*&#34; -exec rm -rf {} \\;</span>
+</span></span><span style="display:flex;"><span> echo <span style="color:#e6db74">&#34;delete ems data : cim files &#34;</span>
+</span></span><span style="display:flex;"><span> ls -t *.* | awk <span style="color:#e6db74">&#39;{if(NR&gt;=30){print $0}}&#39;</span> | xargs rm -rf
+</span></span><span style="display:flex;"><span> endif
+</span></span><span style="display:flex;"><span> cd /users/ems/EMS_MODEL/TRIP/bak
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>$status <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#find -mtime +31 -name &#34;*.*&#34; -exec rm -rf {} \\;</span>
+</span></span><span style="display:flex;"><span> echo <span style="color:#e6db74">&#34;delete ems data : trip files &#34;</span>
+</span></span><span style="display:flex;"><span> ls -t *.* | awk <span style="color:#e6db74">&#39;{if(NR&gt;=30){print $0}}&#39;</span> | xargs rm -rf
+</span></span><span style="display:flex;"><span> endif
+</span></span><span style="display:flex;"><span> cd /users/ems/EMS_MODEL/EFILE 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>$status <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#find -mtime +31 -name &#34;*.*&#34; -exec rm -rf {} \\;</span>
+</span></span><span style="display:flex;"><span> echo <span style="color:#e6db74">&#34;delete ems data : efile files &#34;</span>
+</span></span><span style="display:flex;"><span> ls -t *.* | awk <span style="color:#e6db74">&#39;{if(NR&gt;=30){print $0}}&#39;</span> | xargs rm -rf
+</span></span><span style="display:flex;"><span> endif
+</span></span><span style="display:flex;"><span> cd /users/ems/EMS_MODEL/RATIO/bak
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>$status <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#find -mtime +31 -name &#34;*.*&#34; -exec rm -rf {} \\;</span>
+</span></span><span style="display:flex;"><span> echo <span style="color:#e6db74">&#34;delete ems data : ratio files &#34;</span>
+</span></span><span style="display:flex;"><span> ls -t *.* | awk <span style="color:#e6db74">&#39;{if(NR&gt;=30){print $0}}&#39;</span> | xargs rm -rf
+</span></span><span style="display:flex;"><span> endif
+</span></span><span style="display:flex;"><span> 
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2021/%E7%BB%9F%E8%AE%A1%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%96%87%E4%BB%B6%E6%95%B0%E9%87%8F/">Linux——统计文件夹下文件的个数</a></span>
+  <span class="nav-next"><a href="/cn/2021/202106/">2021年06月财务实证</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2021\/%E7%BB%9F%E8%AE%A1%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%96%87%E4%BB%B6%E6%95%B0%E9%87%8F\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2021\/202106\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

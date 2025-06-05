@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Java实体类和map的转换 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Java实体类和map的转换 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5c2020-06-29-java-bean2map.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Java实体类和map的转换</h1>
+
+
+<h3>rehoni / 
+2020-06-29</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h3 id="java反射对javabean体和泛型map做互换">Java反射对JavaBean体和泛型Map做互换</h3>
+<h5 id="map转为bean">Map转为Bean</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#f92672">&lt;</span>T, K, V<span style="color:#f92672">&gt;</span> T <span style="color:#a6e22e">map2Bean</span>(Map<span style="color:#f92672">&lt;</span>K, V<span style="color:#f92672">&gt;</span> map, Class<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> beanCls) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// try catch未写</span>
+</span></span><span style="display:flex;"><span>    T t <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    BeanInfo beanInfo <span style="color:#f92672">=</span> Introspector.<span style="color:#a6e22e">getBeanInfo</span>(beanCls.<span style="color:#a6e22e">getClass</span>());
+</span></span><span style="display:flex;"><span>    PropertyDescriptor<span style="color:#f92672">[]</span> propertyDescriptors <span style="color:#f92672">=</span> beanInfo.<span style="color:#a6e22e">getPropertyDescriptors</span>();
+</span></span><span style="display:flex;"><span>    t <span style="color:#f92672">=</span> beanCls.<span style="color:#a6e22e">newInstance</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (PropertyDescriptor property : propertyDescriptors) {
+</span></span><span style="display:flex;"><span>        String key <span style="color:#f92672">=</span> property.<span style="color:#a6e22e">getName</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (map.<span style="color:#a6e22e">containsKey</span>(key)) {
+</span></span><span style="display:flex;"><span>            Object value <span style="color:#f92672">=</span> map.<span style="color:#a6e22e">get</span>(key);
+</span></span><span style="display:flex;"><span>            Method setter <span style="color:#f92672">=</span> property.<span style="color:#a6e22e">getWriteMethod</span>();
+</span></span><span style="display:flex;"><span>            setter.<span style="color:#a6e22e">invoke</span>(t, value);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> t;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="bean转为map">Bean转为Map</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#f92672">&lt;</span>T, K, V<span style="color:#f92672">&gt;</span> Map<span style="color:#f92672">&lt;</span>String, Object<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">bean2Map</span>(T bean) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// try catch未写</span>
+</span></span><span style="display:flex;"><span>    Map<span style="color:#f92672">&lt;</span>String, Object<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (bean <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    BeanInfo beanInfo <span style="color:#f92672">=</span> Introspector.<span style="color:#a6e22e">getBeanInfo</span>(bean.<span style="color:#a6e22e">getClass</span>());
+</span></span><span style="display:flex;"><span>    PropertyDescriptor<span style="color:#f92672">[]</span> propertyDescriptors <span style="color:#f92672">=</span> beanInfo.<span style="color:#a6e22e">getPropertyDescriptors</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (PropertyDescriptor property : propertyDescriptors) {
+</span></span><span style="display:flex;"><span>        String key <span style="color:#f92672">=</span> property.<span style="color:#a6e22e">getName</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#e6db74">&#34;class&#34;</span>.<span style="color:#a6e22e">equalsIgnoreCase</span>(key)) {
+</span></span><span style="display:flex;"><span>            Method getter <span style="color:#f92672">=</span> property.<span style="color:#a6e22e">getReadMethod</span>();
+</span></span><span style="display:flex;"><span>            Object value <span style="color:#f92672">=</span> getter.<span style="color:#a6e22e">invoke</span>(bean);
+</span></span><span style="display:flex;"><span>            map.<span style="color:#a6e22e">put</span>(key, value);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> map;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2020/2020-06-29-java-dom4j/">Java的DOM4J解析XML文件</a></span>
+  <span class="nav-next"><a href="/cn/2020/paasiaas%E7%AD%89/">Paas、IaaS等</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2020\/2020-06-29-java-dom4j\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/paasiaas%E7%AD%89\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

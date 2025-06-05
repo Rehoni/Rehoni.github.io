@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle——问题小书 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Oracle——问题小书 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="ORA-01810 format code appears twice
+报次错误的原因很简单，原因是重复了
+比如：日期格式：
+正确：TO_DATE(&amp;lsquo;2012-07-03 13:04:58&amp;rsquo;, &amp;lsquo;yyyy-MM-dd hh24:mi:ss&amp;rsquo;)
+错误：TO_DATE(&amp;lsquo;2012-07-03 13:04:58&amp;rsquo;, &amp;hellip;">
+      <meta property="og:description" content="ORA-01810 format code appears twice
+报次错误的原因很简单，原因是重复了
+比如：日期格式：
+正确：TO_DATE(&amp;lsquo;2012-07-03 13:04:58&amp;rsquo;, &amp;lsquo;yyyy-MM-dd hh24:mi:ss&amp;rsquo;)
+错误：TO_DATE(&amp;lsquo;2012-07-03 13:04:58&amp;rsquo;, &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2021%5cOracle%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle——问题小书</h1>
+
+
+<h3>Rehoni / 
+2021-04-22</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="问题1日期格式重复">问题1、日期格式重复</h2>
+<p><strong>ORA-01810 format code appears twice</strong></p>
+<p>报次错误的原因很简单，原因是重复了</p>
+<p>比如：日期格式：</p>
+<p>正确：TO_DATE(&lsquo;2012-07-03 13:04:58&rsquo;, &lsquo;yyyy-MM-dd hh24:mi:ss&rsquo;)</p>
+<p>错误：TO_DATE(&lsquo;2012-07-03 13:04:58&rsquo;, &lsquo;yyyy-MM-dd hh24:mi:dd&rsquo;) dd是重复的</p>
+<p>错误：TO_DATE(&lsquo;2012-07-03 13:04:58&rsquo;, &lsquo;yyyy-MM-dd hh24:mm:ss&rsquo;) mm是重复的</p>
+<p>错误：TO_DATE(&lsquo;2012-07-03 13:04:58&rsquo;, &lsquo;yyyy-MM-dd hh24:mm:dd&rsquo;) dd，mm是重复的</p>
+<h2 id="问题2ora-01000-超出打开游标的最大数">问题2、ORA-01000: 超出打开游标的最大数</h2>
+<p>一般是Java代码在执行conn.createStatement()和 conn.prepareStatement()的时候，实际上都是相当与在数据库中打开了一个cursor。尤其是，如果你的 createStatement和prepareStatement是在一个循环里面的话，就会非常容易出现这个问题。因为游标一直在不停的打开，而且没有关闭。</p>
+<h2 id="问题3oracle取两列中值最大和最小的列">问题3、Oracle取两列中值最大和最小的列</h2>
+<p>Greatest和least两个函数；或者用case when</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- a，b，c为table中的三列
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> (<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">when</span> a<span style="color:#f92672">&gt;</span>b <span style="color:#66d9ef">then</span> a <span style="color:#66d9ef">else</span> b <span style="color:#66d9ef">end</span>),(<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">when</span> b<span style="color:#f92672">&gt;</span><span style="color:#66d9ef">c</span> <span style="color:#66d9ef">then</span> b <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">end</span>) <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">table</span>;
+</span></span></code></pre></div><h2 id="问题4oracle的update-set必须是子查询">问题4、Oracle的update set必须是子查询</h2>
+<pre tabindex="0"><code>ORA-01767: UPDATE ...SET 表达式必须是子查询
+</code></pre><h2 id="问题5oracle查找和删除约束">问题5、Oracle查找和删除约束</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> user_constraints; <span style="color:#75715e">-- 在sys账户下查找
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> standard.EMS_RATIO <span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">constraint</span> SYS_C0036049; <span style="color:#75715e">-- 注意带standard模式名
+</span></span></span></code></pre></div><h2 id="问题6in改为exist提高效率">问题6、in改为exist提高效率</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 当in的数量很大的时候，使用in的效率会很慢
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">where</span> tb.fl_type <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> <span style="color:#66d9ef">and</span> tb.classify_id <span style="color:#66d9ef">in</span> (<span style="color:#ae81ff">246</span>,<span style="color:#ae81ff">7943</span>,<span style="color:#ae81ff">6669</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 改成exist提升效率
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">where</span> tb.fl_type <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">and</span> <span style="color:#66d9ef">exists</span>(
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">from</span> (<span style="color:#66d9ef">select</span> <span style="color:#ae81ff">246</span> <span style="color:#66d9ef">as</span> id
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">dual</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">union</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">select</span> <span style="color:#ae81ff">7943</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">dual</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">union</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">select</span> <span style="color:#ae81ff">6669</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">dual</span>
+</span></span><span style="display:flex;"><span>              ) temp
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">where</span> temp.id <span style="color:#f92672">=</span> tb.classify_id
+</span></span><span style="display:flex;"><span>        );
+</span></span></code></pre></div><h2 id="问题7oracle的merge-into-和update-set的写法">问题7、Oracle的merge into 和update set的写法</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span>merge <span style="color:#66d9ef">into</span> table_target a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> table_source t
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">on</span> (a.key1 <span style="color:#f92672">=</span> t.key1) <span style="color:#75715e"># 可以多字段匹配
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">when</span> matched <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">update</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">set</span> a.col1 <span style="color:#f92672">=</span> t.col1,a.col2 <span style="color:#f92672">=</span> t.col2 <span style="color:#75715e"># 需要更新的行
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">when</span> <span style="color:#66d9ef">not</span> matched <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">insert</span> (a.col1,a.col2) <span style="color:#66d9ef">values</span> (b.col1,b.col2); <span style="color:#75715e"># 全插入
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#merge into写法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>merge <span style="color:#66d9ef">into</span> IMP_CABLE_SHEATH_CIRCULATION_LATEST a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> (<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">from</span> (
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">select</span> <span style="color:#a6e22e">row_number</span>() <span style="color:#a6e22e">over</span> (partition <span style="color:#66d9ef">by</span> URI <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> MONITOR_TIME <span style="color:#66d9ef">desc</span>) <span style="color:#66d9ef">as</span> rn, a.<span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> IMP_CABLE_SHEATH_CIRCULATION a)
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">where</span> rn <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>) t
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">on</span> (a.URI <span style="color:#f92672">=</span> t.URI)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">when</span> matched <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">update</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">set</span> a.NAME                <span style="color:#f92672">=</span> t.NAME,
+</span></span><span style="display:flex;"><span>        a.REGION              <span style="color:#f92672">=</span> t.REGION,
+</span></span><span style="display:flex;"><span>        a.VOLTAGELEVEL        <span style="color:#f92672">=</span> t.VOLTAGELEVEL,
+</span></span><span style="display:flex;"><span>        a.SUBSTATION          <span style="color:#f92672">=</span> t.SUBSTATION,
+</span></span><span style="display:flex;"><span>        a.LOCALNAME           <span style="color:#f92672">=</span> t.LOCALNAME,
+</span></span><span style="display:flex;"><span>        a.PHASE               <span style="color:#f92672">=</span> t.PHASE,
+</span></span><span style="display:flex;"><span>        a.COMMUNICATIONMODE   <span style="color:#f92672">=</span> t.COMMUNICATIONMODE,
+</span></span><span style="display:flex;"><span>        a.OPERATIONSTATE      <span style="color:#f92672">=</span> t.OPERATIONSTATE,
+</span></span><span style="display:flex;"><span>        a.MONITORINGTYPEURI   <span style="color:#f92672">=</span> t.MONITORINGTYPEURI,
+</span></span><span style="display:flex;"><span>        a.MONITORINGTYPENAME  <span style="color:#f92672">=</span> t.MONITORINGTYPENAME,
+</span></span><span style="display:flex;"><span>        a.PSRURI              <span style="color:#f92672">=</span> t.PSRURI,
+</span></span><span style="display:flex;"><span>        a.PSRTYPE             <span style="color:#f92672">=</span> t.PSRTYPE,
+</span></span><span style="display:flex;"><span>        a.CONTAINEDGRDIPHASES <span style="color:#f92672">=</span> t.CONTAINEDGRDIPHASES,
+</span></span><span style="display:flex;"><span>        a.CONTAINEDIPHASES    <span style="color:#f92672">=</span> t.CONTAINEDIPHASES,
+</span></span><span style="display:flex;"><span>        a.JUNCTION<span style="color:#f92672">=</span> t.JUNCTION,
+</span></span><span style="display:flex;"><span>        a.IA<span style="color:#f92672">=</span> t.IA,
+</span></span><span style="display:flex;"><span>        a.IB<span style="color:#f92672">=</span> t.IB,
+</span></span><span style="display:flex;"><span>        a.IC<span style="color:#f92672">=</span> t.IC,
+</span></span><span style="display:flex;"><span>        a.GRDIA<span style="color:#f92672">=</span> t.GRDIA,
+</span></span><span style="display:flex;"><span>        a.GRDIB<span style="color:#f92672">=</span> t.GRDIB,
+</span></span><span style="display:flex;"><span>        a.GRDIC<span style="color:#f92672">=</span> t.GRDIC,
+</span></span><span style="display:flex;"><span>        a.GRDIN               <span style="color:#f92672">=</span> t.GRDIN,
+</span></span><span style="display:flex;"><span>        a.IA_TIME             <span style="color:#f92672">=</span> t.IA_TIME,
+</span></span><span style="display:flex;"><span>        a.IB_TIME<span style="color:#f92672">=</span> t.IB_TIME,
+</span></span><span style="display:flex;"><span>        a.IC_TIME<span style="color:#f92672">=</span> t.IC_TIME,
+</span></span><span style="display:flex;"><span>        a.GRDIA_TIME<span style="color:#f92672">=</span> t.GRDIA_TIME,
+</span></span><span style="display:flex;"><span>        a.GRDIB_TIME<span style="color:#f92672">=</span> t.GRDIB_TIME,
+</span></span><span style="display:flex;"><span>        a.GRDIC_TIME<span style="color:#f92672">=</span> t.GRDIC_TIME,
+</span></span><span style="display:flex;"><span>        a.GRDIN_TIME<span style="color:#f92672">=</span> t.GRDIN_TIME,
+</span></span><span style="display:flex;"><span>        a.MONITOR_TIME        <span style="color:#f92672">=</span> t.MONITOR_TIME
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">when</span> <span style="color:#66d9ef">not</span> matched <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">INSERT</span> (a.URI, a.NAME, a.REGION, a.VOLTAGELEVEL, a.SUBSTATION, a.LOCALNAME, a.PHASE, a.COMMUNICATIONMODE, a.OPERATIONSTATE,
+</span></span><span style="display:flex;"><span>            a.MONITORINGTYPEURI, a.MONITORINGTYPENAME, a.PSRURI, a.PSRTYPE, a.CONTAINEDGRDIPHASES, a.CONTAINEDIPHASES, a.JUNCTION, a.IA,
+</span></span><span style="display:flex;"><span>            a.IB, a.IC, a.GRDIA, a.GRDIB, a.GRDIC, a.GRDIN, a.IA_TIME, a.IB_TIME, a.IC_TIME, a.GRDIA_TIME, a.GRDIB_TIME, a.GRDIC_TIME,
+</span></span><span style="display:flex;"><span>            a.GRDIN_TIME, a.MONITOR_TIME)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">VALUES</span> (t.URI, t.NAME, t.REGION, t.VOLTAGELEVEL, t.SUBSTATION, t.LOCALNAME, t.PHASE, t.COMMUNICATIONMODE, t.OPERATIONSTATE,
+</span></span><span style="display:flex;"><span>            t.MONITORINGTYPEURI, t.MONITORINGTYPENAME, t.PSRURI, t.PSRTYPE, t.CONTAINEDGRDIPHASES, t.CONTAINEDIPHASES, t.JUNCTION, t.IA,
+</span></span><span style="display:flex;"><span>            t.IB, t.IC, t.GRDIA, t.GRDIB, t.GRDIC, t.GRDIN, t.IA_TIME, t.IB_TIME, t.IC_TIME, t.GRDIA_TIME, t.GRDIB_TIME, t.GRDIC_TIME,
+</span></span><span style="display:flex;"><span>            t.GRDIN_TIME, t.MONITOR_TIME);
+</span></span></code></pre></div><h2 id="问题7oracle按月自动创建分区">问题7、Oracle按月自动创建分区</h2>
+<h3 id="具体描述">具体描述</h3>
+<p>建分区表自动按月分区</p>
+<h3 id="解决方案和原理">解决方案和原理</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span> <span style="color:#75715e">-- 自动按月分区
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> <span style="color:#a6e22e">EMS_RATIO</span>
+</span></span><span style="display:flex;"><span> (
+</span></span><span style="display:flex;"><span>     FUNCTION_ID <span style="color:#a6e22e">VARCHAR2</span>(<span style="color:#ae81ff">64</span>),
+</span></span><span style="display:flex;"><span>     FUNCTION_NAME <span style="color:#a6e22e">VARCHAR2</span>(<span style="color:#ae81ff">256</span>),
+</span></span><span style="display:flex;"><span>     FUNCTION_TYPE <span style="color:#a6e22e">NUMBER</span>(<span style="color:#ae81ff">4</span>),
+</span></span><span style="display:flex;"><span>     RESOLVE_TIME <span style="color:#66d9ef">TIMESTAMP</span>(<span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>     MEASURE_TIME <span style="color:#66d9ef">TIMESTAMP</span>(<span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>     VOLTAGE <span style="color:#a6e22e">VARCHAR2</span>(<span style="color:#ae81ff">32</span>),
+</span></span><span style="display:flex;"><span>     START_STATION <span style="color:#a6e22e">VARCHAR2</span>(<span style="color:#ae81ff">64</span>),
+</span></span><span style="display:flex;"><span>     END_STATION <span style="color:#a6e22e">VARCHAR2</span>(<span style="color:#ae81ff">64</span>),
+</span></span><span style="display:flex;"><span>     RATED_CAPACITY <span style="color:#66d9ef">FLOAT</span>(<span style="color:#ae81ff">24</span>),
+</span></span><span style="display:flex;"><span>     LIMIT_I <span style="color:#66d9ef">FLOAT</span>(<span style="color:#ae81ff">24</span>),
+</span></span><span style="display:flex;"><span>     I <span style="color:#66d9ef">FLOAT</span>(<span style="color:#ae81ff">24</span>),
+</span></span><span style="display:flex;"><span>     P <span style="color:#66d9ef">FLOAT</span>(<span style="color:#ae81ff">24</span>),
+</span></span><span style="display:flex;"><span>     Q <span style="color:#66d9ef">FLOAT</span>(<span style="color:#ae81ff">24</span>),
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">LOAD</span> <span style="color:#66d9ef">FLOAT</span>(<span style="color:#ae81ff">24</span>),
+</span></span><span style="display:flex;"><span>     LOAD_TYPE <span style="color:#a6e22e">NUMBER</span>(<span style="color:#ae81ff">4</span>),
+</span></span><span style="display:flex;"><span>     ID <span style="color:#a6e22e">VARCHAR2</span>(<span style="color:#ae81ff">32</span>) <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>     NAME <span style="color:#a6e22e">VARCHAR2</span>(<span style="color:#ae81ff">64</span>),
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">constraint</span> EMS_RATIO_PK
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span> (ID, MEASURE_TIME)
+</span></span><span style="display:flex;"><span> ) <span style="color:#75715e"># 创建表结束
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> tablespace EMS_RATIO_TB
+</span></span><span style="display:flex;"><span> partition <span style="color:#66d9ef">by</span> <span style="color:#a6e22e">RANGE</span> (MEASURE_TIME) <span style="color:#66d9ef">interval</span> (<span style="color:#a6e22e">numtoyminterval</span>(<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;month&#39;</span>))
+</span></span><span style="display:flex;"><span> store <span style="color:#66d9ef">in</span> (EMS_RATIO_TB)(
+</span></span><span style="display:flex;"><span>     partition ems_ratio_partition <span style="color:#66d9ef">values</span> less <span style="color:#a6e22e">than</span> (<span style="color:#a6e22e">to_date</span>(<span style="color:#e6db74">&#39;2020-06-01&#39;</span>,<span style="color:#e6db74">&#39;yyyy-MM-dd&#39;</span>))
+</span></span><span style="display:flex;"><span> )
+</span></span></code></pre></div><h2 id="oracle抛出异常的写法">Oracle抛出异常的写法</h2>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2021/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%8Adblink/">Oracle——连接远程数据库</a></span>
+  <span class="nav-next"><a href="/cn/2021/202104/">2021年04月财务实证</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2021\/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%8Adblink\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2021\/202104\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

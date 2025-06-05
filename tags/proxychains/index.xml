@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Proxychains on Rehoni | 罗皓</title>
+    <link>/tags/proxychains/</link>
+    <description>Recent content in Proxychains on Rehoni | 罗皓</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 07 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/proxychains/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>proxychains代理windows</title>
+      <link>/cn/2023/proxychains-for-windows/</link>
+      <pubDate>Sat, 07 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>/cn/2023/proxychains-for-windows/</guid>
+      <description>在 linux 下为了终端命令绕过防火墙我们可以使用 proxychains 结合 socksv5 代理进行使用，在windows下有没有类似工具呢，有！大佬写了一个 proxychains for windows 版可以使用，下面就是简要的设置过程&#xA;参考：Proxychains for Windows 自述文件&#xA;去 https://github.com/shunf4/proxychains-windows/releases 下一个最新版如 proxychains_0.6.8_win32_x64.zip，解压到任意目录，我为了方便解压到D:\proxychains 将 proxychains_win32_x64.exe 重命名 proxychains 编辑目录下 proxychains.conf 配置文件，根据自己实际情况改，例如 socks5 127.0.0.1 1081 编辑系统环境变量将 D:\proxychains 加入系统 PATH 变量。 新建一个系统变量名称 PROXYCHAINS_CONF_FILE 值 D:\proxychains\proxychains.conf 根据情况自己修改 打开一个新的 cmd，使用方法 proxychains command，如 proxychains go get github.com/StackExchange/wmi 注意：一些协议估计没法代理，详情见作者项目文档</description>
+    </item>
+  </channel>
+</rss>

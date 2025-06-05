@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>tomcat——简要介绍和部署 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="tomcat——简要介绍和部署 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="实时查看运行日志了
+cd usr/local/tomcat/logstail -f catalina.out Tomcat部署问题 bin目录 执行tomcat脚本的目录，对setclasspath.bat中的内容进行修改，可以在这里边设置不同的JAVA_HOME和JRE_HOME，直接将设置语句放在文件前边即可。如果有问题，则在calalina.bat文件中也添加这两句。
+set &amp;hellip;">
+      <meta property="og:description" content="实时查看运行日志了
+cd usr/local/tomcat/logstail -f catalina.out Tomcat部署问题 bin目录 执行tomcat脚本的目录，对setclasspath.bat中的内容进行修改，可以在这里边设置不同的JAVA_HOME和JRE_HOME，直接将设置语句放在文件前边即可。如果有问题，则在calalina.bat文件中也添加这两句。
+set &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5c%e7%ae%80%e8%a6%81%e4%bb%8b%e7%bb%8d%e5%92%8c%e9%83%a8%e7%bd%b2.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>tomcat——简要介绍和部署</h1>
+
+
+<h3>rehoni / 
+2020-09-01</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="linux查看tomcat运行日志"><strong>Linux查看tomcat运行日志</strong></h1>
+<p>实时查看运行日志了</p>
+<pre tabindex="0"><code> cd usr/local/tomcat/logs
+ tail -f catalina.out
+</code></pre><h1 id="tomcat部署问题"><strong>Tomcat部署问题</strong></h1>
+<h2 id="bin目录"><strong>bin目录</strong></h2>
+<p>执行tomcat脚本的目录，对<code>setclasspath.bat</code>中的内容进行修改，可以在这里边设置不同的JAVA_HOME和JRE_HOME，直接将设置语句放在文件前边即可。如果有问题，则在<code>calalina.bat</code>文件中也添加这两句。</p>
+<pre tabindex="0"><code> set JAVA_HOME = &#34;C:\\Program Files\\Java\\jdk1.8.0_251&#34;
+ set JRE_HOME = &#34;C:\\Program Files\\Java\\jre1.8.0_251&#34;
+</code></pre><p>注意因为的jre文件放在“program files”文件下，这个路径中间存在空格，会导致出现”此时不应有files/java/jre“的问题。</p>
+<h2 id="conf目录"><strong>conf目录</strong></h2>
+<p>配置tomcat的目录</p>
+<ul>
+<li>
+<p>**server.xml：**中可以配置端口转发和监听器等内容，可以通过修改默认8080端口为其他端口，来解决8080端口被占用的问题。</p>
+</li>
+<li>
+<p>**logging.properties：**修改日志的配置，如果出现console窗口出现乱码的问题，可以将UTF-8修改为GBK编码</p>
+<pre tabindex="0"><code> java.util.logging.ConsoleHandler.encoding = UTF-8
+</code></pre></li>
+</ul>
+<h2 id="webapp目录"><strong>webapp目录</strong></h2>
+<p>丢war包的地方</p>
+<p>可以通过server.xml修改webapp的目录</p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2020/%E9%9A%90%E8%97%8F%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B/">tomcat——隐藏版本查看</a></span>
+  <span class="nav-next"><a href="/cn/2020/%E9%80%92%E5%BD%92%E6%9F%A5%E8%AF%A2/">Oracle——递归查询写法</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2020\/%E9%9A%90%E8%97%8F%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/%E9%80%92%E5%BD%92%E6%9F%A5%E8%AF%A2\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

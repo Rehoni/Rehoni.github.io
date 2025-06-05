@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kafka on Rehoni | 罗皓</title>
+    <link>/tags/kafka/</link>
+    <description>Recent content in Kafka on Rehoni | 罗皓</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 08 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>kafka备忘</title>
+      <link>/cn/2023/kafka/</link>
+      <pubDate>Sun, 08 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>/cn/2023/kafka/</guid>
+      <description>1、kafka启动 运行kafka需要使用Zookeeper，所以你需要先启动Zookeeper，如果你没有Zookeeper，你可以使用kafka自带打包和配置好的Zookeeper。&#xA;# 下载解压 tar -xzf kafka_2.13-3.2.0.tgz cd kafka_2.13-3.2.0 # 启动zookeeper # 注意：Apache Kafka2.8版本之后可以不需要使用ZooKeeper，内测中，文章末尾有体验的安装方式。 bin/zookeeper-server-start.sh config/zookeeper.properties &amp;amp; # 打开另一个命令终端启动kafka服务： bin/kafka-server-start.sh config/server.properties &amp;amp; 2、使用 Zookeeper命令行修改 Kafka Cluster ID 先讲一下做这件事的背景，笔者用 Docker搭了一套 Kafka的环境用于测试，某天发现 Kafka频繁重启，查看日志中的报错如下：&#xA;ERROR Fatal error during KafkaServer startup. Prepare to shutdown (kafka.server.KafkaServer) kafka.common.InconsistentClusterIdException: The Cluster ID q3r3fhGkTya24-s3dfvYUQ doesn&amp;#39;t match stored clusterId Some(kguWHlzQQGmCHczV3u38vQ) in meta.properties. The broker is trying to join the wrong cluster. Configured zookeeper.connect may be wrong. at kafka.server.KafkaServer.startup(KafkaServer.scala:218) at kafka.</description>
+    </item>
+  </channel>
+</rss>

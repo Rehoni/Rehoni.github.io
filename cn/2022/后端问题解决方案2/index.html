@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>后端——问题小书（2022） - Rehoni | 罗皓</title>
+    <meta property="og:title" content="后端——问题小书（2022） - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="Spring Cloud Stream是一个用来为微服务应用构建消息驱动能力的框架。它可以基于Spring Boot来创建独立的、可用于生产的Spring应用程序。它通过使用Spring Integration来连接消息代理中间件以实现消息事件驱动的微服务应用。Spring Cloud Stream为一些供应商的消息中间件产品提供了个性化的自动化配置实现，并且引入了发布-订阅、消费组以及消息分区这 &amp;hellip;">
+      <meta property="og:description" content="Spring Cloud Stream是一个用来为微服务应用构建消息驱动能力的框架。它可以基于Spring Boot来创建独立的、可用于生产的Spring应用程序。它通过使用Spring Integration来连接消息代理中间件以实现消息事件驱动的微服务应用。Spring Cloud Stream为一些供应商的消息中间件产品提供了个性化的自动化配置实现，并且引入了发布-订阅、消费组以及消息分区这 &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2022%5c%e5%90%8e%e7%ab%af%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%882.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>后端——问题小书（2022）</h1>
+
+
+<h3>rehoni / 
+2022-12-31</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="1spring-cloud-stream介绍">1、spring cloud stream介绍</h2>
+<p><strong>Spring Cloud Stream</strong>是一个用来为微服务应用构建消息驱动能力的框架。它可以基于Spring Boot来创建独立的、可用于生产的Spring应用程序。它通过使用Spring Integration来连接消息代理中间件以实现消息事件驱动的微服务应用。Spring Cloud Stream为一些供应商的消息中间件产品提供了个性化的自动化配置实现，并且引入了<strong>发布-订阅、消费组以及消息分区</strong>这三个核心概念。简单的说，Spring Cloud Stream本质上就是整合了Spring Boot和Spring Integration，实现了一套<strong>轻量级的消息驱动的微服务框架</strong>。通过使用Spring Cloud Stream，可以有效地简化开发人员对消息中间件的使用复杂度，让系统开发人员可以有更多的精力关注于核心业务逻辑的处理。</p>
+<h3 id="binder绑定器">Binder绑定器</h3>
+<p>通过定义绑定器作为中间层，完美地实现了应用程序与消息中间件细节之间的隔离。通过向应用程序暴露统一的Channel通道，使得应用程序不需要再考虑各种不同的消息中间件实现。</p>
+<h3 id="发布-订阅模式">发布-订阅模式</h3>
+<p>在Spring Cloud Stream中的消息通信方式遵循了发布-订阅模式，当一条消息被投递到消息中间件之后，它会通过共享的Topic主题进行广播，消息消费者在订阅的主题中收到它并触发自身的业务逻辑处理。这里所提到的Topic主题是Spring Cloud Stream中的一个抽象概念，用来代表发布共享消息给消费者的地方。在不同的消息中间件中，Topic可能对应着不同的概念，比如：在RabbitMQ中的它对应了Exchange、而在Kakfa中则对应了Kafka中的Topic。</p>
+<h3 id="消费组">消费组</h3>
+<p>虽然Spring Cloud Stream通过发布-订阅模式将消息生产者与消费者做了很好的解耦，基于相同主题的消费者可以轻松的进行扩展，但是这些扩展都是针对不同的应用实例而言的，在现实的微服务架构中，我们每一个微服务应用为了实现高可用和负载均衡，实际上都会部署多个实例。很多情况下，消息生产者发送消息给某个具体微服务时，只希望被消费一次，按照上面我们启动两个应用的例子，虽然它们同属一个应用，但是这个消息出现了被重复消费两次的情况。为了解决这个问题，在Spring Cloud Stream中提供了消费组的概念。</p>
+<p>如果在同一个主题上的应用需要启动多个实例的时候，我们可以通过spring.cloud.stream.bindings.input.group属性为应用指定一个组名，这样这个应用的多个实例在接收到消息的时候，只会有一个成员真正的收到消息并进行处理。</p>
+<h3 id="消息分区">消息分区</h3>
+<p>通过引入消费组的概念，我们已经能够在多实例的情况下，保障每个消息只被组内一个实例进行消费。通过上面对消费组参数设置后的实验，我们可以观察到，消费组并无法控制消息具体被哪个实例消费。也就是说，对于同一条消息，它多次到达之后可能是由不同的实例进行消费的。但是对于一些业务场景，就需要对于一些具有相同特征的消息每次都可以被同一个消费实例处理，比如：一些用于监控服务，为了统计某段时间内消息生产者发送的报告内容，监控服务需要在自身内容聚合这些数据，那么消息生产者可以为消息增加一个固有的特征ID来进行分区，使得拥有这些ID的消息每次都能被发送到一个特定的实例上实现累计统计的效果，否则这些数据就会分散到各个不同的节点导致监控结果不一致的情况。而分区概念的引入就是为了解决这样的问题：当生产者将消息数据发送给多个消费者实例时，保证拥有共同特征的消息数据始终是由同一个消费者实例接收和处理。</p>
+<h2 id="2mapstruct简单使用">2、mapstruct简单使用</h2>
+<p>MapStruct 是一个代码生成器，主要用于 Java Bean 之间的映射，如 entity 到 DTO 的映射。</p>
+<h3 id="参考">参考</h3>
+<p><a href="https://blog.csdn.net/weixin_37139197/article/details/98675459">优雅的对象转换解决方案-MapStruct使用进阶(二)</a></p>
+<p><a href="https://juejin.cn/post/6956190395319451679#heading-8">MapStruct使用指南</a></p>
+<h3 id="导入-maven-依赖以及插件">导入 Maven 依赖以及插件</h3>
+<p>注意lombok和MapStruct 的冲突（在maven install时候会出现属性找不到错误）：</p>
+<ol>
+<li>确保 Lombok 最低版本为 1.18.16</li>
+<li>annotationProcessorPaths 中，要配置lombok</li>
+</ol>
+<p>如未使用 lombok 可以去除后两个注解处理器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://maven.apache.org/POM/4.0.0&#34;</span> <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;modelVersion&gt;</span>4.0.0<span style="color:#f92672">&lt;/modelVersion&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;parent&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.boot<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;artifactId&gt;</span>spring-boot-starter-parent<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;version&gt;</span>2.3.12.RELEASE<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;relativePath/&gt;</span> <span style="color:#75715e">&lt;!-- lookup parent from repository --&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/parent&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>cn.muzaijian.mall<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>mapstruct<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>1.0-RELEASE<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;name&gt;</span>mapstruct<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;description&gt;</span>Map Struct project for Spring Boot<span style="color:#f92672">&lt;/description&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;properties&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;java.version&gt;</span>1.8<span style="color:#f92672">&lt;/java.version&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;mapstruct.version&gt;</span>1.4.1.Final<span style="color:#f92672">&lt;/mapstruct.version&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;lombok-mapstruct-binding.version&gt;</span>0.2.0<span style="color:#f92672">&lt;/lombok-mapstruct-binding.version&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/properties&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;dependencies&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.boot<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;artifactId&gt;</span>spring-boot-starter<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">&lt;!-- Lombok --&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;groupId&gt;</span>org.projectlombok<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;artifactId&gt;</span>lombok<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">&lt;!-- SpringBoot Test --&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.boot<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;artifactId&gt;</span>spring-boot-starter-test<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;scope&gt;</span>test<span style="color:#f92672">&lt;/scope&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;exclusions&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;exclusion&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;groupId&gt;</span>org.junit.vintage<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;artifactId&gt;</span>junit-vintage-engine<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;/exclusion&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/exclusions&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">&lt;!-- MapStruct domain 映射工具 --&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;groupId&gt;</span>org.mapstruct<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;artifactId&gt;</span>mapstruct<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;version&gt;</span>${mapstruct.version}<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/dependencies&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;build&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;plugins&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">&lt;!-- Spring Boot 插件，可以把应用打包为可执行 Jar --&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;plugin&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.boot<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;artifactId&gt;</span>spring-boot-maven-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/plugin&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">&lt;!-- Maven 编译插件，提供给 MapStruct 使用 --&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;plugin&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.maven.plugins<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;artifactId&gt;</span>maven-compiler-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;version&gt;</span>${maven-compiler-plugin.version}<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;source&gt;</span>${java.version}<span style="color:#f92672">&lt;/source&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;target&gt;</span>${java.version}<span style="color:#f92672">&lt;/target&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;annotationProcessorPaths&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#75715e">&lt;!-- MapStruct 注解处理器 --&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;path&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;groupId&gt;</span>org.mapstruct<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;artifactId&gt;</span>mapstruct-processor<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;version&gt;</span>${mapstruct.version}<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;/path&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#75715e">&lt;!-- Lombok 注解处理器 --&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;path&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;groupId&gt;</span>org.projectlombok<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;artifactId&gt;</span>lombok<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;version&gt;</span>${lombok.version}<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;/path&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#75715e">&lt;!-- MapStruct 和 Lombok 注解绑定处理器 --&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;path&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;groupId&gt;</span>org.projectlombok<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;artifactId&gt;</span>lombok-mapstruct-binding<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;version&gt;</span>${lombok-mapstruct-binding.version}<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;/path&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;/annotationProcessorPaths&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/plugin&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/plugins&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/build&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/project&gt;</span>
+</span></span></code></pre></div><h3 id="编写转换接口">编写转换接口</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> cn.muzaijian.mall.mapstruct.convert;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cn.muzaijian.mall.mapstruct.domain.dto.PmsBrandItemDTO;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cn.muzaijian.mall.mapstruct.mbg.entity.PmsBrand;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.mapstruct.Mapper;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.mapstruct.Mapping;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * &lt;p&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * 商品品牌 转换 Demo One
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * &lt;/p&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @author muzaijian
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @date 2021/7/12
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Mapper</span>(componentModel <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;spring&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">PmsBrandConvertDemoOne</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 商品品牌 ItemDTO 转换商品品牌 entity
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param brandItemDTO 商品品牌 ItemDTO
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return 商品品牌 entity
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Mapping</span>(source <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bigPicture&#34;</span>, target <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bigPic&#34;</span>)
+</span></span><span style="display:flex;"><span>    PmsBrand <span style="color:#a6e22e">convert</span>(PmsBrandItemDTO brandItemDTO);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol>
+<li>需结合 Spring 使用</li>
+<li>domain 实例变量不一样可以使用 @Mapping 注解指定实例变量映射名称</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> cn.muzaijian.mall.mapstruct.convert;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cn.muzaijian.mall.mapstruct.domain.dto.PmsBrandItemDTO;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cn.muzaijian.mall.mapstruct.mbg.entity.PmsBrand;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.mapstruct.Mapper;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.mapstruct.Mapping;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.mapstruct.factory.Mappers;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * &lt;p&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * 商品品牌 转换 Demo Two
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * &lt;/p&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @author muzaijian
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @date 2021/7/13
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Mapper</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">PmsBrandConvertDemoTwo</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    PmsBrandConvertDemoTwo INSTANCE <span style="color:#f92672">=</span> Mappers.<span style="color:#a6e22e">getMapper</span>(PmsBrandConvertDemoTwo.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 商品品牌 ItemDTO 转换商品品牌 entity
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param brandItemDTO 商品品牌 ItemDTO
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return 商品品牌 entity
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Mapping</span>(source <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bigPicture&#34;</span>, target <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bigPic&#34;</span>)
+</span></span><span style="display:flex;"><span>    PmsBrand <span style="color:#a6e22e">convert</span>(PmsBrandItemDTO brandItemDTO);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>查看编译后的实现类，可见两者区别只是 PmsBrandConvertDemoOneImpl <strong>多了一个 @Component 注解，可以直接使用依赖注入方式调用</strong></li>
+</ul>
+<h3 id="spring注入用法">spring注入用法</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * description convertBeanList 转化台账json dto为实体库Java bean &lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * version 1.0 &lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param sourceObjects
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param target
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return java.util.List&lt;java.lang.Object&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @date 2022/6/15 10:40 &lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @author 罗皓 &lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">convertBeanList</span>(List<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;</span> sourceObjects, String target) {
+</span></span><span style="display:flex;"><span>        String convertMapperClassName <span style="color:#f92672">=</span> target <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;ConvertMapperImpl&#34;</span>;
+</span></span><span style="display:flex;"><span>        Object beanService <span style="color:#f92672">=</span> SpringUtil.<span style="color:#a6e22e">getBean</span>(convertMapperClassName);
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;</span> targetObjects <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>(sourceObjects.<span style="color:#a6e22e">size</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (Object sourceObject : sourceObjects) {
+</span></span><span style="display:flex;"><span>            Object convert <span style="color:#f92672">=</span> ReflectUtil.<span style="color:#a6e22e">invoke</span>(beanService, <span style="color:#e6db74">&#34;convert&#34;</span>, sourceObject);
+</span></span><span style="display:flex;"><span>            targetObjects.<span style="color:#a6e22e">add</span>(convert);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> targetObjects;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>编译后的实现类，为在编写的接口类后添加<code>Impl</code>作为实现，例如 xxxConvertMapperImpl 为 xxxConvertMapper 的编译实现类。由于使用了<code>@Mapper(componentModel = &quot;spring&quot;)</code>，故可以用SpringUtil获取容器中注入的该接口。</li>
+</ul>
+<h3 id="list转化">List转化</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Mapping</span>(target <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dydj&#34;</span>, source <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;voltageLevel&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Mapping</span>(target <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;eddl&#34;</span>, source <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ratedCurrent&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Mx <span style="color:#a6e22e">convert</span>(PmsBusbarDto pmsBusbarDto);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Mx<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">convertList</span>(List<span style="color:#f92672">&lt;</span>PmsBusbarDto<span style="color:#f92672">&gt;</span> list);
+</span></span></code></pre></div><h2 id="3java单个方法返回多个返回值">3、java单个方法返回多个返回值</h2>
+<p>可使用hutool的pair，tuple</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Pair<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;</span>, List<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;&gt;</span> pair <span style="color:#f92672">=</span> convertBeanList(sourceObjects, target);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Tuple tuple <span style="color:#f92672">=</span> entityToMapAndBytes(RecognitionEntity recognitionEntity);
+</span></span></code></pre></div><h2 id="4open-feign使用和接口调用">4、open-feign使用和接口调用</h2>
+<h3 id="参考-1">参考</h3>
+<p><a href="http://c.biancheng.net/springcloud/open-feign.html">OpenFeign：Spring Cloud声明式服务调用组件（非常详细）</a></p>
+<p><a href="https://blog.csdn.net/hkk666123/article/details/113964715">OpenFeign设置header的5种方式</a></p>
+<h3 id="简单使用">简单使用</h3>
+<p>POM文件引入</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.cloud<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;artifactId&gt;</span>spring-cloud-starter-openfeign<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><p>开启配置</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@EnableFeignClients</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Slf4j</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UkApplication</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;########## app is running ##########&#34;</span>);
+</span></span><span style="display:flex;"><span>        SpringApplication.<span style="color:#a6e22e">run</span>(UkApplication.<span style="color:#a6e22e">class</span>, args);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>调用feign接口，注意调用服务的context-path需要在url上补上，否则调用接口时会404 Not Found（这也是下边video-service写了两遍的原因）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 普通POST类型接口</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@FeignClient</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;video-service&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">VideoAlarmService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@PostMapping</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;video-service/alarm/recognition/create&#34;</span>)
+</span></span><span style="display:flex;"><span>    Result <span style="color:#a6e22e">insertRecognitionResult</span>(<span style="color:#a6e22e">@RequestBody</span> RecognitionEntity recognitionEntity);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.http.MediaType;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 上传文件类型接口</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@FeignClient</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;img-upload-service&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">UploadService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@PostMapping</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;img-upload-service/103-img/v2/upload&#34;</span>, consumes <span style="color:#f92672">=</span> MediaType.<span style="color:#a6e22e">MULTIPART_FORM_DATA_VALUE</span>)
+</span></span><span style="display:flex;"><span>    Result <span style="color:#a6e22e">handleFileUpload</span>(<span style="color:#a6e22e">@RequestPart</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;files&#34;</span>) List<span style="color:#f92672">&lt;</span>MultipartFile<span style="color:#f92672">&gt;</span> files);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//  application/x-www-form-urlencode 接口</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@PostMapping</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;auth-service/oauth/token&#34;</span>, consumes <span style="color:#f92672">=</span> MediaType.<span style="color:#a6e22e">APPLICATION_FORM_URLENCODED_VALUE</span>)
+</span></span><span style="display:flex;"><span>    AuthClientResult <span style="color:#a6e22e">token</span>(<span style="color:#a6e22e">@RequestParam</span> Map<span style="color:#f92672">&lt;</span>String, Object<span style="color:#f92672">&gt;</span> params);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 带header的情况</span>
+</span></span></code></pre></div><h3 id="设置header的5种方式">设置header的5种方式</h3>
+<p>在微服务间使用Feign进行远程调用时需要在 header 中添加信息，那么 springcloud open feign 如何设置 header 呢？有5种方式可以设置请求头信息:</p>
+<ol>
+<li>在@RequestMapping注解里添加headers属性</li>
+<li>在方法参数前面添加@RequestHeader注解</li>
+<li>在方法或者类上添加@Headers的注解</li>
+<li>在方法参数前面添加@HeaderMap注解</li>
+<li>实现RequestInterceptor接口</li>
+</ol>
+<h2 id="5普通maven项目非spring-boot项目打包成jar包">5、普通maven项目（非spring boot项目）打包成jar包</h2>
+<p>强烈建议参照官方文档而非搜索教程。https://maven.apache.org/plugins/maven-assembly-plugin/usage.html</p>
+<p>1、引入依赖</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.maven.plugins<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;artifactId&gt;</span>maven-assembly-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;version&gt;</span>3.3.0<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;scope&gt;</span>provided<span style="color:#f92672">&lt;/scope&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><p>2、引入插件修改配置</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;build&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;plugins&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;plugin&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;artifactId&gt;</span>maven-assembly-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;version&gt;</span>3.3.0<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;descriptorRefs&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;descriptorRef&gt;</span>jar-with-dependencies<span style="color:#f92672">&lt;/descriptorRef&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;/descriptorRefs&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;archive&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;manifest&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;mainClass&gt;</span>com.nrec.App<span style="color:#f92672">&lt;/mainClass&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;/manifest&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;/archive&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;executions&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;execution&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;id&gt;</span>make-assembly<span style="color:#f92672">&lt;/id&gt;</span> <span style="color:#75715e">&lt;!-- this is used for inheritance merges --&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;phase&gt;</span>package<span style="color:#f92672">&lt;/phase&gt;</span> <span style="color:#75715e">&lt;!-- bind to the packaging phase --&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;goals&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;goal&gt;</span>single<span style="color:#f92672">&lt;/goal&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;/goals&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;/execution&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;/executions&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/plugin&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/plugins&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/build&gt;</span>
+</span></span></code></pre></div><p>3、执行打包</p>
+<p><img src="/images/image-20220425152151013.png" alt="image-20220425152151013"></p>
+<p>第二步直接进行packge，此时会先打一个未整合在一起的jar包，再打jar-with-dependencies，直接进行第二步，打包会产生警告，[WARNING] Cannot include project artifact: com.nrec:envBuild:jar:1.0-SNAPSHOT; it doesn&rsquo;t have an associated file or directory.，运行jar包导致报错：找不到主类。</p>
+<h2 id="6nettychannelread0和channelread的区别todo">6、netty，channelRead0和channelRead的区别【todo】</h2>
+<h2 id="7netty中的handler类通过autowired注入的类显示为null">7、netty中的handler类，通过@Autowired注入的类显示为Null</h2>
+<p><strong>主要问题在于：Spring Bean的生命周期。</strong></p>
+<p>Netty中的handler类，通过@Autowired注入的类显示为Null</p>
+<p>原因：netty中无法使用注入的bean，需要主动通过getBean的方式来获取。并不是配置的问题，而是因为netty启动的时候并没有交给spring <a href="https://so.csdn.net/so/search?q=IOC&amp;spm=1001.2101.3001.7020">IOC</a>托管。</p>
+<h3 id="1使用postconstruct注解">1、使用@PostConstruct注解</h3>
+<p>方法上加该注解会在项目启动的时候执行该方法，即spring容器初始化的时候执行，它与构造函数及@Autowired的执行顺序为：构造函数 &raquo; @Autowired &raquo; @PostConstruct。</p>
+<p><img src="/images/c85573d0e7ba460cba89e7e0b0181cec.png" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-tIsyCkP6-1649826757555)(G:\西电研究生\学长简历\项目经验总结.assets\image-20210928173236517.png)]"></p>
+<p>我们想在生成对象时完成某些初始化操作，而偏偏这些初始化操作又依赖于注入的bean，那么就无法在构造函数中实现，为此可以使用@PostConstruct注解一个init方法来完成初始化，该方法会在bean注入完成后被自动调用。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    ScriptService scriptService;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> MqttSeverHandler mqttSeverHandler;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@PostConstruct</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">init</span>(){
+</span></span><span style="display:flex;"><span>        mqttSeverHandler <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        mqttSeverHandler.<span style="color:#a6e22e">scriptService</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">scriptService</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>或者如</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@ChannelHandler.Sharable</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Slf4j</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Component</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NettyServerHandler</span> <span style="color:#66d9ef">extends</span> ChannelInboundHandlerAdapter {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ISocketServerService socketServerService;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> RedisTemplate<span style="color:#f92672">&lt;</span>Object, Object<span style="color:#f92672">&gt;</span> redisTemplate;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> NettyServerHandler nettyServerHandler;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@PostConstruct</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">init</span>() {
+</span></span><span style="display:flex;"><span>        nettyServerHandler <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="2使用springutil">2、使用SpringUtil</h3>
+<p>可以使用hutool的springUtil替代</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.example.Util;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.beans.BeansException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.context.ApplicationContext;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.context.ApplicationContextAware;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.stereotype.Component;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Component</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SpringUtils</span> <span style="color:#66d9ef">implements</span> ApplicationContextAware {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> ApplicationContext applicationContext;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setApplicationContext</span>(ApplicationContext applicationContext) <span style="color:#66d9ef">throws</span> BeansException {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(SpringUtils.<span style="color:#a6e22e">applicationContext</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>){
+</span></span><span style="display:flex;"><span>            SpringUtils.<span style="color:#a6e22e">applicationContext</span> <span style="color:#f92672">=</span> applicationContext;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ApplicationContext <span style="color:#a6e22e">getApplicationContext</span>(){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> applicationContext;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Object <span style="color:#a6e22e">getBean</span>(String name){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> getApplicationContext().<span style="color:#a6e22e">getBean</span>(name);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> T <span style="color:#a6e22e">getBean</span>(Class<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> clazz){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> getApplicationContext().<span style="color:#a6e22e">getBean</span>(clazz);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> T <span style="color:#a6e22e">getBean</span>(String name, Class<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> clazz){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> getApplicationContext().<span style="color:#a6e22e">getBean</span>(name, clazz);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>使用</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Slf4j</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RequiredArgsConstructor</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@ChannelHandler.Sharable</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MqttSeverHandler</span> <span style="color:#66d9ef">extends</span> SimpleChannelInboundHandler<span style="color:#f92672">&lt;</span>MqttMessage<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Map<span style="color:#f92672">&lt;</span>ChannelHandlerContext, JSONObject<span style="color:#f92672">&gt;</span> sublist<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Map<span style="color:#f92672">&lt;</span>String,List<span style="color:#f92672">&lt;</span>ChannelHandlerContext<span style="color:#f92672">&gt;&gt;</span> topiclist <span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> MqttSeverHandler mqttSeverHandler;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> ScriptService scriptService;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> {
+</span></span><span style="display:flex;"><span>        scriptService <span style="color:#f92672">=</span> SpringUtils.<span style="color:#a6e22e">getBean</span>(ScriptServiceImpl.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h2 id="8netty-bytebuf与string相互转换">8、netty ByteBuf与String相互转换</h2>
+<h3 id="string转为bytebuf">String转为ByteBuf</h3>
+<p>1）使用String.getBytes(Charset)，将String转为byte[]类型</p>
+<p>2）使用Unpooled.wrappedBuffer(byte[])，将byte[]转为ByteBuf</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>        String msg <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A message&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> bytes <span style="color:#f92672">=</span> msg.<span style="color:#a6e22e">getBytes</span>(CharsetUtil.<span style="color:#a6e22e">UTF_8</span>);
+</span></span><span style="display:flex;"><span>        ByteBuf buf <span style="color:#f92672">=</span> Unpooled.<span style="color:#a6e22e">wrappedBuffer</span>(bytes);
+</span></span></code></pre></div><p>或者使用 Unpooled.copiedBuffer(CharSequence string, Charset charset)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>        ByteBuf buf <span style="color:#f92672">=</span> Unpooled.<span style="color:#a6e22e">copiedBuffer</span>(<span style="color:#e6db74">&#34;Hello&#34;</span>, CharsetUtil.<span style="color:#a6e22e">UTF_8</span>);
+</span></span></code></pre></div><h3 id="bytebuf转为string">ByteBuf转为String</h3>
+<p>使用<code>ByteBuf.toString(Charset)，将ByteBuf转为String</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>        buf.<span style="color:#a6e22e">toString</span>(CharsetUtil.<span style="color:#a6e22e">UTF_8</span>)
+</span></span></code></pre></div><p>示例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>        String msg <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A message&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> bytes <span style="color:#f92672">=</span> msg.<span style="color:#a6e22e">getBytes</span>(CharsetUtil.<span style="color:#a6e22e">UTF_8</span>);
+</span></span><span style="display:flex;"><span>        ByteBuf buf <span style="color:#f92672">=</span> Unpooled.<span style="color:#a6e22e">wrappedBuffer</span>(bytes);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(buf.<span style="color:#a6e22e">toString</span>(CharsetUtil.<span style="color:#a6e22e">UTF_8</span>));
+</span></span></code></pre></div><p>输出：A message</p>
+<h2 id="9systemarraycopy的使用方法详解">9、System.arraycopy的使用方法详解</h2>
+<p>System.arraycopy这个方法之前用得很少，前段时间在一个项目需要对很多字节的处理，使用这个方法是非常有用的。
+这个方法的作用大家应该都是知道的吧：就是把一个数组中某一段字节数据放到另一个数组中。至于从第一个数组中取出几个数据，放到第二个数组中的什么位置都是可以通知这个方法的参数控制的。</p>
+<h3 id="一systemarraycopy使用的基本定义">一.System.arraycopy使用的基本定义</h3>
+<p>public <a href="https://so.csdn.net/so/search?q=static&amp;spm=1001.2101.3001.7020">static</a> void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)</p>
+<p>src:源数组;</p>
+<p>srcPos:源数组要复制的起始位置;</p>
+<p>dest:目的数组;</p>
+<p>destPos:目的数组放置的起始位置;</p>
+<p>length:复制的长度.</p>
+<p>注意：src 和 dest都必须是同类型或者可以进行转换类型的数组．</p>
+<h3 id="二示例详解">二.示例详解</h3>
+<p>System.arraycopy(int[] arr, int star,int[] arr2, int start2, length);</p>
+<blockquote>
+<p>第一个参数是要被复制的数组</p>
+<p>第二个参数是被复制的数字开始复制的下标</p>
+<p>第三个参数是目标数组，也就是要把数据放进来的数组</p>
+<p>第四个参数是从目标数据第几个下标开始放入数据</p>
+<p>第五个参数表示从被复制的数组中拿几个数值放到目标数组中</p>
+</blockquote>
+<p>比如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>数组1<span style="color:#960050;background-color:#1e0010">：</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr <span style="color:#f92672">=</span> { 1, 2, 3, 4, 5 };
+</span></span><span style="display:flex;"><span>数组2<span style="color:#960050;background-color:#1e0010">：</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr2 <span style="color:#f92672">=</span> { 5, 6,7, 8, 9 };
+</span></span><span style="display:flex;"><span>运行<span style="color:#960050;background-color:#1e0010">：</span>System.<span style="color:#a6e22e">arraycopy</span>(arr, 1, arr2, 0, 3);
+</span></span><span style="display:flex;"><span>得到<span style="color:#960050;background-color:#1e0010">：</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr2 <span style="color:#f92672">=</span> { 2, 3, 4, 8, 9 };
+</span></span></code></pre></div><h3 id="过程分析">过程分析：</h3>
+<p>先看第1、2、5个参数，得出要从arr中从下标为1的数组中拿出三个数值：2，3，4。然后看第3、4个参数，知道要在arr2中从下标为0开始放入数据，放入的个数也是第五个参加决定的这里是3个，所有最后的结果就是：2，3，4（加入的） + 8，9（原来的）</p>
+<p>比如：System.arraycopy(arr , 1 , arr2 , 2 , 3)。表示的是从数组arr中下标为1的位置取出3个数据，放到数组arr2中从下标为2的位置，放入3个数据。</p>
+<h2 id="10requestparam和requestpart的区别">10、@RequestParam和@RequestPart的区别</h2>
+<h3 id="requestpart">@RequestPart</h3>
+<ul>
+<li><code>@RequestPart</code>这个注解用在<code>multipart/form-data</code>表单提交请求的方法上。</li>
+<li>支持的请求方法的方式<code>MultipartFile</code>，属于Spring的<code>MultipartResolver</code>类。这个请求是通过<code>http协议</code>传输的</li>
+</ul>
+<h3 id="requestparam">@RequestParam</h3>
+<ul>
+<li><code>@RequestParam</code>支持’application/json’，也同样支持<code>multipart/form-data</code>请求</li>
+</ul>
+<h3 id="区别">区别</h3>
+<ul>
+<li>当请求方法的请求参数类型不是String 或 MultipartFile / Part时，而是复杂的请求域时，@RequestParam 依赖Converter or PropertyEditor进行数据解析， RequestPart参考 ‘Content-Type’ header，依赖HttpMessageConverters 进行数据解析</li>
+<li>当请求为<code>multipart/form-data</code>时，<code>@RequestParam</code>只能接收<code>String类型</code>的<code>name-value</code>值，<code>@RequestPart</code>可以接收复杂的请求域（像<code>json、xml</code>）；<code>@RequestParam</code> 依赖<code>Converter or PropertyEditor</code>进行数据解析， <code>@RequestPart</code>参考<code>'Content-Type' header</code>，依赖<code>HttpMessageConverters</code>进行数据解析</li>
+</ul>
+<p>前台请求：</p>
+<p><code>jsonData</code>为<code>Person</code>对象的<code>json</code>字符串，<code>uploadFile</code>为上传的图片</p>
+<p><img src="/images/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI4OTQ2OTI=,size_16,color_FFFFFF,t_70.png" alt="POST"></p>
+<p>后台接收：</p>
+<ul>
+<li><code>@RequestPart</code>可以将<code>jsonData</code>的<code>json数据</code>转换为<code>Person对象</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@RequestMapping</span>(<span style="color:#e6db74">&#34;jsonDataAndUploadFile&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@ResponseBody</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">jsonDataAndUploadFile</span>(<span style="color:#a6e22e">@RequestPart</span>(<span style="color:#e6db74">&#34;uploadFile&#34;</span>) MultiPartFile uploadFile,
+</span></span><span style="display:flex;"><span>                                    <span style="color:#a6e22e">@RequestPart</span>(<span style="color:#e6db74">&#34;jsonData&#34;</span>) Person person) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    StringBuilder sb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>    sb.<span style="color:#a6e22e">append</span>(uploadFile.<span style="color:#a6e22e">getOriginalFilename</span>()).<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;;;;&#34;</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> person.<span style="color:#a6e22e">toString</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;:::&#34;</span> <span style="color:#f92672">+</span> sb.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>@RequestParam</code>对于<code>jsonData</code>的<code>json数据</code>只能用<code>String字符串</code>来接收</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@RequestMapping</span>(<span style="color:#e6db74">&#34;jsonDataAndUploadFile&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@ResponseBody</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">jsonDataAndUploadFile</span>(<span style="color:#a6e22e">@RequestPart</span>(<span style="color:#e6db74">&#34;uploadFile&#34;</span>) MultiPartFile uploadFile,
+</span></span><span style="display:flex;"><span>                                    <span style="color:#a6e22e">@RequestParam</span>(<span style="color:#e6db74">&#34;jsonData&#34;</span>) String jsonData) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    StringBuilder sb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>    sb.<span style="color:#a6e22e">append</span>(uploadFile.<span style="color:#a6e22e">getOriginalFilename</span>()).<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;;;;&#34;</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> person.<span style="color:#a6e22e">toString</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;:::&#34;</span> <span style="color:#f92672">+</span> sb.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="总结">总结</h3>
+<p>当请求头中指定Content-Type:multipart/form-data时，传递的json参数，@RequestPart注解可以用对象来接收，@RequestParam只能用字符串接收</p>
+<h2 id="11file文件流转为multipartfile流">11、File文件流转为MultipartFile流</h2>
+<p>需要借助apache.commons包中的文件类，进行默认配置。不推荐使用springboot-test包（打包后不会引入）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.fileupload.FileItem;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.fileupload.FileItemFactory;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.fileupload.disk.DiskFileItemFactory;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.beans.factory.annotation.Value;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.data.redis.core.RedisTemplate;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.annotation.Async;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.stereotype.Service;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.web.multipart.MultipartFile;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.web.multipart.commons.CommonsMultipartFile;    
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * description getMulFileByFile 根据File构造MultipartFile对象 &lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * version 1.0 &lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param file
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return org.springframework.web.multipart.MultipartFile
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @date 2022/6/21 15:36 &lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @author 罗皓 &lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> MultipartFile <span style="color:#a6e22e">getMulFileByFile</span>(File file) {
+</span></span><span style="display:flex;"><span>        FileItem fileItem <span style="color:#f92672">=</span> createFileItem(file.<span style="color:#a6e22e">getPath</span>(), file.<span style="color:#a6e22e">getName</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> CommonsMultipartFile(fileItem);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * description createFileItem 创建用于构造CommonsMultipartFile的FileItem对象 &lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * version 1.0 &lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param filePath
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param fileName
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return org.apache.commons.fileupload.FileItem
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @date 2022/6/21 15:36 &lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @author 罗皓 &lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> FileItem <span style="color:#a6e22e">createFileItem</span>(String filePath, String fileName) {
+</span></span><span style="display:flex;"><span>        String fieldName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;file&#34;</span>;
+</span></span><span style="display:flex;"><span>        FileItemFactory factory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DiskFileItemFactory(16, <span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>        FileItem item <span style="color:#f92672">=</span> factory.<span style="color:#a6e22e">createItem</span>(fieldName, <span style="color:#e6db74">&#34;text/plain&#34;</span>, <span style="color:#66d9ef">false</span>, fileName);
+</span></span><span style="display:flex;"><span>        File newfile <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File(filePath);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> bytesRead;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> buffer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[</span>8192<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            FileInputStream fis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileInputStream(newfile);
+</span></span><span style="display:flex;"><span>            OutputStream os <span style="color:#f92672">=</span> item.<span style="color:#a6e22e">getOutputStream</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> ((bytesRead <span style="color:#f92672">=</span> fis.<span style="color:#a6e22e">read</span>(buffer, 0, 8192)) <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1) {
+</span></span><span style="display:flex;"><span>                os.<span style="color:#a6e22e">write</span>(buffer, 0, bytesRead);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            os.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>            fis.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> item;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h2 id="12mybatis-plus-新增获取自增列id">12、Mybatis-Plus 新增获取自增列id</h2>
+<p><strong>1、实体类定义</strong></p>
+<p>注意：@TableId(value = “id”, type = IdType.AUTO)注解中的 <code>type = IdType.AUTO</code> 属性标注<a href="https://so.csdn.net/so/search?q=%E4%B8%BB%E9%94%AE&amp;spm=1001.2101.3001.7020">主键</a>为自增策略。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> lombok.Data;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.baomidou.mybatisplus.annotation.IdType;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.baomidou.mybatisplus.annotation.TableId;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.baomidou.mybatisplus.annotation.TableName;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.baomidou.mybatisplus.annotation.TableField;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Data</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@TableName</span>(<span style="color:#e6db74">&#34;users&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@TableId</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id&#34;</span>, type <span style="color:#f92672">=</span> IdType.<span style="color:#a6e22e">AUTO</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer id;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@TableField</span>(<span style="color:#e6db74">&#34;`name`&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String name;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>2、解决办法</strong></p>
+<p>方法一：使用框架自带的insert方法。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">insert</span>(T entity);
+</span></span></code></pre></div><p>方法二：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Insert</span>(<span style="color:#e6db74">&#34;insert into users(`name`) values(#{user.name})&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Options</span>(useGeneratedKeys <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>, keyProperty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id&#34;</span>, keyColumn <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id&#34;</span>)
+</span></span><span style="display:flex;"><span>Integer <span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">@Param</span>(<span style="color:#e6db74">&#34;user&#34;</span>) User user);
+</span></span></code></pre></div><p>方法三：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@InsertProvider</span>(type <span style="color:#f92672">=</span> UserMapperProvider.<span style="color:#a6e22e">class</span>, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;add&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Options</span>(useGeneratedKeys <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>, keyProperty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id&#34;</span>, keyColumn <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id&#34;</span>)
+</span></span><span style="display:flex;"><span>Integer <span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">@Param</span>(<span style="color:#e6db74">&#34;user&#34;</span>) User user);
+</span></span></code></pre></div><p>UserMapperProvider类</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserMapperProvider</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">add</span>(User user) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;insert into users(id, `name`) values(#{user.id},#{user.name})&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>3、调用方法获取id说明：</strong></p>
+<p>方法调用前：id为null</p>
+<p><img src="/images/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDkxNzA0NQ==,size_16,color_FFFFFF,t_70#pic_left.png" alt="id为null"></p>
+<p>方法调用后：<strong>id会被赋值</strong></p>
+<p><img src="/images/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDkxNzA0NQ==,size_16,color_FFFFFF,t_70#pic_left-16565592935714.png" alt="id会被赋值"></p>
+<h2 id="13autowired和resource的区别">13、@Autowired和@Resource的区别</h2>
+<p>@Autowired功能虽说非常强大，但是也有些不足之处。比如它跟Spring强耦合了，如果换成了其他框架，功能就会失效。而@Resource是JSR-250提供的，它是Java标准，绝大部分框架都支持。</p>
+<p>除此之外，有些场景使用@Autowired无法满足的要求，改成@Resource却能解决问题。</p>
+<p>1、@Autowired默认按byType自动装配，而@Resource默认byName自动装配。</p>
+<p>2、@Autowired只包含一个参数：required，表示是否开启自动准入，默认是true。而@Resource包含七个参数，其中最重要的两个参数是：name 和 type。</p>
+<p>3、@Autowired如果要使用byName，需要使用@Qualifier一起配合。而@Resource如果指定了name，则用byName自动装配，如果指定了type，则用byType自动装配。</p>
+<p>4、@Autowired能够用在：构造器、方法、参数、成员变量和注解上，而@Resource能用在：类、成员变量和方法上。</p>
+<p>5、@Autowired是Spring定义的注解，而@Resource是JSR-250定义的注解。</p>
+<p>6、二者装配顺序不同</p>
+<p><strong>@Autowired</strong></p>
+<!-- raw HTML omitted -->
+<p><strong>@Resource</strong></p>
+<!-- raw HTML omitted -->
+<h3 id="参考-2">参考</h3>
+<p><a href="https://juejin.cn/post/7022507865701089317">@Autowired和@Resource的区别 - 掘金 (juejin.cn)</a></p>
+<h2 id="14netty注解扫盲">14、Netty注解扫盲</h2>
+<h3 id="sharable">@Sharable</h3>
+<ul>
+<li>标识 handler 提醒可共享；</li>
+<li>没有被此注解标注的 handler 不能重复安装到 pipeline 中，如果没有被该注解的 handler 安装到多个 pipeline 中，那么只有第一个请求的 Client 可以连接成功，之后的 Client 无法连接，并且在 Server 端会报错；</li>
+</ul>
+<h3 id="skip">@Skip</h3>
+<ul>
+<li>跳过 handler 的执行；</li>
+<li>在 Netty 5 中是可以使用的，但是在 Netty 4 中不可以使用；</li>
+<li>在自己的基于 Netty 4 项目中，如果不想用某个 handler，就直接删除，而不是用 @Skip 注解；</li>
+</ul>
+<h3 id="unstableapi">@UnstableApi</h3>
+<ul>
+<li>提醒不稳定，慎用；</li>
+</ul>
+<h3 id="supressjava6requirement">@SupressJava6Requirement</h3>
+<ul>
+<li>去除 “Java6 需求”的报警；</li>
+<li>如果我们基于 Netty 开发的项目要运行在 Java6 上，那么 Java6 以上版本的 API 就不能使用，我们需要先扫描出项目中所有使用到 Java6 以上 API 的地方，可以用一个 Maven 插件：animal-sniffer；</li>
+<li>不过我们的代码一般会在用到某个版本的 JDK 的 API 之前先用 <code>PlatformDependeng.javaVersion() &gt;= 7</code> 这样的代码判断一下，但是插件 animal-sniffer 会把这样的代码也扫描出来，那么对于这样的代码，就可以使用 @SupressJava6Requirement 一直 animal-sniffer 的行为；</li>
+</ul>
+<h2 id="15spring-boot配置静态资源的地址与访问路径">15、Spring Boot配置静态资源的地址与访问路径</h2>
+<p>静态资源，例如HTML文件、JS文件，设计到的Spring Boot配置有两项，一是“spring.<a href="https://so.csdn.net/so/search?q=mvc&amp;spm=1001.2101.3001.7020">mvc</a>.static-path-pattern”，一是“spring.resources.static-locations”，很多人都难以分辨它们之间的差异，所以经常出现的结果就是404错误，无法找到静态资源。</p>
+<h3 id="1-springmvcstatichttpssocsdnnetsosearchqstaticspm1001210130017020-path-pattern">1. “spring.mvc.<a href="https://so.csdn.net/so/search?q=static&amp;spm=1001.2101.3001.7020">static</a>-path-pattern”</h3>
+<p>spring.mvc.static-path-pattern代表的含义是我们应该以什么样的路径来访问静态资源，换句话说，只有静态资源满足什么样的匹配条件，Spring Boot才会处理静态资源请求，以官方配置为例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-properties" data-lang="properties"><span style="display:flex;"><span><span style="color:#75715e">#   这表示只有静态资源的访问路径为/resources/**时，才会处理请求</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">spring.mvc.static-path-pattern</span><span style="color:#f92672">=</span><span style="color:#e6db74">/resources/**，</span>
+</span></span></code></pre></div><p>假定采用默认的配置端口，那么只有请求地址类似于“http://localhost:8080/resources/jquery.js”时，Spring Boot才会处理此请求，处理方式是将根据模式匹配后的文件名查找本地文件，那么应该在什么地方查找本地文件呢？这就是“spring.resources.static-locations”的作用了。</p>
+<h3 id="2-springresourcesstatic-locations">2. “spring.resources.static-locations”</h3>
+<p>“spring.resources.static-locations”用于告诉Spring Boot应该在何处查找静态资源文件，这是一个列表性的配置，查找文件时会依赖于配置的先后顺序依次进行，默认的官方配置如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-properties" data-lang="properties"><span style="display:flex;"><span><span style="color:#a6e22e">spring.resources.static-locations</span><span style="color:#f92672">=</span><span style="color:#e6db74">classpath:/static,classpath:/public,classpath:/resources,classpath:/META-INF/resources</span>
+</span></span></code></pre></div><p>继续以上面的请求地址为例，“http://localhost:8080/resources/jquery.js”就会在上述的四个路径中依次查找是否存在“jquery.js”文件，如果找到了，则返回此文件，否则返回404错误。</p>
+<h3 id="3-静态资源的bean配置">3. 静态资源的Bean配置</h3>
+<p>从上面可以看出，“spring.mvc.static-path-pattern”与“spring.resources.static-locations”组合起来演绎了nginx的映射配置，如果熟悉Spring MVC，那么理解起来更加简单，它们的作用可以用Bean配置表示，如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableWebMvc</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WebConfig</span> <span style="color:#66d9ef">extends</span> WebMvcConfigurerAdapter {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addResourceHandlers</span>(ResourceHandlerRegistry registry) {
+</span></span><span style="display:flex;"><span>        registry.<span style="color:#a6e22e">addResourceHandler</span>(<span style="color:#e6db74">&#34;/resources/**&#34;</span>)
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">addResourceLocations</span>(<span style="color:#e6db74">&#34;/public-resources/&#34;</span>)
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">setCacheControl</span>(CacheControl.<span style="color:#a6e22e">maxAge</span>(1, TimeUnit.<span style="color:#a6e22e">HOURS</span>).<span style="color:#a6e22e">cachePublic</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>或者等同与以下的XML。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;mvc:resources</span> <span style="color:#a6e22e">mapping=</span><span style="color:#e6db74">&#34;/resources/**&#34;</span> <span style="color:#a6e22e">location=</span><span style="color:#e6db74">&#34;/public-resources/&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;mvc:cache-control</span> <span style="color:#a6e22e">max-age=</span><span style="color:#e6db74">&#34;3600&#34;</span> <span style="color:#a6e22e">cache-public=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/mvc:resources&gt;</span>123
+</span></span></code></pre></div><h3 id="结论">结论</h3>
+<p>“spring.mvc.static-path-pattern”用于阐述HTTP请求地址，而“spring.resources.static-locations”则用于描述静态资源的存放位置。</p>
+<h2 id="16java执行js代码">16、Java执行js代码</h2>
+<p>1、使用<code>ScriptEngineManager</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>        String str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;(msgCategory.equals(\&#34;工况类\&#34;) &amp;&amp; msgSource.equals(\&#34;告警\&#34;))||(msgCategory.equals(\&#34;事故类\&#34;) &amp;&amp; msgSource.equals(\&#34;缺陷\&#34;))&#34;</span>;
+</span></span><span style="display:flex;"><span>        ScriptEngineManager scriptEngineManager <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ScriptEngineManager();
+</span></span><span style="display:flex;"><span>        ScriptEngine js <span style="color:#f92672">=</span> scriptEngineManager.<span style="color:#a6e22e">getEngineByName</span>(<span style="color:#e6db74">&#34;js&#34;</span>);
+</span></span><span style="display:flex;"><span>        js.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;msgCategory&#34;</span>, <span style="color:#e6db74">&#34;工况类&#34;</span>);
+</span></span><span style="display:flex;"><span>        js.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;msgSource&#34;</span>, <span style="color:#e6db74">&#34;告警&#34;</span>);
+</span></span><span style="display:flex;"><span>        Object eval <span style="color:#f92672">=</span> js.<span style="color:#a6e22e">eval</span>(str);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;结果类型：&#34;</span> <span style="color:#f92672">+</span> eval.<span style="color:#a6e22e">getClass</span>().<span style="color:#a6e22e">getName</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;,计算结果：&#34;</span> <span style="color:#f92672">+</span> eval);
+</span></span></code></pre></div><p>2、</p>
+<h2 id="17suppresswarningsdeprecation">17、@SuppressWarnings(&ldquo;deprecation&rdquo;)</h2>
+<p>表示不检测过期的方y法,不显示使用了不赞成使用的类或方法时的警告</p>
+<h2 id="18springboot-task动态定时任务">18、springboot task动态定时任务</h2>
+<p>1、需要存数据库，修改后，需要等任务下次执行后，再读库生效</p>
+<p>数据库中有做简单的cron配置</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.nrec.pcs9000.app.task;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cn.hutool.core.date.DateTime;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cn.hutool.core.date.DateUtil;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.nrec.pcs9000.app.entity.GlobalCfg;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.nrec.pcs9000.app.entity.OpsDefect;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.nrec.pcs9000.app.service.IGlobalCfgService;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.nrec.pcs9000.app.service.IOpsDefectService;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> lombok.extern.slf4j.Slf4j;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.annotation.SchedulingConfigurer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.config.ScheduledTaskRegistrar;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.config.TriggerTask;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.support.CronTrigger;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.stereotype.Component;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.annotation.Resource;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Date;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * 类 DynamicScheduledTask&lt;code&gt;Doc&lt;/code&gt;用于：动态定时任务配置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @author 罗皓
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @version 1.0
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @date 2022/9/5 16:35
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Component</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Slf4j</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DynamicScheduledTask</span> <span style="color:#66d9ef">implements</span> SchedulingConfigurer {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 每天零点</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String DEFAULT_CRON <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0 * * * * ?&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Resource</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> IOpsDefectService opsDefectService;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Resource</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> IGlobalCfgService globalCfgService;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configureTasks</span>(ScheduledTaskRegistrar taskRegistrar) {
+</span></span><span style="display:flex;"><span>        taskRegistrar.<span style="color:#a6e22e">addTriggerTask</span>(opsLogTask());
+</span></span><span style="display:flex;"><span>        taskRegistrar.<span style="color:#a6e22e">addTriggerTask</span>(opsDefectTask());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> TriggerTask <span style="color:#a6e22e">opsLogTask</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> TriggerTask(
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">//1.添加任务内容(Runnable)</span>
+</span></span><span style="display:flex;"><span>                () <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>                    log.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;监控日志推送中台&#34;</span>);
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">//2.设置执行周期(Trigger)</span>
+</span></span><span style="display:flex;"><span>                triggerContext <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">//2.1 从数据库获取执行周期</span>
+</span></span><span style="display:flex;"><span>                    String cron <span style="color:#f92672">=</span> globalCfgService.<span style="color:#a6e22e">lambdaQuery</span>()
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">eq</span>(GlobalCfg::getPKey, <span style="color:#e6db74">&#34;ops-log.mid.cron&#34;</span>)
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">oneOpt</span>()
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">map</span>(GlobalCfg::getPValue)
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">map</span>(str <span style="color:#f92672">-&gt;</span> getCron(str, <span style="color:#e6db74">&#34;ss mm HH * * ?&#34;</span>))
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">orElse</span>(DEFAULT_CRON);
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">//2.2 合法性校验.</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">//2.3 返回执行周期(Date)</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> CronTrigger(cron).<span style="color:#a6e22e">nextExecutionTime</span>(triggerContext);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> TriggerTask <span style="color:#a6e22e">opsDefectTask</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> TriggerTask(
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">//1.添加任务内容(Runnable)</span>
+</span></span><span style="display:flex;"><span>                () <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>                    log.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;执行缺陷推送中台&#34;</span>);
+</span></span><span style="display:flex;"><span>                    opsDefectService.<span style="color:#a6e22e">lambdaQuery</span>()
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">in</span>(OpsDefect::getState, 3, 4)
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">eq</span>(OpsDefect::getIsSend, 0)
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">list</span>()
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">forEach</span>(opsDefectService::sendMid);
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">//2.设置执行周期(Trigger)</span>
+</span></span><span style="display:flex;"><span>                triggerContext <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">//2.1 从数据库获取执行周期</span>
+</span></span><span style="display:flex;"><span>                    String cron <span style="color:#f92672">=</span> globalCfgService.<span style="color:#a6e22e">lambdaQuery</span>()
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">eq</span>(GlobalCfg::getPKey, <span style="color:#e6db74">&#34;ops-defect.mid.cron&#34;</span>)
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">oneOpt</span>()
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">map</span>(GlobalCfg::getPValue)
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">map</span>(str <span style="color:#f92672">-&gt;</span> getCron(str, <span style="color:#e6db74">&#34;ss mm HH * * ?&#34;</span>))
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">orElse</span>(DEFAULT_CRON);
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">//2.2 合法性校验.</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">//2.3 返回执行周期(Date)</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> CronTrigger(cron).<span style="color:#a6e22e">nextExecutionTime</span>(triggerContext);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String <span style="color:#a6e22e">getCron</span>(String dateStr, String format) {
+</span></span><span style="display:flex;"><span>        DateTime date <span style="color:#f92672">=</span> DateUtil.<span style="color:#a6e22e">parse</span>(dateStr);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> DateUtil.<span style="color:#a6e22e">format</span>(date, format);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String <span style="color:#a6e22e">getCron</span>(Date date, String format) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// &#34;ss mm HH dd MM ? yyyy&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> DateUtil.<span style="color:#a6e22e">format</span>(date, format);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>2、使用自定义线程池和Map来存放，可以控制定时任务的启停</p>
+<p>数据库中有做简单的cron配置</p>
+<pre tabindex="0"><code></code></pre><p>3、使用自定义线程池和Map来存放，可以控制定时任务的启停</p>
+<p>数据库中有做Task实体的存储</p>
+<ul>
+<li>serviceImpl实现</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.nrec.pcs9000.app.service.impl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.nrec.base.common.model.Result;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.nrec.pcs9000.app.entity.ScheduleTask;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.nrec.pcs9000.app.mapper.ScheduleTaskMapper;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.nrec.pcs9000.app.schedule.TaskRunnable;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.nrec.pcs9000.app.service.IScheduleTaskService;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.ArrayList;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.List;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.boot.CommandLineRunner;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.context.annotation.Bean;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.annotation.Async;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.annotation.EnableAsync;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.support.CronTrigger;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.stereotype.Service;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> lombok.extern.slf4j.Slf4j;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.annotation.Resource;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.ConcurrentHashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.ScheduledFuture;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * 动态定时任务 服务实现类
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @author liucq
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @since 2021-11-11
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Slf4j</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScheduleTaskServiceImpl</span> <span style="color:#66d9ef">extends</span> ServiceImpl<span style="color:#f92672">&lt;</span>ScheduleTaskMapper, ScheduleTask<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">implements</span> IScheduleTaskService, CommandLineRunner {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Resource</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ThreadPoolTaskScheduler threadPoolTaskScheduler;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Resource</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ScheduleTaskMapper scheduleTaskMapper;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//存放任务调度的容器，此容器中的任务都是正在运行的任务</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ConcurrentHashMap<span style="color:#f92672">&lt;</span>String, ScheduledFuture<span style="color:#f92672">&gt;</span> futureMap <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ConcurrentHashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> ThreadPoolTaskScheduler <span style="color:#a6e22e">threadPoolTaskScheduler</span>() {
+</span></span><span style="display:flex;"><span>        ThreadPoolTaskScheduler threadPoolTaskScheduler <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ThreadPoolTaskScheduler();
+</span></span><span style="display:flex;"><span>        threadPoolTaskScheduler.<span style="color:#a6e22e">setPoolSize</span>(10);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> threadPoolTaskScheduler;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ScheduleTask <span style="color:#a6e22e">getScheduleTaskById</span>(String id) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> baseMapper.<span style="color:#a6e22e">getScheduleTaskById</span>(id);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Result <span style="color:#a6e22e">start</span>(String jobIds) {
+</span></span><span style="display:flex;"><span>        String<span style="color:#f92672">[]</span> jobs <span style="color:#f92672">=</span> jobIds.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;,&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (String jobId : jobs) {
+</span></span><span style="display:flex;"><span>            ScheduleTask task <span style="color:#f92672">=</span> scheduleTaskMapper.<span style="color:#a6e22e">getScheduleTaskById</span>(jobId);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (task <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> Result.<span style="color:#a6e22e">buildFailed</span>(jobId <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; 任务不存在，无法启动！&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (futureMap.<span style="color:#a6e22e">get</span>(jobId) <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> Result.<span style="color:#a6e22e">buildFailed</span>(<span style="color:#e6db74">&#34;任务已经在运行，无法重复启动！&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            ScheduledFuture future <span style="color:#f92672">=</span> threadPoolTaskScheduler.<span style="color:#a6e22e">schedule</span>(<span style="color:#66d9ef">new</span> TaskRunnable(task), <span style="color:#66d9ef">new</span> CronTrigger(task.<span style="color:#a6e22e">getCron</span>()));
+</span></span><span style="display:flex;"><span>            baseMapper.<span style="color:#a6e22e">updateEnableStart</span>(jobId, 1);
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//放入任务调度集合中</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">assert</span> future <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            futureMap.<span style="color:#a6e22e">put</span>(jobId, future);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Result.<span style="color:#a6e22e">buildSuccess</span>(jobIds <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; start success&#34;</span>, <span style="color:#e6db74">&#34;通过任务id启动任务&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Result <span style="color:#a6e22e">stop</span>(String jobIds) {
+</span></span><span style="display:flex;"><span>        String<span style="color:#f92672">[]</span> jobs <span style="color:#f92672">=</span> jobIds.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;,&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (String jobId : jobs) {
+</span></span><span style="display:flex;"><span>            pause(jobId);
+</span></span><span style="display:flex;"><span>            scheduleTaskMapper.<span style="color:#a6e22e">updateEnableStart</span>(jobId, 0);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Result.<span style="color:#a6e22e">buildSuccess</span>(jobIds <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;停止程序自启成功&#34;</span>, <span style="color:#e6db74">&#34;通过任务id停止任务并取消随程序启动&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Result <span style="color:#a6e22e">edit</span>(String jobId, String cron) {
+</span></span><span style="display:flex;"><span>        scheduleTaskMapper.<span style="color:#a6e22e">updateCron</span>(jobId, cron);
+</span></span><span style="display:flex;"><span>        ScheduledFuture future <span style="color:#f92672">=</span> futureMap.<span style="color:#a6e22e">get</span>(jobId);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">null</span> <span style="color:#f92672">!=</span> future) {
+</span></span><span style="display:flex;"><span>            pause(jobId);
+</span></span><span style="display:flex;"><span>            start(jobId);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> Result.<span style="color:#a6e22e">buildSuccess</span>(jobId <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; edit success&#34;</span>, <span style="color:#e6db74">&#34;通过任务id编辑任务执行周期&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Result.<span style="color:#a6e22e">buildFailed</span>(jobId <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; edit failed&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>ScheduleTask<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">listRunningTask</span>() {
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>ScheduleTask<span style="color:#f92672">&gt;</span> tasks <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        futureMap.<span style="color:#a6e22e">forEach</span>((k, v) <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>            tasks.<span style="color:#a6e22e">add</span>(getScheduleTaskById(k));
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tasks;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>ScheduleTask<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">listAllTask</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> list();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">startAllScheduleTask</span>() {
+</span></span><span style="display:flex;"><span>        QueryWrapper<span style="color:#f92672">&lt;</span>ScheduleTask<span style="color:#f92672">&gt;</span> wrapper <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> QueryWrapper<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        wrapper.<span style="color:#a6e22e">eq</span>(<span style="color:#e6db74">&#34;DEFAULT_START&#34;</span>, <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>ScheduleTask<span style="color:#f92672">&gt;</span> scheduleTasks <span style="color:#f92672">=</span> scheduleTaskMapper.<span style="color:#a6e22e">selectList</span>(wrapper);
+</span></span><span style="display:flex;"><span>        scheduleTasks.<span style="color:#a6e22e">forEach</span>(task <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>            start(task.<span style="color:#a6e22e">getJobId</span>());
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Result<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">pause</span>(String id) {
+</span></span><span style="display:flex;"><span>        ScheduledFuture future <span style="color:#f92672">=</span> futureMap.<span style="color:#a6e22e">get</span>(id);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (future <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//从调度集合中移除</span>
+</span></span><span style="display:flex;"><span>            future.<span style="color:#a6e22e">cancel</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>            futureMap.<span style="color:#a6e22e">remove</span>(id);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> Result.<span style="color:#a6e22e">buildSuccess</span>(<span style="color:#e6db74">&#34;定时任务暂停成功&#34;</span>, <span style="color:#e6db74">&#34;通过任务id暂停任务并不会取消随程序启动&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Result.<span style="color:#a6e22e">buildFailed</span>(<span style="color:#e6db74">&#34;该任务不在运行行列中，无法暂停！&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 程序启动时执行启动所有定时任务过程
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param args
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @throws Exception
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span>(String... args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        startAllScheduleTask();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>controller实现</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.nrec.pcs9000.app.controller;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.nrec.base.common.model.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.nrec.pcs9000.app.service.IScheduleTaskService;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.nrec.pcs9000.app.entity.ScheduleTask;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> io.swagger.annotations.Api;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> io.swagger.annotations.ApiOperation;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> lombok.extern.slf4j.Slf4j;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.beans.factory.annotation.Autowired;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.web.bind.annotation.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> io.swagger.annotations.ApiImplicitParam;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> io.swagger.annotations.ApiImplicitParams;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.annotation.Resource;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.List;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import static</span> com.alibaba.fastjson.JSON.toJSONString;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * 动态定时任务 前端控制器
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @author liucq
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @since 2021-11-11
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Slf4j</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Api</span>(tags <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;动态定时任务模块&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RequestMapping</span>(<span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScheduleTaskController</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Resource</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> IScheduleTaskService scheduleTaskService;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiOperation</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;通过任务id停止任务并取消随程序启动&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiImplicitParams</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">@ApiImplicitParam</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id&#34;</span>, value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;任务id&#34;</span>, required <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>, paramType <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;path&#34;</span>)
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/schedule-task/stop/{ids}/update&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Result<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">stopScheduleTaskById</span>(<span style="color:#a6e22e">@PathVariable</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ids&#34;</span>) String ids) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> scheduleTaskService.<span style="color:#a6e22e">stop</span>(ids);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//    @ApiOperation(value = &#34;通过任务id暂停任务不会取消随程序启动&#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//    @ApiImplicitParams({</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//            @ApiImplicitParam(name = &#34;id&#34;, value = &#34;任务id&#34;, required = true, paramType = &#34;path&#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//    })</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//    @GetMapping(value = &#34;/schedule-task/pause/{id}/update&#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//    public Result&lt;String&gt; pauseScheduleTaskById(@PathVariable(name = &#34;id&#34;) String id) {</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        return scheduleTaskService.pause(id);</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//    }</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiOperation</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;通过任务id编辑任务执行周期&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiImplicitParams</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">@ApiImplicitParam</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id&#34;</span>, value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;任务id&#34;</span>, required <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>, paramType <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;path&#34;</span>)
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/schedule-task/edit/{id}/update&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Result<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">editScheduleTaskById</span>(<span style="color:#a6e22e">@PathVariable</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id&#34;</span>) String id, <span style="color:#a6e22e">@RequestParam</span>(<span style="color:#e6db74">&#34;cron&#34;</span>) String cron) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> scheduleTaskService.<span style="color:#a6e22e">edit</span>(id, cron);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiOperation</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;通过任务id启动任务&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiImplicitParams</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">@ApiImplicitParam</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id&#34;</span>, value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;任务id&#34;</span>, required <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>, paramType <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;path&#34;</span>)
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/schedule-task/start/{ids}/update&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Result<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">startScheduleTaskById</span>(<span style="color:#a6e22e">@PathVariable</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ids&#34;</span>) String ids) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> scheduleTaskService.<span style="color:#a6e22e">start</span>(ids);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiOperation</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;查询所有正在执行任务及执行周期&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/schedule-task/list/run/access&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Result<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>ScheduleTask<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">getRunningTask</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Result.<span style="color:#a6e22e">buildSuccess</span>(scheduleTaskService.<span style="color:#a6e22e">listRunningTask</span>(),<span style="color:#e6db74">&#34;查询所有正在执行任务及执行周期&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiOperation</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;查询所有任务及执行周期&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/schedule-task/list/all/access&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Result<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>ScheduleTask<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">getAllTask</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Result.<span style="color:#a6e22e">buildSuccess</span>(scheduleTaskService.<span style="color:#a6e22e">listAllTask</span>(),<span style="color:#e6db74">&#34;查询所有任务及执行周期&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="19hutool实现属性字段映射">19、hutool实现属性字段映射</h2>
+<p>A实体，从B、C实体拷贝。</p>
+<p>A.emsFieldInB = B.fieldInB</p>
+<p>A.midFieldInC = B.fieldInC</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>BeanUtil.<span style="color:#a6e22e">copyProperties</span>(asset, adLedgerDto, CopyOptions.<span style="color:#a6e22e">create</span>().<span style="color:#a6e22e">setFieldNameEditor</span>(sourceEditor(<span style="color:#e6db74">&#34;mid&#34;</span>)));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Editor<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">sourceEditor</span>(String prefix) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> fieldName <span style="color:#f92672">-&gt;</span> prefix <span style="color:#f92672">+</span> CharSequenceUtil.<span style="color:#a6e22e">upperFirst</span>(fieldName);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h2 id="20oval使用">20、oval使用</h2>
+<p>总结说明针对不同场景的主要使用那些注解。</p>
+<ul>
+<li>字符类型</li>
+</ul>
+<p>@AsserURL、@Email、@Length、@MaxLength、@MinLength</p>
+<p>@NotNull、@NotBlank、@NotEmpty、</p>
+<p>@Digits、@HasSubstring</p>
+<ul>
+<li>数值类型</li>
+</ul>
+<p>@Range、@Max、@Min、@NotNegative</p>
+<ul>
+<li>布尔类型</li>
+</ul>
+<p>@AssertFalse、@AssertTrue</p>
+<ul>
+<li>集合数组</li>
+</ul>
+<p>@Size、@MaxSize、@MinSize、@MemberOf、@NotMemberOf</p>
+<ul>
+<li>表达式或自定义</li>
+</ul>
+<p>@Assert、@CheckWith、@NotMatchPatternCheck，@MatchPatternCheck、</p>
+<p>@ValidateWithMethod</p>
+<p>可供参考：</p>
+<p><a href="https://blog.csdn.net/neweastsun/article/details/49154337">java开源验证框架OVAL帮助文档_梦想画家的博客-CSDN博客</a></p>
+<p><a href="https://www.cnblogs.com/mumuxinfei/p/9207684.html">Oval框架如何校验枚举类型的一种思路 - mumuxinfei - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://note.youdao.com/ynoteshare/index.html?id=5cefa62f67556a16e6feb6d02832a000&amp;type=note&amp;_time=1637048010044">oval api</a></p>
+<h2 id="21将html转化为pdf">21、将html转化为PDF</h2>
+<p><strong>controller</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@PostMapping</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/preview&#34;</span>, produces <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;application/octet-stream&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiOperation</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;打印&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">preview</span>(<span style="color:#a6e22e">@RequestBody</span> ReportQo reportQo,
+</span></span><span style="display:flex;"><span>                        HttpServletRequest request, HttpServletResponse response) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        reportQo.<span style="color:#a6e22e">setCurrentPage</span>(1);
+</span></span><span style="display:flex;"><span>        reportQo.<span style="color:#a6e22e">setPageSize</span>(10000);
+</span></span><span style="display:flex;"><span>        ReportDataDto data <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">getReportTableData</span>(reportQo).<span style="color:#a6e22e">getData</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 构造freemarker模板引擎参数,listVars.size()个数对应pdf页数</span>
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>Map<span style="color:#f92672">&lt;</span>String, Object<span style="color:#f92672">&gt;&gt;</span> listVars <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>String, Object<span style="color:#f92672">&gt;</span> variables <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// variables.put(&#34;var1&#34;, &#34;xxxxxxx1&#34;);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// variables.put(&#34;var2&#34;, &#34;xxxxxxxxxxxxx2&#34;);</span>
+</span></span><span style="display:flex;"><span>        listVars.<span style="color:#a6e22e">add</span>(variables);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        PdfUtils.<span style="color:#a6e22e">preview</span>(configurer, <span style="color:#e6db74">&#34;pdfReportTable.ftl&#34;</span>, data, listVars, response);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@PostMapping</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/download&#34;</span>, produces <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;application/octet-stream&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiOperation</span>(value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;导出&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">download</span>(<span style="color:#a6e22e">@RequestBody</span> ReportQo reportQo,
+</span></span><span style="display:flex;"><span>                         HttpServletRequest request, HttpServletResponse response) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        reportQo.<span style="color:#a6e22e">setCurrentPage</span>(1);
+</span></span><span style="display:flex;"><span>        reportQo.<span style="color:#a6e22e">setPageSize</span>(10000);
+</span></span><span style="display:flex;"><span>        ReportDataDto data <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">getReportTableData</span>(reportQo).<span style="color:#a6e22e">getData</span>();
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>Map<span style="color:#f92672">&lt;</span>String, Object<span style="color:#f92672">&gt;&gt;</span> listVars <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>String, Object<span style="color:#f92672">&gt;</span> variables <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// variables.put(&#34;title&#34;,&#34;测试下载ASGX!&#34;);</span>
+</span></span><span style="display:flex;"><span>        listVars.<span style="color:#a6e22e">add</span>(variables);
+</span></span><span style="display:flex;"><span>        PdfUtils.<span style="color:#a6e22e">download</span>(configurer, <span style="color:#e6db74">&#34;pdfReportTable.ftl&#34;</span>, data, listVars, response, <span style="color:#e6db74">&#34;export.pdf&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p><strong>pdfUtils</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.nrec.pcs9000.app.util;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.lowagie.text.pdf.BaseFont;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.nrec.pcs9000.app.model.dto.ReportDataDto;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> freemarker.template.Template;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> freemarker.template.TemplateException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.slf4j.Logger;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.slf4j.LoggerFactory;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.util.CollectionUtils;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.w3c.dom.Document;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.xhtmlrenderer.pdf.ITextFontResolver;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.xhtmlrenderer.pdf.ITextRenderer;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.ServletOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.http.HttpServletResponse;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.xml.parsers.DocumentBuilder;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.xml.parsers.DocumentBuilderFactory;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.List;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * 功能：pdf处理工具类
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @author qust
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @version 1.0 2018/2/23 17:21
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PdfUtils</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">PdfUtils</span>() {
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> Logger LOGGER <span style="color:#f92672">=</span> LoggerFactory.<span style="color:#a6e22e">getLogger</span>(PdfUtils.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 按模板和参数生成html字符串
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param templateName freemarker模板名称
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param variables    freemarker模板参数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return String
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * &lt;p&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 解决打包后Windows下调用出现空指针问题
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">generateDocString</span>(FreeMarkerConfigurer configurer, String templateName, Object variables) {
+</span></span><span style="display:flex;"><span>        StringWriter writer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringWriter();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            Template template <span style="color:#f92672">=</span> configurer.<span style="color:#a6e22e">getConfiguration</span>().<span style="color:#a6e22e">getTemplate</span>(templateName);
+</span></span><span style="display:flex;"><span>            template.<span style="color:#a6e22e">process</span>(variables, writer);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            LOGGER.<span style="color:#a6e22e">error</span>(e.<span style="color:#a6e22e">getMessage</span>(), e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        writer.<span style="color:#a6e22e">flush</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> writer.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 按模板和参数生成html字符串,再转换为flying-saucer识别的Document
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param templateName freemarker模板名称
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param variables    freemarker模板参数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return Document
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * &lt;p&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Deprecated暂停使用, 调整为generateDocString()进行生成
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Deprecated</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Document <span style="color:#a6e22e">generateDoc</span>(FreeMarkerConfigurer configurer, String templateName, Map<span style="color:#f92672">&lt;</span>String, Object<span style="color:#f92672">&gt;</span> variables) {
+</span></span><span style="display:flex;"><span>        Template tp;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            tp <span style="color:#f92672">=</span> configurer.<span style="color:#a6e22e">getConfiguration</span>().<span style="color:#a6e22e">getTemplate</span>(templateName);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            LOGGER.<span style="color:#a6e22e">error</span>(e.<span style="color:#a6e22e">getMessage</span>(), e);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        StringWriter stringWriter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringWriter();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (BufferedWriter writer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedWriter(stringWriter)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                tp.<span style="color:#a6e22e">process</span>(variables, writer);
+</span></span><span style="display:flex;"><span>                writer.<span style="color:#a6e22e">flush</span>();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">catch</span> (TemplateException e) {
+</span></span><span style="display:flex;"><span>                LOGGER.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;模板不存在或者路径错误&#34;</span>, e);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>                LOGGER.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;IO异常&#34;</span>, e);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            DocumentBuilder builder <span style="color:#f92672">=</span> DocumentBuilderFactory.<span style="color:#a6e22e">newInstance</span>().<span style="color:#a6e22e">newDocumentBuilder</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> builder.<span style="color:#a6e22e">parse</span>(<span style="color:#66d9ef">new</span> ByteArrayInputStream(stringWriter.<span style="color:#a6e22e">toString</span>().<span style="color:#a6e22e">getBytes</span>()));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            LOGGER.<span style="color:#a6e22e">error</span>(e.<span style="color:#a6e22e">getMessage</span>(), e);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 核心: 根据freemarker模板生成pdf文档
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param configurer   freemarker配置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param templateName freemarker模板名称
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param out          输出流
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param listVars     freemarker模板参数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @throws Exception 模板无法找到、模板语法错误、IO异常
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">generateAll</span>(FreeMarkerConfigurer configurer, String templateName, OutputStream out, ReportDataDto data, List<span style="color:#f92672">&lt;</span>Map<span style="color:#f92672">&lt;</span>String, Object<span style="color:#f92672">&gt;&gt;</span> listVars) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (CollectionUtils.<span style="color:#a6e22e">isEmpty</span>(listVars)) {
+</span></span><span style="display:flex;"><span>            LOGGER.<span style="color:#a6e22e">warn</span>(<span style="color:#e6db74">&#34;警告:freemarker模板参数为空!&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">setProperty</span>(<span style="color:#e6db74">&#34;javax.xml.transform.TransformerFactory&#34;</span>, <span style="color:#e6db74">&#34;com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl&#34;</span>);
+</span></span><span style="display:flex;"><span>        ITextRenderer renderer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ITextRenderer();
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        Document doc = generateDoc(configurer, templateName, listVars.get(0));</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        组装参数</span>
+</span></span><span style="display:flex;"><span>        String doc <span style="color:#f92672">=</span> generateDocString(configurer, templateName, data);
+</span></span><span style="display:flex;"><span>        renderer.<span style="color:#a6e22e">setDocumentFromString</span>(doc);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//设置字符集(宋体),此处必须与模板中的&lt;body style=&#34;font-family: SimSun&#34;&gt;一致,区分大小写,不能写成汉字&#34;宋体&#34;</span>
+</span></span><span style="display:flex;"><span>        ITextFontResolver fontResolver <span style="color:#f92672">=</span> (ITextFontResolver) renderer.<span style="color:#a6e22e">getSharedContext</span>().<span style="color:#a6e22e">getFontResolver</span>();
+</span></span><span style="display:flex;"><span>        fontResolver.<span style="color:#a6e22e">addFont</span>(<span style="color:#e6db74">&#34;fonts/simsun.ttc&#34;</span>, BaseFont.<span style="color:#a6e22e">IDENTITY_H</span>, BaseFont.<span style="color:#a6e22e">NOT_EMBEDDED</span>);
+</span></span><span style="display:flex;"><span>        fontResolver.<span style="color:#a6e22e">addFont</span>(<span style="color:#e6db74">&#34;fonts/SourceHanSansSC.otf&#34;</span>, BaseFont.<span style="color:#a6e22e">IDENTITY_H</span>, BaseFont.<span style="color:#a6e22e">NOT_EMBEDDED</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// fontResolver.addFont(&#34;fonts/HarmonyOS_Sans_SC_Medium.ttf&#34;, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// fontResolver.addFont(&#34;fonts/GB2312.ttf&#34;, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// fontResolver.addFont(&#34;fonts/fzhtjw.ttf&#34;, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//展现和输出pdf</span>
+</span></span><span style="display:flex;"><span>        renderer.<span style="color:#a6e22e">layout</span>();
+</span></span><span style="display:flex;"><span>        renderer.<span style="color:#a6e22e">createPDF</span>(out, <span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//根据参数集个数循环调用模板,追加到同一个pdf文档中</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//(注意:此处从1开始,因为第0是创建pdf,从1往后则向pdf中追加内容)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1; i <span style="color:#f92672">&lt;</span> listVars.<span style="color:#a6e22e">size</span>(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            String docAppend <span style="color:#f92672">=</span> generateDocString(configurer, templateName, listVars.<span style="color:#a6e22e">get</span>(i));
+</span></span><span style="display:flex;"><span>            renderer.<span style="color:#a6e22e">setDocumentFromString</span>(docAppend);
+</span></span><span style="display:flex;"><span>            renderer.<span style="color:#a6e22e">layout</span>();
+</span></span><span style="display:flex;"><span>            renderer.<span style="color:#a6e22e">writeNextDocument</span>(); <span style="color:#75715e">//写下一个pdf页面</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        renderer.<span style="color:#a6e22e">finishPDF</span>(); <span style="color:#75715e">//完成pdf写入</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * pdf下载
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param configurer   freemarker配置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param templateName freemarker模板名称(带后缀.ftl)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param listVars     模板参数集
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param response     HttpServletResponse
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param fileName     下载文件名称(带文件扩展名后缀)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">download</span>(FreeMarkerConfigurer configurer, String templateName, ReportDataDto data,
+</span></span><span style="display:flex;"><span>                                List<span style="color:#f92672">&lt;</span>Map<span style="color:#f92672">&lt;</span>String, Object<span style="color:#f92672">&gt;&gt;</span> listVars, HttpServletResponse response, String fileName) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 设置编码、文件ContentType类型、文件头、下载文件名</span>
+</span></span><span style="display:flex;"><span>        response.<span style="color:#a6e22e">setCharacterEncoding</span>(<span style="color:#e6db74">&#34;utf-8&#34;</span>);
+</span></span><span style="display:flex;"><span>        response.<span style="color:#a6e22e">setContentType</span>(<span style="color:#e6db74">&#34;multipart/form-data&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            response.<span style="color:#a6e22e">setHeader</span>(<span style="color:#e6db74">&#34;Content-Disposition&#34;</span>, <span style="color:#e6db74">&#34;attachment;fileName=&#34;</span> <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">new</span> String(fileName.<span style="color:#a6e22e">getBytes</span>(<span style="color:#e6db74">&#34;gb2312&#34;</span>), <span style="color:#e6db74">&#34;ISO8859-1&#34;</span>));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">catch</span> (UnsupportedEncodingException e) {
+</span></span><span style="display:flex;"><span>            LOGGER.<span style="color:#a6e22e">error</span>(e.<span style="color:#a6e22e">getMessage</span>(), e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (ServletOutputStream out <span style="color:#f92672">=</span> response.<span style="color:#a6e22e">getOutputStream</span>()) {
+</span></span><span style="display:flex;"><span>            generateAll(configurer, templateName, out, data, listVars);
+</span></span><span style="display:flex;"><span>            out.<span style="color:#a6e22e">flush</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            LOGGER.<span style="color:#a6e22e">error</span>(e.<span style="color:#a6e22e">getMessage</span>(), e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * pdf预览
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param configurer   freemarker配置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param templateName freemarker模板名称(带后缀.ftl)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param listVars     模板参数集
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param response     HttpServletResponse
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">preview</span>(FreeMarkerConfigurer configurer,
+</span></span><span style="display:flex;"><span>                               String templateName, ReportDataDto data,
+</span></span><span style="display:flex;"><span>                               List<span style="color:#f92672">&lt;</span>Map<span style="color:#f92672">&lt;</span>String, Object<span style="color:#f92672">&gt;&gt;</span> listVars, HttpServletResponse response) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (ServletOutputStream out <span style="color:#f92672">=</span> response.<span style="color:#a6e22e">getOutputStream</span>()) {
+</span></span><span style="display:flex;"><span>            generateAll(configurer, templateName, out, data, listVars);
+</span></span><span style="display:flex;"><span>            out.<span style="color:#a6e22e">flush</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            LOGGER.<span style="color:#a6e22e">error</span>(e.<span style="color:#a6e22e">getMessage</span>(), e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>参考：<a href="https://github.com/Rehoni/demo-pdf">Rehoni/demo-pdf: SpringBoot + FreeMarker + FlyingSaucer 实现pdf在线预览下载 (github.com)</a></p>
+<h3 id="maven打jar包字体出现fontssimsunttc-is-not-a-valid-ttf-file">maven打jar包字体出现：fonts/simsun.ttc is not a valid TTF file.</h3>
+<p>com.lowagie.text.DocumentException: fonts/simsun.ttc is not a valid TTF file.</p>
+<p>在pom文件中，将静态fonts字体资源配置如下：<strong>注意出现这种问题时，重新打包需要先clean！</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;resources&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;resource&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;directory&gt;</span>src/main/resources/<span style="color:#f92672">&lt;/directory&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;filtering&gt;</span>true<span style="color:#f92672">&lt;/filtering&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;excludes&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;exclude&gt;</span>fonts/*<span style="color:#f92672">&lt;/exclude&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;exclude&gt;</span>application${application.exclude}.yml<span style="color:#f92672">&lt;/exclude&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/excludes&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/resource&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;resource&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;directory&gt;</span>src/main/resources/<span style="color:#f92672">&lt;/directory&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;filtering&gt;</span>false<span style="color:#f92672">&lt;/filtering&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;includes&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;include&gt;</span>fonts/*<span style="color:#f92672">&lt;/include&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/includes&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/resource&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/resources&gt;</span>
+</span></span></code></pre></div><h3 id="解决javaxxmlparsersdocumentbuilderfactorysetfeatureljavalangstringzv异常">解决javax.xml.parsers.DocumentBuilderFactory.setFeature(Ljava/lang/String;Z)V异常</h3>
+<blockquote>
+<p>java.lang.AbstractMethodError:javax.xml.parsers.DocumentBuilderFactory.setFeature(Ljava/lang/String;Z)</p>
+</blockquote>
+<p>原因：不同jar包的多xml解析器冲突</p>
+<p>在使用DocumentBuilderFactory前加入这一行代码，后者的具体是哪个Impl需要根据源码打印的堆栈检索一下，确认引入正确的xml解析器。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>System.<span style="color:#a6e22e">setProperty</span>(<span style="color:#e6db74">&#34;javax.xml.parsers.DocumentBuilderFactory&#34;</span>, <span style="color:#e6db74">&#34;com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl&#34;</span>);
+</span></span></code></pre></div><h3 id="flying-saucer--itext--freemarker生成pdf表格跨页问题">flying-saucer + iText + Freemarker生成pdf表格跨页问题</h3>
+<p>通过样式控制，默认换行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#f92672">table</span> {
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">page-break-inside</span>:<span style="color:#66d9ef">auto</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tr</span> { 
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">page-break-inside</span>:<span style="color:#66d9ef">avoid</span>; 
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">page-break-after</span>:<span style="color:#66d9ef">auto</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="22freemarker">22、Freemarker</h2>
+<h3 id="listmap和split">listMap和split</h3>
+<p>rows.rows是个 List&lt;Map&lt;String,Object&raquo;</p>
+<p><code>&lt;#list hds?split(&quot;,&quot;) as title &gt;</code>split的简单使用</p>
+<p><code>(map[key])!&quot; &quot;</code>进行了判空，null则替换为空格</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;display: table; margin: 0 auto;font-size: 8px;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">table</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width: 186mm&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">tr</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">td</span>&gt;序号&lt;/<span style="color:#f92672">td</span>&gt;
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">&lt;</span>#list hds?split(&#34;,&#34;) as title &gt;
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#f92672">td</span>&gt;${title}&lt;/<span style="color:#f92672">td</span>&gt;
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">&lt;</span>/#list&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">tr</span>&gt;
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">&lt;</span>#list rows.rows as map&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">tr</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#f92672">td</span>&gt;${map[&#34;rowId&#34;]}&lt;/<span style="color:#f92672">td</span>&gt;
+</span></span><span style="display:flex;"><span>                <span style="color:#960050;background-color:#1e0010">&lt;</span>#list ids?split(&#34;,&#34;) as key &gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#f92672">td</span>&gt;${(map[key])!&#34; &#34;}&lt;/<span style="color:#f92672">td</span>&gt;
+</span></span><span style="display:flex;"><span>                <span style="color:#960050;background-color:#1e0010">&lt;</span>/#list&gt;
+</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#f92672">tr</span>&gt;
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">&lt;</span>/#list&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">table</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;
+</span></span></code></pre></div><p>参考：<a href="https://juejin.cn/post/6844903753657630728">FreeMarker对应各种数据结构解析 - 掘金 (juejin.cn)</a></p>
+<h2 id="23负载均衡定时任务加锁">23、负载均衡定时任务加锁</h2>
+<p>0、表结构，以金仓为例，其他数据库建表语句去<a href="https://github.com/lukas-krecan/ShedLock#readme">官方</a>找</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> SHEDLOCK
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>  NAME VARCHAR(<span style="color:#ae81ff">64</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>, 
+</span></span><span style="display:flex;"><span>  LOCK_UNTIL <span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>  LOCKED_AT <span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>, 
+</span></span><span style="display:flex;"><span>  LOCKED_BY VARCHAR(<span style="color:#ae81ff">255</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>, 
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (NAME)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p>1、pom.xml 引入依赖</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;groupId&gt;</span>net.javacrumbs.shedlock<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;artifactId&gt;</span>shedlock-spring<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;version&gt;</span>4.42.0<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;groupId&gt;</span>net.javacrumbs.shedlock<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;artifactId&gt;</span>shedlock-provider-jdbc-template<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;version&gt;</span>4.42.0<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><p>2、config 启用</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableScheduling</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableSchedulerLock</span>(defaultLockAtMostFor <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1m&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScheduleTaskConfig</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> LockProvider <span style="color:#a6e22e">lockProvider</span>(DataSource dataSource) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> JdbcTemplateLockProvider(
+</span></span><span style="display:flex;"><span>                JdbcTemplateLockProvider.<span style="color:#a6e22e">Configuration</span>.<span style="color:#a6e22e">builder</span>()
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">withJdbcTemplate</span>(<span style="color:#66d9ef">new</span> JdbcTemplate(dataSource))
+</span></span><span style="display:flex;"><span>                        <span style="color:#75715e">// .usingDbTime() // Works on Postgres, MySQL, MariaDb, MS SQL, Oracle, DB2, HSQL and H2</span>
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">build</span>()
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>3、定时任务上配置</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Scheduled</span>(fixedDelay <span style="color:#f92672">=</span> 3000L, initialDelay <span style="color:#f92672">=</span> 10000L)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@SchedulerLock</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;smsDistribute&#34;</span>, lockAtMostFor <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1m&#34;</span>, lockAtLeastFor <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;2s&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">smsDistribute</span>() {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;smsDistribute start, thread name: {} , time: {}.&#34;</span>, Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>(), DateUtil.<span style="color:#a6e22e">now</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// dosomething</span>
+</span></span><span style="display:flex;"><span>        log.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;smsDistribute end, thread name: {} , time: {}.&#34;</span>, Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>(), DateUtil.<span style="color:#a6e22e">now</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h2 id="24eureka-客户端不注册">24、Eureka 客户端不注册</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#75715e"># 不向注册中心注册 , 是否注册到服务中心 ， false = 不注册，true = 注册</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">eureka.client.register-with-eureka</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 不获取注册列表信息, 是否从eureka服务器获取注册信息 , false = 不获取，true = 获取</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">eureka.client.fetch-registry</span>: <span style="color:#66d9ef">false</span>
+</span></span></code></pre></div><h2 id="25spring-cloud-gateway-url重写">25、spring cloud gateway url重写</h2>
+<p>将/a/b/c指向到/f/c的控制示例：</p>
+<pre tabindex="0"><code>spring:
+  cloud:
+    gateway:
+      routes:
+      # =====================================
+      - id: rewritepath_route
+        uri: http://example.org
+        predicates:
+        - Path=/a/b/**
+        filters:
+        - RewritePath=/a/b/(?&lt;segment&gt;.*), /f/$\{segment}
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2022/vmware/">vmvare设置网络</a></span>
+  <span class="nav-next"><a href="/cn/2023/202301/">2023年01月钱月记：一如初见</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2022\/vmware\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2023\/202301\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

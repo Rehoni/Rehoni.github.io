@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>正则表达式规则 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="正则表达式规则 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="数字：^[0-9]*$n位的数字：^\d{n}$至少n位的数字：^\d{n,}$m-n位的数字：^\d{m,n}$零和非零开头的数字：^(0|[1-9][0-9]*)$非零开头的最多带两位小数的数字：^([1-9][0-9]*)&#43;(.[0-9]{1,2})?$带1-2位小数的正数或负数：^(\-)?\d&#43;(\.\d{1,2})?$正数、负数、和小 &amp;hellip;">
+      <meta property="og:description" content="数字：^[0-9]*$n位的数字：^\d{n}$至少n位的数字：^\d{n,}$m-n位的数字：^\d{m,n}$零和非零开头的数字：^(0|[1-9][0-9]*)$非零开头的最多带两位小数的数字：^([1-9][0-9]*)&#43;(.[0-9]{1,2})?$带1-2位小数的正数或负数：^(\-)?\d&#43;(\.\d{1,2})?$正数、负数、和小 &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5c%e6%ad%a3%e5%88%99%e8%a1%a8%e8%be%be%e5%bc%8f%e8%a7%84%e5%88%99.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>正则表达式规则</h1>
+
+
+<h3>rehoni / 
+2020-01-16</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h3 id="匹配数字">匹配数字</h3>
+<pre tabindex="0"><code>数字：^[0-9]*$
+n位的数字：^\d{n}$
+至少n位的数字：^\d{n,}$
+m-n位的数字：^\d{m,n}$
+零和非零开头的数字：^(0|[1-9][0-9]*)$
+非零开头的最多带两位小数的数字：^([1-9][0-9]*)+(.[0-9]{1,2})?$
+带1-2位小数的正数或负数：^(\-)?\d+(\.\d{1,2})?$
+正数、负数、和小数：^(\-|\+)?\d+(\.\d+)?$
+有两位小数的正实数：^[0-9]+(.[0-9]{2})?$
+有1~3位小数的正实数：^[0-9]+(.[0-9]{1,3})?$
+非零的正整数：^[1-9]\d*$ 或 ^([1-9][0-9]*){1,3}$ 或 ^\+?[1-9][0-9]*$
+非零的负整数：^\-[1-9][]0-9&#34;*$ 或 ^-[1-9]\d*$
+非负整数：^\d+$ 或 ^[1-9]\d*|0$
+非正整数：^-[1-9]\d*|0$ 或 ^((-\d+)|(0+))$
+非负浮点数：^\d+(\.\d+)?$ 或 ^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$
+非正浮点数：^((-\d+(\.\d+)?)|(0+(\.0+)?))$ 或 ^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$
+正浮点数：^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$ 或 ^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$
+负浮点数：^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$ 或 ^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$
+浮点数：^(-?\d+)(\.\d+)?$ 或 ^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$
+</code></pre><h3 id="匹配任意数量任意字符"><strong>匹配任意数量任意字符</strong></h3>
+<pre tabindex="0"><code> [\\s\\S]*
+</code></pre><h3 id="匹配电压等级"><strong>匹配电压等级</strong></h3>
+<pre tabindex="0"><code> [0-9][0-9]{0,2}kV
+</code></pre><h3 id="替换回车换行和空白符号"><strong>替换回车、换行和空白符号</strong></h3>
+<pre tabindex="0"><code></code></pre><h3 id="匹配字符串a和b之间的字符"><strong>匹配字符串a和b之间的字符</strong></h3>
+<pre tabindex="0"><code> (?&lt;=create table).*(?=primary key)
+</code></pre><h3 id="匹配中文字符"><strong>匹配中文字符</strong></h3>
+<pre tabindex="0"><code> [\\u4e00-\\u9fa5]  [^(\u4e00-\u9fa5)]
+</code></pre><h3 id="匹配双字节字符包括汉字在内"><strong>匹配双字节字符(包括汉字在内)</strong></h3>
+<pre tabindex="0"><code> [^\\x00-\\xff]
+</code></pre><h3 id="匹配空白行"><strong>匹配空白行</strong></h3>
+<p>用于删除空白行</p>
+<pre tabindex="0"><code> \\n\\s*\\r
+</code></pre><h3 id="匹配腾讯qq号"><strong>匹配腾讯QQ号</strong></h3>
+<pre tabindex="0"><code> [1-9][0-9]{4,} (腾讯QQ号从10000开始)
+</code></pre><h3 id="匹配ip地址"><strong>匹配ip地址</strong></h3>
+<pre tabindex="0"><code>\\d+\\.\\d+\\.\\d+\\.\\d+
+</code></pre><h3 id="匹配身份证"><strong>匹配身份证</strong></h3>
+<p>中国的身份证为15位或18位，不一定全为数字，需要勘误</p>
+<pre tabindex="0"><code>^\\d{15}|\\d{18}$
+</code></pre><h3 id="匹配国内电话号码"><strong>匹配国内电话号码</strong></h3>
+<ol>
+<li>手机号码</li>
+<li>电话号码</li>
+<li>国内电话号码</li>
+</ol>
+<pre tabindex="0"><code>^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$
+(&#34;XXX-XXXXXXX&#34;、&#34;XXXX-XXXXXXXX&#34;、&#34;XXX-XXXXXXX&#34;、&#34;XXX-XXXXXXXX&#34;、&#34;XXXXXXX&#34;和&#34;XXXXXXXX)：^(\\(\\d{3,4}-)|\\d{3.4}-)?\\d{7,8}$
+\\d{3}-\\d{8}|\\d{4}-\\d{7}
+</code></pre><h3 id="匹配邮政编码"><strong>匹配邮政编码</strong></h3>
+<pre tabindex="0"><code>[1-9]\\d{5}(?!\\d) (中国邮政编码为6位数字)
+</code></pre><h3 id="匹配email地址的正则表达式"><strong>匹配Email地址的正则表达式</strong></h3>
+<pre tabindex="0"><code> ^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$
+</code></pre><h3 id="匹配网址url的正则表达式"><strong>匹配网址URL的正则表达式</strong></h3>
+<pre tabindex="0"><code> [a-zA-z]+://[^\\s]*
+ ^http://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&amp;=]*)?$
+</code></pre><h3 id="匹配帐号是否合法字母开头允许5-16字节允许字母数字下划线"><strong>匹配帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)</strong></h3>
+<pre tabindex="0"><code> ^[a-zA-Z][a-zA-Z0-9_]$
+</code></pre><h3 id="限定密码"><strong>限定密码</strong></h3>
+<pre tabindex="0"><code> 密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)：^[a-zA-Z]\\w{5,17}$
+ 强密码(必须包含大小写字母和数字的组合，不能使用特殊字符，长度在8-10之间)：^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$ 
+</code></pre><h3 id="匹配特定数字"><strong>匹配特定数字</strong></h3>
+<p>具体应用时需要修正勘误，以防错误</p>
+<pre tabindex="0"><code> ^[1-9]\\d*$　 　 //匹配正整数
+ ^-[1-9]\\d*$ 　 //匹配负整数
+ ^-?[1-9]\\d*$　　 //匹配整数
+ ^[1-9]\\d*|0$　 //匹配非负整数（正整数 + 0）
+ ^-[1-9]\\d*|0$　　 //匹配非正整数（负整数 + 0）
+ ^[1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*$　　 //匹配正浮点数
+ ^-([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*)$　 //匹配负浮点数
+ ^-?([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*|0?\\.0+|0)$　 //匹配浮点数
+ ^[1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*|0?\\.0+|0$　　 //匹配非负浮点数（正浮点数 + 0）
+ ^(-([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*))|0?\\.0+|0$　　//匹配非正浮点数（负浮点数 + 0）
+</code></pre><h3 id="匹配特定字符串"><strong>匹配特定字符串：</strong></h3>
+<pre tabindex="0"><code> ^[A-Za-z]+$　　//匹配由26个英文字母组成的字符串
+ ^[A-Z]+$　　//匹配由26个英文字母的大写组成的字符串
+ ^[a-z]+$　　//匹配由26个英文字母的小写组成的字符串
+ ^[A-Za-z0-9]+$　　//匹配由数字和26个英文字母组成的字符串
+ ^\\w+$　　//匹配由数字、26个英文字母或者下划线组成的字符串
+</code></pre><h3 id="参考"><strong>参考</strong></h3>
+<p><a href="https://www.cnblogs.com/imsoft/p/5012193.html">使用正则表达式匹配任意字符包括空格和换行符</a></p>
+<p><a href="https://www.cnblogs.com/Akeke/p/6649589.html">常用正则表达式</a></p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2019/2020-01-04-fire3/">2019年12月财务实证</a></span>
+  <span class="nav-next"><a href="/cn/2020/chrome/">chrome浏览器相关</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2019\/2020-01-04-fire3\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/chrome\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

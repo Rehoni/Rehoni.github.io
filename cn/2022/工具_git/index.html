@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Git——常见问题 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Git——常见问题 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="git config user.name &amp;amp; user.email 2、本地已创建分支dev，要推送到远程分支 在远程分支中创建一个dev，利用 git push origin dev:dev 推送到远程，这样有一个坏处，如果未设置1️⃣中的user，则会以本地计算机或global中的信息推送过去。
+故可以考虑commit之后直接push，git会提醒你push没有上游，采用git &amp;hellip;">
+      <meta property="og:description" content="git config user.name &amp;amp; user.email 2、本地已创建分支dev，要推送到远程分支 在远程分支中创建一个dev，利用 git push origin dev:dev 推送到远程，这样有一个坏处，如果未设置1️⃣中的user，则会以本地计算机或global中的信息推送过去。
+故可以考虑commit之后直接push，git会提醒你push没有上游，采用git &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2022%5c%e5%b7%a5%e5%85%b7_git.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Git——常见问题</h1>
+
+
+<h3>rehoni / 
+2022-02-16</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="1查看和修改当前project的用户名密码">1、查看和修改当前project的用户名、密码</h2>
+<pre tabindex="0"><code>git config user.name &amp; user.email
+</code></pre><h2 id="2本地已创建分支dev要推送到远程分支"><strong>2、本地已创建分支dev，要推送到远程分支</strong></h2>
+<p>在远程分支中创建一个dev，利用 <code>git push origin dev:dev</code> 推送到远程，这样有一个坏处，如果未设置1️⃣中的user，则会以本地计算机或global中的信息推送过去。</p>
+<p>故可以考虑commit之后直接push，git会提醒你push没有上游，采用<code>git branch -u origin/dev</code>来设置本地dev的上游为远程的origin/dev。</p>
+<h2 id="3本地仓库推送到远程github">3、本地仓库推送到远程GitHub</h2>
+<p>新建本地仓库关联</p>
+<ol>
+<li>在需要建立本地仓库的位置调出git bash</li>
+<li>输入git init，初始化本地仓库</li>
+<li>输入git remote add origin 仓库地址， 添加远程仓库</li>
+<li>如果远程仓库中有提交历史，输入git pull origin master，将提交历史和文件拉到本地仓库，有冲突解决冲突</li>
+<li>输入git add，git commit，将文件存入本地仓库</li>
+<li>输入git push -u origin master，将之前已commit的本地仓库文件推到远程仓库</li>
+</ol>
+<p>已有本地仓库关联</p>
+<ol>
+<li>在需要关联的本地仓库位置调出git bash</li>
+<li>没有已关联的远程仓库则输入git remote add origin 仓库地址， 添加远程仓库，有则输入 git remote set-url origin 新地址</li>
+<li>如果远程仓库中有提交历史，本地仓库也有，则输入git pull origin master &ndash;allow-unrelated-histories，合并两个项目不关联的历史</li>
+<li>输入git push -u origin master，将本地仓库的commit推到远程仓库</li>
+</ol>
+<p>注：origin和master根据需要替换，一般创建远程仓库时默认仓库别名是origin，默认分支是master。</p>
+<p>再记录一下https设置用户名，密码步骤，不用每次有远程操作都要输入：</p>
+<p>在本地仓库中调出git bash，输入git config credential.helper store，再输入git push就可以了</p>
+<p><strong>合并分支到master上</strong></p>
+<p><a href="https://blog.csdn.net/boysky0015/article/details/78185879">https://blog.csdn.net/boysky0015/article/details/78185879</a></p>
+<h2 id="4关于记住密码多项目不同用户"><strong>4、关于记住密码、多项目不同用户</strong></h2>
+<pre tabindex="0"><code> git config credential.helper store
+</code></pre><h2 id="5更正git历史修改commit记录">5、更正Git历史修改commit记录</h2>
+<ol>
+<li>
+<p>打开Git bash</p>
+</li>
+<li>
+<p>创建存储库的全新裸克隆</p>
+<pre tabindex="0"><code> git clone --bare &lt;https://github.com/user/repo.git&gt;
+ cd repo.git
+</code></pre></li>
+<li>
+<p>复制粘贴脚本，替换变量</p>
+<ol>
+<li>OLD_EMAIL</li>
+<li>CORRECT_NAME</li>
+<li>CORRECT_EMAIL</li>
+</ol>
+<pre tabindex="0"><code> #!/bin/sh
+
+ git filter-branch --env-filter &#39;
+
+ OLD_EMAIL=&#34;your-old-email@example.com&#34;
+ CORRECT_NAME=&#34;Your Correct Name&#34;
+ CORRECT_EMAIL=&#34;your-correct-email@example.com&#34;
+
+ if [ &#34;$GIT_COMMITTER_EMAIL&#34; = &#34;$OLD_EMAIL&#34; ]
+ then
+     export GIT_COMMITTER_NAME=&#34;$CORRECT_NAME&#34;
+     export GIT_COMMITTER_EMAIL=&#34;$CORRECT_EMAIL&#34;
+ fi
+ if [ &#34;$GIT_AUTHOR_EMAIL&#34; = &#34;$OLD_EMAIL&#34; ]
+ then
+     export GIT_AUTHOR_NAME=&#34;$CORRECT_NAME&#34;
+     export GIT_AUTHOR_EMAIL=&#34;$CORRECT_EMAIL&#34;
+ fi
+ &#39; --tag-name-filter cat -- --branches --tags
+</code></pre></li>
+<li>
+<p>执行脚本</p>
+</li>
+<li>
+<p>查看新的Git历史记录是否有错误。</p>
+</li>
+<li>
+<p>将更正的历史记录推送到GitHub：</p>
+<pre tabindex="0"><code> git push --force --tags origin &#39;refs/heads/*&#39;
+</code></pre></li>
+<li>
+<p>清理临时克隆</p>
+<pre tabindex="0"><code> cd ..
+ rm -rf repo.git
+</code></pre></li>
+</ol>
+<h2 id="5拉取远程分支代码"><strong>5、拉取远程分支代码</strong></h2>
+<p><code>git clone</code>了<code>master</code>分支的代码下来，但是需要拉取其他远程分支的代码，采用<code>git branch -r</code>查看远程分支列表，如想要拉取，则可以通过<code>git branch -t origin/dev</code>或者<code>git checkout -b dev origin/dev</code>拉取同远程分支名同名的分支到本地。</p>
+<h2 id="6合并仓库并且保留commit-log-message记录"><strong>6、合并仓库并且保留commit log message记录</strong></h2>
+<ol>
+<li>将repo1作为远程仓库，添加到repo2中，设置别名为other</li>
+<li>从repo1仓库中抓取数据到本仓库</li>
+<li>将repo1仓库中抓取的master分支作为新分支checkout到本地，新分支命名为repo1</li>
+<li>切换为repo2的master分支</li>
+<li>将repo1合并入master分支</li>
+</ol>
+<p>注意：产生的文件冲突需要解决提交后才能merge，merge时需要添加参数<code>--allow-unrelated-histories</code></p>
+<pre tabindex="0"><code>   git remote add other ../repo1/
+   git fetch other
+   git checkout -b repo1 other/master
+   git checkout master
+   git merge repo1 --allow-unrelated-histories
+</code></pre><h2 id="7递归子模块"><strong>7、递归子模块</strong></h2>
+<p><a href="https://www.cnblogs.com/hexiaobao/p/8134829.html">https://www.cnblogs.com/hexiaobao/p/8134829.html</a></p>
+<p><a href="https://www.dokyme.cn/index.php/2017/09/04/git/">https://www.dokyme.cn/index.php/2017/09/04/git/</a></p>
+<h2 id="8分支的创建和合并-十分详细"><strong>8、分支的创建和合并 (十分详细）</strong></h2>
+<p><a href="https://git-scm.com/book/zh/v1/Git-">https://git-scm.com/book/zh/v1/Git-</a>分支-分支的新建与合并</p>
+<p><a href="https://www.dokyme.cn/index.php/2017/09/07/git-2/">https://www.dokyme.cn/index.php/2017/09/07/git-2/</a></p>
+<h2 id="9取消一个目录的git化"><strong>9、取消一个目录的git化</strong></h2>
+<pre tabindex="0"><code>rm -rf .git
+</code></pre><p>将git分支branch合并到主干master上https://blog.csdn.net/sinat_39150454/article/details/77816179</p>
+<p>修改git的config配置http://daemon369.github.io/git/2015/03/11/setting-email-in-git</p>
+<p>Git bash配置代理</p>
+<h2 id="10同一个-github-账号之多台电脑间协同开发"><strong>10、同一个 Github 账号之多台电脑间协同开发</strong></h2>
+<p><a href="https://blog.csdn.net/u013477973/article/details/80820882">https://blog.csdn.net/u013477973/article/details/80820882</a></p>
+<h2 id="11git-bash快捷键">11、Git bash快捷键</h2>
+<p><a href="https://blog.csdn.net/xianghongai/article/details/79029357">https://blog.csdn.net/xianghongai/article/details/79029357</a></p>
+<h2 id="12git变基操作">12、Git变基操作</h2>
+<p><a href="https://git-scm.com/book/zh/v2/Git-">https://git-scm.com/book/zh/v2/Git-</a>分支-变基</p>
+<h2 id="13统计git提交次数区域时间内提交次数提交行数"><strong>13、统计git提交次数+区域时间内提交次数+提交行数</strong></h2>
+<p>统计git提交次数: 所有人的所有提交次数，会展示所有的提交人 提交次数详情。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> git log | grep <span style="color:#e6db74">&#34;^Author: &#34;</span> | awk <span style="color:#e6db74">&#39;{print $2}&#39;</span> | sort | uniq -c | sort -k1,1nr
+</span></span></code></pre></div><p>统计时间内提交次数。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> git log --author<span style="color:#f92672">=</span>yourname --since<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2017-08-01&#34;</span> --no-merges | grep -e <span style="color:#e6db74">&#39;commit [a-zA-Z0-9]*&#39;</span> | wc -l
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>  git log --author<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;罗皓&#34;</span> --since<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2023-01-01&#34;</span> --no-merges | grep -e <span style="color:#e6db74">&#39;commit [a-zA-Z0-9]*&#39;</span> | wc -l
+</span></span></code></pre></div><p>统计提交行数：根据1展示出详情，可以填入username。将展示该用户增加行数，删减行数，剩余行数。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log --author<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;罗皓&#34;</span> --since<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2023-01-01&#34;</span> --pretty<span style="color:#f92672">=</span>tformat: --numstat | awk <span style="color:#e6db74">&#39;{ add += $1; subs += $2; loc += $1 - $2 } END { printf &#34;added lines: %s, removed lines: %s, total lines: %s\\n&#34;, add, subs, loc }&#39;</span> -
+</span></span></code></pre></div><h2 id="14pull-分支报错-fatal-need-to-specify-how-to-reconcile-divergent-branches">14、pull 分支报错 fatal: Need to specify how to reconcile divergent branches.</h2>
+<p>报错信息</p>
+<pre tabindex="0"><code>➜  fisher git:(test) git pull origin test
+From git.woa.com:wxg-bigdata/fisher
+ * branch              test       -&gt; FETCH_HEAD
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace &#34;git config&#34; with &#34;git config --global&#34; to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+</code></pre><p>分析：这是由于你拉取pull分支前，进行过merge合并更新分支操作，导致版本不一致，没有<strong>设定策略</strong>。</p>
+<p><strong>第一种解决方法：</strong></p>
+<ul>
+<li>执行<code>git config pull.rebase false</code></li>
+<li>默认将pull下来的代码与现有改动的代码进行合并</li>
+<li>但是可能会造成代码冲突，需要处理下这个问题</li>
+</ul>
+<p><strong>第二种解决方法：回退到合并之前的代码，在进行pull拉取最新代码</strong></p>
+<blockquote>
+<p>注意：这种解决方法适用于2个分支之间的merge操作，比如test分支回退版本，那test上合并的代码会丢失，等你test分支能成功pull后，需要重新merge开发分支上的代码合并到test上。所以记得保留这个版本的代码再回退到上一个版本，等pull成功，再重新合并代码</p>
+</blockquote>
+<ul>
+<li>查看最近3次提交的历史版本</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>➜  fisher git:<span style="color:#f92672">(</span>test<span style="color:#f92672">)</span> git log -3			<span style="color:#75715e"># 查看最近3次提交的历史版本</span>
+</span></span><span style="display:flex;"><span>commit da20b931f4e04a61f0f9b4e4726a2e907e566fc9 <span style="color:#f92672">(</span>HEAD -&gt; test<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Merge: 33df706e 6018c237
+</span></span><span style="display:flex;"><span>Author: v_isiliu &lt;v_isiliu@tencent.com&gt;
+</span></span><span style="display:flex;"><span>Date:   Wed Jan <span style="color:#ae81ff">19</span> 09:58:40 <span style="color:#ae81ff">2022</span> +0800
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Merge branch <span style="color:#e6db74">&#39;feture/tapd#870810123&#39;</span> into test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>commit 6018c237278f5265e78314049d6642e493ebdb5e <span style="color:#f92672">(</span>feture/tapd#870810123<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Author: v_isiliu &lt;v_isiliu@tencent.com&gt;
+</span></span><span style="display:flex;"><span>Date:   Wed Jan <span style="color:#ae81ff">19</span> 09:57:50 <span style="color:#ae81ff">2022</span> +0800
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    feat: 发布版本<span style="color:#e6db74">&#39;feture/tapd#870810123&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>commit 33df706e780d10af6435bda1fee85430604eebfc
+</span></span><span style="display:flex;"><span>Merge: 1d06cd1f 7589979d
+</span></span><span style="display:flex;"><span>Author: v_isiliu &lt;v_isiliu@tencent.com&gt;
+</span></span><span style="display:flex;"><span>Date:   Tue Jan <span style="color:#ae81ff">18</span> 16:11:21 <span style="color:#ae81ff">2022</span> +0800
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Merge branch <span style="color:#e6db74">&#39;feature/date#0118&#39;</span> into test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">12345678910111213141516171819202122</span>
+</span></span></code></pre></div><ul>
+<li>回退到上一个版本</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>➜  fisher git:<span style="color:#f92672">(</span>test<span style="color:#f92672">)</span> git reset --hard 33df706e780d10af6435bda1fee85430604eebfc
+</span></span><span style="display:flex;"><span>HEAD is now at 33df706e Merge branch <span style="color:#e6db74">&#39;feature/date#0118&#39;</span> into test
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">12</span>
+</span></span></code></pre></div><ul>
+<li>再进行pull更新分支</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>➜  fisher git:<span style="color:#f92672">(</span>test<span style="color:#f92672">)</span> git pull origin test
+</span></span></code></pre></div><h2 id="15git分支管理">15、git分支管理</h2>
+<p>作者：阮一峰</p>
+<p><strong>一、主分支Master</strong></p>
+<p>首先，代码库应该有一个、且仅有一个主分支。所有提供给用户使用的正式版本，都在这个主分支上发布。</p>
+<p>Git主分支的名字，默认叫做Master。它是自动建立的，版本库初始化以后，默认就是在主分支在进行开发。</p>
+<p><strong>二、开发分支Develop</strong></p>
+<p>主分支只用来分布重大版本，日常开发应该在另一条分支上完成。我们把开发用的分支，叫做Develop。</p>
+<p><img src="/images/bg2012070504.png" alt="img"></p>
+<p>这个分支可以用来生成代码的最新隔夜版本（nightly）。如果想正式对外发布，就在Master分支上，对Develop分支进行&quot;合并&quot;（merge）。</p>
+<p>Git创建Develop分支的命令：</p>
+<blockquote>
+<p>　　　　　　　　git checkout -b develop master</p>
+</blockquote>
+<p>将Develop分支发布到Master分支的命令：</p>
+<blockquote>
+<p>　　　　　　　　# 切换到Master分支</p>
+<p>　　　　　　　　git checkout master</p>
+<p>　　　　　　　　# 对Develop分支进行合并</p>
+<p>　　　　　　　　git merge &ndash;no-ff develop</p>
+</blockquote>
+<p>这里稍微解释一下，上一条命令的&ndash;no-ff参数是什么意思。默认情况下，Git执行&quot;快进式合并&quot;（fast-farward merge），会直接将Master分支指向Develop分支。</p>
+<p><img src="/images/bg2012070505.png" alt="img"></p>
+<p>使用&ndash;no-ff参数后，会执行正常合并，在Master分支上生成一个新节点。为了保证版本演进的清晰，我们希望采用这种做法。关于合并的更多解释，请参考Benjamin Sandofsky的<a href="https://sandofsky.com/blog/git-workflow.html">《Understanding the Git Workflow》</a>。</p>
+<p><img src="/images/bg2012070506.png" alt="img"></p>
+<p><strong>三、临时性分支</strong></p>
+<p>前面讲到版本库的两条主要分支：Master和Develop。前者用于正式发布，后者用于日常开发。其实，常设分支只需要这两条就够了，不需要其他了。</p>
+<p>但是，除了常设分支以外，还有一些临时性分支，用于应对一些特定目的的版本开发。临时性分支主要有三种：</p>
+<blockquote>
+<p>　　     * 功能（feature）分支</p>
+<p>　　       * 预发布（release）分支</p>
+<p>　　            * 修补bug（fixbug）分支</p>
+</blockquote>
+<p>这三种分支都属于临时性需要，使用完以后，应该删除，使得代码库的常设分支始终只有Master和Develop。</p>
+<p><strong>四、 功能分支</strong></p>
+<p>接下来，一个个来看这三种&quot;临时性分支&quot;。</p>
+<p>第一种是功能分支，它是为了开发某种特定功能，从Develop分支上面分出来的。开发完成后，要再并入Develop。</p>
+<p><img src="/images/bg2012070507.png" alt="img"></p>
+<p>功能分支的名字，可以采用feature-*的形式命名。</p>
+<p>创建一个功能分支：</p>
+<blockquote>
+<p>　　　　　　　　git checkout -b feature-x develop</p>
+</blockquote>
+<p>开发完成后，将功能分支合并到develop分支：</p>
+<blockquote>
+<p>　　　　　　　　git checkout develop</p>
+<p>　　　　　　　　git merge &ndash;no-ff feature-x</p>
+</blockquote>
+<p>删除feature分支：</p>
+<blockquote>
+<p>　　　　　　　　git branch -d feature-x</p>
+</blockquote>
+<p><strong>五、预发布分支</strong></p>
+<p>第二种是预发布分支，它是指发布正式版本之前（即合并到Master分支之前），我们可能需要有一个预发布的版本进行测试。</p>
+<p>预发布分支是从Develop分支上面分出来的，预发布结束以后，必须合并进Develop和Master分支。它的命名，可以采用release-*的形式。</p>
+<p>创建一个预发布分支：</p>
+<blockquote>
+<p>　　　　　　　　git checkout -b release-1.2 develop</p>
+</blockquote>
+<p>确认没有问题后，合并到master分支：</p>
+<blockquote>
+<p>　　　　　　　　git checkout master</p>
+<p>　　　　　　　　git merge &ndash;no-ff release-1.2</p>
+<p>　　　　　　对合并生成的新节点，做一个标签</p>
+<p>　　　　　　　　git tag -a 1.2</p>
+</blockquote>
+<p>再合并到develop分支：</p>
+<blockquote>
+<p>　　　　　　　　git checkout develop</p>
+<p>　　　　　　　　git merge &ndash;no-ff release-1.2</p>
+</blockquote>
+<p>最后，删除预发布分支：</p>
+<blockquote>
+<p>　　　　　　　　git branch -d release-1.2</p>
+</blockquote>
+<p><strong>六、修补bug分支</strong></p>
+<p>最后一种是修补bug分支。软件正式发布以后，难免会出现bug。这时就需要创建一个分支，进行bug修补。</p>
+<p>修补bug分支是从Master分支上面分出来的。修补结束以后，再合并进Master和Develop分支。它的命名，可以采用fixbug-*的形式。</p>
+<p><img src="/images/bg2012070508.png" alt="img"></p>
+<p>创建一个修补bug分支：</p>
+<blockquote>
+<p>　　　　　　　　git checkout -b fixbug-0.1 master</p>
+</blockquote>
+<p>修补结束后，合并到master分支：</p>
+<blockquote>
+<p>　　　　　　　　git checkout master</p>
+<p>　　　　　　　　git merge &ndash;no-ff fixbug-0.1</p>
+<p>　　　　　　　　git tag -a 0.1.1</p>
+</blockquote>
+<p>再合并到develop分支：</p>
+<blockquote>
+<p>　　　　　　　　git checkout develop</p>
+<p>　　　　　　　　git merge &ndash;no-ff fixbug-0.1</p>
+</blockquote>
+<p>最后，删除&quot;修补bug分支&quot;：</p>
+<blockquote>
+<p>　　　　　　　　git branch -d fixbug-0.1</p>
+</blockquote>
+<p>（完）</p>
+<h2 id="16修改远程分支名称">16、修改远程分支名称</h2>
+<blockquote>
+<p>注：修改远程分支先拉下来再进行以下步骤</p>
+</blockquote>
+<ol>
+<li>旧分支：oldBranch</li>
+<li>新分支：newBranch</li>
+</ol>
+<blockquote>
+<p>步骤：</p>
+</blockquote>
+<ol>
+<li>
+<p>先将本地分支重命名</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git branch -m oldBranch newBranch
+</span></span></code></pre></div></li>
+<li>
+<p>删除远程分支（远端无此分支则跳过该步骤）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git push --delete origin oldBranch
+</span></span></code></pre></div></li>
+<li>
+<p>将重命名后的分支推到远端</p>
+<pre tabindex="0"><code>git push origin newBranch
+</code></pre></li>
+<li>
+<p>把修改后的本地分支与远程分支关联</p>
+<pre tabindex="0"><code>git branch --set-upstream-to origin/newBranch
+</code></pre></li>
+</ol>
+<h2 id="17git回滚">17、git回滚</h2>
+<h3 id="1回滚到之前某一版本且该版本后的提交都不需要">1、回滚到之前某一版本且该版本后的提交都不需要</h3>
+<p>1）首先使用git log命令查看版本号(commit后就是版本号)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">commit</span> <span style="color:#ae81ff">91089</span>df9cc4581d82d454a16fc15b8501d239128
+</span></span></code></pre></div><p>2）git reset &ndash;hard 版本号 回滚到之前某版本，此时本地已经回滚，远程仓库还未回滚</p>
+<p>3）git push -f 回滚远程仓库版本</p>
+<h3 id="2回滚到之前某一版本但该版本后的提交仍需保留">2、回滚到之前某一版本但该版本后的提交仍需保留</h3>
+<p>1）首先使用git log命令查看版本号(commit后就是版本号)</p>
+<p>2）git revert -n 版本号回滚到之前版本</p>
+<p>3） git commit &ldquo;备注信息&rdquo; 提交</p>
+<p>4）git push 推送至远程仓库</p>
+<h3 id="3git-commit但未push-把修改撤销到工作区中">3、git commit但未push 把修改撤销到工作区中</h3>
+<p>使用 git reset &ndash;soft HEAD^ 命令，撤销了commit 代码依然保留</p>
+<p><a href="https://blog.csdn.net/zmm0413/article/details/108078400">git回滚到之前某次提交（本地+远程）_Ta是蒙蒙的博客-CSDN博客_git代码回滚到上一次提交</a></p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2022/%E7%97%9B%E9%A3%8E%E5%98%8C%E5%91%A4%E9%A5%AE%E9%A3%9F%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">痛风嘌呤饮食注意事项</a></span>
+  <span class="nav-next"><a href="/cn/2022/%E5%B7%A5%E5%85%B7_vscode/">VsCode小技巧</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2022\/%E7%97%9B%E9%A3%8E%E5%98%8C%E5%91%A4%E9%A5%AE%E9%A3%9F%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2022\/%E5%B7%A5%E5%85%B7_vscode\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

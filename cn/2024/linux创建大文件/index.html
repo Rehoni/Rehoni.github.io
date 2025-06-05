@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Linux——创建大文件 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Linux——创建大文件 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="先说结论
+dd 和 truncate 创建的文件是稀疏文件。在计算机世界中，稀疏文件是一种特殊文件，具有不同的表观文件大小（它们可以扩展到的最大大小）和真实文件大小（为磁盘上的数据分配了多少空间）。
+fallocate 命令则不会创建稀疏文件，而且它的速度更快，这也是我比较推荐使用 fallocate 创建大文件的原因。
+dd命令，用于复制和转换文件。创建一个名为 rumenz.img 的 2 &amp;hellip;">
+      <meta property="og:description" content="先说结论
+dd 和 truncate 创建的文件是稀疏文件。在计算机世界中，稀疏文件是一种特殊文件，具有不同的表观文件大小（它们可以扩展到的最大大小）和真实文件大小（为磁盘上的数据分配了多少空间）。
+fallocate 命令则不会创建稀疏文件，而且它的速度更快，这也是我比较推荐使用 fallocate 创建大文件的原因。
+dd命令，用于复制和转换文件。创建一个名为 rumenz.img 的 2 &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2024%5clinux%e5%88%9b%e5%bb%ba%e5%a4%a7%e6%96%87%e4%bb%b6.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Linux——创建大文件</h1>
+
+
+<h3>rehoni / 
+2024-08-05</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p><strong>先说结论</strong></p>
+<p>dd 和 truncate 创建的文件是稀疏文件。在计算机世界中，稀疏文件是一种特殊文件，具有不同的表观文件大小（它们可以扩展到的最大大小）和真实文件大小（为磁盘上的数据分配了多少空间）。</p>
+<p>fallocate 命令则不会创建稀疏文件，而且它的速度更快，这也是我比较推荐使用 fallocate 创建大文件的原因。</p>
+<p><strong>dd命令</strong>，用于复制和转换文件。创建一个名为 rumenz.img 的 2 GB 大小的文本文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/zero of<span style="color:#f92672">=</span>rumenz.img bs<span style="color:#f92672">=</span>2G count<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>可以根据需要来更改块大小和块数。例如，可以使用 bs=1M 和 count=1024 来获得 1024 Mb 的文件。</p>
+<p><strong>truncate命令</strong>，缩减或扩充指定文件的大小为指定值。参数所指定的文件如果不存在，那么该命令会创建这个文件。</p>
+<p>truncate 命令将一个文件缩小或者扩展到所需大小。使用 -s 选项来指定文件的大小。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>truncate -s 2G rumenz.img
+</span></span></code></pre></div><p>fallocate命令，fallocate用于将块预分配给文件。对于支持fallocate系统调用的文件系统，这可以通过分配块并将其标记为未初始化来快速完成，因此不需要对数据块进行I / O操作。这是创建文件而不是用零填充的更快的方法。大文件几乎可以立即创建，而不必等待任何I / O操作完成。在以下文件系统上支持fallocate系统调用：btrfs，ext4，ocfs2和xfs文件系统（自内核版本v2.6.31起）。</p>
+<p>创建一个 1 GB 的文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>fallocate -l 1G rumenz.img
+</span></span></code></pre></div><p>使用ls -lh rumenz.img查看生成的文件。</p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2024/fire07/">2024年07月钱月记：时间飞逝、一事无成</a></span>
+  <span class="nav-next"><a href="/cn/2024/0806%E4%B8%8D%E8%AE%A9%E9%A5%AE%E9%A3%9F%E4%B9%A0%E6%83%AF%E8%A2%AB%E8%B5%84%E6%9C%AC%E4%BE%B5%E8%9A%80%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8Ftips/">不让饮食习惯被资本侵蚀的一些小tips</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2024\/fire07\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2024\/0806%E4%B8%8D%E8%AE%A9%E9%A5%AE%E9%A3%9F%E4%B9%A0%E6%83%AF%E8%A2%AB%E8%B5%84%E6%9C%AC%E4%BE%B5%E8%9A%80%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8Ftips\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

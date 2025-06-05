@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Linux——统计文件夹下文件的个数 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Linux——统计文件夹下文件的个数 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="如果运行ls -l会输出当前目录下的文件以及目录的信息。那么只要在当前目录下的输出结果中，统计出是文件的行的数目，就可以统计出当前目录下的文件个数，所以要找出命令ls -l输出的文件的信息与目录的信息的不同之处。
+不难看出，如果是文件的话，该行的字符串信息的第一个字符显示的是“-”，如果是目录的话，该行的字符的第一个显示的是&amp;quot;d&amp;quot;，意即directory，找到这两者之间的区别， &amp;hellip;">
+      <meta property="og:description" content="如果运行ls -l会输出当前目录下的文件以及目录的信息。那么只要在当前目录下的输出结果中，统计出是文件的行的数目，就可以统计出当前目录下的文件个数，所以要找出命令ls -l输出的文件的信息与目录的信息的不同之处。
+不难看出，如果是文件的话，该行的字符串信息的第一个字符显示的是“-”，如果是目录的话，该行的字符的第一个显示的是&amp;quot;d&amp;quot;，意即directory，找到这两者之间的区别， &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240611142131498.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2021%5c%e7%bb%9f%e8%ae%a1%e6%96%87%e4%bb%b6%e5%a4%b9%e4%b8%8b%e6%96%87%e4%bb%b6%e6%95%b0%e9%87%8f.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Linux——统计文件夹下文件的个数</h1>
+
+
+<h3>rehoni / 
+2021-06-24</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h3 id="统计文件夹下文件的个数">统计文件夹下文件的个数</h3>
+<p>如果运行<code>ls -l</code>会输出当前目录下的文件以及目录的信息。那么只要在当前目录下的输出结果中，统计出是文件的行的数目，就可以统计出当前目录下的文件个数，所以要找出命令ls -l输出的文件的信息与目录的信息的不同之处。</p>
+<p>不难看出，如果是文件的话，该行的字符串信息的第一个字符显示的是“-”，如果是目录的话，该行的字符的第一个显示的是&quot;d&quot;，意即directory，找到这两者之间的区别，运行能够判别第一个字符的命令.</p>
+<p><code>ls -l</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240611142131498.png" alt="image-20240611142131498"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls -l | grep <span style="color:#e6db74">&#34;^-&#34;</span>
+</span></span></code></pre></div><p>其中“^-”是一个正则化项，表示字符串的第一个字符，提取第一个字符为<code>-</code>的，就是文件。</p>
+<p>运行两次管道命令，即<code>ls -l | grep “^-” | wc -l</code>，就能统计文件夹下文件的个数</p>
+<h3 id="统计文件夹下目录的个数">统计文件夹下目录的个数</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls -l | grep <span style="color:#e6db74">&#34;^d&#34;</span> | wc -l
+</span></span></code></pre></div><h3 id="统计文件夹下文件个数包括子文件">统计文件夹下文件个数，包括子文件</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls -lR | grep <span style="color:#e6db74">&#34;^-&#34;</span>| wc -l
+</span></span></code></pre></div><h3 id="统计文件夹下目录个数包括子目录">统计文件夹下目录个数，包括子目录</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls -lR | grep <span style="color:#e6db74">&#34;^d&#34;</span>| wc -l
+</span></span></code></pre></div><h3 id="递归统计出文件夹下所有文件的数目">递归统计出文件夹下所有文件的数目</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>find ./ -type f| wc -l
+</span></span></code></pre></div><h3 id="递归统计出文件夹下所有子文件夹的数目">递归统计出文件夹下所有子文件夹的数目</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>find ./ -type d | wc -l <span style="color:#75715e"># 注意，这里面包含了当前文件夹，所以统计出来减一即可</span>
+</span></span></code></pre></div><h3 id="参考">参考</h3>
+<p><a href="https://blog.csdn.net/zhizhengguan/article/details/108260761">Linux上统计文件夹下文件个数以及目录个数_OceanStar的博客-CSDN博客_linux 统计目录下文件个数</a></p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2021/202105/">2021年05月财务实证</a></span>
+  <span class="nav-next"><a href="/cn/2021/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6/">Linux——批量删除文件</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2021\/202105\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2021\/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

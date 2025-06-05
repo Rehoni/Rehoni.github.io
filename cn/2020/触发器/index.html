@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle——触发器写法 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Oracle——触发器写法 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5c%e8%a7%a6%e5%8f%91%e5%99%a8.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle——触发器写法</h1>
+
+
+<h3>Rehoni / 
+2020-09-01</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h3 id="oracle触发器"><strong>Oracle触发器</strong></h3>
+<pre tabindex="0"><code> create or replace trigger update_insert_trigger
+     after insert or update
+     on GEA_DM_FUNCTION_LOCATION
+     for each row
+ begin
+     if inserting then
+         if :NEW.RUNNING_STATE&lt;&gt;&#39;1&#39; then
+             DBMS_OUTPUT.PUT_LINE(&#39;是运行态=1,记录已经成功插入gea，执行插入clean&#39;);
+             insert into ELECTRANS.CLEAND_EMS_DEVICE(CLEAND_EMS_DEVICE.ID,
+                                                     CLEAND_EMS_DEVICE.FL_NAME,
+                                                     CLEAND_EMS_DEVICE.FL_CODE,
+                                                     CLEAND_EMS_DEVICE.VINDICATE_OID,
+                                                     SORT_ID,
+                                                     CLEAND_EMS_DEVICE.BASE_VOLTAGE_ID,
+                                                     CLEAND_EMS_DEVICE.LONGITUDE,
+                                                     CLEAND_EMS_DEVICE.LATITUDE,
+                                                     CLEAND_EMS_DEVICE.FULL_PATH,
+                                                     RUNMANAG_OID)
+             values (:NEW.CLASSIFY_ID,
+                     :NEW.FL_NAME,
+                     :NEW.FL_CODE,
+                     :NEW.VINDICATE_OID,
+                     :NEW.CLASSIFY_ID,
+                     :NEW.BASE_VOLTAGE_ID,
+                     :NEW.LONGITUDE,
+                     :NEW.LATITUDE,
+                     :NEW.FULL_PATH,
+                     :NEW.RUNMANAGE_OID);
+         else
+                         DBMS_OUTPUT.PUT_LINE(:NEW.RUNNING_CODE);
+             DBMS_OUTPUT.PUT_LINE(&#39;不是运行态！=1,记录已经成功插入gea，不执行插入clean&#39;);
+         end if;
+     elsif updating then
+         if :NEW.RUNNING_STATE = 1 then
+             DBMS_OUTPUT.PUT_LINE(&#39;是运行态=1,记录已经成功插入gea，执行插入clean&#39;);
+             update ELECTRANS.CLEAND_EMS_DEVICE
+             set CLEAND_EMS_DEVICE.FL_NAME         = :NEW.FL_NAME,
+                 CLEAND_EMS_DEVICE.FL_CODE         = :NEW.FL_CODE,
+                 CLEAND_EMS_DEVICE.VINDICATE_OID   = :NEW.VINDICATE_OID,
+                 SORT_ID                           = :NEW.CLASSIFY_ID,
+                 CLEAND_EMS_DEVICE.BASE_VOLTAGE_ID = :NEW.BASE_VOLTAGE_ID,
+                 CLEAND_EMS_DEVICE.LONGITUDE       = :NEW.LONGITUDE,
+                 CLEAND_EMS_DEVICE.LATITUDE        = :NEW.LATITUDE,
+                 CLEAND_EMS_DEVICE.FULL_PATH       = :NEW.FULL_PATH,
+                 RUNMANAG_OID                      = :NEW.RUNMANAGE_OID
+             where CLEAND_EMS_DEVICE.ID = :NEW.CLASSIFY_ID;
+         else
+             DBMS_OUTPUT.PUT_LINE(&#39;不是运行态！=1,记录已经成功插入gea，不执行插入clean&#39;);
+         end if;
+ 
+     end if;
+ end;
+ 
+ select *
+ from ALL_TRIGGERS
+ where TABLE_NAME = &#39;GEA_DM_FUNCTION_LOCATION&#39;;
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2020/%E9%80%92%E5%BD%92%E6%9F%A5%E8%AF%A2/">Oracle——递归查询写法</a></span>
+  <span class="nav-next"><a href="/cn/2020/%E7%BA%B5%E8%A1%A8%E8%BD%AC%E6%A8%AA%E6%A0%87%E5%8F%8Acasewhen/">Oracle——纵表转横表</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2020\/%E9%80%92%E5%BD%92%E6%9F%A5%E8%AF%A2\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/%E7%BA%B5%E8%A1%A8%E8%BD%AC%E6%A8%AA%E6%A0%87%E5%8F%8Acasewhen\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

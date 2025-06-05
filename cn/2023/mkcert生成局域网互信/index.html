@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>mkcert生成局域网互信 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="mkcert生成局域网互信 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="按照github网站，参考readme
+[&amp;hellip;] 一般是服务器，即网页发布方
+[&amp;hellip;] mkcert -install 再执行，如果有域名输入域名，没有则写自己ip即可 mkcert example.com &amp;#34;*.example.com&amp;#34; example.test localhost 127.0.0.1 ::1The certificate is at &amp;hellip;">
+      <meta property="og:description" content="按照github网站，参考readme
+[&amp;hellip;] 一般是服务器，即网页发布方
+[&amp;hellip;] mkcert -install 再执行，如果有域名输入域名，没有则写自己ip即可 mkcert example.com &amp;#34;*.example.com&amp;#34; example.test localhost 127.0.0.1 ::1The certificate is at &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2023%5cmkcert%e7%94%9f%e6%88%90%e5%b1%80%e5%9f%9f%e7%bd%91%e4%ba%92%e4%bf%a1.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>mkcert生成局域网互信</h1>
+
+
+<h3>rehoni / 
+2023-10-12</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>按照<a href="https://github.com/FiloSottile/mkcert">github网站</a>，参考readme</p>
+<h2 id="服务端">服务端</h2>
+<p>一般是服务器，即网页发布方</p>
+<ol>
+<li>先执行</li>
+</ol>
+<pre tabindex="0"><code>mkcert -install
+</code></pre><ol start="2">
+<li>再执行，如果有域名输入域名，没有则写自己ip即可</li>
+</ol>
+<pre tabindex="0"><code>mkcert example.com &#34;*.example.com&#34; example.test localhost 127.0.0.1 ::1
+
+The certificate is at &#34;./example.com+5.pem&#34; and the key at &#34;./example.com+5-key.pem&#34; ✅
+</code></pre><ol start="3">
+<li>得到的pem文件为证书，key为密钥</li>
+<li>如果是haproxy，则在 ssl crt 后边写入该 pem 文件绝对路径，重新发布网页即可</li>
+</ol>
+<p>注意haproxy的pem格式，是有两段，一段为 CERTIFICATE，一段为RSA PRIVATE KEY</p>
+<p>要将3中的pem文件后补全key的内容，并且key的段始段尾都需要增加 RSA三个字母保持一致。</p>
+<p>注意下边这段话，意思是访问时要对mkcert的CA进行授信</p>
+<blockquote>
+<p>Using certificates from real certificate authorities (CAs) for development can be dangerous or impossible (for hosts like <code>example.test</code>, <code>localhost</code> or <code>127.0.0.1</code>), but self-signed certificates cause trust errors. Managing your own CA is the best solution, but usually involves arcane commands, specialized knowledge and manual steps.</p>
+<p>mkcert automatically creates and installs a local CA in the system root store, and generates locally-trusted certificates. mkcert does not automatically configure servers to use the certificates, though, that&rsquo;s up to you.</p>
+</blockquote>
+<h2 id="客户端">客户端</h2>
+<p>要安装 mkcert 颁发的根证书</p>
+<p>仅试验了安装根证书，即生效。未试验安装上文中生成的证书。</p>
+<p>通过命令</p>
+<pre tabindex="0"><code>mkcert -CAROOT
+</code></pre><p>获取到了根证书的路径，从服务器上下载此证书到客户端上，修改后缀为 .crt 双击安装即可，选择”受信任的根证书颁发机构“。</p>
+<blockquote>
+<p>Installing in the trust store does not require the CA key, so you can export the CA certificate and use mkcert to install it in other machines.</p>
+<ul>
+<li>Look for the <code>rootCA.pem</code> file in <code>mkcert -CAROOT</code></li>
+<li>copy it to a different machine</li>
+<li>set <code>$CAROOT</code> to its directory</li>
+<li>run <code>mkcert -install</code></li>
+</ul>
+<p>Remember that mkcert is meant for development purposes, not production, so it should not be used on end users&rsquo; machines, and that you should <em>not</em> export or share <code>rootCA-key.pem</code>.</p>
+</blockquote>
+<p>在通过该客户端访问网页后，该网页将不会再显示”不安全“。</p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2023/mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">MySQL——问题小书</a></span>
+  <span class="nav-next"><a href="/cn/2023/selenium%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/">selenium driver实现后台运行</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2023\/mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2023\/selenium%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

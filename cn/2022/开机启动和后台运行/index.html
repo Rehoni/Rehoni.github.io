@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Linux——开机启动和后台运行 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Linux——开机启动和后台运行 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="流程：后台运行脚本调用自启动脚本，判断执行脚本是否正在运行，调用执行脚本。
+创建xxxx.sh脚本包装java -jar命令的执行
+[&amp;hellip;] cd /users/ems/Jar/imp java -jar -Xms1024m -Xmx1536m -XX:PermSize=512m -XX:MaxPermSize=2048m imp.jar -propath imp.properties &amp;hellip;">
+      <meta property="og:description" content="流程：后台运行脚本调用自启动脚本，判断执行脚本是否正在运行，调用执行脚本。
+创建xxxx.sh脚本包装java -jar命令的执行
+[&amp;hellip;] cd /users/ems/Jar/imp java -jar -Xms1024m -Xmx1536m -XX:PermSize=512m -XX:MaxPermSize=2048m imp.jar -propath imp.properties &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2022%5c%e5%bc%80%e6%9c%ba%e5%90%af%e5%8a%a8%e5%92%8c%e5%90%8e%e5%8f%b0%e8%bf%90%e8%a1%8c.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Linux——开机启动和后台运行</h1>
+
+
+<h3>rehoni / 
+2022-09-21</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="执行脚本"><strong>执行脚本</strong></h1>
+<p>流程：后台运行脚本调用自启动脚本，判断执行脚本是否正在运行，调用执行脚本。</p>
+<p>创建<code>xxxx.sh</code>脚本包装<code>java -jar</code>命令的执行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> cd /users/ems/Jar/imp
+</span></span><span style="display:flex;"><span> java -jar -Xms1024m -Xmx1536m -XX:PermSize<span style="color:#f92672">=</span>512m -XX:MaxPermSize<span style="color:#f92672">=</span>2048m imp.jar -propath imp.properties &gt; /users/ems/Jar/logs/imp-logs.txt
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># -vmargs 说明后面是VM的参数，所以后面的其实都是JVM的参数了</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># -Xms128m JVM初始分配的堆内存</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># -Xmx512m JVM最大允许分配的堆内存，按需分配</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># -XX:PermSize=64M JVM初始分配的非堆内存</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># -XX:MaxPermSize=128M JVM最大允许分配的非堆内存，按需分配</span>
+</span></span></code></pre></div><h1 id="自启脚本"><strong>自启脚本</strong></h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> start_ratio<span style="color:#f92672">(){</span>
+</span></span><span style="display:flex;"><span>     sh /users/ems/Jar/bin/ratio.sh &amp;
+</span></span><span style="display:flex;"><span>     sleep <span style="color:#ae81ff">120</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> stop_ratio<span style="color:#f92672">(){</span>
+</span></span><span style="display:flex;"><span>     PROCESS<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>ps -ef |grep ratio.jar|grep -v grep|grep -v PPID|awk <span style="color:#e6db74">&#39;{ print $2}&#39;</span><span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">for</span> i in $PROCESS
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>       echo <span style="color:#e6db74">&#34;&gt;&gt;&gt;RatioExec is running!begin to shutdown...&#34;</span>
+</span></span><span style="display:flex;"><span>       echo <span style="color:#e6db74">&#34;Kill the process [ </span>$i<span style="color:#e6db74"> ]&#34;</span>
+</span></span><span style="display:flex;"><span>       kill -9 $i
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> restart_ratio<span style="color:#f92672">(){</span>
+</span></span><span style="display:flex;"><span>     stop_ratio
+</span></span><span style="display:flex;"><span>     start_ratio
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> COUNT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>ps -ef |grep ratio.jar |grep -v <span style="color:#e6db74">&#34;grep&#34;</span> |wc -l<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">while</span> true;<span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $COUNT -eq <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>         echo <span style="color:#e6db74">&#34;&gt;&gt;&gt;Ratio is not ok!begin to restart ratio...&#34;</span>
+</span></span><span style="display:flex;"><span>         echo <span style="color:#e6db74">&#34;count:&#34;</span>$COUNT
+</span></span><span style="display:flex;"><span>         restart_ratio
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[</span> $COUNT -gt <span style="color:#ae81ff">1</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>         echo <span style="color:#e6db74">&#34;&gt;&gt;&gt;Ratio is running so many!begin to kill all and restart ratio...&#34;</span>
+</span></span><span style="display:flex;"><span>         echo <span style="color:#e6db74">&#34;count:&#34;</span>$COUNT
+</span></span><span style="display:flex;"><span>         restart_ratio
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>         echo <span style="color:#e6db74">&#34;&gt;&gt;&gt;Only 1 ratio is running!&#34;</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>     sleep <span style="color:#ae81ff">60</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">done</span>
+</span></span></code></pre></div><p>通过COUNT线程数量来判断是否有多个java进行在执行，来决定是否清除多余的java进程。</p>
+<p>sleep是用来间歇性地判断程序是否有执行完，判断周期，让程序跑一会儿。</p>
+<p>考虑到有些程序可以通过判断http的响应，执行程序的运行和停止。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> get_http_status<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>     http_code<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>curl --head -o /dev/null --silent --max-time <span style="color:#ae81ff">20</span> --connect-timeout <span style="color:#ae81ff">20</span> -w %<span style="color:#f92672">{</span>http_code<span style="color:#f92672">}</span> $1<span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">return</span> $http_code
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#########Start Zuul &amp;&amp; Eureka##########################</span>
+</span></span><span style="display:flex;"><span> zuulUrl<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;http://localhost:8001/info&gt;&#34;</span>
+</span></span><span style="display:flex;"><span> eurekaUrl<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;http://localhost:8000/info&gt;&#34;</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">############check NrCloud#############################</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">while</span> true; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">#check and restart eureka</span>
+</span></span><span style="display:flex;"><span>     get_http_status $eurekaUrl
+</span></span><span style="display:flex;"><span>     status<span style="color:#f92672">=</span>$?
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $status -eq <span style="color:#ae81ff">200</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>         echo <span style="color:#e6db74">&#34;&gt;&gt;&gt;Eureka is ok!&#34;</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>         echo <span style="color:#e6db74">&#34;&gt;&gt;&gt;Eureka is not ok!begin to restart Eureka...&#34;</span>
+</span></span><span style="display:flex;"><span>         echo <span style="color:#e6db74">&#34;http_status:&#34;</span>$status     
+</span></span><span style="display:flex;"><span>         restart_eureka        
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>     
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">#check and restart zuul</span>
+</span></span><span style="display:flex;"><span>     get_http_status $zuulUrl
+</span></span><span style="display:flex;"><span>     status<span style="color:#f92672">=</span>$?
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $status -eq <span style="color:#ae81ff">200</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>         echo <span style="color:#e6db74">&#34;&gt;&gt;&gt;Zuul is ok!&#34;</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>         echo <span style="color:#e6db74">&#34;&gt;&gt;&gt;Zuul is not ok!begin to restart Zuul...&#34;</span>
+</span></span><span style="display:flex;"><span>         echo <span style="color:#e6db74">&#34;http_status:&#34;</span>$status     
+</span></span><span style="display:flex;"><span>         restart_zuul        
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>         
+</span></span><span style="display:flex;"><span>     sleep <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">done</span>
+</span></span></code></pre></div><h1 id="后台运行脚本"><strong>后台运行脚本</strong></h1>
+<p>创建后台运行脚本<code>java_exec.csh</code>来包装自启脚本</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> <span style="color:#75715e">#!/bin/csh</span>
+</span></span><span style="display:flex;"><span> nohup /users/ems/Jar/bin/self_restart_ratio.sh &amp;
+</span></span></code></pre></div><p><code>nohup</code>配合<code>&amp;</code>命令，能够实现后台一直运行该程序/脚本。可以通过<code>ps -ef | grep 关键字</code>来确认该脚本是否正在运行。上边的执行脚本也是。</p>
+<h1 id="自定义开机程序"><strong>自定义开机程序</strong></h1>
+<h2 id="编辑文件-etcrclocal"><strong>编辑文件 /etc/rc.local</strong></h2>
+<p>修改 /etc/rc.d/rc.loacl （/etc/rc.local）文件，在文件末尾（exit 0之前）加上你开机需要启动的程序或执行的命令即可（执行的程序需要写绝对路径，添加到系统环境变量的除外）</p>
+<h2 id="通过chkconfig命令设置"><strong>通过chkconfig命令设置</strong></h2>
+<p>将启动文件cp到  -或者/etc/rc.d/init.d/（前者是后者的软连接）下</p>
+<p>vim 启动文件，文件前面务必添加如下三行代码，否侧会提示chkconfig不支持</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> <span style="color:#75715e">#!/bin/sh 告诉系统使用的shell,所以的shell脚本都是这样</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#chkconfig: 35 20 80 分别代表运行级别，启动优先权，关闭优先权，此行代码必须</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#description: http server（自己随便发挥）//两行都注释掉！！！，此行代码必须</span>
+</span></span></code></pre></div><p>chkconfig &ndash;add 脚本文件名 操作后就已经添加了</p>
+<h1 id="注意"><strong>注意</strong></h1>
+<p>如果在服务器中执行的时候，提示权限不足</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> chmod <span style="color:#ae81ff">777</span> ./imp.sh
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2022/%E7%8E%AF%E7%90%830903%E6%94%BB%E7%95%A5/">环球0903攻略</a></span>
+  <span class="nav-next"><a href="/cn/2022/vmware/">vmvare设置网络</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2022\/%E7%8E%AF%E7%90%830903%E6%94%BB%E7%95%A5\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2022\/vmware\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

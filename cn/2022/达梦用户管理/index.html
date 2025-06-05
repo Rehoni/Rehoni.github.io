@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>达梦——用户管理 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="达梦——用户管理 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="达梦数据库安装完成后，系统默认会自带有一些系统级的用户：
+[&amp;hellip;] 1、sys &amp;mdash;&amp;ndash;达梦数据库内置管理用户，不能登录数据库，数据库使用的大部分的数据字典和动态性能视图sys。
+2、Sysdba &amp;mdash;&amp;ndash;数据库管理员用户
+3、Sysauditor &amp;mdash;-审计用户
+4、Syssso —安全用户
+5、Sysdbo &amp;mdash;-数据操作 &amp;hellip;">
+      <meta property="og:description" content="达梦数据库安装完成后，系统默认会自带有一些系统级的用户：
+[&amp;hellip;] 1、sys &amp;mdash;&amp;ndash;达梦数据库内置管理用户，不能登录数据库，数据库使用的大部分的数据字典和动态性能视图sys。
+2、Sysdba &amp;mdash;&amp;ndash;数据库管理员用户
+3、Sysauditor &amp;mdash;-审计用户
+4、Syssso —安全用户
+5、Sysdbo &amp;mdash;-数据操作 &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2022%5c%e8%be%be%e6%a2%a6%e7%94%a8%e6%88%b7%e7%ae%a1%e7%90%86.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>达梦——用户管理</h1>
+
+
+<h3>rehoni / 
+2022-04-03</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="达梦数据库的用户管理">达梦数据库的用户管理</h2>
+<p>达梦数据库安装完成后，系统默认会自带有一些系统级的用户：</p>
+<blockquote>
+<p>1、sys &mdash;&ndash;达梦数据库内置管理用户，不能登录数据库，数据库使用的大部分的数据字典和动态性能视图sys。</p>
+<p>2、Sysdba &mdash;&ndash;数据库管理员用户</p>
+<p>3、Sysauditor &mdash;-审计用户</p>
+<p>4、Syssso —安全用户</p>
+<p>5、Sysdbo &mdash;-数据操作员</p>
+</blockquote>
+<p>在达梦数据库里每一个用户都有一个默认的表空间，对于 SYS、SYSSSO、SYSAUDITOR 系统用户，默认的用户表空间是 SYSTEM，SYSDBA 的默认表空间为 MAIN，新创建的用户如果没有指定默认表空间，则系统自动指定 MAIN 表空间为用户默认的表空间。</p>
+<p>1、查看所有用户相关信息</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> username,user_id,default_tablespace,profile <span style="color:#66d9ef">from</span> dba_users;
+</span></span></code></pre></div><p>2、用户策略</p>
+<blockquote>
+<p>名字：字母开头，a—z,0-9,$#_</p>
+<p>位置：对应的表空间。</p>
+<p>口令策略：</p>
+<p>用户密码最长为48个字节，创建用户语句password policy子句来指定口令策略。（dm.ini pwd_policy)</p>
+</blockquote>
+<p>系统支持的口令策略</p>
+<blockquote>
+<p>0：无策略</p>
+<p>1：禁止与用户名相同</p>
+<p>2：口令长度不小于9</p>
+<p>4：至少包含一个大写字母（A-Z)</p>
+<p>8: 至少包含一个数字（0-9）</p>
+<p>16：至少包含一个标点符号（英文状态输入，除”和空格除外）</p>
+<p>口令可以单独使用，也可以组合使用，比如需要策略1和2，则设置口令策略为3</p>
+</blockquote>
+<p>相关参数：</p>
+<blockquote>
+<p>faild_login_attemps 密码尝试登录次数</p>
+<p>password_lock_time 密码失败锁定时间</p>
+<p>password_life_time 密码过期时间</p>
+</blockquote>
+<p>相关视图：</p>
+<blockquote>
+<p>sysusers, all_users , dba_users</p>
+</blockquote>
+<p>3、创建用户</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">user</span> test1 identified <span style="color:#66d9ef">by</span> test123456 <span style="color:#66d9ef">default</span> tablespace tbs1;
+</span></span></code></pre></div><p>创建用户设置密码注意：</p>
+<p>DM7.6之前版本默认密码是转为大写存储的，登录时要注意。比如用户设置test1/test123456，那么登录的时候用test1/TEST123456和TEST1/TEST123456可以登录，用test1/test123456和TEST1/test123456就不能登录。如果设置密码时加引号，则存储实际的密码。</p>
+<p>DM8版本后大小写默认通用，用户名密码默认统一都存储大写的，登录时用大小写都可以，都转为大写做匹配。如果设置密码时加引号，则存储实际的密码。</p>
+<p><strong>新建的用户未赋值权限只能查询通用的系统表，是没有创建表之类的权限。</strong></p>
+<p><strong>如果没有赋值权限，那这个用户只能连接，还不能做任何事情</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">给用户赋管理员权限：</span><span style="color:#66d9ef">grant</span> dba <span style="color:#66d9ef">to</span> test1;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">或者只给创建表等部分的权限：</span><span style="color:#66d9ef">grant</span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">to</span> test1;
+</span></span></code></pre></div><p>查看用户相关权限：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">Select</span> grantee,granted_role <span style="color:#66d9ef">from</span> dba_role_privs <span style="color:#66d9ef">where</span> grantee<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">’</span>TESTUSER<span style="color:#960050;background-color:#1e0010">’</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Select</span> grantee,privilege <span style="color:#66d9ef">from</span> dba_sys_privs <span style="color:#66d9ef">where</span> grantee<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">’</span><span style="color:#66d9ef">PUBLIC</span><span style="color:#960050;background-color:#1e0010">’</span>;
+</span></span></code></pre></div><p>4、修改用户密码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">切换用户：</span>conn test1<span style="color:#f92672">/</span>test123456
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">重置用户密码：</span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">user</span> test1 identified <span style="color:#66d9ef">by</span> dameng123456;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">修改默认表空间</span>:<span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">user</span> test1 <span style="color:#66d9ef">default</span> tablespace tbs2;
+</span></span></code></pre></div><p><strong>重置用户密码和修改默认表空间可一步进行</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">锁定用户：</span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">user</span> test1 account <span style="color:#66d9ef">lock</span>;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">解锁用户：</span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">user</span> test1 account unlock;
+</span></span></code></pre></div><p>5、删除用户</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">user</span> test1;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">user</span> test1 <span style="color:#66d9ef">cascade</span>; <span style="color:#75715e">----慎用
+</span></span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2022/%E8%BE%BE%E6%A2%A6%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/">达梦——表空间管理</a></span>
+  <span class="nav-next"><a href="/cn/2022/%E8%BE%BE%E6%A2%A6disql%E5%B7%A5%E5%85%B7%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/">达梦——disql工具连接数据库</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2022\/%E8%BE%BE%E6%A2%A6%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2022\/%E8%BE%BE%E6%A2%A6disql%E5%B7%A5%E5%85%B7%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on Rehoni | 罗皓</title>
+    <link>/tags/git/</link>
+    <description>Recent content in Git on Rehoni | 罗皓</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 14 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git——提交规范</title>
+      <link>/cn/2022/git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/</link>
+      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
+      <guid>/cn/2022/git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/</guid>
+      <description>遇到的问题 版本回退时无法快速定位到指定版本 无法知道项目中封版操作是哪一个commit 无法清晰的知道每次提交的记录 以下是commit提交规范 每次提交，Commit message 都包括三个部分：Header，Body 和 Footer。&#xA;其中，Header 是必需的，Body 和 Footer 可以省略。&#xA;&amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt; // 空一行 &amp;lt;body&amp;gt; // 空一行 &amp;lt;footer&amp;gt; 12345 Header Header部分只有一行，包括两个字段：type（必需）和subject（必需）。&#xA;type用于说明 commit 的类别，只允许使用下面9个标识。&#xA;feat: 新功能（feature）&#xD;fix: 修补bug&#xD;docs: 文档（documentation）&#xD;style: 格式（不影响代码运行的变动）&#xD;refactor: 重构（即不是新增功能，也不是修改bug的代码变动）&#xD;chore: 构建过程或辅助工具的变动&#xD;revert: 撤销，版本回退&#xD;perf: 性能优化&#xD;test：测试&#xD;improvement: 改进&#xD;build: 打包&#xD;ci: 持续集成&#xD;123456789101112 subject是 commit 目的的简短描述，不超过50个字符。&#xA;以动词开头，使用第一人称现在时，比如修改/修复/增加 等等&#xD;example: 订单详情增加导出功能&#xD;12 scope scope用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。&#xA;Body Body 部分是对本次 commit 的详细描述，可以分成多行。下面是一个范例。</description>
+    </item>
+    <item>
+      <title>Git——常见问题</title>
+      <link>/cn/2022/%E5%B7%A5%E5%85%B7_git/</link>
+      <pubDate>Wed, 16 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>/cn/2022/%E5%B7%A5%E5%85%B7_git/</guid>
+      <description>1、查看和修改当前project的用户名、密码 git config user.name &amp;amp; user.email 2、本地已创建分支dev，要推送到远程分支 在远程分支中创建一个dev，利用 git push origin dev:dev 推送到远程，这样有一个坏处，如果未设置1️⃣中的user，则会以本地计算机或global中的信息推送过去。&#xA;故可以考虑commit之后直接push，git会提醒你push没有上游，采用git branch -u origin/dev来设置本地dev的上游为远程的origin/dev。&#xA;3、本地仓库推送到远程GitHub 新建本地仓库关联&#xA;在需要建立本地仓库的位置调出git bash 输入git init，初始化本地仓库 输入git remote add origin 仓库地址， 添加远程仓库 如果远程仓库中有提交历史，输入git pull origin master，将提交历史和文件拉到本地仓库，有冲突解决冲突 输入git add，git commit，将文件存入本地仓库 输入git push -u origin master，将之前已commit的本地仓库文件推到远程仓库 已有本地仓库关联&#xA;在需要关联的本地仓库位置调出git bash 没有已关联的远程仓库则输入git remote add origin 仓库地址， 添加远程仓库，有则输入 git remote set-url origin 新地址 如果远程仓库中有提交历史，本地仓库也有，则输入git pull origin master &amp;ndash;allow-unrelated-histories，合并两个项目不关联的历史 输入git push -u origin master，将本地仓库的commit推到远程仓库 注：origin和master根据需要替换，一般创建远程仓库时默认仓库别名是origin，默认分支是master。&#xA;再记录一下https设置用户名，密码步骤，不用每次有远程操作都要输入：&#xA;在本地仓库中调出git bash，输入git config credential.</description>
+    </item>
+    <item>
+      <title>Git实际问题</title>
+      <link>/cn/2019/2019-10-11-git-problems/</link>
+      <pubDate>Fri, 11 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/cn/2019/2019-10-11-git-problems/</guid>
+      <description>查看和修改当前project的用户名、密码 git config user.name &amp;amp; user.email&#xA;本地已创建分支dev，要推送到远程分支 在远程分支中创建一个dev，利用 git push origin dev:dev 推送到远程，这样有一个坏处，如果未设置:one:中的user，则会以本地计算机或global中的信息推送过去。&#xA;故可以考虑commit之后直接push，git会提醒你push没有上游，采用git branch -u origin/dev来设置本地dev的上游为远程的origin/dev。&#xA;合并分支到master上 https://blog.csdn.net/boysky0015/article/details/78185879&#xA;关于记住密码、多项目不同用户 git config credential.helper store TODO: 多项目不同用户&#xA;Changing the Git history of your repository using a script 打开Git bash&#xA;创建存储库的全新裸克隆&#xA;git clone --bare https://github.com/user/repo.git cd repo.git 复制粘贴脚本，替换变量&#xA;OLD_EMAIL CORRECT_NAME CORRECT_EMAIL #!/bin/sh git filter-branch --env-filter &amp;#39; OLD_EMAIL=&amp;#34;your-old-email@example.com&amp;#34; CORRECT_NAME=&amp;#34;Your Correct Name&amp;#34; CORRECT_EMAIL=&amp;#34;your-correct-email@example.com&amp;#34; if [ &amp;#34;$GIT_COMMITTER_EMAIL&amp;#34; = &amp;#34;$OLD_EMAIL&amp;#34; ] then export GIT_COMMITTER_NAME=&amp;#34;$CORRECT_NAME&amp;#34; export GIT_COMMITTER_EMAIL=&amp;#34;$CORRECT_EMAIL&amp;#34; fi if [ &amp;#34;$GIT_AUTHOR_EMAIL&amp;#34; = &amp;#34;$OLD_EMAIL&amp;#34; ] then export GIT_AUTHOR_NAME=&amp;#34;$CORRECT_NAME&amp;#34; export GIT_AUTHOR_EMAIL=&amp;#34;$CORRECT_EMAIL&amp;#34; fi &amp;#39; --tag-name-filter cat -- --branches --tags 执行脚本</description>
+    </item>
+  </channel>
+</rss>

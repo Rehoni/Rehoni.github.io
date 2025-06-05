@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>达梦——常见问题及解决 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="达梦——常见问题及解决 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="select table_name from user_tables; //当前用户拥有的表 select table_name from all_tables; //所有用户的表 select table_name from dba_tables; //包括系统表 获取表字段： select * from user_tab_columns where Table_Name=&amp;#39;用户 &amp;hellip;">
+      <meta property="og:description" content="select table_name from user_tables; //当前用户拥有的表 select table_name from all_tables; //所有用户的表 select table_name from dba_tables; //包括系统表 获取表字段： select * from user_tab_columns where Table_Name=&amp;#39;用户 &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2022%5c%e8%be%be%e6%a2%a6%e9%97%ae%e9%a2%98%e6%89%8b%e5%86%8c.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>达梦——常见问题及解决</h1>
+
+
+<h3>rehoni / 
+2022-04-06</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="1获取表名和字段名">1、获取表名和字段名</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">table_name</span> <span style="color:#66d9ef">from</span> user_tables; <span style="color:#f92672">//</span><span style="color:#960050;background-color:#1e0010">当前用户拥有的表</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">table_name</span> <span style="color:#66d9ef">from</span> all_tables; <span style="color:#f92672">//</span><span style="color:#960050;background-color:#1e0010">所有用户的表</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">table_name</span> <span style="color:#66d9ef">from</span> dba_tables; <span style="color:#f92672">//</span><span style="color:#960050;background-color:#1e0010">包括系统表</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">获取表字段：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> user_tab_columns <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">Table_Name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;用户表&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> all_tab_columns <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">Table_Name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;用户表&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> dba_tab_columns <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">Table_Name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;用户表&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">获取表注释：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> user_tab_comments
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">相应的还有</span>dba_tab_comments<span style="color:#960050;background-color:#1e0010">，</span>all_tab_comments<span style="color:#960050;background-color:#1e0010">，这两个比</span>user_tab_comments多了ower列<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">获取字段注释：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> user_col_comments
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">相应的还有</span>dba_col_comments<span style="color:#960050;background-color:#1e0010">，</span>all_col_comments<span style="color:#960050;background-color:#1e0010">，这两个比</span>user_col_comments多了ower列<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">举例如下</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 获取表名和表注释
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> all_tab_comments <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">owner</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;HIS&#39;</span> <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">Table_Name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;OPS_EQUIPMENT_SUMMARY&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 获取字段名和详情
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> all_tab_columns <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">owner</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;HIS&#39;</span> <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">Table_Name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;OPS_EQUIPMENT_SUMMARY&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 获取字段名和字段注释
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> all_col_comments <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">owner</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;HIS&#39;</span> <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">Table_Name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;OPS_EQUIPMENT_SUMMARY&#39;</span>;
+</span></span></code></pre></div><h2 id="2sql语句指定用户当前模式">2、SQL语句指定用户当前模式</h2>
+<p>MySQL或者SQLSERVER程序在连接时可以在连接串中指定对应的数据库名，达梦数据库中是指定对应的模式名，如果表等对象存在默认模式下，可以不用在连接串中指定默认模式名，达梦数据库用户登录后默认为当前用户的默认模式且模式名与用户名相同。</p>
+<p>查看当前模式的对象：查看模式下拥有的对象，可以通过DBA_OBJECTS、ALL_OBJECTS、SYSOBJECTS等视图根据OWNER=&lsquo;模式名’去查看。需要注意的是，user_tables等USER视图是查看当前用户下所有模式的对象。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> SESSIONS <span style="color:#66d9ef">SET</span> CURRENT_SCHEMA<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">模式名</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">或者</span> <span style="color:#66d9ef">set</span> <span style="color:#66d9ef">schema</span> <span style="color:#960050;background-color:#1e0010">模式名；</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">查看</span>TEST用户下的模式
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span>  USERNAME,NAME <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">SCHEMA_NAME</span>,<span style="color:#66d9ef">TYPE</span><span style="color:#960050;background-color:#1e0010">$</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> SYSOBJECTS A,DBA_USERS B 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> A.PID<span style="color:#f92672">=</span>B.USER_ID <span style="color:#66d9ef">AND</span> A.<span style="color:#66d9ef">TYPE</span><span style="color:#960050;background-color:#1e0010">$</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SCH&#39;</span> <span style="color:#66d9ef">AND</span> B.USERNAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;TEST&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">默认模式名与用户名相同，且用户登录之后不指定当前模式或者操作的对象前不加模式名“模式名</span>.<span style="color:#960050;background-color:#1e0010">对象名”，默认是操作默认模式下的对象；</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">----------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">查看用户会话当前的模式名：</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> SF_GET_SCHEMA_NAME_BY_ID(CURRENT_SCHID);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">行号</span>     SF_GET_SCHEMA_NAME_BY_ID(CURRENT_SCHID)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">---------- ---------------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span>          TEST
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">或者</span>:
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> sys_context(<span style="color:#e6db74">&#39;USERENV&#39;</span>,<span style="color:#e6db74">&#39;CURRENT_SCHEMA&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">行号</span>     SYS_CONTEXT(<span style="color:#e6db74">&#39;USERENV&#39;</span>,<span style="color:#e6db74">&#39;CURRENT_SCHEMA&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">---------- ---------------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span>          TEST
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">指定当前模式</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">session</span> <span style="color:#66d9ef">set</span> current_schema<span style="color:#f92672">=</span>TEST2; 
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">或者</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">set</span> <span style="color:#66d9ef">schema</span> TEST2;
+</span></span></code></pre></div><h3 id="参考">参考</h3>
+<p>在使用达梦数据库时，可能存在一个用户下有多个模式（schema）的情况，当用户登录之后访问非默认模式下的表等对象时，需要使用&quot;模式名.对象名&quot;的方式进行访问等操作，或者可以执行alter session set current_schema=模式名;或者SET SCHEMA &lt;模式名&gt;;指定当前模式。
+  有时候可能从SQLSERVER或者MYSQL数据库中迁移到达梦数据库时，没有创建与每个数据库对应的梦数据库用户，可能在使用达梦迁移工具迁移时直接将所有MYSQL中的数据库迁移到一个达梦数据库用户下的不同模式中（默认是模式名与MYSQL中数据库名相同）。这种情况下使用达梦数据库用户登录之后访问非默认模式下的对象时，需要&quot;模式名.对象名&quot;的方式，这样对与程序来说可能代码修改量比较大。针对这种情况，在达梦数据库中可以通过指定JDBC URL中的schema属性配置来指定当前模式。</p>
+<h3 id="简单演示">简单演示</h3>
+<h4 id="sql语句指定用户当前模式">SQL语句指定用户当前模式</h4>
+<p>语句：ALTER SESSIONS SET CURRENT_SCHEMA=模式名; 或者 set schema 模式名；</p>
+<p>查询用户下拥有的模式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#66d9ef">select</span>  USERNAME,NAME AS SCHEMA_NAME,TYPE$ 
+</span></span><span style="display:flex;"><span>FROM SYSOBJECTS A,DBA_USERS B 
+</span></span><span style="display:flex;"><span>WHERE A.PID<span style="color:#f92672">=</span>B.USER_ID AND A.TYPE$<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SCH&#39;</span> AND B.USERNAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;TEST&#39;</span>;
+</span></span><span style="display:flex;"><span>------------------------------------------------------------------------
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#查看TEST用户下的模式：</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>dmdba@localhost bin<span style="color:#f92672">]</span>$ ./disql /nolog
+</span></span><span style="display:flex;"><span>disql V8
+</span></span><span style="display:flex;"><span>SQL&gt; login
+</span></span><span style="display:flex;"><span>服务名:
+</span></span><span style="display:flex;"><span>用户名:TEST
+</span></span><span style="display:flex;"><span>密码:
+</span></span><span style="display:flex;"><span>SSL路径:
+</span></span><span style="display:flex;"><span>SSL密码:
+</span></span><span style="display:flex;"><span>UKEY名称:
+</span></span><span style="display:flex;"><span>UKEY PIN码:
+</span></span><span style="display:flex;"><span>MPP类型:
+</span></span><span style="display:flex;"><span>是否读写分离<span style="color:#f92672">(</span>y/n<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>协议类型:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>服务器<span style="color:#f92672">[</span>LOCALHOST:5236<span style="color:#f92672">]</span>:处于普通打开状态
+</span></span><span style="display:flex;"><span>登录使用时间 : 2.850<span style="color:#f92672">(</span>ms<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>SQL&gt; <span style="color:#66d9ef">select</span>  USERNAME,NAME AS SCHEMA_NAME,TYPE$ FROM SYSOBJECTS A,DBA_USERS B WHERE A.PID<span style="color:#f92672">=</span>B.USER_ID AND A.TYPE$<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SCH&#39;</span> AND B.USERNAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;TEST&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>行号     USERNAME SCHEMA_NAME TYPE$
+</span></span><span style="display:flex;"><span>---------- -------- ----------- -----
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>          TEST     TEST        SCH        <span style="color:#75715e">###TEST用户下有TEST、TEST2两个模式</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>          TEST     TEST2       SCH
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>已用时间: 18.982<span style="color:#f92672">(</span>毫秒<span style="color:#f92672">)</span>. 执行号:701.
+</span></span><span style="display:flex;"><span>------------------------
+</span></span></code></pre></div><p>查看当前模式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#默认模式名与用户名相同，且用户登录之后不指定当前模式或者操作的对象前不加模式名“模式名.对象名”，默认是操作默认模式下的对象；</span>
+</span></span><span style="display:flex;"><span>----------
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#查看用户会话当前的模式名：</span>
+</span></span><span style="display:flex;"><span>SQL&gt; SELECT SF_GET_SCHEMA_NAME_BY_ID<span style="color:#f92672">(</span>CURRENT_SCHID<span style="color:#f92672">)</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>行号     SF_GET_SCHEMA_NAME_BY_ID<span style="color:#f92672">(</span>CURRENT_SCHID<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>---------- ---------------------------------------
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>          TEST
+</span></span><span style="display:flex;"><span>或者:
+</span></span><span style="display:flex;"><span>SQL&gt; <span style="color:#66d9ef">select</span> sys_context<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;USERENV&#39;</span>,<span style="color:#e6db74">&#39;CURRENT_SCHEMA&#39;</span><span style="color:#f92672">)</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>行号     SYS_CONTEXT<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;USERENV&#39;</span>,<span style="color:#e6db74">&#39;CURRENT_SCHEMA&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>---------- ---------------------------------------
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>          TEST
+</span></span></code></pre></div><p>指定当前模式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>SQL&gt; alter session set current_schema<span style="color:#f92672">=</span>TEST2; 
+</span></span><span style="display:flex;"><span>或者
+</span></span><span style="display:flex;"><span>SQL&gt; set schema TEST2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SQL&gt; <span style="color:#66d9ef">select</span> sys_context<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;USERENV&#39;</span>,<span style="color:#e6db74">&#39;CURRENT_SCHEMA&#39;</span><span style="color:#f92672">)</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>行号     SYS_CONTEXT<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;USERENV&#39;</span>,<span style="color:#e6db74">&#39;CURRENT_SCHEMA&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>---------- ---------------------------------------
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>          TEST2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>或者
+</span></span><span style="display:flex;"><span>SQL&gt; SELECT SF_GET_SCHEMA_NAME_BY_ID<span style="color:#f92672">(</span>CURRENT_SCHID<span style="color:#f92672">)</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>行号     SF_GET_SCHEMA_NAME_BY_ID<span style="color:#f92672">(</span>CURRENT_SCHID<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>---------- ---------------------------------------
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>          TEST2
+</span></span></code></pre></div><p>查看当前模式的对象：
+查看模式下拥有的对象，可以通过DBA_OBJECTS、ALL_OBJECTS、SYSOBJECTS等视图根据OWNER=&lsquo;模式名’去查看。需要注意的是，user_tables等USER视图是查看当前用户下所有模式的对象。</p>
+<h4 id="jdbc中指定用户当前模式">JDBC中指定用户当前模式</h4>
+<p>JDBC URL属性为：schema，指定用户登录后的当前模式，默认为用户的默认模式。</p>
+<p>JDBC URL为：jdbc:dm://ip:port?schema=模式名</p>
+<p>简单测试示例如下：</p>
+<p>在TEST用户TEST2模式下创建表并插入数据，然后查询：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>String name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dm.jdbc.driver.DmDriver&#34;</span>;
+</span></span><span style="display:flex;"><span>String url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jdbc:dm://192.168.15.35:5236?schema=TEST2&#34;</span>;     <span style="color:#75715e">//使用schema指定当前模式名</span>
+</span></span><span style="display:flex;"><span>String user<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;TEST&#34;</span>;
+</span></span><span style="display:flex;"><span>String password<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;123456789&#34;</span>;
+</span></span></code></pre></div><p>简单的建表、插入数据、查询</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Table</span> <span style="color:#66d9ef">extends</span> Connec{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create</span>() <span style="color:#66d9ef">throws</span> SQLException{
+</span></span><span style="display:flex;"><span>        String sql_1<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;DROP TABLE TABLE1;&#34;</span>;
+</span></span><span style="display:flex;"><span>        String sql_2<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;CREATE TABLE TABLE1(C1 INT,C2 VARCHAR(50));&#34;</span>;            <span style="color:#75715e">//创建表TABLE1</span>
+</span></span><span style="display:flex;"><span>        Connection testcon<span style="color:#f92672">=</span>getConn();
+</span></span><span style="display:flex;"><span>        Statement state<span style="color:#f92672">=</span>testcon.<span style="color:#a6e22e">createStatement</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>{
+</span></span><span style="display:flex;"><span>            state.<span style="color:#a6e22e">executeUpdate</span>(sql_2);
+</span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">catch</span>(SQLException e){
+</span></span><span style="display:flex;"><span>            state.<span style="color:#a6e22e">executeUpdate</span>(sql_1);
+</span></span><span style="display:flex;"><span>            state.<span style="color:#a6e22e">executeUpdate</span>(sql_2);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">print</span>(<span style="color:#e6db74">&#34;建表成功&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        state.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>        testcon.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">insert</span>() <span style="color:#66d9ef">throws</span> SQLException{
+</span></span><span style="display:flex;"><span>    	String sql<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;INSERT INTO TABLE1 SELECT 1,SF_GET_SCHEMA_NAME_BY_ID(CURRENT_SCHID);&#34;</span>;    <span style="color:#75715e">//插入一条数据其中一个值为当前模式名</span>
+</span></span><span style="display:flex;"><span>        Connection testcon<span style="color:#f92672">=</span>getConn();
+</span></span><span style="display:flex;"><span>        PreparedStatement pre<span style="color:#f92672">=</span>testcon.<span style="color:#a6e22e">prepareStatement</span>(sql);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>{
+</span></span><span style="display:flex;"><span>            pre.<span style="color:#a6e22e">executeUpdate</span>();
+</span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">catch</span>(SQLException e){
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">print</span>(e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">print</span>(<span style="color:#e6db74">&#34;插入成功&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        pre.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>        testcon.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">select</span>() <span style="color:#66d9ef">throws</span> SQLException{
+</span></span><span style="display:flex;"><span>        String sql<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;SELECT * from TABLE1;&#34;</span>;
+</span></span><span style="display:flex;"><span>        Connection testcon<span style="color:#f92672">=</span>getConn();
+</span></span><span style="display:flex;"><span>        Statement state<span style="color:#f92672">=</span>testcon.<span style="color:#a6e22e">createStatement</span>();
+</span></span><span style="display:flex;"><span>        ResultSet res<span style="color:#f92672">=</span>state.<span style="color:#a6e22e">executeQuery</span>(sql);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(res.<span style="color:#a6e22e">next</span>()){
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">print</span>(<span style="color:#e6db74">&#34;查询结果：&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\n&#34;</span>);
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(
+</span></span><span style="display:flex;"><span>                res.<span style="color:#a6e22e">getInt</span>(1)<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;,&#34;</span><span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>                res.<span style="color:#a6e22e">getString</span>(2)
+</span></span><span style="display:flex;"><span>            );
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GetTable</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        Table table<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> Table();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>{
+</span></span><span style="display:flex;"><span>            table.<span style="color:#a6e22e">create</span>();   
+</span></span><span style="display:flex;"><span>            table.<span style="color:#a6e22e">insert</span>(); 
+</span></span><span style="display:flex;"><span>            table.<span style="color:#a6e22e">select</span>();
+</span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">catch</span>(SQLException e){
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="总结">总结</h3>
+<p>MySQL或者SQLSERVER程序在连接时可以在连接串中指定对应的数据库名，达梦数据库中是指定对应的模式名，如果表等对象存在默认模式下，可以不用在连接串中指定默认模式名，达梦数据库用户登录后默认为当前用户的默认模式且模式名与用户名相同。</p>
+<h2 id="3创建视图">3、创建视图</h2>
+<p><a href="https://eco.dameng.com/docs/zh-cn/pm/view.html">视图 | 达梦技术文档 (dameng.com)</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span>  <span style="color:#66d9ef">VIEW</span> HIS.CIM_DEVICE <span style="color:#66d9ef">AS</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span> id,name,<span style="color:#e6db74">&#39;变压器&#39;</span> <span style="color:#66d9ef">as</span> cim_dev_type_name ,<span style="color:#e6db74">&#39;0301&#39;</span> <span style="color:#66d9ef">as</span> pms_dev_type_code <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;HIS&#34;</span>.<span style="color:#e6db74">&#34;CIM_POWERTRANSFORMER&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">union</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span> id,name,<span style="color:#e6db74">&#39;断路器&#39;</span>,<span style="color:#e6db74">&#39;0305&#39;</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;HIS&#34;</span>.<span style="color:#e6db74">&#34;CIM_BREAKER&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">union</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span> id,name,<span style="color:#e6db74">&#39;隔离开关&#39;</span>,<span style="color:#e6db74">&#39;0306&#39;</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;HIS&#34;</span>.<span style="color:#e6db74">&#34;CIM_DISCONNECTOR&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">union</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span> id,name,<span style="color:#e6db74">&#39;接地刀闸&#39;</span>,<span style="color:#e6db74">&#39;0306&#39;</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;HIS&#34;</span>.<span style="color:#e6db74">&#34;CIM_GROUND_DISCONNECTOR&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">union</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span> id,name,<span style="color:#e6db74">&#39;交流线路/线段端点&#39;</span>,<span style="color:#e6db74">&#39;xl&#39;</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;HIS&#34;</span>.<span style="color:#e6db74">&#34;CIM_ACLINEEND&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">union</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span> id,name,<span style="color:#e6db74">&#39;交流线路/线段端点&#39;</span>,<span style="color:#e6db74">&#39;xl&#39;</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;HIS&#34;</span>.<span style="color:#e6db74">&#34;CIM_ACLINESEGMENT&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><h2 id="4达梦数据库导出表格形式excel方式">4、达梦数据库导出表格形式（Excel）方式</h2>
+<p><a href="https://blog.csdn.net/IT01chao/article/details/118222966">达梦数据库导出表格形式（Excel）方式</a></p>
+<h2 id="5删除聚集主键及聚集主键索引">5、删除聚集主键及聚集主键索引</h2>
+<h3 id="现状描述">现状描述</h3>
+<p>直接删除聚集主键，则会报错“试图删除聚集主键”。聚集主键索引无法直接删除，会提示“没有删除表[xx]上索引的权限”。</p>
+<h3 id="解决办法">解决办法</h3>
+<p>两种办法：</p>
+<p>第一种：在表上新建一个聚集索引，那么聚集主键索引会变为非聚集，这样可以直接删除主键和索引；</p>
+<p>第二种：重新建表，建表时显示指定主键为非聚集；或者在建表之前修改ini参数PK_WITH_CLUSTER为0，这样默认创建主键时为非聚集型；</p>
+<p>具体操作如下：</p>
+<p>第一种方法：</p>
+<pre tabindex="0"><code>CREATE TABLE tab1 (A INT PRIMARY KEY,B VARCHAR,C VARCHAR);
+---首先创建新的聚集索引
+CREATE CLUSTER INDEX IDX01 ON tab1(b);
+---然后删除主键约束，主键索引会自动删除(无法直接删除主键索引)
+alter table tab1 drop constraint CONS134218785;
+---删除新建的聚集索引
+drop index IDX01;
+---更改主键为非聚集主键
+alter table tab1 add NOT CLUSTER primary key(A);
+</code></pre><p>第二种方法：</p>
+<p>（1）创建表时指定主键为非聚集主键</p>
+<pre tabindex="0"><code>CREATE TABLE tab1 (A INT NOT CLUSTER PRIMARY KEY,B VARCHAR,C VARCHAR);
+</code></pre><p>（2）建表之前修改PK_WITH_CLUSTER参数值为0</p>
+<pre tabindex="0"><code>SP_SET_PARA_VALUE(1,&#39;PK_WITH_CLUSTER&#39;,0);
+CREATE TABLE tab2 (A INT PRIMARY KEY,B VARCHAR,C VARCHAR);
+</code></pre><h2 id="6仅当指定列列表且set-identity_insert为on时才能对自增列赋值">6、仅当指定列列表,且SET IDENTITY_INSERT为ON时,才能对自增列赋值</h2>
+<ol>
+<li>自增长的SQL表格里面插入指定ID的数据的时候，会禁止你操作</li>
+<li>插入数据时，自增长列是系统自动处理，不需要你来指定数值，你也指定不了。只有将IDENTITY_INSERT 为 ON 时插入数据时，自增长列你才可以指定一个值</li>
+</ol>
+<p>直接上手解决方案：
+一直要注意一个点就是，一定要有“；”，还有value后哦面也需要加上“；”这个很多人都会忘了。</p>
+<pre tabindex="0"><code>set IDENTITY_INSERT ms_server_log_info ON;
+insert  表名
+value（******）;
+SET IDENTITY_INSERT ms_server_log_info OFF
+</code></pre><h2 id="7查询结果部分替换-成指定的值">7、查询结果部分替换 成指定的值</h2>
+<p>将查询结果中的某个字段值部分的替换掉.
+如:将 t_student 标准中的id字段中的 ‘1994’ 全部要替换成 ‘2019’,</p>
+<pre tabindex="0"><code>update t_student set id= replace(id,&#39;19940317&#39;,&#39;20190317&#39;);
+</code></pre><p>这样 所有的id字段的
+&lsquo;1994****&lsquo;全部被替换成 ‘2019****’</p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2022/%E8%BE%BE%E6%A2%A6%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5/">达梦——集群连接</a></span>
+  <span class="nav-next"><a href="/cn/2022/nginx%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">Nginx常见问题</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2022\/%E8%BE%BE%E6%A2%A6%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2022\/nginx%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

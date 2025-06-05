@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>MySQL——问题小书 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="MySQL——问题小书 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="从左开始截取字符串
+用法：left(str, length)，即：left(被截取字符串， 截取长度)
+[&amp;hellip;] https://yuanrengu.com/2020/9cfe2ad6.html
+[&amp;hellip;] # 查看端口 show variables like &amp;#39;port&amp;#39;; # 查看表结构 desc tablename; # 查看mysql版本 select &amp;hellip;">
+      <meta property="og:description" content="从左开始截取字符串
+用法：left(str, length)，即：left(被截取字符串， 截取长度)
+[&amp;hellip;] https://yuanrengu.com/2020/9cfe2ad6.html
+[&amp;hellip;] # 查看端口 show variables like &amp;#39;port&amp;#39;; # 查看表结构 desc tablename; # 查看mysql版本 select &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240611143605627.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2023%5cmysql%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>MySQL——问题小书</h1>
+
+
+<h3>Rehoni / 
+2023-10-12</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="问题1截取字符串">问题1、截取字符串</h2>
+<h3 id="具体描述">具体描述</h3>
+<h5 id="left">left</h5>
+<p>从<strong>左</strong>开始截取字符串</p>
+<p>用法：left(str, length)，即：left(被截取字符串， 截取长度)</p>
+<h5 id="right">right</h5>
+<h5 id="substring">subString</h5>
+<h5 id="substring_index">substring_index</h5>
+<p><a href="https://yuanrengu.com/2020/9cfe2ad6.html">https://yuanrengu.com/2020/9cfe2ad6.html</a></p>
+<h2 id="问题2查看相关信息">问题2、查看相关信息</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 查看端口
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> variables <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;port&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看表结构
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">desc</span> tablename;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看mysql版本
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#a6e22e">version</span>() <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">dual</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看mysql时区
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> variables <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;%time_zone&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>system_time_zone    CST
+</span></span><span style="display:flex;"><span>time_zone    <span style="color:#f92672">+</span><span style="color:#ae81ff">08</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">set</span> global time_zone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;+08:00&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">flush</span> <span style="color:#66d9ef">privileges</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 全局时区和当前session时区
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">@@</span>global.time_zone, <span style="color:#f92672">@@</span>session.time_zone;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 获取当前时间戳，各个类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#a6e22e">TIME_TO_SEC</span>(<span style="color:#a6e22e">NOW</span>()),
+</span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">NOW</span>(),
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">current_timestamp</span>(),
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">REPLACE</span>(<span style="color:#a6e22e">unix_timestamp</span>(<span style="color:#a6e22e">NOW</span>(<span style="color:#ae81ff">3</span>)), <span style="color:#e6db74">&#39;.&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>),
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">REPLACE</span>(<span style="color:#a6e22e">unix_timestamp</span>(<span style="color:#66d9ef">current_timestamp</span>(<span style="color:#ae81ff">3</span>)), <span style="color:#e6db74">&#39;.&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>),
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">current_timestamp</span>(<span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">unix_timestamp</span>(<span style="color:#66d9ef">current_timestamp</span>(<span style="color:#ae81ff">3</span>));
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 审计日志相关
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> variables <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;init_connect&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">show</span> variables <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;%log_bin%&#39;</span>;<span style="color:#75715e"># 查看是否开启binlog
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> variables <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;%binlog%&#39;</span>; <span style="color:#75715e"># 查看binlog相关参数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> variables <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;%audit%&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">set</span> global init_connect<span style="color:#f92672">=</span><span style="color:#66d9ef">NULL</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">show</span> binlog events;<span style="color:#75715e"># 只查看第一个binlog文件的内容
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> binlog events <span style="color:#66d9ef">in</span> <span style="color:#e6db74">&#39;mysql-bin.000002&#39;</span>; <span style="color:#75715e"># 查看指定binlog文件的内容
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> master status;<span style="color:#75715e"># 查看当前正在写入的binlog文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">binary</span> logs;<span style="color:#75715e"># 获取binlog文件列表
+</span></span></span></code></pre></div><h2 id="问题3用户操作">问题3、用户操作</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">user</span> <span style="color:#e6db74">&#39;rehoni&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span>; <span style="color:#75715e"># 删除用户
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> Host,<span style="color:#66d9ef">user</span> <span style="color:#66d9ef">from</span> mysql.<span style="color:#66d9ef">user</span>; <span style="color:#75715e"># 查看用户
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">user</span> <span style="color:#e6db74">&#39;rehoni&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span> <span style="color:#66d9ef">identified</span> <span style="color:#66d9ef">by</span> <span style="color:#e6db74">&#39;rehoni&#39;</span>; <span style="color:#75715e"># 创建用户
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">USER</span> dbadmin<span style="color:#f92672">@</span>localhost <span style="color:#66d9ef">IDENTIFIED</span> <span style="color:#66d9ef">BY</span> <span style="color:#e6db74">&#39;newpasswd3&#39;</span>; <span style="color:#75715e"># 修改用户密码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">update</span> <span style="color:#66d9ef">user</span> <span style="color:#66d9ef">set</span> host<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%&#39;</span> <span style="color:#66d9ef">where</span> mysql.<span style="color:#66d9ef">user</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;his&#39;</span>; <span style="color:#75715e">#开通远程访问权限
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> grants <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#39;rehoni&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span>; <span style="color:#75715e"># 查看权限
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">grant</span> <span style="color:#66d9ef">all</span> <span style="color:#66d9ef">privileges</span> <span style="color:#66d9ef">on</span> <span style="color:#f92672">*</span>.<span style="color:#f92672">*</span> <span style="color:#66d9ef">to</span> <span style="color:#e6db74">&#39;rehoni&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span>;<span style="color:#75715e"># 赋予权限
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">flush</span> <span style="color:#66d9ef">privileges</span> ; <span style="color:#75715e"># 刷新权限
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> grants <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#39;root&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span>;<span style="color:#75715e"># 查看权限
+</span></span></span></code></pre></div><h2 id="问题4增加表的字段">问题4、增加表的字段</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> imp_transform_ocg
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">add</span> vc <span style="color:#66d9ef">varchar</span>(<span style="color:#ae81ff">64</span>) <span style="color:#66d9ef">null</span> comment <span style="color:#e6db74">&#39;c2h4/c2h6气体比值&#39;</span>;
+</span></span></code></pre></div><h2 id="问题5修改创建视图">问题5、修改创建视图</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">drop</span> view imp_transform_ocg_latest;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> view imp_transform_ocg_latest <span style="color:#66d9ef">as</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> a.<span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> imp_transform_ocg a,
+</span></span><span style="display:flex;"><span>     (
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">select</span> uri, <span style="color:#a6e22e">max</span>(ACQTM) acqtm
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">from</span> imp_transform_ocg
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> uri) b
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> a.URI <span style="color:#f92672">=</span> b.URI
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">and</span> a.ACQTM <span style="color:#f92672">=</span> b.acqtm
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> a.URI;
+</span></span></code></pre></div><h2 id="问题6从表创建表">问题6、从表创建表</h2>
+<p><strong>问题描述</strong></p>
+<p>从已有的表的数据创建一张新的表的数据</p>
+<p><strong>解决方案和原理</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">table</span> operate_user;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span>
+</span></span><span style="display:flex;"><span>    operate_user
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">as</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> NAME <span style="color:#66d9ef">as</span> username, <span style="color:#e6db74">&#39;1&#39;</span> <span style="color:#66d9ef">as</span> priority, <span style="color:#a6e22e">now</span>() <span style="color:#66d9ef">as</span> control_time
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> nrcloud.users;
+</span></span></code></pre></div><h2 id="问题7日期加减">问题7、日期加减</h2>
+<p><strong>问题描述</strong></p>
+<p>日期做加减法</p>
+<p><strong>解决方案和原理</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#a6e22e">max</span>(priority)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> operate_user
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> control_time <span style="color:#66d9ef">between</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 注意这里的data_sub和interval的用法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">date_sub</span>(<span style="color:#a6e22e">now</span>(), <span style="color:#66d9ef">interval</span> <span style="color:#e6db74">&#39;599999999&#39;</span> minute) <span style="color:#66d9ef">and</span> <span style="color:#a6e22e">now</span>()
+</span></span></code></pre></div><h2 id="问题8空值排序">问题8、空值排序</h2>
+<p><strong>问题描述</strong></p>
+<p>表里该字段大部分为空，需要非空值排在前列</p>
+<p><strong>解决方案和原理</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e">-- 按空值排序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> FETIME, CLOSE_VAL, ROBOT_SCHEME, VIDEO_SCHEME
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> ems_status e
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e"># 1、传入这个条件，则此两个字段均为空的排在后边
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#75715e"># e.ROBOT_SCHEME = &#39;&#39; and e.VIDEO_SCHEME = &#39;&#39;;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#75715e"># 2、直接desc，逐个按顺序排列下去
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       e.ROBOT_SCHEME <span style="color:#66d9ef">desc</span>, e.VIDEO_SCHEME <span style="color:#66d9ef">desc</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 按长度排序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> FETIME, CLOSE_VAL, ROBOT_SCHEME, VIDEO_SCHEME, <span style="color:#a6e22e">length</span>(ROBOT_SCHEME) len
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> ems_status
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> len <span style="color:#66d9ef">desc</span>;
+</span></span></code></pre></div><h2 id="问题9添加行号">问题9、添加行号</h2>
+<p><strong>问题描述</strong></p>
+<p>返回给后端的带行号的数据</p>
+<p><strong>解决方案和原理</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> (<span style="color:#f92672">@</span>i :<span style="color:#f92672">=</span> <span style="color:#f92672">@</span>i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">as</span> row_num, A.<span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> (
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 需要添加行号的视图
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>         <span style="color:#66d9ef">select</span> b.id,
+</span></span><span style="display:flex;"><span>                a.SIGNAL_NAME,
+</span></span><span style="display:flex;"><span>                a.ID <span style="color:#66d9ef">as</span> signal_id,
+</span></span><span style="display:flex;"><span>                b.VIDEO_SCHEME,
+</span></span><span style="display:flex;"><span>                b.SOUND,
+</span></span><span style="display:flex;"><span>                b.SOUND_TYPE,
+</span></span><span style="display:flex;"><span>                b.video,
+</span></span><span style="display:flex;"><span>                b.PICTURE,
+</span></span><span style="display:flex;"><span>                d.STATION_NAME
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">from</span> base_signal a
+</span></span><span style="display:flex;"><span>                  <span style="color:#66d9ef">left</span> <span style="color:#66d9ef">join</span> relation_signal_scheme b <span style="color:#66d9ef">on</span> b.SIGNAL_ID <span style="color:#f92672">=</span> a.ID
+</span></span><span style="display:flex;"><span>                  <span style="color:#66d9ef">left</span> <span style="color:#66d9ef">join</span> relation_id c <span style="color:#66d9ef">on</span> c.signal_id <span style="color:#f92672">=</span> a.ID
+</span></span><span style="display:flex;"><span>                  <span style="color:#66d9ef">left</span> <span style="color:#66d9ef">join</span> base_station d <span style="color:#66d9ef">on</span> d.ID <span style="color:#f92672">=</span> c.station_id
+</span></span><span style="display:flex;"><span>     ) A,
+</span></span><span style="display:flex;"><span>     (<span style="color:#66d9ef">Select</span> <span style="color:#f92672">@</span>i :<span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>) B;
+</span></span></code></pre></div><h2 id="问题10创建视图">问题10、创建视图</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> view imp_transform_ocg_latest <span style="color:#66d9ef">as</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># as 后跟需要创建好的视图
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> a.<span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> imp_transform_ocg a,
+</span></span><span style="display:flex;"><span>     (
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">select</span> uri, <span style="color:#a6e22e">max</span>(ACQTM) acqtm
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">from</span> imp_transform_ocg
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> uri) b
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> a.URI <span style="color:#f92672">=</span> b.URI
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">and</span> a.ACQTM <span style="color:#f92672">=</span> b.acqtm
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> a.URI;
+</span></span></code></pre></div><h2 id="问题11修改字段大小写和字符集">问题11、修改字段大小写和字符集</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>
+</span></span><span style="display:flex;"><span>CONCAT(<span style="color:#e6db74">&#39;ALTER table &#39;</span>,t2.table_schema,<span style="color:#e6db74">&#39;.&#39;</span>,t2.<span style="color:#66d9ef">table_name</span>,<span style="color:#e6db74">&#39; CHANGE &#39;</span>,<span style="color:#e6db74">&#39; \`&#39;</span>,t2.<span style="color:#66d9ef">column_name</span>,<span style="color:#e6db74">&#39;\` \`&#39;</span>,<span style="color:#66d9ef">UPPER</span>(t2.<span style="color:#66d9ef">column_name</span>),<span style="color:#e6db74">&#39;\` &#39;</span>,
+</span></span><span style="display:flex;"><span>t2.column_type,<span style="color:#e6db74">&#39; &#39;</span>,<span style="color:#66d9ef">CASE</span> <span style="color:#66d9ef">WHEN</span> t2.is_nullable<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;NO&#39;</span> <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;not null&#39;</span> <span style="color:#66d9ef">ELSE</span> <span style="color:#e6db74">&#39;null&#39;</span> <span style="color:#66d9ef">END</span>,<span style="color:#e6db74">&#39; COMMENT &#39;&#39;&#39;</span>,t2.column_comment,<span style="color:#e6db74">&#39;&#39;&#39;;&#39;</span>) <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">c</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> information_schema.tables t1, information_schema.columns t2
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> t1.table_schema <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;sdjk&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> t1.table_type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;base table&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> t1.table_schema <span style="color:#f92672">=</span> t2.table_schema
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> t1.<span style="color:#66d9ef">table_name</span> <span style="color:#f92672">=</span> t2.<span style="color:#66d9ef">table_name</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">show</span> character <span style="color:#66d9ef">set</span> ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> concat(<span style="color:#e6db74">&#39;alter table `&#39;</span>,<span style="color:#66d9ef">TABLE_NAME</span>,<span style="color:#e6db74">&#39;` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">as</span> target_tables
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> information_schema.TABLES
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> TABLE_SCHEMA <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;standard&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">and</span> TABLE_TYPE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;base table&#39;</span>;
+</span></span></code></pre></div><h2 id="问题12转oracle的问题">问题12、转Oracle的问题</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 1. to_date ==&gt; str_to_date
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>str_to_date(<span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">{</span>startTime<span style="color:#960050;background-color:#1e0010">}</span>,<span style="color:#e6db74">&#39;%Y-%m-%d %H:%i:%s&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 2. to_char ==&gt; date_format 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>date_format(acqtm,<span style="color:#e6db74">&#39;%Y-%m-%d %H:%i:%s&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 3. || ==&gt; concat
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 4. sysdate() | sysdate
+</span></span></span></code></pre></div><h2 id="问题13修改mysql时区">问题13、修改MySQL时区</h2>
+<p>查看mysql当前时间，当前时区</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#a6e22e">curtime</span>();  <span style="color:#75715e">#或select now()也可以
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">+-----------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> <span style="color:#a6e22e">curtime</span>() <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+-----------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> <span style="color:#ae81ff">15</span>:<span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">10</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+-----------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">show</span> variables <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#34;%time_zone%&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+------------------+--------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> Variable_name  <span style="color:#f92672">|</span> Value <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+------------------+--------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> system_time_zone <span style="color:#f92672">|</span> CST  <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> time_zone    <span style="color:#f92672">|</span> SYSTEM <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+------------------+--------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span> rows <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</span></span></code></pre></div><p>time_zone说明mysql使用system的时区，system_time_zone说明system使用CST时区</p>
+<p><strong>方法一，直接修改</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">set</span> global time_zone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;+8:00&#39;</span>; <span style="color:#75715e">##修改mysql全局时区为北京时间，即我们所在的东8区
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">set</span> time_zone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;+8:00&#39;</span>; <span style="color:#75715e">##修改当前会话时区
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">flush</span> <span style="color:#66d9ef">privileges</span>; <span style="color:#75715e">#立即生效
+</span></span></span></code></pre></div><p><strong>方法二：通过修改my.cnf配置文件来修改时区</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># vim /etc/my.cnf ##在[mysqld]区域中加上</span>
+</span></span><span style="display:flex;"><span>default-time_zone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;+8:00&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /etc/init.d/mysqld restart ##重启mysql使新时区生效</span>
+</span></span></code></pre></div><p><strong>方法三：如果不方便重启mysql，又想临时解决时区问题，可以通过php或其他语言在初始化mysql时初始化mysql时区</strong></p>
+<p>这里，以php为例，在mysql_connect()下使用:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">mysql_query</span>(<span style="color:#e6db74">&#34;SET time_zone = &#39;+8:00&#39;&#34;</span>)
+</span></span></code></pre></div><blockquote>
+<p>这样可以在保证你不重启的情况下改变时区。但是mysql的某些系统函数还是不能用如：now()。</p>
+</blockquote>
+<h2 id="问题14mysql内置json操作函数">问题14、mysql内置Json操作函数</h2>
+<p>MySQL 官方列出 JSON 相关的函数，完整列表如下 [<a href="https://link.segmentfault.com/?enc=jiZQuhquDK6iDMRdUnbxpQ%3D%3D.ySsnXHKck%2FE7gmx%2BKYERkKN97PYeR%2BRyY2GXsL2u2QX6OsFYMbamUkFBgfK4%2BE0ImNY6QuwqfsVBaV9qZbSH1kfdfkgHZf8uOit9xGcdRB0%3D">doc</a> ]：</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://link.segmentfault.com/?enc=wOGpbgoJvPLQ4%2Bha7iU8ZQ%3D%3D.eAvOM4EE23TNEx2H6lxZFqXDnjqCkVXJKTi19XOZmRAGH8FyKvrbpInTdVDazvb5eLISdxxmQfSDBxXz1Ri0NiMheLFpkXSfZsLT28QAX2s%3D">json 创建函数</a></td>
+<td><a href="https://link.segmentfault.com/?enc=dpMapM22DJ95X%2BfZXL%2F7tw%3D%3D.2O%2FUEWeBHs7o0l8QOmK9BhGFbB5zEzodvFQQPM5Iu54XPW7wROWqpBg3ypF8zTYbRJMfrkWCZTU3iXwDURM0EaVA4Io5GPtUVls19BEzyQ5xvn2z5V4eXs%2FcIXzxXMpd">json_array()</a></td>
+<td>创建 json 数组</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=V8ZrVA8SzEkemYVQjotCZg%3D%3D.4lJxVNNb5HMcn1RwL5Stjqpoyj%2F7OJVk31P0lacA8VsW0Wr1femTyfUpCtwQwNN%2FSlK4NcYlj2NKRlzyRuhgLfTxHIGnZFepQX3G1RNDlWpdfjijN0DAQEDiDHIxrTGr">json_object()</a></td>
+<td>创建 json 对象</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=rCRVh8SJ1sZTPRp3s1bGew%3D%3D.iuSpJICbzGWZJREk2zHe5g5rxBc%2F753hdRpBew2BnycqlYEUKcYGzE4axN%2B5j5Hae42QkehmbUH2xX7gAmCH8PzwfDcJBwrdtp2Pj7gXiZnEskTWhbjwxBi0aj31O%2BM8">json_quote()</a></td>
+<td>用双引号包裹 json 文档</td>
+</tr>
+<tr>
+<td><a href="https://link.segmentfault.com/?enc=VM5mouG%2FTwiCUrrpanCSLw%3D%3D.aJ60IlJPvsG6GRgdpwhIZGtXw9hPjQn2BfcNUSbTWwkoi%2BL%2B2ZjxpXpXpWVw9pTl9u0ieEdXEdEeShFzMh0XPE2kysheQB9TpnxT1MMshvU%3D">json 查询函数</a></td>
+<td><a href="https://link.segmentfault.com/?enc=InFRDvvuYL%2BY0dtKuGFNTQ%3D%3D.5yAzQB%2Bko1hRLSPCzX1TphJWMSlPqHQwo2LLiK23JjjJFs22cOVVJtM%2F7GPlXpcvjGgMN6smhN9Gkl5XedqfSgSREYG%2Ffjojd%2Bv9rbXVC3in41A7%2BrFiCb3IQ3c4NRX6">json_contains()</a></td>
+<td>判断是否包含某个 json 值</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=krjvYZ5EwLtpE9RMThw1sQ%3D%3D.XK3TKdRscmKpcBVppo%2F0lVYFJMYSGT2ndOMKH%2FW8rgdo2SxVHLZKC3Mg9txgkpWK87O1P%2FKS9fm%2BYMlolbs9%2BnsQR16Y8RaG%2FjKHQmaev0m6%2B599B6u0b%2FPhaoQkoSQj">json_contains_path()</a></td>
+<td>判断某个路径下是否包 json 值</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=QriBA8uLgLS6sBMq%2B7L%2FjQ%3D%3D.fh%2Fhyo%2Bf08ApzMNu9n7CR%2Bl3sEwEZIVzAWu3VGSYVJHFgK8J81MGJpvsHqD2ckl80I5EX1ex9AIBjqc1Qh34N5lgxKPe8VYs4FZzx%2FmhGksiEJGpBNITsCCttIaXFnB7">json_extract()</a></td>
+<td>提取 json 值</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=GK367bayc3XUAJC46J9WAg%3D%3D.nQlInJFHlPSqG0wV4%2FEv424OXndFIMPbzFcKJwXWOmANDjfBsJfPQ%2FXxRTqTlOfbuyUMcstHFsZCcVFOwqbVDFZFxcikicrQ16t5x4vaZSEAFWhvGD25%2F9GgG1FTIx9r">column-&gt;path</a></td>
+<td>json_extract() 的简洁写法，5.7.9 开始支持</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=y4UNR7vunLJiAaZgqyNGNQ%3D%3D.HqoeQwgWfKeFCGIfrwaYbDyHqV5I3lafRGuhPBAhwebx2Twg6DHNtp3Cb0LEwKREyOgjHcSCqxmjvK%2FoZiK6xJ14lMWtYgSr9aGYmTesEuCe6Z8H0EceOuQgOUwBK3PV">column-&raquo;path</a></td>
+<td>json_unquote(json_extract()) 的简洁写法，5.7.13 开始支持</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=Uu6unIHtsahp9d%2FS1CtuQg%3D%3D.PNA9eo8al81hEvcFtPTX4wTdecGmOvq5BwipkvtfasPNiy1U3oL6Vt1jZIdtf4AUYBlQnr9Vyba0C7BGyhhyceD9eOswRYyXNlvw6qG6k5FV8DgXQpkYCy9VtOWRfe1f">json_keys()</a></td>
+<td>把 json 对象的顶层的全部键提取为 json 数组</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=Y3wc5KObGQZVuYJH8HXOvw%3D%3D.n5l2LC8RPizCVew24rLk04U9B247xtLC75FFsIA2t4Iiyd9tFAFv1jguXAcB59E3HRcZ5zxFmmrCTCY2vvHuT6pQWGdKF5vumAM2DMqXS4YlSCPt7PkIYJs4Xffg5xmo">json_search()</a></td>
+<td>按给定字符串关键字搜索 json，返回匹配的路径</td>
+</tr>
+<tr>
+<td><a href="https://link.segmentfault.com/?enc=19AOZyfZ%2F08ZC5Q3GCg8sg%3D%3D.WBwWziDnA9kNz3hZHTowd8bzUFXjp9pYofzqRhVtyZTkNXcbj5LvIlChQvyWuPYO6%2F8rybObtW9kAM5ypRrobZDQIVcYf8exTpOPdbL0tcc%3D">json 修改函数</a></td>
+<td><del><a href="https://link.segmentfault.com/?enc=3%2Bvewp28HdxPVXZ8tzd8qw%3D%3D.Ab8VypMbQZzHBk3%2FRmbclTlZdaIOyhk1JhWOX4N72DkebAcPKyr5b7FRZmF2iV8poMy4L%2FBBcfPMlOxsW0nEqZKZdQ0hOTC9IoxmPMiDjrPX9rIHSNMHWQJer0%2FpYSLP">json_append()</a></del></td>
+<td>5.7.9 废弃，改名为 json_array_append</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=b%2B%2BrN415VkEO4vKiJglQGw%3D%3D.j1WSAOAmmYmZD8qaXvbev4yBfL50nzDKadLf2WeE%2BQ%2F2dYAjGAYBVCOmDVIK6VYPDhzmC14rrzTvwMpkwdpz9Pg1WywixNsWEAR8iSVbxBNLH2jGHsgwaTJYpUwKQVjzoj1U%2B7mDyXOOWQ1eqn%2BElA%3D%3D">json_array_append()</a></td>
+<td>在 josn 文档末尾添加数组元素</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=O8WN%2FkFKFcqpvMdl7UzweQ%3D%3D.9KqeJ7w86RitJc5D9ekhR3PmCbdFeFz6FIshs%2FTRlGpNIj24H57HX70SkXVkvNwWYqUY1OoloTeZfT8aCm45OjtBh123O9lPsubUN8aQ%2BRFL4jAHzA4eWRRjQ0xA1JToH0pK6yZCjEr%2BPsY911vLYQ%3D%3D">json_array_insert()</a></td>
+<td>在 josn 数组中插入元素</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=S%2Bqe7XAyVc%2BRfRg%2F8RpSzg%3D%3D.SiYm8xlyUqXfjuGW4jKgXDuZwP7EzIhM4USE0pCgoTU3RGo%2Br6dhBTqddlEUtpSiuT3Ixi54gLqA1%2F4j7nzXIhJPfOx%2B0a8%2F8hKWMd9lX%2BjTNUXNxfu%2BbR6DX%2Fk5qW5Z">json_insert()</a></td>
+<td>插入值（只插入新值，不替换旧值）</td>
+</tr>
+<tr>
+<td></td>
+<td><del><a href="https://link.segmentfault.com/?enc=O19a60SRDGcz7vEgCwqfDA%3D%3D.VuhCU7zDmPWqVu52rbDb9zeDFsKjHgnUOUPAbASASuafm9BmeJhr3eoXHOusludD45KKQF5SmuzZ6hOpmAFrmhFBkYvfSrJ04nwhw9%2B53wouqvL%2BNzH%2BChJeXy8H2GG5">json_merge()</a></del></td>
+<td>5.7.22 废弃，与 json_merge_preserve() 同义</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=m2309%2BjDIOxv%2Fs%2FQDcM51Q%3D%3D.hAe%2BBNx6FZXLRbCLu8VK19hAZj%2FHhQyGOCPTdZtBz2fePO3lc%2BsjsALqFFbcqOIil%2F1aWUawzClv7G2b%2BQImN12IoOkwZGNuFsahPHjYnr%2FYuoPiuwfmTCG%2BKXXgEsjExL3XSx2%2FezHZK6XvHQMTQQ%3D%3D">json_merge_patch()</a></td>
+<td>合并 json 文档，重复键的值将被替换掉</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=xI%2F8NeEQojgFYPxfLhfLZQ%3D%3D.cVj2GRx9tYY%2F68LmGJnRr5tZYBcI4TPiR9hfAw8gqqwBaFU%2BSU%2B5%2FlnJfb8Ndng6PkVr0YCaLE3rNg4GXkpIxTeE8j7oyVZPgp3xPJ2AbbXxV4HFDBCKwL%2BkP9s4GrrV2X0YqxIvrVHb3COFj0FrGA%3D%3D">json_merge_preserve()</a></td>
+<td>合并 json 文档，保留重复键</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=4cIvwCPN7Z6kP7nroMu4SA%3D%3D.Fvllfb1bZI6wuzbz2ug%2BcreeqW3KT9XCKdIICDqqFweYGojQ%2FAaRZtO4%2BeMBseicW3hfeCXw5UNvyvtmlc13Nl3I8yydtqV88%2BuYX8cYBbO6F%2B1Sb9ak2lLge4vQeZ2l">json_remove()</a></td>
+<td>删除 json 文档中的数据</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=WOIqdlwgjP4mLuKYgNz6IQ%3D%3D.V3wUeX3UMTiPi9QTMqaLZjByzzEbXa8ANzqnR1DNbVQcYq2XnkO6FzUlRONim0JL8OmOZLRzu6pFePaxTCM%2FKIT7BkLSiJ0Y4MYY4ZX7%2Bl7s1kq60VJXcvzRORObHH9M">json_replace()</a></td>
+<td>替换值（只替换旧值，不插入新值）</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=5BkcU0roNFe28d78yy0ZPw%3D%3D.RgVSBRJT0cousZNPghEMwnSvSV8crdTgyHgyWCK8r4BQwTWInwAl6dJIc1wyGaC3oneeRQaU%2FBZKkPrU6yny%2BPdwFNJrYpG1XFsOtBqQhJTPtSWOb%2F2n5rHw%2B3xpDztC">json_set()</a></td>
+<td>设置值（替换旧值，或插入新值）</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=B5kOtfy0wqkGrEDk9qHwOA%3D%3D.wOnS4zN2D%2BTTQYkPeCFv70VCfkE%2FTNOIJBwpmM6IayN1eT%2FH8YD6e5dV6KkNnYssktEuXF5l4bSXAiXmAHZDM%2BCLlOyVWdPVu5xFd4Z0bwBCI4UHQMuGazQ4YHfIb7vz">json_unquote()</a></td>
+<td>移除 json 值的双引号包裹</td>
+</tr>
+<tr>
+<td><a href="https://link.segmentfault.com/?enc=1DTTfEs%2FaaccgmDfF75Zpw%3D%3D.EYQRdFPgYkML5iwX6SBXekutjMq2buszZHyIr4JqngMXfxJREpiDdRXGErlZmEOkDDzNQcg9lQUWBr1NZRAdM5JSBNiS454JwL9wlkBdWfc%3D">json 属性函数</a></td>
+<td><a href="https://link.segmentfault.com/?enc=b2CWirIeXysVjArOnQbSSg%3D%3D.2ArIpzUj%2BGikBtcsNdIGCat2cfusSttjMNDIYVzoqfOjmj3mwd6Vfqnf87Q3abUP%2BHv3tm8UZJ7JMsPkeCjUTaluubXLwDhReVy5xhmR0aYiOq6kSflcXc71q5pCTwD1">json_depth()</a></td>
+<td>返回 json 文档的最大深度</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=YHP4QaHOe4MF4m9JcTudJA%3D%3D.jejFYD4reb4xRQGPkU7TKQWgemxaUe1SmvgTuPrwIXfmPyLkj8oqBJ9DwDWA86utaLhwMHhGNLHPCLZuyIa4P3lyisKO%2FEkOgIBhcVJotFtT2iZj6x%2FDRPN%2FHrevZ%2Fz4">json_length()</a></td>
+<td>返回 json 文档的长度</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=3k0e6eoLOoTUw7bBzfJgJw%3D%3D.rcltBcrr4rN%2BYv4rMUb8aaosKzZXx4P7W6WQzwsPigVN3npcocp3XwUFwfcuWvwnqrjUoYLPS0SQhIAuh5CKUexetNQnNol4mDg9QGNSSjqtdY6rnYHLiyQx0vViXEd2">json_type()</a></td>
+<td>返回 json 值的类型</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=8hQOAC0Igqnc2tasyyTmvg%3D%3D.Y6QV2ss8O3nmFoo%2B9905tAGo78t6guD8WLmAMR8C2j7XQ7QfCeR0IkNMKGt9JPwoH7DwNkdJhehf7WN2CX1HxBTt0j9Iy3p%2FOLRiAV7cCqz0a1sES%2BRoFIezGJwTl%2BCG">json_valid()</a></td>
+<td>判断是否为合法 json 文档</td>
+</tr>
+<tr>
+<td><a href="https://link.segmentfault.com/?enc=y5KfGIK0E8DaohcxpI72qg%3D%3D.%2BaD4FyV9KMkcvMwWSkGk5JOjIdJ938TJ29fZla4e%2FAmqlg6j%2BbVeNq%2FyTSkGl5dOjNR7UYUHPlDjSo7z12YVBx48I%2F7k0wDMjARYAmxkOHs%3D">json 工具函数</a></td>
+<td><a href="https://link.segmentfault.com/?enc=NZJMT2rgo2nTAJXTCM32Wg%3D%3D.4AGhFM0YkSh7c0z6LBBjKxRKusV8r5a1cmTwH%2FktW%2FQ945boG5byi46f2jAnjS2JhykMMydH6vOxRaLPL%2BcXNYxB7VQilESMQOVKbzNBCMnPhIlCB%2FX0yytCxrsKs2zu">json_pretty()</a></td>
+<td>美化输出 json 文档，5.7.22 新增</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://link.segmentfault.com/?enc=6rRNrpsjPmPlJfsFSUjbFw%3D%3D.yCQNW5VYxLHqTxvATbQ3f70aLoOh7nVmO7BX9ql7dJEoxUz%2FEHh0RLmVOVnkjZ37N%2BxbbswBTWXc%2FPo1HkzVXKXBntXKxKJdNTPHo7pVG3xV9oUpZNwUFM9wXRuSsbOq">json_storage_size()</a></td>
+<td>返回 json 文档占用的存储空间，5.7.22 新增</td>
+</tr>
+</tbody>
+</table>
+<p>官方文档对全部函数都作了充分解释并提供一定的示例代码。下文挑选了<strong>部分函数</strong>，演示它们的使用方法。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e">-- 创建 tbl 表，字段 data 为 json 类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> <span style="color:#a6e22e">tbl</span> (data JSON);
+</span></span><span style="display:flex;"><span>Query OK, <span style="color:#ae81ff">0</span> rows <span style="color:#a6e22e">affected</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">17</span> sec)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 插入 json 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> tbl <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;{&#34;id&#34;: 1, &#34;name&#34;: &#34;Will&#34;}&#39;</span>);
+</span></span><span style="display:flex;"><span>Query OK, <span style="color:#ae81ff">1</span> row <span style="color:#a6e22e">affected</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">04</span> sec)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 插入 json 数组
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> tbl <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;[1, 42, 1024]&#39;</span>);
+</span></span><span style="display:flex;"><span>Query OK, <span style="color:#ae81ff">1</span> row <span style="color:#a6e22e">affected</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 使用 json_object() 创建 json 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> tbl <span style="color:#66d9ef">values</span> (<span style="color:#a6e22e">json_object</span>(<span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;name&#39;</span>, <span style="color:#e6db74">&#39;Joe&#39;</span>));
+</span></span><span style="display:flex;"><span>Query OK, <span style="color:#ae81ff">1</span> row <span style="color:#a6e22e">affected</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 使用 json_array() 创建 json 数组
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> tbl <span style="color:#66d9ef">values</span> (<span style="color:#a6e22e">json_array</span>(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;abc&#34;</span>, <span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">true</span>, <span style="color:#a6e22e">curtime</span>()));
+</span></span><span style="display:flex;"><span>Query OK, <span style="color:#ae81ff">1</span> row <span style="color:#a6e22e">affected</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 查询 tbl 表数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> tbl;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+-------------------------------------------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> data                                      <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+-------------------------------------------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Will&#34;</span><span style="color:#960050;background-color:#1e0010">}</span>                 <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">42</span>, <span style="color:#ae81ff">1024</span>]                             <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Andy&#34;</span><span style="color:#960050;background-color:#1e0010">}</span>                 <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> [<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;abc&#34;</span>, <span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">true</span>, <span style="color:#e6db74">&#34;20:27:41.000000&#34;</span>] <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+-------------------------------------------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span> rows <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</span></span></code></pre></div><p><strong>JSON_EXTRACT</strong> 查询局部数据</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysql&gt; SELECT JSON_EXTRACT<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;{&#34;name&#34;:&#34;Zhaim&#34;,&#34;tel&#34;:&#34;13240133388&#34;}&#39;</span>,<span style="color:#e6db74">&#34;</span>$<span style="color:#e6db74">.name&#34;</span><span style="color:#f92672">)</span>;
+</span></span><span style="display:flex;"><span>+---------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>| JSON_EXTRACT<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;{&#34;name&#34;:&#34;Zhaim&#34;,&#34;tel&#34;:&#34;13240133388&#34;}&#39;</span>,<span style="color:#e6db74">&#34;</span>$<span style="color:#e6db74">.name&#34;</span><span style="color:#f92672">)</span> |
+</span></span><span style="display:flex;"><span>+---------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>| <span style="color:#e6db74">&#34;Zhaim&#34;</span>                                                       |
+</span></span><span style="display:flex;"><span>+---------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 可以使用 column-&gt;path 的形式提取元素的值，对应字符串类型的 category-&gt;&#39;$.name&#39; 中还包含着双引号，可以用 JSON_UNQUOTE 函数将双引号去掉</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 从 MySQL 5.7.13 起也可以通过这个操作符 -&gt;&gt; 这个和 JSON_UNQUOTE 是等价的</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 用 -&gt; 直接提取时要注意元素值的类型</span>
+</span></span><span style="display:flex;"><span>mysql&gt; SELECT * FROM lnmp WHERE category-&gt;&gt;<span style="color:#e6db74">&#39;$.name&#39;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;lnmp.cn&#39;</span>;
+</span></span><span style="display:flex;"><span>+----+------------------------------+-----------+
+</span></span><span style="display:flex;"><span>| id | category                     | tags      |
+</span></span><span style="display:flex;"><span>+----+------------------------------+-----------+
+</span></span><span style="display:flex;"><span>|  <span style="color:#ae81ff">1</span> | <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;id&#34;</span>: 1, <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;lnmp.cn&#34;</span><span style="color:#f92672">}</span> | <span style="color:#f92672">[</span>1, 2, 3<span style="color:#f92672">]</span> |
+</span></span><span style="display:flex;"><span>+----+------------------------------+-----------+
+</span></span></code></pre></div><p><strong>JSON_INSERT</strong> 插入新的元素</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysql&gt; UPDATE lnmp SET category <span style="color:#f92672">=</span> JSON_INSERT<span style="color:#f92672">(</span>category, <span style="color:#e6db74">&#39;$.name&#39;</span>, <span style="color:#e6db74">&#39;lnmp&#39;</span>, <span style="color:#e6db74">&#39;$.url&#39;</span>, <span style="color:#e6db74">&#39;www.lnmp.cn&#39;</span><span style="color:#f92672">)</span> WHERE id <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mysql&gt; SELECT * FROM lnmp;
+</span></span><span style="display:flex;"><span>+----+----------------------------------------------------+-----------+
+</span></span><span style="display:flex;"><span>| id | category                                           | tags      |
+</span></span><span style="display:flex;"><span>+----+----------------------------------------------------+-----------+
+</span></span><span style="display:flex;"><span>|  <span style="color:#ae81ff">1</span> | <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;id&#34;</span>: 1, <span style="color:#e6db74">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;www.lnmp.cn&#34;</span>, <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;lnmp.cn&#34;</span><span style="color:#f92672">}</span> | <span style="color:#f92672">[</span>1, 3, 4<span style="color:#f92672">]</span> |
+</span></span><span style="display:flex;"><span>|  <span style="color:#ae81ff">2</span> | <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;id&#34;</span>: 2, <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;php.net&#34;</span><span style="color:#f92672">}</span>                       | <span style="color:#f92672">[</span>1, 3, 5<span style="color:#f92672">]</span> |
+</span></span><span style="display:flex;"><span>+----+----------------------------------------------------+-----------+
+</span></span></code></pre></div><p><strong>JSON_SET</strong> 插入或覆盖元素</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysql&gt; UPDATE lnmp SET category <span style="color:#f92672">=</span> JSON_SET<span style="color:#f92672">(</span>category, <span style="color:#e6db74">&#39;$.host&#39;</span>, <span style="color:#e6db74">&#39;www.lnmp.cn&#39;</span>, <span style="color:#e6db74">&#39;$.url&#39;</span>, <span style="color:#e6db74">&#39;http://www.lnmp.cn&#39;</span><span style="color:#f92672">)</span> WHERE id <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mysql&gt; SELECT * FROM lnmp;
+</span></span><span style="display:flex;"><span>+----+----------------------------------------------------------------------------------+-----------+
+</span></span><span style="display:flex;"><span>| id | category                                                                         | tags      |
+</span></span><span style="display:flex;"><span>+----+----------------------------------------------------------------------------------+-----------+
+</span></span><span style="display:flex;"><span>|  <span style="color:#ae81ff">1</span> | <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;id&#34;</span>: 1, <span style="color:#e6db74">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;http://www.lnmp.cn&#34;</span>, <span style="color:#e6db74">&#34;host&#34;</span>: <span style="color:#e6db74">&#34;www.lnmp.cn&#34;</span>, <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;lnmp.cn&#34;</span><span style="color:#f92672">}</span> | <span style="color:#f92672">[</span>1, 3, 4<span style="color:#f92672">]</span> |
+</span></span><span style="display:flex;"><span>|  <span style="color:#ae81ff">2</span> | <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;id&#34;</span>: 2, <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;php.net&#34;</span><span style="color:#f92672">}</span>                                                     | <span style="color:#f92672">[</span>1, 3, 5<span style="color:#f92672">]</span> |
+</span></span><span style="display:flex;"><span>+----+----------------------------------------------------------------------------------+-----------+
+</span></span></code></pre></div><p><strong>JSON_REPLACE</strong> 替换已有元素</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysql&gt; UPDATE lnmp SET category <span style="color:#f92672">=</span> JSON_REPLACE<span style="color:#f92672">(</span>category, <span style="color:#e6db74">&#39;$.name&#39;</span>, <span style="color:#e6db74">&#39;php&#39;</span>, <span style="color:#e6db74">&#39;$.url&#39;</span>, <span style="color:#e6db74">&#39;http://www.php.net&#39;</span><span style="color:#f92672">)</span> WHERE id <span style="color:#f92672">=</span> 2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mysql&gt; SELECT * FROM lnmp;
+</span></span><span style="display:flex;"><span>+----+----------------------------------------------------------------------------------+-----------+
+</span></span><span style="display:flex;"><span>| id | category                                                                         | tags      |
+</span></span><span style="display:flex;"><span>+----+----------------------------------------------------------------------------------+-----------+
+</span></span><span style="display:flex;"><span>|  <span style="color:#ae81ff">1</span> | <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;id&#34;</span>: 1, <span style="color:#e6db74">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;http://www.lnmp.cn&#34;</span>, <span style="color:#e6db74">&#34;host&#34;</span>: <span style="color:#e6db74">&#34;www.lnmp.cn&#34;</span>, <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;lnmp.cn&#34;</span><span style="color:#f92672">}</span> | <span style="color:#f92672">[</span>1, 3, 4<span style="color:#f92672">]</span> |
+</span></span><span style="display:flex;"><span>|  <span style="color:#ae81ff">2</span> | <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;id&#34;</span>: 2, <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;php&#34;</span><span style="color:#f92672">}</span>                                                         | <span style="color:#f92672">[</span>1, 3, 5<span style="color:#f92672">]</span> |
+</span></span><span style="display:flex;"><span>+----+----------------------------------------------------------------------------------+-----------+
+</span></span></code></pre></div><p><strong>JSON_REMOVE</strong> 删除部分元素</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysql&gt; UPDATE lnmp SET category <span style="color:#f92672">=</span> JSON_REMOVE<span style="color:#f92672">(</span>category, <span style="color:#e6db74">&#39;$.url&#39;</span>, <span style="color:#e6db74">&#39;$.host&#39;</span><span style="color:#f92672">)</span> WHERE id <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mysql&gt; SELECT * FROM lnmp;
+</span></span><span style="display:flex;"><span>+----+------------------------------+-----------+
+</span></span><span style="display:flex;"><span>| id | category                     | tags      |
+</span></span><span style="display:flex;"><span>+----+------------------------------+-----------+
+</span></span><span style="display:flex;"><span>|  <span style="color:#ae81ff">1</span> | <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;id&#34;</span>: 1, <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;lnmp.cn&#34;</span><span style="color:#f92672">}</span> | <span style="color:#f92672">[</span>1, 3, 4<span style="color:#f92672">]</span> |
+</span></span><span style="display:flex;"><span>|  <span style="color:#ae81ff">2</span> | <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;id&#34;</span>: 2, <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;php&#34;</span><span style="color:#f92672">}</span>     | <span style="color:#f92672">[</span>1, 3, 5<span style="color:#f92672">]</span> |
+</span></span><span style="display:flex;"><span>+----+------------------------------+-----------+
+</span></span></code></pre></div><h2 id="问题15where和inner-join区别">问题15、where和inner join区别</h2>
+<p>在多表查询中，一些SQL开发人员更喜欢使用WHERE来做join，比如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> a.ID, b.Name, b.Date <span style="color:#66d9ef">FROM</span> Customers a, Sales b <span style="color:#66d9ef">WHERE</span> a.ID <span style="color:#f92672">=</span> b.ID;
+</span></span></code></pre></div><p>缺点：在上面语句中，实际上是创建了两张表的笛卡尔积，所有可能的组合都会被创建出来。在笛卡尔连接中，在上面的例子中，如果有1000顾客和1000条销售记录，这个查询会先产生1000000个结果，然后通过正确的 ID过滤出1000条记录。 这是一种低效利用数据库资源，数据库多做100倍的工作。 在大型数据库中，笛卡尔连接是一个大问题，对两个大表的笛卡尔积会创建数10亿或万亿的记录。</p>
+<p>为了避免创建笛卡尔积，应该使用INNER JOIN ：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> a.ID, b.Name, b.Date <span style="color:#66d9ef">FROM</span> Customers a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales b <span style="color:#66d9ef">ON</span> a.ID <span style="color:#f92672">=</span> b.ID;
+</span></span></code></pre></div><p>优点：如上面语句，使用inner join 这样数据库就只产生等于ID 的1000条目标结果。增加了查询效率。</p>
+<p>有些数据库系统会识别出 WHERE连接并自动转换为 INNER JOIN。在这些数据库系统中，WHERE 连接与INNER JOIN 就没有性能差异。但是， INNER JOIN 是所有数据库都能识别的，因此DBA会建议在你的环境中使用它。</p>
+<ol>
+<li>INNER JOIN（内连接,或等值连接）：获取两个表中字段匹配关系的记录。</li>
+<li>LEFT JOIN（左连接）：获取左表所有记录，即使右表没有对应匹配的记录。</li>
+<li>RIGHT JOIN（右连接）： 与 LEFT JOIN 相反，用于获取右表所有记录，即使左表没有对应匹配的记录。</li>
+</ol>
+<h2 id="问题16mysql日期类型和默认设置">问题16、mysql日期类型和默认设置</h2>
+<h3 id="日期类型区别及用途">日期类型区别及用途</h3>
+<p>MySQL 的日期类型有5个，分别是： date、time、year、<a href="https://so.csdn.net/so/search?q=datetime&amp;spm=1001.2101.3001.7020">datetime</a>、timestamp。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20240611143605627.png" alt="image-20240611143605627"></p>
+<p><strong>DATETIME</strong></p>
+<p>DATETIME 用于表示 年月日 时分秒，是 DATE和TIME 的组合，并且记录的年份（见上表）比较长久。如果实际应用中有这样的需求，就可以使用 DATETIME 类型。</p>
+<p><strong>TIMESTAMP</strong></p>
+<p>　 TIMESTAMP 用于表示 年月日 时分秒，但是记录的年份（见上表）比较短暂。</p>
+<p>　 TIMESTAMP 和时区相关，更能反映当前时间。当插入日期时，会先转换为本地时区后再存放；当查询日期时，会将日期转换为本地时区后再显示。所以不同时区的人看到的同一时间是不一样的。</p>
+<p>表中的第一个 TIMESTAMP 列自动设置为系统时间（CURRENT_TIMESTAMP）。当插入或更新一行，但没有明确给 TIMESTAMP 列赋值，也会自动设置为当前系统时间。如果表中有第二个 TIMESTAMP    列，则默认值设置为0000-00-00 00:00:00。</p>
+<p>TIMESTAMP 的属性受 Mysql 版本和服务器 SQLMode 的影响较大。</p>
+<p>如果记录的日期需要让不同时区的人使用，最好使用 TIMESTAMP。</p>
+<p><strong>DATE</strong></p>
+<p>DATE 用于表示年月日，如果实际应用值需要保存年月日就可以使用DATE。</p>
+<p><strong>TIME</strong></p>
+<p>TIME 用于表示时分秒，如果实际应用值需要保存时分秒就可以使用TIME。</p>
+<p><strong>YEAR</strong></p>
+<p>YEAR 用于表示 年份，YEAR 有2位（最好使用4位）和4位格式的年。 默认是4位。如果实际应用只保存年份，那么用1bytes 保存YEAR 类型完全可以。不但能够节约存储空间，还能提高表的操作效率。</p>
+<p>将在<a href="http://www.runoob.com/mysql/mysql-data-types.html">“菜鸟教程”</a>和百度获取的资料，整理成如下表格：</p>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>字节</th>
+<th>格式</th>
+<th>用途</th>
+<th>是否支持设置系统默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>date</td>
+<td>3</td>
+<td>YYYY-MM-DD</td>
+<td>日期值</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>time</td>
+<td>3</td>
+<td>HH:MM:SS</td>
+<td>时间值或持续时间</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>year</td>
+<td>1</td>
+<td>YYYY</td>
+<td>年份</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>8</td>
+<td>YYYY-MM-DD HH:MM:SS</td>
+<td>日期和时间混合值</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>4</td>
+<td>YYYYMMDD HHMMSS</td>
+<td>混合日期和时间，可作时间戳</td>
+<td>支持</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h3 id="日期类型的-default-设置">日期类型的 default 设置</h3>
+<p>关于 default 设置，通常情况下会使用当前时间作为默认值。
+Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>ts_time <span style="color:#66d9ef">timestamp</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> NOW();
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>or</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>ts_time <span style="color:#66d9ef">timestamp</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>();
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>根据上表可知，除了 timestamp 类型支持系统默认值设置，其他类型都不支持。
+如果建表语句中有:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>ts_time1 time <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> NOW();
+</span></span><span style="display:flex;"><span>ts_time3 yearNOT <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> NOW();
+</span></span><span style="display:flex;"><span>ts_time2 date <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>();
+</span></span><span style="display:flex;"><span>ts_time2 datetime <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>();<span style="color:#ae81ff">1234</span>
+</span></span></code></pre></div><p>都会报错。所以想要设置某个日期列的默认值为当前时间，只能使用 timestamp 类型，并设置 DEFAULT NOW() 或 DEFAULT CURRENT_TIMESTAMP() 作为默认值。</p>
+<p><strong>date 类型默认值使用 current_date() 创建失败</strong></p>
+<p><img src="/images/20161202175807369.png" alt="date 创建失败"></p>
+<p><strong>date 类型默认值使用 now() 创建失败</strong></p>
+<p><img src="/images/20161202175834692.png" alt=" date 创建失败2 "></p>
+<p><strong>date 类型默认值使用 current_timestamp() 创建失败</strong></p>
+<p><img src="/images/20161202175907427.png" alt=" date 创建失败3"></p>
+<p><strong>datetime 类型默认值使用 current_timestamp() 创建失败</strong></p>
+<p><img src="/images/20161202175933099.png" alt="datetime 创建失败1"></p>
+<p><strong>datetime 类型默认值使用 now() 创建失败</strong></p>
+<p><img src="/images/20161202180128433.png" alt="datetime 创建失败2"></p>
+<p><strong>timestamp 类型默认值使用 now() 创建成功</strong></p>
+<p><img src="/images/20161202175107259.png" alt="timestamp "></p>
+<h3 id="常见的日期获取函数">常见的日期获取函数</h3>
+<p>MySQL中有一些日期函数可供我们使用，我们可以使用 ” select 函数名() ; ” 的 sql 查看它们的返回值。同时也可以使用 “select 自定义函数名();”，调用我们自己定义的函数。
+Eample:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">current_timestamp</span>();
+</span></span></code></pre></div><p><img src="/images/20161202165020400.png" alt="MySQL当前时间戳"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">current_date</span>();
+</span></span></code></pre></div><p><img src="/images/20161202165220744.png" alt="MySQL当前日期"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">current_time</span>();
+</span></span></code></pre></div><p><img src="/images/20161202165436839.png" alt="当前时间"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> now();
+</span></span></code></pre></div><p><img src="/images/20161202165623376.png" alt="获取当前时间"></p>
+<p>参照<a href="http://www.w3school.com.cn/sql/sql_dates.asp">“w3School相关内容”</a>，其他常见的日期函数如下</p>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NOW()</td>
+<td>返回当前的日期和时间</td>
+</tr>
+<tr>
+<td>CURDATE()</td>
+<td>返回当前的日期</td>
+</tr>
+<tr>
+<td>CURTIME()</td>
+<td>返回当前的时间</td>
+</tr>
+<tr>
+<td>DATE()</td>
+<td>提取日期或日期/时间表达式的日期部分</td>
+</tr>
+<tr>
+<td>EXTRACT()</td>
+<td>返回日期/时间按的单独部分</td>
+</tr>
+<tr>
+<td>DATE_ADD()</td>
+<td>给日期添加指定的时间间隔</td>
+</tr>
+<tr>
+<td>DATE_SUB()</td>
+<td>从日期减去指定的时间间隔</td>
+</tr>
+<tr>
+<td>DATEDIFF()</td>
+<td>返回两个日期之间的天数</td>
+</tr>
+<tr>
+<td>DATE_FORMAT()</td>
+<td>用不同的格式显示日期/时间</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h2 id="问题17所有的视图是否都可以更新为什么">问题17、所有的视图是否都可以更新？为什么？</h2>
+<p>（1）若视图的字段是来自<strong>字段表达式或常数</strong>，则不允许对此视图执行<a href="https://so.csdn.net/so/search?q=INSERT&amp;spm=1001.2101.3001.7020">INSERT</a>、UPDATE操作，允许执行DELETE操作；
+（2）若视图的字段是来自<strong>库函数</strong>，则此视图不允许更新；
+（3）若视图的定义中有<strong>GROUP BY子句或聚集函数时</strong>，则此视图不允许更新；
+（4）若视图的定义中有<strong>DISTINCT任选项</strong>，则此视图不允许更新；
+（5）若视图的定义中有<strong>嵌套查询，并且嵌套查询的FROM子句中涉及的表也是导出该视图的基表</strong>，则此视图不允许更新；
+（6）若视图是由<strong>两个以上的基表</strong>导出的，此视图不允许更新；
+（7）一个<strong>不允许更新的视图上定义的视图</strong>也不允许更新；
+（8）由一个基表定义的视图，只含有基表的主键或候补键，并且视图中没有用表达式或函数定义的属性，才允许更新。
+9 ．哪类视图是可以更新的？哪类视图是不可更新的？各举一例说明。
+答：基本表的行列子集视图一般是可更新的。若视图的属性来自集函数、<a href="https://so.csdn.net/so/search?q=%E8%A1%A8%E8%BE%BE%E5%BC%8F&amp;spm=1001.2101.3001.7020">表达式</a>，则该视图肯定是不可以更新的。</p>
+<h2 id="问题18自动设置create_time和update_time自动更新">问题18、自动设置create_time和update_time，自动更新</h2>
+<p>执行后, 会批量更新 现有数据全部自动更新为当前时间, 新插入的数据时候自动更新插入的时间.</p>
+<p>CURRENT_TIMESTAMP  字段设置后 当insert数据时 mysql会自动设置当前系统时间 赋值给该属性字段</p>
+<p>ON UPDATE CURRENT_TIMESTAMP 字段设置后 当update数据时 并且 成功发生更改时 mysql会自动设置当前系统时间 赋值给该属性字段</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">添加</span> <span style="color:#960050;background-color:#1e0010">创建</span> <span style="color:#960050;background-color:#1e0010">更新</span> <span style="color:#960050;background-color:#1e0010">时间字段</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span><span style="color:#960050;background-color:#1e0010">表名</span><span style="color:#f92672">`</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">COLUMN</span> <span style="color:#f92672">`</span>create_time<span style="color:#f92672">`</span>  datetime <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span> <span style="color:#66d9ef">AFTER</span> <span style="color:#f92672">`</span><span style="color:#960050;background-color:#1e0010">最后一个列名</span><span style="color:#f92672">`</span>,
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">COLUMN</span> <span style="color:#f92672">`</span>update_time<span style="color:#f92672">`</span> <span style="color:#66d9ef">timestamp</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span> <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">UPDATE</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span> <span style="color:#66d9ef">AFTER</span> <span style="color:#f92672">`</span>create_time<span style="color:#f92672">`</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">修改已存在字段</span>.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#960050;background-color:#1e0010">表名</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">MODIFY</span> <span style="color:#66d9ef">COLUMN</span> create_time datetime <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span> <span style="color:#66d9ef">AFTER</span> create字段前面一个字段名,
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">MODIFY</span> <span style="color:#66d9ef">COLUMN</span> update_time <span style="color:#66d9ef">timestamp</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span> <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">UPDATE</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span> <span style="color:#66d9ef">AFTER</span> create_time;
+</span></span></code></pre></div><h2 id="问题19查询表结构和列注释">问题19、查询表结构和列注释</h2>
+<p>1、仅显示表的结构有如下几种方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">show</span> columns <span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">表名</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">desc</span> <span style="color:#960050;background-color:#1e0010">表名</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">describe</span> <span style="color:#960050;background-color:#1e0010">表名</span>;
+</span></span></code></pre></div><p>2、查询指定数据库中指定表各字段的列注释如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> information_schema.columns
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> TABLE_SCHEMA <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;数据库名称&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">and</span> <span style="color:#66d9ef">TABLE_NAME</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;表名称&#39;</span>;
+</span></span></code></pre></div><p>3、查询指定数据库中所有表各字段的列注释如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> information_schema.columns
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> TABLE_SCHEMA <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;数据库名称&#39;</span>;
+</span></span></code></pre></div><h2 id="问题20mysql获取两个集合的交集差集并集">问题20、mysql获取两个集合的交集/差集/并集</h2>
+<p>mysql的常见场景,获取两个<a href="https://so.csdn.net/so/search?q=%E6%95%B0%E6%8D%AE%E9%9B%86&amp;spm=1001.2101.3001.7020">数据集</a>的交集和差集</p>
+<h3 id="步骤">步骤</h3>
+<ol>
+<li>两个集合的结构要一致,对应的字段数,字段类型</li>
+<li>将两个集合用 UNION ALL 关键字合并,这里的结果是有重复的所有集</li>
+<li>将上面的所有集 GROUP BY id</li>
+<li>最后 HAVING COUNT(id)=1,等于1的意思是只出现了一次,所以这个是差集,如果等于2,那么就是交集</li>
+</ol>
+<h3 id="代码演示">代码演示</h3>
+<h4 id="差集">差集</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 下面的sql有明显的问题,不过这个只是一个示意,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 从一个表中查询不需要用到交集和差集,条件可以合并在一起直接查询出来的.能明白意思就好
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 下面的sql的意思是找到所有非技术部的员工的id,code和name
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> a.<span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> id,code,name <span style="color:#66d9ef">FROM</span> test_emp
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> id,code,name <span style="color:#66d9ef">FROM</span> test_emp <span style="color:#66d9ef">WHERE</span> dept<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;JSB&#39;</span>
+</span></span><span style="display:flex;"><span>)a <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> a.id <span style="color:#66d9ef">HAVING</span> <span style="color:#66d9ef">COUNT</span>(a.id)<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h4 id="交集">交集</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 下面的sql的意思是找到所有技术部年龄大于25的员工
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> a.<span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> id,code,name <span style="color:#66d9ef">FROM</span> test_emp <span style="color:#66d9ef">WHERE</span> age<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> id,code,name <span style="color:#66d9ef">FROM</span> test_emp <span style="color:#66d9ef">WHERE</span> dept<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;JSB&#39;</span>
+</span></span><span style="display:flex;"><span>)a <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> a.id <span style="color:#66d9ef">HAVING</span> <span style="color:#66d9ef">COUNT</span>(a.id)<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><h4 id="并集">并集</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 下面的sql的意思是找到所有技术部的员工和年龄大于30的员工
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- union可以自动去除重复的内容,得到不重复的结果集
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> a.<span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> id,code,name <span style="color:#66d9ef">FROM</span> test_emp <span style="color:#66d9ef">WHERE</span> age<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">UNION</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> id,code,name <span style="color:#66d9ef">FROM</span> test_emp <span style="color:#66d9ef">WHERE</span> dept<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;JSB&#39;</span>
+</span></span><span style="display:flex;"><span>)a
+</span></span></code></pre></div><h2 id="21给已存在的表添加自增主键">21、给已存在的表添加自增主键</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> alarm_global <span style="color:#66d9ef">add</span> id <span style="color:#66d9ef">int</span>(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span> <span style="color:#66d9ef">AUTO_INCREMENT</span>; <span style="color:#75715e"># 添加自增主键
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 给已存在的字段重新配置主键
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> alarm_camera_info <span style="color:#66d9ef">add</span> global_id <span style="color:#66d9ef">int</span>(<span style="color:#ae81ff">11</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> alarm_robot_info <span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> alarm_robot_info <span style="color:#66d9ef">add</span> <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>(global_id);
+</span></span></code></pre></div><h2 id="22mysql运算符--和--以及--和--的区别">22、MySQL运算符 != 和 ＜＞ 以及 = 和 ＜=＞ 的区别</h2>
+<h3 id="1运算符-和-">1、运算符：!= 和 &lt;&gt;</h3>
+<ul>
+<li>在MySQL中!= 和 &lt;&gt; 的功能一致，在sql92规范中建议是：!=，新的规范中建议为: &lt;&gt;</li>
+</ul>
+<p>下面查询username为&quot;陈哈哈&quot;以外的用户，以下两条语句的作用一样。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">FROM</span> <span style="color:#a6e22e">t_user</span> <span style="color:#a6e22e">WHERE</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;陈哈哈&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">FROM</span> <span style="color:#a6e22e">t_user</span> <span style="color:#a6e22e">WHERE</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">&lt;&gt;</span> <span style="color:#e6db74">&#34;陈哈哈&#34;</span>;
+</span></span></code></pre></div><h3 id="2运算符-和-">2、运算符：= 和 &lt;=&gt;</h3>
+<p>值得一提的是 = 、 &lt;=&gt; 以及 is 这三个运算符的用法</p>
+<p>is 专门用来判断是否为 NULL，而 = 则是用来判断非NULL以外的所有数据类型使用。而 &lt;=&gt; 则是前两者合起来。</p>
+<p>&lt;=&gt;运算符相当于封装了= 和 is ，既可以判断 非NULL值，也可以用来判断NULL值。</p>
+<ul>
+<li>&lt;=&gt; 只用于MySQL数据库，username &lt;=&gt; NULL 得 0 等价 username is NULL，NOT(username &lt;=&gt; NULL) 等价 username is NOT NULL;</li>
+<li>当col1，col2两个可能存在NULL值的列需要进行相等比较时，可以使用 col1 &lt;=&gt; col2，可以把null=null的也关联起来。</li>
+</ul>
+<h2 id="23between-的边界问题">23、between 的边界问题</h2>
+<p>between 边界：闭区间，not between 边界：开区间</p>
+<p>BETWEEN 用以查询确定范围的值，这些值可以是数字，文本或日期 。</p>
+<p>BETWEEN 运算符是闭区间的：包括开始 和 结束值 。</p>
+<h2 id="24varchar类型转换int类型">24、varchar类型转换int类型</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> gyzd_yysinfo <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> <span style="color:#66d9ef">cast</span>(yysid <span style="color:#66d9ef">as</span> SIGNED INTEGER)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">一、手动转化类型</span>(<span style="color:#960050;background-color:#1e0010">直接</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> server_id <span style="color:#66d9ef">from</span> cardserver <span style="color:#66d9ef">where</span> game_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> server_id<span style="color:#f92672">+</span><span style="color:#ae81ff">0</span> desclimit <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">二、使用</span>MySQL函数CAST
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> server_id <span style="color:#66d9ef">from</span> cardserver <span style="color:#66d9ef">where</span> game_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> <span style="color:#66d9ef">CAST</span>(server_id <span style="color:#66d9ef">as</span> SIGNED) <span style="color:#66d9ef">desc</span> <span style="color:#66d9ef">limit</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">三、使用</span>MySQL函数CONVERT
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> server_id <span style="color:#66d9ef">from</span> cardserver <span style="color:#66d9ef">where</span> game_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> <span style="color:#66d9ef">CONVERT</span>(server_id,SIGNED)<span style="color:#66d9ef">desc</span> <span style="color:#66d9ef">limit</span> <span style="color:#ae81ff">10</span>;
+</span></span></code></pre></div><h2 id="25分页查询的sql语句写法">25、分页查询的SQL语句写法</h2>
+<p>一：分页需求：</p>
+<p>客户端通过传递start(页码)，limit(每页显示的条数)两个参数去分页查询数据库表中的数据，那我们知道MySql数据库提供了分页的函数limit m,n，但是该函数的用法和我们的需求不一样，所以就需要我们根据实际情况去改写适合我们自己的分页语句，具体的分析如下：</p>
+<p>比如：</p>
+<p>查询第1条到第10条的数据的sql是：select * from table limit 0,10;  -&gt;对应我们的需求就是查询第一页的数据：select * from table limit (1-1)*10,10;</p>
+<p>查询第10条到第20条的数据的sql是：select * from table limit 10,20; -&gt;对应我们的需求就是查询第二页的数据：select * from table limit (2-1)*10,10;</p>
+<p>查询第20条到第30条的数据的sql是：select * from table limit 20,30; -&gt;对应我们的需求就是查询第三页的数据：select * from table limit (3-1)*10,10;</p>
+<p>二：通过上面的分析，可以得出符合我们自己需求的分页sql格式是：</p>
+<pre tabindex="0"><code>select * from table limit (start-1)*limit,limit; 
+</code></pre><p>其中start是页码，limit是每页显示的条数。</p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2023/%E5%8E%8B%E5%8A%9B%E5%92%8C%E5%8A%A8%E5%8A%9B/">压力和动力</a></span>
+  <span class="nav-next"><a href="/cn/2023/mkcert%E7%94%9F%E6%88%90%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BA%92%E4%BF%A1/">mkcert生成局域网互信</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2023\/%E5%8E%8B%E5%8A%9B%E5%92%8C%E5%8A%A8%E5%8A%9B\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2023\/mkcert%E7%94%9F%E6%88%90%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BA%92%E4%BF%A1\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

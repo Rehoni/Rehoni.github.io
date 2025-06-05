@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on Rehoni | 罗皓</title>
+    <link>/tags/mysql/</link>
+    <description>Recent content in MySQL on Rehoni | 罗皓</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 12 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL——问题小书</title>
+      <link>/cn/2023/mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>/cn/2023/mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <description>问题1、截取字符串 具体描述 left 从左开始截取字符串&#xA;用法：left(str, length)，即：left(被截取字符串， 截取长度)&#xA;right subString substring_index https://yuanrengu.com/2020/9cfe2ad6.html&#xA;问题2、查看相关信息 # 查看端口 show variables like &amp;#39;port&amp;#39;; # 查看表结构 desc tablename; # 查看mysql版本 select version() from dual; # 查看mysql时区 show variables like &amp;#39;%time_zone&amp;#39;; system_time_zone CST time_zone +08:00 set global time_zone = &amp;#39;+08:00&amp;#39;; flush privileges; # 全局时区和当前session时区 select @@global.time_zone, @@session.time_zone; # 获取当前时间戳，各个类型 SELECT TIME_TO_SEC(NOW()), NOW(), current_timestamp(), REPLACE(unix_timestamp(NOW(3)), &amp;#39;.&amp;#39;, &amp;#39;&amp;#39;), REPLACE(unix_timestamp(current_timestamp(3)), &amp;#39;.&amp;#39;, &amp;#39;&amp;#39;), current_timestamp(3), unix_timestamp(current_timestamp(3)); # 审计日志相关 show variables like &amp;#39;init_connect&amp;#39;; show variables like &amp;#39;%log_bin%&amp;#39;;# 查看是否开启binlog show variables like &amp;#39;%binlog%&amp;#39;; # 查看binlog相关参数 show variables like &amp;#39;%audit%&amp;#39;; set global init_connect=NULL; show binlog events;# 只查看第一个binlog文件的内容 show binlog events in &amp;#39;mysql-bin.</description>
+    </item>
+    <item>
+      <title>MySQL数据库备份</title>
+      <link>/cn/2021/%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Wed, 15 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>/cn/2021/%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>mysqldump 语法：&#xA;默认不带参数的导出，导出文本内容大概如下：创建数据库判断语句-删除表-创建表-锁表-禁用索引-插入数据-启用索引-解锁表。&#xA;Usage: mysqldump [OPTIONS] database [tables] OR mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...] OR mysqldump [OPTIONS] --all-databases [OPTIONS] 导出所有数据库 mysqldump -uroot -proot --all-databases &amp;gt;/tmp/all.sql 导出db1、db2两个数据库的所有数据 mysqldump -uroot -proot --databases db1 db2 &amp;gt;/tmp/user.sql 导出db1中的a1、a2表 注意导出指定表只能针对一个数据库进行导出，且导出的内容中和导出数据库也不一样，导出指定表的导出文本中没有创建数据库的判断语句，只有删除表-创建表-导入数据。&#xA;mysqldump -uroot -proot --databases db1 --tables a1 a2 &amp;gt;/tmp/db1.sql 条件导出，导出db1表a1中id=1的数据 mysqldump -uroot -proot --databases db1 --tables a1 --where=&amp;#39;id=1&amp;#39; &amp;gt;/tmp/a1.sql 只导出表结构不导出数据，&amp;ndash;no-data mysqldump -uroot -proot --no-data --databases db1 &amp;gt;/tmp/db1.sql 跨服务器导出导入数据 mysqldump --host=h1 -uroot -proot --databases db1 |mysql --host=h2 -uroot -proot db2 将h1服务器中的db1数据库的所有数据导入到h2中的db2数据库中，db2的数据库必须存在否则会报错</description>
+    </item>
+    <item>
+      <title>MySQL——重置mysql数据库</title>
+      <link>/cn/2021/%E9%87%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>/cn/2021/%E9%87%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>1、删掉 data 文件夹，这个文件夹的具体位置是 my.ini 里决定的数据库数据的存放位置，一般默认都是数据库的根目录。&#xA;遇到删除不了的情况，打开服务-&amp;gt;关闭mysql服务&#xA;2、使用命令初始化data数据&#xA;mysqld --initialize --console 会重新生成一个密码，用这个密码就可以重新登录数据库了&#xA;3、登录数据库注意&#xA;mysql -uroot -p show databases; # 无法使用，会提示你修改密码 alter user &amp;#39;root&amp;#39;@&amp;#39;localhost&amp;#39; identified by &amp;#39;root&amp;#39;; 报错ERROR 2003 (HY000): Can&amp;rsquo;t connect to MySQL server on &amp;rsquo;localhost&amp;rsquo; (10061)，因为数据库服务没有启动，重新开启数据库服务，已有的mysql80服务估计无法正常启动，因此需要mysqld -nstall 重新安装一下，安装服务默认名为mysql&#xA;# 服务-&amp;gt;开启mysql服务 net start mysql # 启动mysql服务 net start mysql80 # 无法启动 # 如果找不到mysql服务 mysqld -install # 删除原来无用的服务 sc delete mysql80 </description>
+    </item>
+    <item>
+      <title>MySQL——通过Explain计划优化sql</title>
+      <link>/cn/2020/2020-07-13-mysql-explain/</link>
+      <pubDate>Mon, 13 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>/cn/2020/2020-07-13-mysql-explain/</guid>
+      <description>Explain计划 MySQL执行中，遇到一个执行起来很慢的SQL语句&#xA;SELECT t.ORG_NAME AS OBJECT_NAME, t.ORG_ID, f.DEFECT_LEVEL FROM GEA_ORGANIZATION_INFO t INNER JOIN MAPPER_EMS_STATION s ON s.VINDICATE_OID = t.ORG_ID INNER JOIN MAPPER_EMS_DEVICE d ON d.SITE_ID = s.FUNCTION_ID INNER JOIN SORT_DICT tt ON d.sort_id = tt.sort_id LEFT JOIN ( SELECT * FROM GEA_SP_PD_DEFECT WHERE STATE IN ( 3, 4 ) AND REPORT_TIME BETWEEN str_to_date( &amp;#39;2020-07-01 00:00:00&amp;#39;, &amp;#39;%Y-%m-%d %H:%i:%s&amp;#39; ) AND str_to_date( &amp;#39;2020-07-11 15:15:11&amp;#39;, &amp;#39;%Y-%m-%d %H:%i:%s&amp;#39; )) f ON f.SITE_ID = s.FUNCTION_ID AND f.</description>
+    </item>
+  </channel>
+</rss>

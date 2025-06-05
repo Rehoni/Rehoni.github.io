@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>MySQL数据库备份 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="MySQL数据库备份 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="语法：
+默认不带参数的导出，导出文本内容大概如下：创建数据库判断语句-删除表-创建表-锁表-禁用索引-插入数据-启用索引-解锁表。
+[&amp;hellip;] Usage: mysqldump [OPTIONS] database [tables] OR mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...] OR mysqldump &amp;hellip;">
+      <meta property="og:description" content="语法：
+默认不带参数的导出，导出文本内容大概如下：创建数据库判断语句-删除表-创建表-锁表-禁用索引-插入数据-启用索引-解锁表。
+[&amp;hellip;] Usage: mysqldump [OPTIONS] database [tables] OR mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...] OR mysqldump &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2021%5c%e5%a4%87%e4%bb%bd%e6%95%b0%e6%8d%ae%e5%ba%93.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>MySQL数据库备份</h1>
+
+
+<h3>rehoni / 
+2021-12-15</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h3 id="mysqldump">mysqldump</h3>
+<p>语法：</p>
+<p>默认不带参数的导出，导出文本内容大概如下：<strong>创建数据库判断语句-删除表-创建表-锁表-禁用索引-插入数据-启用索引-解锁表。</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Usage: mysqldump <span style="color:#f92672">[</span>OPTIONS<span style="color:#f92672">]</span> database <span style="color:#f92672">[</span>tables<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>OR     mysqldump <span style="color:#f92672">[</span>OPTIONS<span style="color:#f92672">]</span> --databases <span style="color:#f92672">[</span>OPTIONS<span style="color:#f92672">]</span> DB1 <span style="color:#f92672">[</span>DB2 DB3...<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>OR     mysqldump <span style="color:#f92672">[</span>OPTIONS<span style="color:#f92672">]</span> --all-databases <span style="color:#f92672">[</span>OPTIONS<span style="color:#f92672">]</span>
+</span></span></code></pre></div><h5 id="导出所有数据库">导出所有数据库</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysqldump -uroot -proot --all-databases &gt;/tmp/all.sql
+</span></span></code></pre></div><h5 id="导出db1db2两个数据库的所有数据">导出db1、db2两个数据库的所有数据</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysqldump -uroot -proot --databases db1 db2 &gt;/tmp/user.sql
+</span></span></code></pre></div><h5 id="导出db1中的a1a2表">导出db1中的a1、a2表</h5>
+<p>注意导出指定表只能针对一个数据库进行导出，且导出的内容中和导出数据库也不一样，导出指定表的导出文本中没有创建数据库的判断语句，只有删除表-创建表-导入数据。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysqldump -uroot -proot --databases db1 --tables a1 a2  &gt;/tmp/db1.sql
+</span></span></code></pre></div><h5 id="条件导出导出db1表a1中id1的数据">条件导出，导出db1表a1中id=1的数据</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysqldump -uroot -proot --databases db1 --tables a1 --where<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;id=1&#39;</span>  &gt;/tmp/a1.sql
+</span></span></code></pre></div><h5 id="只导出表结构不导出数据--no-data">只导出表结构不导出数据，&ndash;no-data</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysqldump -uroot -proot --no-data --databases db1 &gt;/tmp/db1.sql
+</span></span></code></pre></div><h5 id="跨服务器导出导入数据">跨服务器导出导入数据</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysqldump --host<span style="color:#f92672">=</span>h1 -uroot -proot --databases db1 |mysql --host<span style="color:#f92672">=</span>h2 -uroot -proot db2
+</span></span></code></pre></div><p>将h1服务器中的db1数据库的所有数据导入到h2中的db2数据库中，db2的数据库必须存在否则会报错</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysqldump --host<span style="color:#f92672">=</span>192.168.80.137 -uroot -proot -C --databases test |mysql --host<span style="color:#f92672">=</span>192.168.80.133 -uroot -proot test 
+</span></span></code></pre></div><h5 id="导出存储过程和自定义函数--routines--r">导出存储过程和自定义函数&ndash;routines, -R</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysqldump  -uroot -p --host<span style="color:#f92672">=</span>localhost --all-databases --routines
+</span></span></code></pre></div><h5 id="压缩备份">压缩备份</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>压缩备份
+</span></span><span style="display:flex;"><span>mysqldump -uroot -p -P3306 -q -Q --set-gtid-purged<span style="color:#f92672">=</span>OFF --default-character-set<span style="color:#f92672">=</span>utf8 --hex-blob --skip-lock-tables --databases abc 2&gt;/abc.err |gzip &gt;/abc.sql.gz
+</span></span><span style="display:flex;"><span>还原
+</span></span><span style="display:flex;"><span>gunzip -c abc.sql.gz |mysql -uroot -p -vvv -P3306 --default-character-set<span style="color:#f92672">=</span>utf8 abc 1&gt; abc.log 2&gt;abc.err
+</span></span></code></pre></div><h3 id="脚本">脚本</h3>
+<p>可以通过配置定时任务，定时执行脚本来进行数据库备份。</p>
+<p>注意定时查看 Linux 的密码是否过期，会影响到备份操作。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e"># Name:clear_tomcat_log.sh</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># This is a ShellScript For Auto DB Backup and Delete old Backup</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 参数说明：</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># backupdir 保存路径的绝对地址</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 代码中 time=` date +%Y%m%d`也可以写为time=”$(date +”%Y%m%d”)” 找到当前日期时间格式</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 其中`符号是TAB键上面的符号，不是ENTER左边的’符号，还有date后要有一个空格。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#mysql_bin_dir：mysql的bin路径；</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#dataname：数据库名；</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#user：数据库用户名；</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#password：用户密码；</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#name：自定义备份文件前缀标识</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># name：自定义备份文件前缀标识。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -type f    表示查找普通类型的文件，f表示普通文件。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -mtime +30   按照文件的更改时间来查找文件，+30表示文件更改时间距现在30天以前；如果是 -mmin +7 表示文件更改时间距现在7分钟以前。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -exec rm -rf {} \;   表示执行一段shell命令，exec选项后面跟随着所要执行的命令或脚本，然后是一对儿{}，一个空格和一个\，最后是一个分号。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#数据库备份的位置</span>
+</span></span><span style="display:flex;"><span>backupdir<span style="color:#f92672">=</span>/home/mysqlbak
+</span></span><span style="display:flex;"><span>time<span style="color:#f92672">=</span><span style="color:#e6db74">`</span> date +%Y%m%d%H%M%S<span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#如果文件夹不存在则创建</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> ! -d $backupdir <span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    mkdir -p $backupdir;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#需要备份的数据库的连接的用户名和密码和数据库</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#mysql_bin_dir/mysqldump -uuser -ppassword dataname | gzip &gt; $backupdir/name$time.sql.gz</span>
+</span></span><span style="display:flex;"><span>/usr/bin/mysqldump -uhis -pNRec-9000: -A | gzip &gt; $backupdir/mysql_$time.sql.gz
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#传输至备份服务器，如果保留本机则不需要此步骤</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#scp $backupdir/mysql_$time.sql.gz 22.122.51.158:/data/bakup/159/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#find $backupdir -name &#34;name*.sql.gz&#34; -type f -mtime +30 -exec rm -rf {} \;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#保留10日</span>
+</span></span><span style="display:flex;"><span>find $backupdir -name <span style="color:#e6db74">&#34;mysql_*.sql.gz&#34;</span> -type f -mtime +10 -exec rm -rf <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span>
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2021/2021%E8%AE%A1%E5%88%92/">2021计划</a></span>
+  <span class="nav-next"><a href="/cn/2021/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6/">Linux——chrony 服务器集群对时</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2021\/2021%E8%AE%A1%E5%88%92\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2021\/chrony%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%97%B6\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

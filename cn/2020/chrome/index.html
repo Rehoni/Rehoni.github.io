@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>chrome浏览器相关 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="chrome浏览器相关 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="第一步：
+打开 Chrome 谷歌浏览器，进入“设置 → 高级 → 系统”，将 使用硬件加速模式的选项关闭掉，重启浏览器。如果设置后卡顿已有明显改善，那么就此搞定，不然继续第二步。
+第二步：
+在地址栏上输入：chrome://flags/回车，在顶部搜索栏中搜索“gpu”，列表中找到：“GPU rasterization”(GPU 渲染) 以及 “Accelerated 2D canvas”(2D &amp;hellip;">
+      <meta property="og:description" content="第一步：
+打开 Chrome 谷歌浏览器，进入“设置 → 高级 → 系统”，将 使用硬件加速模式的选项关闭掉，重启浏览器。如果设置后卡顿已有明显改善，那么就此搞定，不然继续第二步。
+第二步：
+在地址栏上输入：chrome://flags/回车，在顶部搜索栏中搜索“gpu”，列表中找到：“GPU rasterization”(GPU 渲染) 以及 “Accelerated 2D canvas”(2D &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20220517161144457.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5cchrome.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>chrome浏览器相关</h1>
+
+
+<h3>rehoni / 
+2020-02-11</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h3 id="浏览器卡顿">浏览器卡顿</h3>
+<p>第一步：</p>
+<p>打开 Chrome 谷歌浏览器，进入“设置 → 高级 → 系统”，将 <strong>使用硬件加速模式的选项关闭掉</strong>，重启浏览器。如果设置后卡顿已有明显改善，那么就此搞定，不然继续第二步。</p>
+<p>第二步：</p>
+<p>在地址栏上输入：chrome://flags/回车，在顶部搜索栏中搜索“gpu”，列表中找到：“<strong>GPU rasterization</strong>”(GPU 渲染) 以及 “<strong>Accelerated 2D canvas</strong>”(2D 图形加速) 两项，将它们都设为“<strong>Disabled</strong>”禁用即可。点击右下角的“ReLaunch”重启浏览器。</p>
+<p>你会发现，做完这两个设置后，流畅的 Chrome 又一次回来了！我这里即便同时开启超过 50 个页面，响应依然飞快，看视频也不再卡顿了。经过几周的使用观察，我认为问题已基本解决。</p>
+<h3 id="扩展程序导出">扩展程序导出</h3>
+<p>打开谷歌浏览器 -&gt; 点击右上方设置按钮 -&gt; 更多工具 -&gt; 扩展程序</p>
+<p><strong>开启开发者模式</strong></p>
+<p>找到需要打包的扩展程序，记住<strong>扩展ID</strong></p>
+<p>点击左上方打包扩展程序</p>
+<p>注意AppData为<strong>隐藏文件夹</strong>，需要在文件资源管理器-&gt;查看-&gt;查看隐藏文件</p>
+<p>浏览目录：C:\Users\用户名\AppData\Local\Google\Chrome\User Data\Default\Extensions\扩展ID\版本号</p>
+<p>生成的扩展程序压缩包为 <strong>crx 文件</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20220517161144457.png" alt="image-20220517161144457"></p>
+<p><strong>安装打包好的拓展程序：</strong></p>
+<p><strong>方法一：</strong></p>
+<p>（1）打开谷歌浏览器 -&gt; 点击右上方设置按钮 -&gt; 更多工具 -&gt; 扩展程序（或直接输入：chrome://extensions/）</p>
+<p>（2）将.crx的文件拖拽到浏览器中间，会出现拖拽以安装的提示，安装。</p>
+<p>（3）如果浏览器能直接安装即成功，如果不能安装，或者提示只能通过Chrome网上应用商店安装该程序，请参照方法二。</p>
+<p><strong>方法二：</strong></p>
+<p>（1）将.crx的文件的扩展名改为.zip，</p>
+<p>（2）打开谷歌浏览器 -&gt; 点击右上方设置按钮 -&gt; 更多工具 -&gt; 扩展程序（或直接输入：chrome://extensions/）</p>
+<p>（3）将.zip的文件拖拽到浏览器中即可安装。</p>
+<h3 id="错误代码err_unsafe_port">错误代码：ERR_UNSAFE_PORT</h3>
+<p>用<a href="https://so.csdn.net/so/search?q=Nginx&amp;spm=1001.2101.3001.7020">Nginx</a>发布多个站点测试，使用了87、88端口，</p>
+<p>88端口访问正常，87端口就怎么也访问不了，点击更多，提示错误代码：ERR_UNSAFE_PORT</p>
+<p>不想修改浏览器设置的就改用其它端口吧，搜索了一下，Firefox也有类似的端口限制；如果非要使用类似的端口，</p>
+<p>我们要做的是允许访问非常规端口地址，解决办法：选中Google Chrome 快捷方式，右键属性，在”目标”对应文本框添加：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>--explicitly-allowed-ports<span style="color:#f92672">=</span>87,6666,556,6667
+</span></span></code></pre></div><p>允许多个端口以逗号隔开，最终如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\H</span>uoqing<span style="color:#ae81ff">\A</span>ppData<span style="color:#ae81ff">\L</span>ocal<span style="color:#ae81ff">\G</span>oogle<span style="color:#ae81ff">\C</span>hrome<span style="color:#ae81ff">\A</span>pplication<span style="color:#ae81ff">\c</span>hrome.exe  --explicitly-allowed-ports<span style="color:#f92672">=</span>6666,556
+</span></span></code></pre></div><blockquote>
+<p>附录：Google Chrome 默认非安全端口列表，虽然以上方法可以解决问题，但建议尽量避免以下端口：</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span>  <span style="color:#a6e22e">1,    // tcpmux</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">7,    // echo</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">9,    // discard</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">11,   // systat</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">13,   // daytime</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">15,   // netstat</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">17,   // qotd</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">19,   // chargen</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">20,   // ftp data</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">21,   // ftp access</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">22,   // ssh</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">23,   // telnet</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">25,   // smtp</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">37,   // time</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">42,   // name</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">43,   // nicname</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">53,   // domain</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">77,   // priv-rjs</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">79,   // finger</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">87,   // ttylink</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">95,   // supdup</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">101,  // hostriame</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">102,  // iso-tsap</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">103,  // gppitnp</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">104,  // acr-nema</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">109,  // pop2</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">110,  // pop3</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">111,  // sunrpc</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">113,  // auth</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">115,  // sftp</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">117,  // uucp-path</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">119,  // nntp</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">123,  // NTP</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">135,  // loc-srv /epmap</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">139,  // netbios</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">143,  // imap2</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">179,  // BGP</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">389,  // ldap</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">465,  // smtp+ssl</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">512,  // print / exec</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">513,  // login</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">514,  // shell</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">515,  // printer</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">526,  // tempo</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">530,  // courier</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">531,  // chat</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">532,  // netnews</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">540,  // uucp</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">556,  // remotefs</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">563,  // nntp+ssl</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">587,  // stmp?</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">601,  // ??</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">636,  // ldap+ssl</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">993,  // ldap+ssl</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">995,  // pop3+ssl</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">2049, // nfs</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">3659, // apple-sasl / PasswordServer</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">4045, // lockd</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">6000, // X11</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">6665, // Alternate IRC [Apple addition]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">6666, // Alternate IRC [Apple addition]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">6667, // Standard IRC [Apple addition]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">6668, // Alternate IRC [Apple addition]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">6669, // Alternate IRC [Apple addition]</span>
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2020/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%A7%84%E5%88%99/">正则表达式规则</a></span>
+  <span class="nav-next"><a href="/cn/2020/%E7%A6%BB%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87pc%E4%B8%AD%E8%BD%AC%E8%BF%9E%E6%8E%A5%E5%85%AC%E7%BD%91/">离线服务器通过PC中转连接公网</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2020\/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%A7%84%E5%88%99\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/%E7%A6%BB%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87pc%E4%B8%AD%E8%BD%AC%E8%BF%9E%E6%8E%A5%E5%85%AC%E7%BD%91\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

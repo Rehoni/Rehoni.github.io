@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Git——提交规范 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Git——提交规范 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="每次提交，Commit message 都包括三个部分：Header，Body 和 Footer。
+其中，Header 是必需的，Body 和 Footer 可以省略。
+[&amp;hellip;] &amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt; // 空一行 &amp;lt;body&amp;gt; // 空一行 &amp;lt;footer&amp;gt; 12345 Header &amp;hellip;">
+      <meta property="og:description" content="每次提交，Commit message 都包括三个部分：Header，Body 和 Footer。
+其中，Header 是必需的，Body 和 Footer 可以省略。
+[&amp;hellip;] &amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt; // 空一行 &amp;lt;body&amp;gt; // 空一行 &amp;lt;footer&amp;gt; 12345 Header &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2022%5cgit%e6%8f%90%e4%ba%a4%e8%a7%84%e8%8c%83.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Git——提交规范</h1>
+
+
+<h3>rehoni / 
+2022-08-14</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h4 id="遇到的问题">遇到的问题</h4>
+<ol>
+<li>版本回退时无法快速定位到指定版本</li>
+<li>无法知道项目中封版操作是哪一个commit</li>
+<li>无法清晰的知道每次提交的记录</li>
+</ol>
+<h4 id="以下是commithttpssocsdnnetsosearchqcommitspm1001210130017020提交规范">以下是<a href="https://so.csdn.net/so/search?q=commit&amp;spm=1001.2101.3001.7020">commit</a>提交规范</h4>
+<p>每次提交，Commit message 都包括三个部分：<a href="https://so.csdn.net/so/search?q=Header&amp;spm=1001.2101.3001.7020">Header</a>，Body 和 Footer。</p>
+<p>其中，Header 是必需的，Body 和 Footer 可以省略。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">&lt;type&gt;(&lt;scope&gt;):</span> <span style="color:#960050;background-color:#1e0010">&lt;subject&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 空一行
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">&lt;body&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 空一行
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">&lt;footer&gt;</span>    
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">12345</span>
+</span></span></code></pre></div><h4 id="header">Header</h4>
+<p>Header部分只有一行，包括两个字段：<code>type</code>（必需）和<code>subject</code>（必需）。</p>
+<p><code>type</code>用于说明 commit 的类别，只允许使用下面9个标识。</p>
+<pre tabindex="0"><code>feat: 新功能（feature）
+fix: 修补bug
+docs: 文档（documentation）
+style: 格式（不影响代码运行的变动）
+refactor: 重构（即不是新增功能，也不是修改bug的代码变动）
+chore: 构建过程或辅助工具的变动
+revert: 撤销，版本回退
+perf: 性能优化
+test：测试
+improvement: 改进
+build: 打包
+ci: 持续集成
+123456789101112
+</code></pre><p><code>subject</code>是 commit 目的的简短描述，不超过50个字符。</p>
+<pre tabindex="0"><code>以动词开头，使用第一人称现在时，比如修改/修复/增加 等等
+example: 订单详情增加导出功能
+12
+</code></pre><h4 id="scopehttpssocsdnnetsosearchqscopespm1001210130017020"><a href="https://so.csdn.net/so/search?q=scope&amp;spm=1001.2101.3001.7020">scope</a></h4>
+<p><code>scope</code>用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。</p>
+<h4 id="body">Body</h4>
+<p>Body 部分是对本次 commit 的详细描述，可以分成多行。下面是一个范例。</p>
+<pre tabindex="0"><code>xxx/xxx.vue  修改内容
+xxx/xxx.vue  修改内容
+12
+</code></pre><h4 id="footer">Footer</h4>
+<p>Footer 部分只用于两种情况。</p>
+<ol>
+<li>
+<p><strong>不兼容变动</strong></p>
+<p>如果当前代码与上一个版本不兼容，则 Footer 部分以<code>BREAKING CHANGE</code>开头，后面是对变动的描述、以及变动理由和迁移方法。</p>
+</li>
+</ol>
+<pre tabindex="0"><code>BREAKING CHANGE: 项目webpack升级到4.0版本
+xx插件替换成xx插件
+12
+</code></pre><ol>
+<li><strong>关闭 bug/需求</strong></li>
+</ol>
+<pre tabindex="0"><code>closes 3056, 11231
+1
+</code></pre><h3 id="revert">Revert</h3>
+<p>还有一种特殊情况，如果当前 commit 用于撤销以前的 commit，则必须以<code>revert:</code>开头，后面跟着被撤销 Commit 的 Header。</p>
+<pre tabindex="0"><code>revert: feat(pencil): 回退当前版本667ec到 sssee2
+1
+</code></pre><h3 id="建议">#建议</h3>
+<p>文档综合了，公司项目git管理的实际情况，在某一些规范上进行了轻微修改，在平时提交fix和feat时，一般使用简写</p>
+<pre tabindex="0"><code>feat: 增加订单详情  closes xxxx (closes非必需)
+fix: 修复xx情况下xx问题  closes xxxx (closes非必需)
+docs: 修改md文件
+style: 修改订单列表样式
+refactor: 重构utils.js下部分方法
+chore: 增加xxx插件/xxxxloader
+revert: 回退当前版本667ec到 sssee2
+perf: 优化了xxx，提高了渲染速度
+test：增加测试
+improvement: 改进
+build: 打包
+ci: 持续集成
+</code></pre><p>在某些复杂commit比如 <code>revert</code>，<code>chore</code> 等操作时最好在body，footer，描述清楚 遇到了什么问题，为何要这样做</p>
+<pre tabindex="0"><code>revert: feat(订单模块): 回退当前版本667ec到 sssee2
+
+因为某次提交失误，造成xxx问题
+xxx.vue
+xxx.js
+
+closes xxx
+1234567
+chore(项目组件, 项目构建): 增加公用组件库xxx和xxx公用一套组件
+
+为了解决xx问题， 引入公用组件库，使用方式见xx.md文档
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2022/idea/">IDEA小技巧</a></span>
+  <span class="nav-next"><a href="/cn/2022/windows%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/">Windows命令行操作</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2022\/idea\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2022\/windows%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

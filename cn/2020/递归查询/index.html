@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Oracle——递归查询写法 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Oracle——递归查询写法 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5c%e9%80%92%e5%bd%92%e6%9f%a5%e8%af%a2.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Oracle——递归查询写法</h1>
+
+
+<h3>Rehoni / 
+2020-09-01</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="oracle递归查询"><strong>Oracle递归查询</strong></h1>
+<pre tabindex="0"><code> select * from
+ (select t.EMPLOYEE_ID,
+        EMPLOYEE_NAME,
+        a.ORG_ID,
+        b.ORG_NAME,
+        t.SHORT_SPELL,
+        t.FULL_SPELL,JOBSTATUS,EMPLOYEE_STATUS,NATIONALITY,SEX,EDUCATION,MOBILE_PHONE,FIX_PHONE,EMAIL,t.UPDATE_TIME,
+        row_number() over (partition by EMPLOYEE_NAME order by t.UPDATE_TIME) rn
+ from SJHL_ZH.NZWOT_TOP_EMPLOYEE t
+     left join NZWOT_TOP_USER a on a.EMPLOYEE_ID = t.EMPLOYEE_ID
+     inner join (select org_id, org_name, parent_org_id, org_type, name_full_path, update_time from sjhl_zh.nzwot_top_organization
+          where state = 1 and regexp_like(name_full_path, &#39;(变电管理所|输电管理所|试验研究所)&#39;)
+          start with parent_org_id = ( select org_id from sjhl_zh.nzwot_top_organization
+          where name_full_path = &#39;中国南方电网有限责任公司/广东电网有限责任公司/珠海供电局&#39; and state = 1 and org_level = 3 ) connect by prior org_id = parent_org_id
+          union
+          select org_id, org_name, null, org_type, name_full_path, update_time from sjhl_zh.nzwot_top_organization
+          where name_full_path = &#39;中国南方电网有限责任公司/广东电网有限责任公司/珠海供电局&#39; and state = 1 and org_level = 3) b on b.ORG_ID = a.ORG_ID) tb
+          where tb.rn = 1;
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2020/%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/">tomcat——简要介绍和部署</a></span>
+  <span class="nav-next"><a href="/cn/2020/%E8%A7%A6%E5%8F%91%E5%99%A8/">Oracle——触发器写法</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2020\/%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/%E8%A7%A6%E5%8F%91%E5%99%A8\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

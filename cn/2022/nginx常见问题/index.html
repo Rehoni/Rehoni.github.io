@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Nginx常见问题 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Nginx常见问题 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="在局域网内和同事共享文件的好方法
+1 安装nginx sudo apt-get install nginx
+2 创建conf文件 sudo gedit /etc/nginx/conf.d/file_server.conf
+修改conf文件如下：
+[&amp;hellip;] server { listen 80; server_name 10.1.2.3; # 自己PC的ip &amp;hellip;">
+      <meta property="og:description" content="在局域网内和同事共享文件的好方法
+1 安装nginx sudo apt-get install nginx
+2 创建conf文件 sudo gedit /etc/nginx/conf.d/file_server.conf
+修改conf文件如下：
+[&amp;hellip;] server { listen 80; server_name 10.1.2.3; # 自己PC的ip &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2022%5cNginx%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Nginx常见问题</h1>
+
+
+<h3>rehoni / 
+2022-04-11</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="1一分钟实现文件服务器">1、一分钟实现文件服务器</h2>
+<p>在局域网内和同事共享文件的好方法</p>
+<p>1 安装nginx
+<code>sudo apt-get install nginx</code></p>
+<p>2 创建conf文件
+<code>sudo gedit /etc/nginx/conf.d/file_server.conf</code></p>
+<p>修改conf文件如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">server</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>; 
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">server_name</span> <span style="color:#ae81ff">10</span><span style="color:#e6db74">.1.2.3</span>; <span style="color:#75715e"># 自己PC的ip或者服务器的域名 charset utf-8; # 避免中文乱码 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#f92672">root</span> <span style="color:#e6db74">/home/xx/share</span>; <span style="color:#75715e"># 存放文件的目录 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> { 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">autoindex</span> <span style="color:#66d9ef">on</span>; <span style="color:#75715e"># 索引 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">autoindex_exact_size</span> <span style="color:#66d9ef">on</span>; <span style="color:#75715e"># 显示文件大小 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">autoindex_localtime</span> <span style="color:#66d9ef">on</span>; <span style="color:#75715e"># 显示文件时间 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>3 使配置生效
+<code>sudo rm /etc/nginx/sites-enabled/default</code>  这一行尤为重要
+<code>sudo service nginx reload</code></p>
+<p>4 命令
+<code>sudo /etc/init.d/nginx start|stop|reload|</code>
+<code>sudo service nginx start|stop|reload|</code></p>
+<p>5 访问
+浏览器里直接输入 http://10.1.2.3</p>
+<h2 id="2red-hat-enterprise-linux-73下nginx安装">2、Red Hat Enterprise Linux 7.3下Nginx安装</h2>
+<p>1、环境</p>
+<p>系统平台：<a href="https://www.linuxidc.com/topicnews.aspx?tid=10">Red Hat</a> Enterprise Linux Server release 7.3 (Maipo)</p>
+<p>内核版本：3.10.0-514.el7.x86_64</p>
+<p>2、安装编译工具和库文件</p>
+<p>yum -y install make zlib zlib-devel gcc-c++ libtool  openssl openssl-devel</p>
+<p>3、安装pcre</p>
+<p>PCRE 作用是让 Ngnix 支持 Rewrite 功能。</p>
+<p>查看是否安装pcre</p>
+<p># pcre-config &ndash;version</p>
+<p>上述表明已安装。</p>
+<p>若未安装，参照以下步骤：</p>
+<p><strong>1）下载</strong></p>
+<p>地址：https://sourceforge.net/projects/pcre/files/pcre/</p>
+<p><strong>2）解压安装包:</strong></p>
+<pre tabindex="0"><code> tar zxvf pcre-8.35.tar.gz
+</code></pre><p><strong>3）编译安装</strong></p>
+<pre tabindex="0"><code> cd pcre-8.35
+
+./configure
+
+ make &amp;&amp; make install
+</code></pre><p><strong>安装</strong></p>
+<p>1、下载 nginx 安装包</p>
+<p><a href="http://nginx.org/download/nginx-1.6.2.tar.gz">http://nginx.org/download/</a></p>
+<p>2、解压</p>
+<p># tar zxvf nginx-1.10.2.tar.gz</p>
+<p>3、编译</p>
+<p># ./configure &ndash;prefix=/usr/local/nginx &ndash;with-http_stub_status_module &ndash;with-http_ssl_module &ndash;with-pcre</p>
+<p>4、安装</p>
+<p># make</p>
+<p># make install</p>
+<p>5、测试</p>
+<p>查看nginx版本</p>
+<p># /usr/local/nginx/sbin/nginx -v</p>
+<p>显示版本信息，证明已安装成功</p>
+<h2 id="3创建用户">3、创建用户</h2>
+<p>创建 Nginx 运行使用的用户 ruready：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span> /usr/sbin/groupadd ruready
+</span></span><span style="display:flex;"><span> /usr/sbin/useradd -g ruready ruready
+</span></span></code></pre></div><h2 id="4启停和加载配置">4、启停和加载配置</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>/usr/local/nginx/sbin/nginx -t <span style="color:#75715e">#检查配置文件ngnix.conf的正确性</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/usr/local/nginx/sbin/nginx -c /usr/local/nginx/sbin/nginx/nginx.conf <span style="color:#75715e"># 加载指定配置文件启动</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/usr/local/nginx/sbin/nginx -s reload <span style="color:#75715e"># 重新载入配置文件</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/usr/local/nginx/sbin/nginx -s reopen <span style="color:#75715e"># 重启 Nginx</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/usr/local/nginx/sbin/nginx -s stop <span style="color:#75715e"># 停止 Nginx</span>
+</span></span></code></pre></div><h2 id="5映射目录">5、映射目录</h2>
+<p>只需要打开 <code>nginx.conf</code> 或者对应的虚拟主机配置文件，在 server 或 location 段里面中上 <code>autoindex on;</code> 就可以了</p>
+<p>除了 autoindex 外，该模块还有两个可用的字段：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">autoindex_exact_size</span> <span style="color:#66d9ef">on</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 默认为 on，以 bytes 为单位显示文件大小；
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 切换为 off 后，以可读的方式显示文件大小，单位为 KB、MB 或者 GB。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">autoindex_localtime</span> <span style="color:#66d9ef">on</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 默认为 off，以 GMT 时间作为显示的文件时间；
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 切换为 on 后，以服务器的文件时间作为显示的文件时间。
+</span></span></span></code></pre></div><p>以访问主机地址 <code>/download</code> 为例下面是一个完整的配置文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">location</span> <span style="color:#e6db74">/download</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">alias</span> <span style="color:#e6db74">/home/user/static_files</span>;   <span style="color:#75715e"># 要在网络上显示的本地目录的路径
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">autoindex</span> <span style="color:#66d9ef">on</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">autoindex_exact_size</span> <span style="color:#66d9ef">off</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">autoindex_localtime</span> <span style="color:#66d9ef">on</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这样访问你的主机地址加上 <code>/download</code> 的时候就能看到你的目录了:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>http://example.cn/download
+</span></span></code></pre></div><p><strong>中文乱码</strong></p>
+<p>加上 <code>charset</code> 即可</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">location</span> <span style="color:#e6db74">/download</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ... 其它同上
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">charset</span> <span style="color:#e6db74">utf-8,gbk</span>; <span style="color:#75715e"># 两个字符集间不要加空格
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p><strong>注意文件夹的权限，查看 Nginx 日志可查看访问和错误日志</strong></p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2022/%E8%BE%BE%E6%A2%A6%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/">达梦——常见问题及解决</a></span>
+  <span class="nav-next"><a href="/cn/2022/%E5%B7%A5%E5%85%B7_docker/">Docker——常见场景</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2022\/%E8%BE%BE%E6%A2%A6%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2022\/%E5%B7%A5%E5%85%B7_docker\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Linux——chrony 服务器集群对时 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Linux——chrony 服务器集群对时 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="chronyd相关命令
+[&amp;hellip;] # 查看 ntp_servers chronyc sources -v # 查看 ntp_servers 状态 chronyc sourcestats -v # 查看 ntp 详细信息 chronyc tracking -v # 查看 NTP 服务器的在线和离线状态 chronyc activity chronyc activity -v # &amp;hellip;">
+      <meta property="og:description" content="chronyd相关命令
+[&amp;hellip;] # 查看 ntp_servers chronyc sources -v # 查看 ntp_servers 状态 chronyc sourcestats -v # 查看 ntp 详细信息 chronyc tracking -v # 查看 NTP 服务器的在线和离线状态 chronyc activity chronyc activity -v # &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20211229113527855.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2021%5cchrony%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%af%b9%e6%97%b6.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Linux——chrony 服务器集群对时</h1>
+
+
+<h3>rehoni / 
+2021-12-15</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p><strong>chronyd相关命令</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 查看 ntp_servers</span>
+</span></span><span style="display:flex;"><span>chronyc sources -v
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看 ntp_servers 状态</span>
+</span></span><span style="display:flex;"><span>chronyc sourcestats -v
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看 ntp 详细信息</span>
+</span></span><span style="display:flex;"><span>chronyc tracking -v
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看 NTP 服务器的在线和离线状态</span>
+</span></span><span style="display:flex;"><span>chronyc activity 
+</span></span><span style="display:flex;"><span>chronyc activity -v
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看 Chrony 服务的日志</span>
+</span></span><span style="display:flex;"><span>journalctl -u chronyd
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 强制同步下系统时钟</span>
+</span></span><span style="display:flex;"><span>chronyc -a makestep
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Rehoni/pic@main/PicList/image-20211229113527855.png" alt="image-20211229113527855"></p>
+<p><strong>M</strong></p>
+<p> 这表示信号源的模式。*^<em>表示服务器，</em>=<em>表示对等方，</em>＃*表示本地连接的参考时钟。</p>
+<p><strong>S</strong></p>
+<p> 此列指示源的状态。</p>
+<pre tabindex="0"><code>* 表示chronyd当前同步到的源。
++ 表示可接受的信号源，与选定的信号源组合在一起。
+- 表示被合并算法排除的可接受源。
+？ 指示已失去连接性或其数据包未通过所有测试的源。它也显示在启动时，直到从中至少收集了3个样本为止。
+x 表示chronyd认为是虚假行情的时钟（即，其时间与大多数其他来源不一致）。
+〜 表示时间似乎具有太多可变性的来源。
+</code></pre><p><strong>Name/IP address</strong></p>
+<p>这显示了源的名称或IP地址，或参考时钟的参考ID。</p>
+<p><strong>Stratum</strong></p>
+<p>这显示了来源的层，如其最近收到的样本中所报告的那样。层1表示一台具有本地连接的参考时钟的计算机。与第1层计算机同步的计算机位于第2层。与第2层计算机同步的计算机位于第3层，依此类推。</p>
+<p><strong>Poll</strong></p>
+<p>这显示轮询源的速率，以秒为单位的时间间隔的以2为底的对数。因此，值为6表示每64秒进行一次测量。<strong>chronyd会</strong>根据当前情况自动<strong>更改</strong>轮询速率。</p>
+<p><strong>Reach</strong></p>
+<p>这显示了源的可达性寄存器以八进制数字打印。寄存器有8位，并在每个从源接收或丢失的数据包上更新。值377表示从最后八次传输中收到了对所有用户的有效答复。</p>
+<p><strong>LastRx</strong></p>
+<p>此列显示多长时间前从来源接收到了最后一个好的样本（在下一列中显示）。未通过某些测试的测量将被忽略。通常以秒为单位。字母<em>m</em>，<em>h</em>，<em>d</em>或<em>y</em>表示分钟，小时，天或年。</p>
+<p><strong>Last sample</strong></p>
+<p>此列显示上次测量时本地时钟与源之间的偏移。方括号中的数字表示实际测得的偏移量。可以用<em>ns</em>（表示纳秒），<em>us</em> （表示微秒），<em>ms</em>（表示毫秒）或<em>s</em>（表示秒）作为后缀。方括号左侧的数字表示原始测量值，已调整为允许此后施加于本地时钟的任何摆度。</p>
+<p>*+/-*指示器后面的数字表示测量中的误差范围。正偏移表示本地时钟位于源时钟之前。</p>
+<p><strong>使用root用户修改</strong></p>
+<p>对时配置文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vi /etc/chrony.conf
+</span></span></code></pre></div><p>（1）作为客户端，设置从哪里对时（即时钟源）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> server xxx.xxx.xxx.xxx iburst
+</span></span></code></pre></div><p>（2）作为服务端，允许哪些节点从本机对时</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> allow xxx.xxx.xxx.xxx
+</span></span></code></pre></div><p>（3）修改配置后，重启服务（客户端）</p>
+<p>对时服务（客户端）常用指令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> systemctl restart chronyd 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> systemctl start chronyd 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> systemctl stop chronyd 
+</span></span></code></pre></div><h3 id="ntp对时">ntp对时</h3>
+<p><strong>ntp相关命令</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 查看ntp服务端时间</span>
+</span></span><span style="display:flex;"><span>ntpq -p
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 手动同步</span>
+</span></span><span style="display:flex;"><span>ntpdate -u 198.120.100.104
+</span></span></code></pre></div><p><strong>使用root用户修改</strong></p>
+<p>对时配置文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vi /etc/ntp.conf
+</span></span></code></pre></div><p>（1）作为客户端，设置从哪里对时（即时钟源）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> <span style="color:#75715e">#ntp服务器地址</span>
+</span></span><span style="display:flex;"><span> server 198.120.100.104 iburst
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#新增：允许上层时间服务器主动修改本机时间</span>
+</span></span><span style="display:flex;"><span> restrict 198.120.100.104 nomodify notrap noquery
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#新增：当外部时间不可用时，使用本地时间</span>
+</span></span><span style="display:flex;"><span> server 127.0.0.1  <span style="color:#75715e">#local clock</span>
+</span></span><span style="display:flex;"><span> fudge 127.0.0.1 stratum <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># 重启ntp服务并加入开启自启</span>
+</span></span><span style="display:flex;"><span> systemctl enable ntpd
+</span></span><span style="display:flex;"><span> systemctl restart ntpd
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2021/%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93/">MySQL数据库备份</a></span>
+  <span class="nav-next"><a href="/cn/2021/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">后端——问题小书（2021）</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2021\/%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2021\/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

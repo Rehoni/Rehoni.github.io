@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>pycharm导出虚拟环境包 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="pycharm导出虚拟环境包 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="在Pycharm中Terminal，注意terminal最好是cmd，运行导出命令：终端会标注出(venv)
+[&amp;hellip;] (venv) D:\Projects\PyCharmProjects\worklog&amp;gt; pip freeze &amp;gt; requirement.txt 运行离线下载依赖包命令：
+[&amp;hellip;] (venv) &amp;hellip;">
+      <meta property="og:description" content="在Pycharm中Terminal，注意terminal最好是cmd，运行导出命令：终端会标注出(venv)
+[&amp;hellip;] (venv) D:\Projects\PyCharmProjects\worklog&amp;gt; pip freeze &amp;gt; requirement.txt 运行离线下载依赖包命令：
+[&amp;hellip;] (venv) &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2023%5cpycharm%e5%af%bc%e5%87%ba%e8%99%9a%e6%8b%9f%e7%8e%af%e5%a2%83%e5%8c%85.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>pycharm导出虚拟环境包</h1>
+
+
+<h3>rehoni / 
+2023-10-09</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>在Pycharm中Terminal，注意terminal最好是cmd，运行导出命令：终端会标注出<code>(venv)</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>(venv) D:\Projects\PyCharmProjects\worklog<span style="color:#f92672">&gt;</span> pip freeze <span style="color:#f92672">&gt;</span> requirement<span style="color:#f92672">.</span>txt
+</span></span></code></pre></div><p>运行离线下载依赖包命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>(venv) D:\Projects\PyCharmProjects\worklog<span style="color:#f92672">&gt;</span> pip download <span style="color:#f92672">-</span>r requirement<span style="color:#f92672">.</span>txt <span style="color:#f92672">-</span>d <span style="color:#f92672">/</span>whl<span style="color:#f92672">-</span>packages
+</span></span></code></pre></div><p>在服务器上离线导入whl：</p>
+<p>如果有 后缀为 <code>-cp310-cp310-win_amd64.whl</code> 的whl文件，改为和其他的whl文件一样的后缀即可，如 <code>-py3-none-any.whl</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python3 <span style="color:#f92672">-</span>m pip install <span style="color:#f92672">--</span>no<span style="color:#f92672">-</span>index <span style="color:#f92672">--</span>find<span style="color:#f92672">-</span>links<span style="color:#f92672">=/</span>home<span style="color:#f92672">/</span>nari<span style="color:#f92672">/</span>luohao<span style="color:#f92672">/</span>whl <span style="color:#f92672">-</span>r req<span style="color:#f92672">.</span>txt
+</span></span></code></pre></div><h2 id="2selenium">2、Selenium</h2>
+<h3 id="selenium-driver实现后台运行">selenium driver实现后台运行</h3>
+<p>标准解决方案：使用headless的selenium driver就可以了。</p>
+<p>短频快的解决方案：使用ghost driver。</p>
+<h3 id="解决chromedriver-executable-needs-to-be-in-path问题">解决&rsquo;chromedriver&rsquo; executable needs to be in PATH问题</h3>
+<p>1.首先需要下载Chromedriver，下载后得到的是一个chromedriver.exe文件。（chromedriver下载地址）
+2.将chromedriver.exe拷贝至谷歌浏览器目录（如 C:\Program Files\Google\Chrome\Application）以及python根目录（C:\Python27）。
+3.将谷歌浏览器环境变量添加到path（C:\Users\HD003\AppData\Local\Google\Chrome\Application）。
+至此，就可以解决 ‘chromedriver’ executable needs to be in PATH问题了。</p>
+<h3 id="填充表单">填充表单</h3>
+<p>Selenium专门提供了Select类来处理下拉框。 其实 WebDriver 中提供了一个叫 Select 的方法，可以帮助我们完成这些事情：</p>
+<pre tabindex="0"><code># 导入 Select 类
+from selenium.webdriver.support.ui import Select
+
+# 找到 name 的选项卡
+select = Select(driver.find_element_by_name(&#39;status&#39;))
+
+# 
+select.select_by_index(1)
+select.select_by_value(&#34;0&#34;)
+select.select_by_visible_text(u&#34;未审核&#34;)
+</code></pre><p>以上是三种选择下拉框的方式，它可以根据索引来选择，可以根据值来选择，可以根据文字来选择。注意：</p>
+<blockquote>
+<p>index 索引从 0 开始
+value是option标签的一个属性值，并不是显示在下拉框中的值
+visible_text是在option标签文本的值，是显示在下拉框的值</p>
+</blockquote>
+<p>全部取消选择怎么办呢？很简单:</p>
+<pre tabindex="0"><code>select.deselect_all()
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2023/kafka/">kafka备忘</a></span>
+  <span class="nav-next"><a href="/cn/2023/%E5%8E%8B%E5%8A%9B%E5%92%8C%E5%8A%A8%E5%8A%9B/">压力和动力</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2023\/kafka\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2023\/%E5%8E%8B%E5%8A%9B%E5%92%8C%E5%8A%A8%E5%8A%9B\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Java数据库（1）基本概念和try-with-resources - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Java数据库（1）基本概念和try-with-resources - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="连接池创建好固定数量的连接，数据库操作通过借用连接池的连接来进行操作，并且不关闭而是返还给连接池。
+[&amp;hellip;] 实现autoClosable接口的类，均可以进行try-with-resources的操作。
+close的顺序是，先进后出，类似堆栈。
+[&amp;hellip;] try (Connection c = &amp;hellip;">
+      <meta property="og:description" content="连接池创建好固定数量的连接，数据库操作通过借用连接池的连接来进行操作，并且不关闭而是返还给连接池。
+[&amp;hellip;] 实现autoClosable接口的类，均可以进行try-with-resources的操作。
+close的顺序是，先进后出，类似堆栈。
+[&amp;hellip;] try (Connection c = &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2020%5c2020-06-20-java-jdbctrycatch.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Java数据库（1）基本概念和try-with-resources</h1>
+
+
+<h3>rehoni / 
+2020-06-20</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h4 id="1-连接池">1. 连接池</h4>
+<p>连接池创建好固定数量的连接，数据库操作通过借用连接池的连接来进行操作，并且不关闭而是返还给连接池。</p>
+<h4 id="2-try-with-resources">2. try-with-resources</h4>
+<p>实现<code>autoClosable</code>接口的类，均可以进行<code>try-with-resources</code>的操作。</p>
+<p>close的顺序是，<strong>先进后出</strong>，类似堆栈。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> (Connection c <span style="color:#f92672">=</span> DriverManager.<span style="color:#a6e22e">getConnection</span>(<span style="color:#e6db74">&#34;jdbc:mysql://127.0.0.1:3306/how2java?characterEncoding=UTF-8&#34;</span>,<span style="color:#e6db74">&#34;root&#34;</span>, <span style="color:#e6db74">&#34;admin&#34;</span>);
+</span></span><span style="display:flex;"><span>        Statement s <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">createStatement</span>();) {
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        String sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;select * from hero where id = &#34;</span> <span style="color:#f92672">+</span> id;
+</span></span><span style="display:flex;"><span>   
+</span></span><span style="display:flex;"><span>        ResultSet rs <span style="color:#f92672">=</span> s.<span style="color:#a6e22e">executeQuery</span>(sql);
+</span></span><span style="display:flex;"><span>   
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 因为id是唯一的，ResultSet最多只能有一条记录</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 所以使用if代替while</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (rs.<span style="color:#a6e22e">next</span>()) {
+</span></span><span style="display:flex;"><span>            hero <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Hero();
+</span></span><span style="display:flex;"><span>            String name <span style="color:#f92672">=</span> rs.<span style="color:#a6e22e">getString</span>(2);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">float</span> hp <span style="color:#f92672">=</span> rs.<span style="color:#a6e22e">getFloat</span>(<span style="color:#e6db74">&#34;hp&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> damage <span style="color:#f92672">=</span> rs.<span style="color:#a6e22e">getInt</span>(4);
+</span></span><span style="display:flex;"><span>            hero.<span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name;
+</span></span><span style="display:flex;"><span>            hero.<span style="color:#a6e22e">hp</span> <span style="color:#f92672">=</span> hp;
+</span></span><span style="display:flex;"><span>            hero.<span style="color:#a6e22e">damage</span> <span style="color:#f92672">=</span> damage;
+</span></span><span style="display:flex;"><span>            hero.<span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> id;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>   
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (SQLException e) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// TODO Auto-generated catch block</span>
+</span></span><span style="display:flex;"><span>        e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h4 id="3-orm">3. ORM</h4>
+<p>ORM=Object Relationship Database Mapping</p>
+<p>对象和关系数据库的映射</p>
+<p>简单说，<strong>一个对象</strong>，对应数据库里的<strong>一条记录</strong></p>
+<h4 id="4-dao">4. DAO</h4>
+<p>DAO=<strong>D</strong>ata<strong>A</strong>ccess <strong>O</strong>bject</p>
+<p>数据访问对象</p>
+<p>实际上就是运用了<a href="https://how2j.cn/k/jdbc/jdbc-orm/391.html#step2641">练习-ORM</a>中的思路，把数据库相关的操作都封装在这个类里面，其他地方看不到JDBC的代码。通过设计类实现DAO接口，来完成对特定类的CRUD操作。</p>
+<ol>
+<li>把驱动的初始化放在了构造方法里</li>
+<li>提供<code>getConnection</code>方法返回连接</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> jdbc;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.List;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> charactor.Hero;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">DAO</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//增加</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add</span>(Hero hero);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//修改</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span>(Hero hero);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//删除</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">delete</span>(<span style="color:#66d9ef">int</span> id);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//获取</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Hero <span style="color:#a6e22e">get</span>(<span style="color:#66d9ef">int</span> id);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//查询</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Hero<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">list</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//分页查询</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Hero<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">list</span>(<span style="color:#66d9ef">int</span> start, <span style="color:#66d9ef">int</span> count);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>以上部分参考自how2java：https://how2j.cn/k/jdbc/jdbc-connection-pool/610.html</p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2020/2020-06-20-java-jdbcutils/">Java数据库（2）改造jdbc工具类</a></span>
+  <span class="nav-next"><a href="/cn/2020/2020-06-22-oracle-userlock/">Oracle排查账户锁定</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2020\/2020-06-20-java-jdbcutils\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2020\/2020-06-22-oracle-userlock\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

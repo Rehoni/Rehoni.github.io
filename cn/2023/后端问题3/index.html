@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>后端——问题小书（2023） - Rehoni | 罗皓</title>
+    <meta property="og:title" content="后端——问题小书（2023） - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="在一个表中有id,name,email我们查询的时候，希望name不为null的时候，作为查询条件，如果email不为null的时候，作为查询条件。
+[&amp;hellip;] @Select(&amp;#34;&amp;lt;script&amp;gt; &amp;#34; &#43; &amp;#34;SELECT * &amp;#34; &#43; &amp;#34;from Demo &amp;#34; &#43; &amp;#34; &amp;lt;where&amp;gt; &amp;#34; &#43; &amp;#34; &amp;hellip;">
+      <meta property="og:description" content="在一个表中有id,name,email我们查询的时候，希望name不为null的时候，作为查询条件，如果email不为null的时候，作为查询条件。
+[&amp;hellip;] @Select(&amp;#34;&amp;lt;script&amp;gt; &amp;#34; &#43; &amp;#34;SELECT * &amp;#34; &#43; &amp;#34;from Demo &amp;#34; &#43; &amp;#34; &amp;lt;where&amp;gt; &amp;#34; &#43; &amp;#34; &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2023%5c%e5%90%8e%e7%ab%af%e9%97%ae%e9%a2%983.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>后端——问题小书（2023）</h1>
+
+
+<h3>rehoni / 
+2023-12-24</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="1mybatis注解-动态sql解决方案">1、MyBatis注解-动态SQL解决方案</h2>
+<p>在一个表中有id,name,email我们查询的时候，希望name不为null的时候，作为查询条件，如果email不为null的时候，作为查询条件。</p>
+<h3 id="方案1script">方案1：&lt;script&gt;</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Select</span>(<span style="color:#e6db74">&#34;&lt;script&gt; &#34;</span> <span style="color:#f92672">+</span>  
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;SELECT * &#34;</span> <span style="color:#f92672">+</span>  
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;from Demo &#34;</span> <span style="color:#f92672">+</span>  
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34; &lt;where&gt; &#34;</span> <span style="color:#f92672">+</span>  
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;  1=1&#34;</span> <span style="color:#f92672">+</span>  
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34; &lt;if test=\&#34;name != null\&#34;&gt;and name=#{name}&lt;/if&gt; &#34;</span> <span style="color:#f92672">+</span>  
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34; &lt;if test=\&#34;email != null\&#34;&gt; and email=#{email}&lt;/if&gt; &#34;</span> <span style="color:#f92672">+</span>  
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34; &lt;/where&gt; &#34;</span> <span style="color:#f92672">+</span>  
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34; &lt;/script&gt; &#34;</span>)  
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Demo<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">select4</span>(Demo demo);  
+</span></span></code></pre></div><h3 id="方案二provider">方案二：@Provider</h3>
+<p>对于创建动态的查的语言。MyBatis提供了多个注解如：@InsertProvider,@UpdateProvider,@DeleteProvider和@SelectProvider，这些都是建立动态语言和让MyBatis执行这些语言。</p>
+<h2 id="2springboot-实现-websocket-通信详解">2、SpringBoot 实现 Websocket 通信详解</h2>
+<p><a href="http://www.mydlq.club/article/86/">SpringBoot 实现 Websocket 通信详解</a></p>
+<h2 id="3spring的beanutilscopypropertiesobj1-obj2复制对象时字段类型不一致导致赋值不上">3、Spring的BeanUtils.copyProperties(obj1, obj2)，复制对象时字段类型不一致，导致赋值不上</h2>
+<p>当用spring的BeanUtils.copyProperties(obj1, obj2);对象进行复制时，因为在obj1 类型的对象中定义的属性类型不同（set方法中用的是Integer类型，get方法中返回的是int类型）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getNumber</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> number;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setNumber</span>(Integer number) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">number</span> <span style="color:#f92672">=</span> number;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这里是因为：spring在利用反射复制对象时，是以javaBean的规范来使用get/set方法进行设置值的。同时set方法的参与类型，在classLoader中，也会被计为函数名的一部分。
+所有这里必须都是int类型或者都是integer类型。否则spring就不会对该属性进行复制相应的值。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getNumber</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> number;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setNumber</span>(<span style="color:#66d9ef">int</span> number) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">number</span> <span style="color:#f92672">=</span> number;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>第二个知识点：
+应用场景：当我修改一个工程里的jar包内的一个类时（其实改动，就是把上一个知识点里的Integer类型修改成了int类型），然后到去替换服务器上对应的jar包后，重启工程会出现：NoSuchMethodError这样的错。
+原因是：基本数据类型与包装类型的解包封包是由编译器提供的（这在jdk 1.5引入)。void setNumber(int a)与 void setNumber(Integer a); 对于编译器来说是不同的方法,他们的有着不同的方法签名。
+这里就涉及到Java编辑器对Java方法编译的问题：在Java中，编辑器会把函数的参数列表与函数名称一起作为内存中标记函数唯一性的标识，这也是Java代码可以重载的原因。</p>
+<h2 id="3map-struct-高级用法">3、map struct 高级用法</h2>
+<p>1、doTrim函数，toJsonString函数、自定义java函数（工具类见附录）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> com.dm.bs.model.vo.BsFieldTransResult;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.dm.bs.model.vo.BsFieldTransVO;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.dm.bs.repository.entity.BsFieldTrans;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.mapstruct.Mapper;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.mapstruct.Mapping;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.mapstruct.factory.Mappers;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * BsFieldTrans转换器
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Mapper</span>(uses <span style="color:#f92672">=</span> {TypeConversionWorker.<span style="color:#a6e22e">class</span>})
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">BsFieldTransMapping</span> {
+</span></span><span style="display:flex;"><span>    BsFieldTransMapping INSTANCE <span style="color:#f92672">=</span> Mappers.<span style="color:#a6e22e">getMapper</span>(BsFieldTransMapping.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Mapping</span>(target <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;targetUrl&#34;</span>,source <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;targetUrl&#34;</span>,qualifiedByName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;doTrim&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Mapping</span>(target <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;transKey&#34;</span>,source <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;transKey&#34;</span>,qualifiedByName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;toJsonString&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Mapping</span>(target <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;transVal&#34;</span>,source <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;transVal&#34;</span>,qualifiedByName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;toJsonString&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Mapping</span>(target <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;relatedField&#34;</span>, expression <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;java(typeConversionWorker.generateRelatedField(bsFieldTransVO.getTransKey(), bsFieldTransVO.getTransVal()))&#34;</span>) <span style="color:#75715e">//使用工具类处理</span>
+</span></span><span style="display:flex;"><span>    BsFieldTrans <span style="color:#a6e22e">transToBsFieldTrans</span>(BsFieldTransVO bsFieldTransVO);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Mapping</span>(target <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;relatedField&#34;</span>,source <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;relatedField&#34;</span>,qualifiedByName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;listStr2CommaStr&#34;</span>)
+</span></span><span style="display:flex;"><span>    BsFieldTransResult <span style="color:#a6e22e">transToBsFieldTransResult</span>(BsFieldTrans bsFieldTrans);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>附录：</p>
+<p>1、转换工具类</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> com.dm.bs.model.vo.TransKeyVO;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.dm.bs.model.vo.TransValVO;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.dm.bs.util.JacksonUtil;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.fasterxml.jackson.core.type.TypeReference;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.mapstruct.Named;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.stereotype.Component;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.util.StringUtils;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.ArrayList;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.List;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Objects;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Mapping通用转换
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Component</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Named</span>(<span style="color:#e6db74">&#34;TypeConversionWorker&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TypeConversionWorker</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 对象转json字符串
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param obj
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Named</span>(<span style="color:#e6db74">&#34;toJsonString&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">toJsonString</span>(Object obj) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (Objects.<span style="color:#a6e22e">isNull</span>(obj)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> JacksonUtil.<span style="color:#a6e22e">toJsonString</span>(obj);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 去空格
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param str
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Named</span>(<span style="color:#e6db74">&#34;doTrim&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">doTrim</span>(String str) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (StringUtils.<span style="color:#a6e22e">isEmpty</span>(str)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> str.<span style="color:#a6e22e">trim</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 字符串转List对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param str
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Named</span>(<span style="color:#e6db74">&#34;toStrList&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">toStrList</span>(String str) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (StringUtils.<span style="color:#a6e22e">isEmpty</span>(str)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> JacksonUtil.<span style="color:#a6e22e">jsonToObjByTypeRf</span>(str, <span style="color:#66d9ef">new</span> TypeReference<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;&gt;</span>() {
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * json字符串转换为Map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param obj
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Named</span>(<span style="color:#e6db74">&#34;toStrObjMap&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Object <span style="color:#a6e22e">toStrObjMap</span>(Object obj) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (Objects.<span style="color:#a6e22e">isNull</span>(obj)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> JacksonUtil.<span style="color:#a6e22e">jsonToObjByTypeRf</span>(obj.<span style="color:#a6e22e">toString</span>(), <span style="color:#66d9ef">new</span> TypeReference<span style="color:#f92672">&lt;</span>Map<span style="color:#f92672">&lt;</span>String, Object<span style="color:#f92672">&gt;&gt;</span>() {
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * jsonLsit转换为逗号隔开形式
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param obj
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Named</span>(<span style="color:#e6db74">&#34;listStr2CommaStr&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">listStr2CommaStr</span>(Object obj) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (Objects.<span style="color:#a6e22e">isNull</span>(obj)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> strings <span style="color:#f92672">=</span> JacksonUtil.<span style="color:#a6e22e">jsonToObjByTypeRf</span>(obj.<span style="color:#a6e22e">toString</span>(), <span style="color:#66d9ef">new</span> TypeReference<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;&gt;</span>() {
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (strings <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> String.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#34;,&#34;</span>, strings);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * BsFieldTransMapping生成relatedField内容
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Named</span>(<span style="color:#e6db74">&#34;generateRelatedField&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">generateRelatedField</span>(List<span style="color:#f92672">&lt;</span>TransKeyVO<span style="color:#f92672">&gt;</span> transKey, List<span style="color:#f92672">&lt;</span>TransValVO<span style="color:#f92672">&gt;</span> transVal) {
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> relatedFieldList <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (transKey <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> transKey.<span style="color:#a6e22e">size</span>() <span style="color:#f92672">&gt;</span> 0) {
+</span></span><span style="display:flex;"><span>            transKey.<span style="color:#a6e22e">forEach</span>(k <span style="color:#f92672">-&gt;</span> relatedFieldList.<span style="color:#a6e22e">add</span>(k.<span style="color:#a6e22e">getCurrentKey</span>()));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (transVal <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> transVal.<span style="color:#a6e22e">size</span>() <span style="color:#f92672">&gt;</span> 0) {
+</span></span><span style="display:flex;"><span>            transVal.<span style="color:#a6e22e">forEach</span>(v <span style="color:#f92672">-&gt;</span> relatedFieldList.<span style="color:#a6e22e">add</span>(v.<span style="color:#a6e22e">getTargetKey</span>()));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> JacksonUtil.<span style="color:#a6e22e">toJsonString</span>(relatedFieldList);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * BsFieldTransMapping生成relatedField内容
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Named</span>(<span style="color:#e6db74">&#34;getParentScope&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getParentScope</span>(String targetScope) {
+</span></span><span style="display:flex;"><span>        String<span style="color:#f92672">[]</span> split <span style="color:#f92672">=</span> targetScope.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;\\.&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (split.<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> 1) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        StringBuilder parentScope <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> split.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> 1; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            parentScope.<span style="color:#a6e22e">append</span>(split<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&lt;</span> split.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> 2) {
+</span></span><span style="display:flex;"><span>                parentScope.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> parentScope.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>2、工具类</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> com.fasterxml.jackson.core.JsonProcessingException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.fasterxml.jackson.core.type.TypeReference;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.fasterxml.jackson.databind.ObjectMapper;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> lombok.extern.slf4j.Slf4j;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Slf4j</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JacksonUtil</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> ObjectMapper mapper <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectMapper();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 对象转json
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param object
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">toJsonString</span>(Object object) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> mapper.<span style="color:#a6e22e">writeValueAsString</span>(object);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (JsonProcessingException e) {
+</span></span><span style="display:flex;"><span>            log.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;...Err...Jackson转换字符串（String）过程失败：：：&#34;</span>, e);
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * json转对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param json
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param clazz
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param &lt;T&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> T <span style="color:#a6e22e">jsonToBean</span>(String json, Class<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> clazz) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> mapper.<span style="color:#a6e22e">readValue</span>(json, clazz);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (JsonProcessingException e) {
+</span></span><span style="display:flex;"><span>            log.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;...Err...Jackson转换对象（Object）过程失败：：：&#34;</span>, e);
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 字符串转换为List
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param listStr
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param typeReference new TypeReference&lt;List&lt;Object&gt;&gt;() {}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param &lt;T&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> T <span style="color:#a6e22e">jsonToObjByTypeRf</span>(String listStr, TypeReference<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> typeReference) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> mapper.<span style="color:#a6e22e">readValue</span>(listStr, typeReference);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (JsonProcessingException e) {
+</span></span><span style="display:flex;"><span>            log.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;...Err...Jackson转换Object过程失败：：：&#34;</span>, e);
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="4java-两个list按照其中一个list元素顺序对另一个list元素进行排序">4、Java 两个List按照其中一个List元素顺序对另一个List元素进行排序</h2>
+<p>根据orderList顺序排序，orderList不存在的元素放置在targetList最后面</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 根据orderList顺序排序，orderList不存在的元素放置在targetList最后面</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sort1</span>(List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> targetList, List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> orderList) {
+</span></span><span style="display:flex;"><span>    targetList.<span style="color:#a6e22e">sort</span>(((o1, o2) <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> io1 <span style="color:#f92672">=</span> orderList.<span style="color:#a6e22e">indexOf</span>(o1);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> io2 <span style="color:#f92672">=</span> orderList.<span style="color:#a6e22e">indexOf</span>(o2);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (io1 <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1) {
+</span></span><span style="display:flex;"><span>            io1 <span style="color:#f92672">=</span> targetList.<span style="color:#a6e22e">size</span>() <span style="color:#f92672">-</span> io1;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (io2 <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1) {
+</span></span><span style="display:flex;"><span>            io2 <span style="color:#f92672">=</span> targetList.<span style="color:#a6e22e">size</span>() <span style="color:#f92672">-</span> io2;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> io2 <span style="color:#f92672">-</span> io1;
+</span></span><span style="display:flex;"><span>    }));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//如果targetList为list&lt;实体&gt;，则需要 get出 key 相同字段进行比较</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sort1</span>(List<span style="color:#f92672">&lt;</span>实体<span style="color:#f92672">&gt;</span> targetList, List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> orderList) {
+</span></span><span style="display:flex;"><span>    targetList.<span style="color:#a6e22e">sort</span>(((o1, o2) <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> io1 <span style="color:#f92672">=</span> orderList.<span style="color:#a6e22e">indexOf</span>(o1.<span style="color:#a6e22e">get出targetList与orderList相同的key</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> io2 <span style="color:#f92672">=</span> orderList.<span style="color:#a6e22e">indexOf</span>(o2.<span style="color:#a6e22e">get出targetList与orderList相同的key</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (io1 <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1) {
+</span></span><span style="display:flex;"><span>            io1 <span style="color:#f92672">=</span> targetList.<span style="color:#a6e22e">size</span>() <span style="color:#f92672">-</span> io1;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (io2 <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1) {
+</span></span><span style="display:flex;"><span>            io2 <span style="color:#f92672">=</span> targetList.<span style="color:#a6e22e">size</span>() <span style="color:#f92672">-</span> io2;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> io2 <span style="color:#f92672">-</span> io1;
+</span></span><span style="display:flex;"><span>    }));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>根据orderList顺序排序，orderList不存在的元素放置在targetList最前面</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span> <span style="color:#75715e">// 根据orderList顺序排序，orderList不存在的元素放置在targetList最前面</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sort2</span>(List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> targetList, List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> orderList) {
+</span></span><span style="display:flex;"><span>    targetList.<span style="color:#a6e22e">sort</span>(((o1, o2) <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> io1 <span style="color:#f92672">=</span> orderList.<span style="color:#a6e22e">indexOf</span>(o1);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> io2 <span style="color:#f92672">=</span> orderList.<span style="color:#a6e22e">indexOf</span>(o2);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> io1 <span style="color:#f92672">-</span> io2;
+</span></span><span style="display:flex;"><span>    }));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">//如果targetList为list&lt;实体&gt;，则需要 get出 key 相同字段进行比较</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sort2</span>( List<span style="color:#f92672">&lt;</span>实体<span style="color:#f92672">&gt;</span> targetList, List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> orderList) {
+</span></span><span style="display:flex;"><span>    targetList.<span style="color:#a6e22e">sort</span>(((o1, o2) <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> io1 <span style="color:#f92672">=</span> orderList.<span style="color:#a6e22e">indexOf</span>(o1.<span style="color:#a6e22e">get出targetList与orderList相同的key</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> io2 <span style="color:#f92672">=</span> orderList.<span style="color:#a6e22e">indexOf</span>(o2.<span style="color:#a6e22e">get出targetList与orderList相同的key</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> io1 <span style="color:#f92672">-</span> io2;
+</span></span><span style="display:flex;"><span>    }));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="5java线程池中创建-threadfactory-设置线程名称">5、Java线程池中创建 ThreadFactory 设置线程名称</h2>
+<h3 id="1-customizablethreadfactory">1. CustomizableThreadFactory</h3>
+<p>Spring 框架提供的 <code>CustomizableThreadFactory</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ThreadFactory springThreadFactory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CustomizableThreadFactory(<span style="color:#e6db74">&#34;springThread-pool-&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ExecutorService exec <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ThreadPoolExecutor(1, 1,
+</span></span><span style="display:flex;"><span>        0L, TimeUnit.<span style="color:#a6e22e">MILLISECONDS</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">new</span> LinkedBlockingQueue<span style="color:#f92672">&lt;</span>Runnable<span style="color:#f92672">&gt;</span>(10),springThreadFactory);
+</span></span><span style="display:flex;"><span>exec.<span style="color:#a6e22e">submit</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>    logger.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;--记忆中的颜色是什么颜色---&#34;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><h3 id="2-threadfactorybuilder">2. ThreadFactoryBuilder</h3>
+<p>Google guava 工具类 提供的 <code>ThreadFactoryBuilder</code> ,使用链式方法创建。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ThreadFactory guavaThreadFactory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ThreadFactoryBuilder().<span style="color:#a6e22e">setNameFormat</span>(<span style="color:#e6db74">&#34;retryClient-pool-&#34;</span>).<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ExecutorService exec <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ThreadPoolExecutor(1, 1,
+</span></span><span style="display:flex;"><span>        0L, TimeUnit.<span style="color:#a6e22e">MILLISECONDS</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">new</span> LinkedBlockingQueue<span style="color:#f92672">&lt;</span>Runnable<span style="color:#f92672">&gt;</span>(10),guavaThreadFactory );
+</span></span><span style="display:flex;"><span>exec.<span style="color:#a6e22e">submit</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>    logger.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;--记忆中的颜色是什么颜色---&#34;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><h3 id="3-basicthreadfactory">3. BasicThreadFactory</h3>
+<p>Apache commons-lang3 提供的 <code>BasicThreadFactory</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ThreadFactory basicThreadFactory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BasicThreadFactory.<span style="color:#a6e22e">Builder</span>()
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">namingPattern</span>(<span style="color:#e6db74">&#34;basicThreadFactory-&#34;</span>).<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ExecutorService exec <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ThreadPoolExecutor(1, 1,
+</span></span><span style="display:flex;"><span>        0L, TimeUnit.<span style="color:#a6e22e">MILLISECONDS</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">new</span> LinkedBlockingQueue<span style="color:#f92672">&lt;</span>Runnable<span style="color:#f92672">&gt;</span>(10),basicThreadFactory );
+</span></span><span style="display:flex;"><span>exec.<span style="color:#a6e22e">submit</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>    logger.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;--记忆中的颜色是什么颜色---&#34;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><h3 id="4-三种方式总结">4. 三种方式总结</h3>
+<p>最终本质都是 给 java.lang.Thread#name 设置名称,详情源码感兴趣的可以自行查看。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">final</span> Thread thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread();
+</span></span><span style="display:flex;"><span>thread.<span style="color:#a6e22e">setName</span>(name);
+</span></span></code></pre></div><h2 id="6创建超链接-in-apache-poi-word">6、创建超链接 in Apache POI Word</h2>
+<p>There is <a href="https://poi.apache.org/apidocs/org/apache/poi/xwpf/usermodel/XWPFHyperlinkRun.html">XWPFHyperlinkRun</a> but not a method for creating a such until now (March 2018, <code>apache poi</code> version <code>3.17</code>). So we will need using underlaying low level methods.</p>
+<p>The following example provides a method for creating a <code>XWPFHyperlinkRun</code> in a <code>XWPFParagraph</code>. After that the <code>XWPFHyperlinkRun</code> can be handled as a <code>XWPFRun</code> for further formatting since it extents this class.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.poi.xwpf.usermodel.*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.openxmlformats.schemas.wordprocessingml.x2006.main.CTHyperlink;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CreateWordXWPFHyperlinkRun</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">static</span> XWPFHyperlinkRun <span style="color:#a6e22e">createHyperlinkRun</span>(XWPFParagraph paragraph, String uri) {
+</span></span><span style="display:flex;"><span>  String rId <span style="color:#f92672">=</span> paragraph.<span style="color:#a6e22e">getDocument</span>().<span style="color:#a6e22e">getPackagePart</span>().<span style="color:#a6e22e">addExternalRelationship</span>(
+</span></span><span style="display:flex;"><span>    uri, 
+</span></span><span style="display:flex;"><span>    XWPFRelation.<span style="color:#a6e22e">HYPERLINK</span>.<span style="color:#a6e22e">getRelation</span>()
+</span></span><span style="display:flex;"><span>   ).<span style="color:#a6e22e">getId</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  CTHyperlink cthyperLink<span style="color:#f92672">=</span>paragraph.<span style="color:#a6e22e">getCTP</span>().<span style="color:#a6e22e">addNewHyperlink</span>();
+</span></span><span style="display:flex;"><span>  cthyperLink.<span style="color:#a6e22e">setId</span>(rId);
+</span></span><span style="display:flex;"><span>  cthyperLink.<span style="color:#a6e22e">addNewR</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> XWPFHyperlinkRun(
+</span></span><span style="display:flex;"><span>    cthyperLink,
+</span></span><span style="display:flex;"><span>    cthyperLink.<span style="color:#a6e22e">getRArray</span>(0),
+</span></span><span style="display:flex;"><span>    paragraph
+</span></span><span style="display:flex;"><span>   );
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  XWPFDocument document <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> XWPFDocument();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  XWPFParagraph paragraph <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createParagraph</span>();
+</span></span><span style="display:flex;"><span>  XWPFRun run <span style="color:#f92672">=</span> paragraph.<span style="color:#a6e22e">createRun</span>();
+</span></span><span style="display:flex;"><span>  run.<span style="color:#a6e22e">setText</span>(<span style="color:#e6db74">&#34;This is a text paragraph having &#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  XWPFHyperlinkRun hyperlinkrun <span style="color:#f92672">=</span> createHyperlinkRun(paragraph, <span style="color:#e6db74">&#34;https://www.google.de&#34;</span>);
+</span></span><span style="display:flex;"><span>  hyperlinkrun.<span style="color:#a6e22e">setText</span>(<span style="color:#e6db74">&#34;a link to Google&#34;</span>);
+</span></span><span style="display:flex;"><span>  hyperlinkrun.<span style="color:#a6e22e">setColor</span>(<span style="color:#e6db74">&#34;0000FF&#34;</span>);
+</span></span><span style="display:flex;"><span>  hyperlinkrun.<span style="color:#a6e22e">setUnderline</span>(UnderlinePatterns.<span style="color:#a6e22e">SINGLE</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  run <span style="color:#f92672">=</span> paragraph.<span style="color:#a6e22e">createRun</span>();
+</span></span><span style="display:flex;"><span>  run.<span style="color:#a6e22e">setText</span>(<span style="color:#e6db74">&#34; in it.&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  paragraph <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createParagraph</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  paragraph <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createParagraph</span>();
+</span></span><span style="display:flex;"><span>  run <span style="color:#f92672">=</span> paragraph.<span style="color:#a6e22e">createRun</span>();
+</span></span><span style="display:flex;"><span>  run.<span style="color:#a6e22e">setText</span>(<span style="color:#e6db74">&#34;This is a text paragraph having &#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  hyperlinkrun <span style="color:#f92672">=</span> createHyperlinkRun(paragraph, <span style="color:#e6db74">&#34;./test.pdf&#34;</span>); <span style="color:#75715e">//path in URI is relative to the Word document file</span>
+</span></span><span style="display:flex;"><span>  hyperlinkrun.<span style="color:#a6e22e">setText</span>(<span style="color:#e6db74">&#34;a link to a file&#34;</span>);
+</span></span><span style="display:flex;"><span>  hyperlinkrun.<span style="color:#a6e22e">setColor</span>(<span style="color:#e6db74">&#34;0000FF&#34;</span>);
+</span></span><span style="display:flex;"><span>  hyperlinkrun.<span style="color:#a6e22e">setUnderline</span>(UnderlinePatterns.<span style="color:#a6e22e">SINGLE</span>);
+</span></span><span style="display:flex;"><span>  hyperlinkrun.<span style="color:#a6e22e">setBold</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>  hyperlinkrun.<span style="color:#a6e22e">setFontSize</span>(20);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  run <span style="color:#f92672">=</span> paragraph.<span style="color:#a6e22e">createRun</span>();
+</span></span><span style="display:flex;"><span>  run.<span style="color:#a6e22e">setText</span>(<span style="color:#e6db74">&#34; in it.&#34;</span>);
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  FileOutputStream out <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileOutputStream(<span style="color:#e6db74">&#34;CreateWordXWPFHyperlinkRun.docx&#34;</span>);
+</span></span><span style="display:flex;"><span>  document.<span style="color:#a6e22e">write</span>(out);
+</span></span><span style="display:flex;"><span>  out.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>  document.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="7spring框架中afterreturning的returning返回值未成功修改string类型">7、Spring框架中@AfterReturning的returning返回值未成功修改String类型</h2>
+<p><strong>现象：</strong></p>
+<p>String类型的参数值在方法中改变，返回值没有改变。</p>
+<p>自定义对象类型的参数值在方法中改变，返回值改变。</p>
+<p><img src="/images/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RpYW50aWFuNDY5,size_16,color_FFFFFF,t_70#pic_center.png" alt="在这里插入图片描述"></p>
+<p><img src="/images/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RpYW50aWFuNDY5,size_16,color_FFFFFF,t_70#pic_center-1696752780587-3.png" alt="在这里插入图片描述"></p>
+<p><strong>结论：</strong></p>
+<p>@AfterReturning注解的方法，在执行结束后，会将目标类的返回值写入returning，最后其做为目标返回值返回给proxy对象的方法调用返回值，而如何识别目标类的返回值，是用其内存地址进行判断的而不是传入的形参，String的str的内存地址发生了改变，但是没有改变实际参数的内存地址，所以最后写入returning的参数依旧是实参。而Student的内存地址全程没有改变，所以方法执行结束后，实际参数被改变了，但因为内存地址没有改变，所以被returning写入，最后就像我们看到的输出结果一样，String的test方法执行后没有发生改变，而Student的test方法执行后参数被改变了。</p>
+<p><strong>总结：</strong></p>
+<p>因此要考虑不改变内存地址修改字符串的内容</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>        String str01 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;aaa&#34;</span>;
+</span></span><span style="display:flex;"><span>        String str02 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;aaa&#34;</span>;
+</span></span><span style="display:flex;"><span>        String str03 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bbbb&#34;</span>;
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(str01.<span style="color:#a6e22e">hashCode</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> str02.<span style="color:#a6e22e">hashCode</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> str03.<span style="color:#a6e22e">hashCode</span>());
+</span></span><span style="display:flex;"><span>        Field field <span style="color:#f92672">=</span> str02.<span style="color:#a6e22e">getClass</span>().<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;value&#34;</span>);
+</span></span><span style="display:flex;"><span>        field.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        field.<span style="color:#a6e22e">set</span>(str02, <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>});
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(str01 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> str02);
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">/* jdk7以后已不包含 private final int count;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   field = str02.getClass().getDeclaredField(&#34;count&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        field.setAccessible(true);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        field.set(str02, 4);*/</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(str01 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> str02);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(str01.<span style="color:#a6e22e">hashCode</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> str02.<span style="color:#a6e22e">hashCode</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> str03.<span style="color:#a6e22e">hashCode</span>());
+</span></span><span style="display:flex;"><span>        field <span style="color:#f92672">=</span> str02.<span style="color:#a6e22e">getClass</span>().<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;hash&#34;</span>);
+</span></span><span style="display:flex;"><span>        field.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        field.<span style="color:#a6e22e">set</span>(str02, 0);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(str01.<span style="color:#a6e22e">hashCode</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> str02.<span style="color:#a6e22e">hashCode</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> str03.<span style="color:#a6e22e">hashCode</span>());
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(str01 <span style="color:#f92672">==</span> str02);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(str02 <span style="color:#f92672">==</span> str03);
+</span></span></code></pre></div><ol>
+<li>根据Java String的特性，str01和str02指向同一个内存地址，所以str01,str02始终保持一致。</li>
+<li>String不能修改的本质是一个final的字符数组（private final char value[];），但是final只在编译时有效，而运行期间是没有作用的，所以可以通过反射修改数组的值。</li>
+<li>代码中修改后字符串的hashcode之所以没有变化，是因为String对象会缓存hashcode，去掉缓存就可以看到变化。</li>
+<li>根据Java String的特性，上面代码创建的所有字符串对象都保存在String Pool中，代码中str02与str03的内容相同，地址却不同，所以String Pool中就存在两个相同的字符串。</li>
+</ol>
+<h2 id="8jsch上传的文件文件名乱码解决方案">8、jsch上传的文件文件名乱码解决方案</h2>
+<p>当使用jsch设置编码格式时</p>
+<p>sftp.setFilenameEncoding(&ldquo;GBK&rdquo;);</p>
+<p>出现如下错误：The encoding can not be changed for this sftp server。</p>
+<p>使用的jar包是：jsch-0.1.54,经查看源码发现，版本是3-5的，都不支持设置文件名编码格式。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setFilenameEncoding</span>(String encoding) <span style="color:#66d9ef">throws</span> SftpException{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sversion<span style="color:#f92672">=</span>getServerVersion();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(3 <span style="color:#f92672">&lt;=</span> sversion <span style="color:#f92672">&amp;&amp;</span> sversion <span style="color:#f92672">&lt;=</span> 5 <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">!</span>encoding.<span style="color:#a6e22e">equals</span>(UTF8)){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> SftpException(SSH_FX_FAILURE,
+</span></span><span style="display:flex;"><span>                                <span style="color:#e6db74">&#34;The encoding can not be changed for this sftp server.&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(encoding.<span style="color:#a6e22e">equals</span>(UTF8)){
+</span></span><span style="display:flex;"><span>        encoding<span style="color:#f92672">=</span>UTF8;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    fEncoding<span style="color:#f92672">=</span>encoding;
+</span></span><span style="display:flex;"><span>    fEncoding_is_utf8<span style="color:#f92672">=</span>fEncoding.<span style="color:#a6e22e">equals</span>(UTF8);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>解决方式：使用反射修改server_version的默认值即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>JSch jsch <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> JSch();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>jsch.<span style="color:#a6e22e">addIdentity</span>(<span style="color:#e6db74">&#34;provateKey&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Session session <span style="color:#f92672">=</span> jsch.<span style="color:#a6e22e">getSession</span>(<span style="color:#e6db74">&#34;userName&#34;</span>, <span style="color:#e6db74">&#34;serverIp&#34;</span><span style="color:#960050;background-color:#1e0010">，“</span>port<span style="color:#960050;background-color:#1e0010">”</span>);
+</span></span><span style="display:flex;"><span>Properties config <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Properties();
+</span></span><span style="display:flex;"><span>config.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;StrictHostKeyChecking&#34;</span>, <span style="color:#e6db74">&#34;no&#34;</span>);
+</span></span><span style="display:flex;"><span>session.<span style="color:#a6e22e">setConfig</span>(config);
+</span></span><span style="display:flex;"><span>session.<span style="color:#a6e22e">connect</span>();
+</span></span><span style="display:flex;"><span>ChannelSftp channelSftp <span style="color:#f92672">=</span> (ChannelSftp)session.<span style="color:#a6e22e">openChannel</span>(<span style="color:#e6db74">&#34;sftp&#34;</span>);
+</span></span><span style="display:flex;"><span>channelSftp.<span style="color:#a6e22e">connect</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Class cl <span style="color:#f92672">=</span> channelSftp.<span style="color:#a6e22e">class</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Field f1 <span style="color:#f92672">=</span>cl.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;server_version&#34;</span>);
+</span></span><span style="display:flex;"><span>f1.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>f1.<span style="color:#a6e22e">set</span>(sftp, 2); 
+</span></span><span style="display:flex;"><span>channelSftp.<span style="color:#a6e22e">setFilenameEncoding</span>(<span style="color:#e6db74">&#34;gbk&#34;</span>);
+</span></span></code></pre></div><p>其中Field是引用java.lang.reflect.Field jar包里面的类。</p>
+<p>这样就ok了，如果想知道自己使用的jar版本是多少，可以使用getServerVersion方法来获取。具体方法如下：channelSftp.getServerVersion()</p>
+<h2 id="9easypoi-使用模板导出图片不显示">9、easypoi 使用模板导出图片不显示</h2>
+<p>题主提供的参考文档在“1.3 使用”中介绍使用的easypoi-base版本号为3.2.0，所以该教程也是在那个版本的基础上说明的。我下载了3.2.0的jar包看了一下，的确是没有问题，这在后面会解释。</p>
+<p>现在的问题是，题主使用的肯定是更高版本的easypoi，比如我目前使用的是4.4.0，查看了一下源码，我觉得问题的确就在于colspan和rowspan上。</p>
+<p>ImageEntity在构造时，默认colspan与rowspan都为1。而在BaseExportService.createImageCell构造ClientAnchor时，也就是找到这个图片的锚点时出现问题</p>
+<p><img src="/images/bVc0NlP.png" alt="img"></p>
+<p>这里直接导致XSSFClientAnchor在构造时第一和第二单元格时为同一单元格，也就是相当于将图片画到了一个点上。而在3.2.0版本中这里是没有使用colspan、rowspan变量的</p>
+<p><img src="/images/bVc0Nmw.png" alt="img"></p>
+<p>说明在版本迭代过程中，作者虽然支持了图片占用多个单元格的方式，但是这里附加的-1会导致ImageEntity默认值被减掉后变成点，要想正常excel导出图片就必须给colspan、rowspan赋值大于2。</p>
+<p>我又看了各个版本的jar，发现4.0.0还是与3.2.0一样只支持1个单元格图片，从4.2.0开始支持colspan、rowspan变量，而且是没有-1，也就是说4.2.0是完美支持的。但是不知道为啥，从4.3.0版本开始增加了-1，导致图片缩为点了&hellip;具体原因我想肯定是有别的考量在里面吧，我就没有继续深入研究了&hellip;</p>
+<h2 id="10java的comparator升序降序的记法">10、Java的Comparator升序降序的记法</h2>
+<p><strong>记住java判断的规则就能轻松各种情况了，-1不交换，1交换</strong></p>
+<p>实现Comparator接口，必须实现下面这个函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">compare</span>(CommentVo o1, CommentVo o2) {
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">return</span> o1.<span style="color:#a6e22e">getTime</span>().<span style="color:#a6e22e">compareTo</span>(o2.<span style="color:#a6e22e">getTime</span>());
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这里o1表示位于前面的对象，o2表示后面的对象</p>
+<ul>
+<li>返回-1（或负数），表示不需要交换01和02的位置，o1排在o2前面，asc</li>
+<li>返回1（或正数），表示需要交换01和02的位置，o1排在o2后面，desc</li>
+</ul>
+<p>下面来用我们之前的结论解释为什么<code>return o2.a - o1.a;</code>就是降序了：</p>
+<p>首先o2是第二个元素，o1是第一个元素。无非就以下这些情况：
+①： <strong><code>o2.a &gt; o1.a</code></strong> : 那么此时返回正数，表示需要调整o1,o2的顺序，也就是需要把o2放到o1前面，这不就是降序了么。</p>
+<p>②：<strong><code>o2.a &lt; o1.a</code></strong> : 那么此时返回负数，表示不需要调整，也就是此时o1 比 o2大， 不还是降序么。</p>
+<p>这样一分析下来，就很明白了。希望对大家有用。</p>
+<h2 id="11springboot20不返回某个字段">11、springboot2.0不返回某个字段</h2>
+<p>1.注解使用在 类名,接口头上</p>
+<p>@JsonIgnoreProperties(value={&ldquo;comid&rdquo;}) //希望动态过滤掉的属性</p>
+<p>2。该注解使用在get方法头上</p>
+<p>@JsonIgnore</p>
+<h2 id="12汉字转拼音pinyin4j">12、汉字转拼音：pinyin4j</h2>
+<h2 id="13把字符串解析为if语句的判断条件">13、把字符串解析为if语句的判断条件</h2>
+<p>脚本语言支持(Scripting)：<strong>ScriptEngineManager</strong></p>
+<p>需要从数据库中取出varchar类型的数据，解析转化为if语句中的判断条件，</p>
+<p>在不断的查阅资料中，找到了下面的方法，使用javax.script.ScriptEngineManager,代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> ScriptException {
+</span></span><span style="display:flex;"><span>    ScriptEngineManager manager <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ScriptEngineManager();  
+</span></span><span style="display:flex;"><span>    ScriptEngine engine <span style="color:#f92672">=</span> manager.<span style="color:#a6e22e">getEngineByName</span>(<span style="color:#e6db74">&#34;js&#34;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">		 * 字符串转算术表达式
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">		 */</span>
+</span></span><span style="display:flex;"><span>    String str1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;43*(2 + 1.4)+2*32/(3-2.1)&#34;</span>;  
+</span></span><span style="display:flex;"><span>    Object result1 <span style="color:#f92672">=</span> engine.<span style="color:#a6e22e">eval</span>(str1);  
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;结果类型:&#34;</span> <span style="color:#f92672">+</span> result1.<span style="color:#a6e22e">getClass</span>().<span style="color:#a6e22e">getName</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;,计算结果:&#34;</span> <span style="color:#f92672">+</span> result1);  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">         * 字符串转条件表达式
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">         */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> 7;
+</span></span><span style="display:flex;"><span>    String state <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;正常&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">boolean</span> flag <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    String st <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test&#34;</span>;
+</span></span><span style="display:flex;"><span>    String str2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;value &gt; 5 &amp;&amp; st == \&#34;test\&#34; &amp;&amp; state == \&#34;正常\&#34; &amp;&amp; flag == true&#34;</span>;
+</span></span><span style="display:flex;"><span>    engine.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;value&#34;</span>, value);
+</span></span><span style="display:flex;"><span>    engine.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;state&#34;</span>, state);
+</span></span><span style="display:flex;"><span>    engine.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;flag&#34;</span>, flag);
+</span></span><span style="display:flex;"><span>    engine.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;st&#34;</span>, st);
+</span></span><span style="display:flex;"><span>    Object result2 <span style="color:#f92672">=</span> engine.<span style="color:#a6e22e">eval</span>(str2);
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;结果类型:&#34;</span> <span style="color:#f92672">+</span> result2.<span style="color:#a6e22e">getClass</span>().<span style="color:#a6e22e">getName</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;,结果:&#34;</span> <span style="color:#f92672">+</span> result2);  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2023/%E6%89%93%E5%B7%A5%E7%A2%8E%E7%A2%8E%E5%BF%B5/">打工碎碎念</a></span>
+  <span class="nav-next"><a href="/cn/2023/2023%E8%AE%A1%E5%88%92-%E6%80%BB%E7%BB%93/">2023计划含总结</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2023\/%E6%89%93%E5%B7%A5%E7%A2%8E%E7%A2%8E%E5%BF%B5\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2023\/2023%E8%AE%A1%E5%88%92-%E6%80%BB%E7%BB%93\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

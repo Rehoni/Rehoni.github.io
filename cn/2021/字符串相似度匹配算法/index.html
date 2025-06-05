@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>字符串相似度匹配算法 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="字符串相似度匹配算法 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="常见的字符串相似度算法包括编辑距离算法（EditDistance），n-gram算法，JaroWinkler算法以及Soundex算法。本文接下来大略的介绍一下这几种算法，有兴趣的读者可以在互联网找到一些更详细的资料。
+最常见的相似度算法为编辑距离算法（EditDistance），该算法将两个字符串的相似度问题，归结为将其中一个字符串转化成另一个字符串所要付出的代价。转化的代价越高，说明两个字符串 &amp;hellip;">
+      <meta property="og:description" content="常见的字符串相似度算法包括编辑距离算法（EditDistance），n-gram算法，JaroWinkler算法以及Soundex算法。本文接下来大略的介绍一下这几种算法，有兴趣的读者可以在互联网找到一些更详细的资料。
+最常见的相似度算法为编辑距离算法（EditDistance），该算法将两个字符串的相似度问题，归结为将其中一个字符串转化成另一个字符串所要付出的代价。转化的代价越高，说明两个字符串 &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/monokai-sublime.min.css">
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2021%5c%e5%ad%97%e7%ac%a6%e4%b8%b2%e7%9b%b8%e4%bc%bc%e5%ba%a6%e5%8c%b9%e9%85%8d%e7%ae%97%e6%b3%95.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>字符串相似度匹配算法</h1>
+
+
+<h3>rehoni / 
+2021-10-11</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h1 id="相似度匹配算法"><strong>相似度匹配算法</strong></h1>
+<p>常见的字符串相似度算法包括编辑距离算法（EditDistance），n-gram算法，JaroWinkler算法以及Soundex算法。本文接下来大略的介绍一下这几种算法，有兴趣的读者可以在互联网找到一些更详细的资料。</p>
+<p>最常见的相似度算法为编辑距离算法（EditDistance），该算法将两个字符串的相似度问题，归结为将其中一个字符串转化成另一个字符串所要付出的代价。转化的代价越高，说明两个字符串的相似度越低。通常可以选择的转化方式包含插入，替换以及删除。</p>
+<p>N-Gram算法则是基于这样的一个假设： 即在字符串中第n个词的出现只与前面n-1个词相关，而与其他任何词都不相关，整个字符串出现的概率就是各个词出现的概率的乘积。 N-gram本身也代表目标字符串中长度为n的子串，举例，“ARM”在“ARMY”中，便是一个3-gram。当两个字符串中，相同的n-gram越多时，两个字串就会被认为更加相似。</p>
+<p>Jaro Winkler则是将n-gram算法更进了一步。将n-gram中的不匹配的部分同时进行了换位的考虑，使得能获得更准确的相似程度。JaroWinkler在比较两个较短字符串的情况下，能够取得很好的结果。</p>
+<p>Soundex算法与前面几种都不太相同。该算法的特点是，它所关注的问题并非两个字符串文本上的相似程度，而是发音的近似。首先，该算法会将两个字符串分别通过一定的hash算法转换成一个hash值，该值由四个字符构成，第一个字符为英文字母，后面三个为数字。进行转化的hash算法并非随机选取，而是利用了该拉丁文字符串的读音近似值。</p>
+<p>当获得了两个字符串的读音上的hash值之后，该算法再对两个hash的相似度进行计算，便可以得出输入字符串的读音相似度。</p>
+<p>Soundex算法的另一个应用场景在于，用户进行模糊查询时，可以通过Soundex值进行过滤，以提高查询性能。</p>
+<h1 id="levenshtein-distance算法"><strong>Levenshtein Distance算法</strong></h1>
+<blockquote>
+<p>In this article, we describe the Levenshtein distance, alternatively known as the Edit distance. The algorithm explained here was devised by a Russian scientist, Vladimir Levenshtein, in 1965.</p>
+</blockquote>
+<p>Levenshtein Distance，也叫编辑距离，是一种度量两个序列(字符串)差异大小的方法。</p>
+<p>两个序列(以单词为例，这里序列也可以表示一个句子)的Levenshtein distance是在使用一个单词修改为另一个单词时，通过编辑单个字符(如插入，删除，修改)所需要的最小次数。</p>
+<p>通常允许三种类型的编辑：</p>
+<ol>
+<li>插入字符<em>c</em></li>
+<li>删除字符<em>c</em></li>
+<li>字符<em>c</em>与<em>c</em>&rsquo; 替换</li>
+</ol>
+<blockquote>
+<p>We know that at the end of the transformation, both Strings will be of equal length and have matching characters at each position. So, if we consider the first character of each String, we&rsquo;ve got three options:Substitution:Determine the cost (D1) of substituting x[1] with y[1]. The cost of this step would be zero if both characters are same. If not, then the cost would be oneAfter step 1.1, we know that both Strings start with the same character. Hence the total cost would now be the sum of the cost of step 1.1 and the cost of transforming the rest of the String x[2:m] into y[2:n]Insertion:Insert a character in x to match the first character in y, the cost of this step would be oneAfter 2.1, we have processed one character from y. Hence the total cost would now be the sum of the cost of step 2.1 (i.e., 1) and the cost of transforming the full x[1:m] to remaining y (y[2:n])Deletion:Delete the first character from x, the cost of this step would be oneAfter 3.1, we have processed one character from x, but the full y remains to be processed. The total cost would be the sum of the cost of 3.1 (i.e., 1) and the cost of transforming remaining x to the full y</p>
+</blockquote>
+<p>代码实现：在这里我使用java代码实现。在这里通过<code>similarCalc</code>来通过double的方式来计算最接近（最大的）的字符串。</p>
+<h2 id="部分工具函数"><strong>部分工具函数</strong></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">costOfSubstitution</span>(<span style="color:#66d9ef">char</span> a, <span style="color:#66d9ef">char</span> b) {
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">return</span> a <span style="color:#f92672">==</span> b <span style="color:#f92672">?</span> 0 : 1;
+</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">min</span>(<span style="color:#66d9ef">int</span>... numbers) {
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">return</span> Arrays.<span style="color:#a6e22e">stream</span>(numbers).<span style="color:#a6e22e">min</span>().<span style="color:#a6e22e">orElse</span>(Integer.<span style="color:#a6e22e">MAX_VALUE</span>);
+</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">similarCalc</span>(String x, String y) {
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> calculate2(x, y);
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">return</span> 1 <span style="color:#f92672">-</span> (<span style="color:#66d9ef">double</span>) value <span style="color:#f92672">/</span> Math.<span style="color:#a6e22e">max</span>(x.<span style="color:#a6e22e">length</span>(), y.<span style="color:#a6e22e">length</span>());
+</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span> 
+</span></span></code></pre></div><h2 id="递归版本"><strong>递归版本</strong></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>     <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">      * 递归法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">      *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">      * @param x 输入
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">      * @param y 比较
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">      * @return int 返回的距离
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">      */</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">calculate</span>(String x, String y) {
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">if</span> (x.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">return</span> y.<span style="color:#a6e22e">length</span>();
+</span></span><span style="display:flex;"><span>         }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">if</span> (y.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">return</span> x.<span style="color:#a6e22e">length</span>();
+</span></span><span style="display:flex;"><span>         }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">int</span> substitution <span style="color:#f92672">=</span> calculate(x.<span style="color:#a6e22e">substring</span>(1), y.<span style="color:#a6e22e">substring</span>(1))
+</span></span><span style="display:flex;"><span>                 <span style="color:#f92672">+</span> costOfSubstitution(x.<span style="color:#a6e22e">charAt</span>(0), y.<span style="color:#a6e22e">charAt</span>(0));
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">int</span> insertion <span style="color:#f92672">=</span> calculate(x, y.<span style="color:#a6e22e">substring</span>(1)) <span style="color:#f92672">+</span> 1;
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">int</span> deletion <span style="color:#f92672">=</span> calculate(x.<span style="color:#a6e22e">substring</span>(1), y) <span style="color:#f92672">+</span> 1;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">return</span> min(substitution, insertion, deletion);
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div><h2 id="动态规划版本"><strong>动态规划版本</strong></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>     <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">      * 动态规划法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">      *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">      * @param x 输入
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">      * @param y 比较
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">      * @return int 返回的距离
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">      */</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">calculate2</span>(String x, String y) {
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">int</span><span style="color:#f92672">[][]</span> dp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>x.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">+</span> 1<span style="color:#f92672">][</span>y.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">+</span> 1<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;=</span> x.<span style="color:#a6e22e">length</span>(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> 0; j <span style="color:#f92672">&lt;=</span> y.<span style="color:#a6e22e">length</span>(); j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                 <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">==</span> 0) {
+</span></span><span style="display:flex;"><span>                     dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> j;
+</span></span><span style="display:flex;"><span>                 } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (j <span style="color:#f92672">==</span> 0) {
+</span></span><span style="display:flex;"><span>                     dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>                 } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                     dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> min(dp<span style="color:#f92672">[</span>i <span style="color:#f92672">-</span> 1<span style="color:#f92672">][</span>j <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                     <span style="color:#f92672">+</span> costOfSubstitution(x.<span style="color:#a6e22e">charAt</span>(i <span style="color:#f92672">-</span> 1), y.<span style="color:#a6e22e">charAt</span>(j <span style="color:#f92672">-</span> 1)),
+</span></span><span style="display:flex;"><span>                             dp<span style="color:#f92672">[</span>i <span style="color:#f92672">-</span> 1<span style="color:#f92672">][</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">+</span> 1,
+</span></span><span style="display:flex;"><span>                             dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">+</span> 1);
+</span></span><span style="display:flex;"><span>                 }
+</span></span><span style="display:flex;"><span>             }
+</span></span><span style="display:flex;"><span>         }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">return</span> dp<span style="color:#f92672">[</span>x.<span style="color:#a6e22e">length</span>()<span style="color:#f92672">][</span>y.<span style="color:#a6e22e">length</span>()<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div><h3 id="参考"><strong>参考</strong></h3>
+<p><a href="https://blog.csdn.net/chndata/article/details/41114771">中文相似度匹配算法</a></p>
+<p><a href="https://commons.apache.org/proper/commons-text/apidocs/org/apache/commons/text/similarity/LevenshteinDistance.html#LevenshteinDistance--">Class LevenshteinDistance</a></p>
+<p><a href="https://commons.apache.org/sandbox/commons-text/jacoco/org.apache.commons.text.similarity/LevenshteinDistance.java.html">LevenshteinDistance.java</a></p>
+<p><a href="https://dzone.com/articles/the-levenshtein-algorithm-1">The Levenshtein Distance Algorithm</a></p>
+<p><a href="https://www.baeldung.com/java-levenshtein-distance">How to Calculate Levenshtein Distance in Java?</a></p>
+<p><a href="https://www.jianshu.com/p/492536dfa98f">Levenshtein distance（编辑距离）</a></p>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2021/202109/">2021年09月财务实证</a></span>
+  <span class="nav-next"><a href="/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/">Windows快捷键</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2021\/202109\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2021\/windows%E5%BF%AB%E6%8D%B7%E9%94%AE\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" defer></script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+

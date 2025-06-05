@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Windows同时输出相同音源 - Rehoni | 罗皓</title>
+    <meta property="og:title" content="Windows同时输出相同音源 - Rehoni | 罗皓">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+    
+      
+    
+
+    
+      
+      <meta property="description" content="需求：和老婆一起玩双人同屏游戏（以撒的结合:抗生），但需要带上蓝牙耳机玩。
+设备：2个蓝牙耳机、1个蓝牙接收器、1台Win10系统电脑。
+通过关键字搜索出一个解决方案（Output audio to multiple devices in Windows 10）
+在我电脑上测试无法实现。
+但顺着思路，找到了虚拟音频软件（Virtual Audio Cable）。
+经测试，使用Virtual &amp;hellip;">
+      <meta property="og:description" content="需求：和老婆一起玩双人同屏游戏（以撒的结合:抗生），但需要带上蓝牙耳机玩。
+设备：2个蓝牙耳机、1个蓝牙接收器、1台Win10系统电脑。
+通过关键字搜索出一个解决方案（Output audio to multiple devices in Windows 10）
+在我电脑上测试无法实现。
+但顺着思路，找到了虚拟音频软件（Virtual Audio Cable）。
+经测试，使用Virtual &amp;hellip;">
+      
+    
+
+    
+    
+    
+    
+    <meta name="twitter:image" content="/images/logo.jpg">
+    
+    
+
+    
+
+    
+    
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<script async src="/js/load-typekit.js"></script>
+
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+  <body class="cn">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.jpg" alt="Luo Hao" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">首页</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">日志</a></li>
+  
+  <li><a href="/categories/">分类</a></li>
+  
+  <li><a href="/tags/">标签</a></li>
+  
+  <li><a href="/cn/vitae/">简历</a></li>
+  
+  <li><a href="/en/">English</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rehonicn%5c2021%5cWindows%e8%be%93%e5%87%ba%e7%9b%b8%e5%90%8c%e9%9f%b3%e6%ba%90.md" target="_blank">编辑</a></li>
+
+
+<li><a href="/cn/index.xml" type="application/rss+xml" title="RSS feed">订阅</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">版权</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Windows同时输出相同音源</h1>
+
+
+<h3>rehoni / 
+2021-10-13</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="同时输出相同音源">同时输出相同音源</h2>
+<p>需求：和老婆一起玩双人同屏游戏（以撒的结合:抗生），但需要带上蓝牙耳机玩。</p>
+<p>设备：2个蓝牙耳机、1个蓝牙接收器、1台Win10系统电脑。</p>
+<p>通过关键字搜索出一个解决方案（<a href="https://answers.microsoft.com/en-us/windows/forum/windows_10-hardware/output-audio-to-multiple-devices-in-windows-10/b284def2-d684-4f1f-87a0-f562f556aedd">Output audio to multiple devices in Windows 10</a>）</p>
+<p>在我电脑上测试无法实现。</p>
+<p>但顺着思路，找到了虚拟音频软件（<a href="https://so.csdn.net/so/search?q=Virtual&amp;spm=1001.2101.3001.7020">Virtual</a> Audio Cable）。</p>
+<p>经测试，使用Virtual Audio Cable软件可以实现以上需求。</p>
+<p>安装软件，连接蓝牙设备。
+运行Audio Repeater (MME)，Wave in 选择Line 1，Wave Out选择你的蓝牙设备1，Total buffer设置为50，点start。
+不关再运行一次Audio Repeater (MME)，也就是双开软件，Wave in 选择Line 1，Wave Out选择你的蓝牙设备2，Total buffer设置为50。点start。</p>
+<p>其实如果只是看剧的话，可以用MPC-BE播放器，选项-音频里可以设置多重输出，选择你的两个蓝牙设备即可，效果还更好。</p>
+<h2 id="windows快捷键">Windows快捷键</h2>
+<h3 id="-windows桌面和虚拟桌面"><strong>🚈 Windows桌面和虚拟桌面</strong></h3>
+<p>贴靠窗口：Win +左/右&gt; Win +上/下&gt;窗口可以变为1/4大小放置在屏幕4个角落</p>
+<p>切换窗口：Alt + Tab</p>
+<p>任务视图：Win + Tab(松开键盘界面不会消失)</p>
+<p>创建新的虚拟桌面：Win + Ctrl + D</p>
+<p>关闭当前虚拟桌面：Win + Ctrl + F4</p>
+<p>切换虚拟桌面：Win + Ctrl +左/右</p>
+<h3 id="输入法"><strong>输入法</strong></h3>
+<p>中英文符号切换：<code>ctrl+.</code></p>
+<p>表情：<code>Win+.或;</code></p>
+<h3 id="字体">字体</h3>
+<ul>
+<li>Fira Code 连字 <a href="https://github.com/tonsky/FiraCode">https://github.com/tonsky/FiraCode</a></li>
+<li>cascadia code 连字 <a href="https://github.com/microsoft/cascadia-code">https://github.com/microsoft/cascadia-code</a></li>
+<li>palatino linotype</li>
+<li>Monaco</li>
+<li>operator mono</li>
+<li>mononoki</li>
+<li>jetbrains mono连字</li>
+<li>consolas</li>
+<li>Ubuntu mono</li>
+</ul>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/">Windows快捷键</a></span>
+  <span class="nav-next"><a href="/cn/2021/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">搭建个人密码管理体系</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/cn\/2021\/windows%E5%BF%AB%E6%8D%B7%E9%94%AE\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/cn\/2021\/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+
+
+
+<script async src="/js/fix-toc.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/alt-title.js"></script>
+
+<script async src="/js/header-link.js"></script>
+
+
+
+
+  
+
+  
+  <hr>
+  <div class="copyright">© <a href="/">Luo Hao</a> 2016 - 2024</div>
+  
+  </footer>
+  </article>
+  
+  
+
+
+  </body>
+</html>
+
