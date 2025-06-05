@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SpringBoot on Rehoni | 罗皓</title>
-    <link>/tags/springboot/</link>
+    <link>//localhost:1313/tags/springboot/</link>
     <description>Recent content in SpringBoot on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 24 Dec 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/springboot/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/springboot/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>后端——问题小书（2023）</title>
-      <link>/cn/2023/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%983/</link>
+      <link>//localhost:1313/cn/2023/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%983/</link>
       <pubDate>Sun, 24 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>/cn/2023/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%983/</guid>
+      <guid>//localhost:1313/cn/2023/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%983/</guid>
       <description>1、MyBatis注解-动态SQL解决方案 在一个表中有id,name,email我们查询的时候，希望name不为null的时候，作为查询条件，如果email不为null的时候，作为查询条件。&#xA;方案1：&amp;lt;script&amp;gt; @Select(&amp;#34;&amp;lt;script&amp;gt; &amp;#34; + &amp;#34;SELECT * &amp;#34; + &amp;#34;from Demo &amp;#34; + &amp;#34; &amp;lt;where&amp;gt; &amp;#34; + &amp;#34; 1=1&amp;#34; + &amp;#34; &amp;lt;if test=\&amp;#34;name != null\&amp;#34;&amp;gt;and name=#{name}&amp;lt;/if&amp;gt; &amp;#34; + &amp;#34; &amp;lt;if test=\&amp;#34;email != null\&amp;#34;&amp;gt; and email=#{email}&amp;lt;/if&amp;gt; &amp;#34; + &amp;#34; &amp;lt;/where&amp;gt; &amp;#34; + &amp;#34; &amp;lt;/script&amp;gt; &amp;#34;) public List&amp;lt;Demo&amp;gt; select4(Demo demo); 方案二：@Provider 对于创建动态的查的语言。MyBatis提供了多个注解如：@InsertProvider,@UpdateProvider,@DeleteProvider和@SelectProvider，这些都是建立动态语言和让MyBatis执行这些语言。&#xA;2、SpringBoot 实现 Websocket 通信详解 SpringBoot 实现 Websocket 通信详解&#xA;3、Spring的BeanUtils.copyProperties(obj1, obj2)，复制对象时字段类型不一致，导致赋值不上 当用spring的BeanUtils.copyProperties(obj1, obj2);对象进行复制时，因为在obj1 类型的对象中定义的属性类型不同（set方法中用的是Integer类型，get方法中返回的是int类型）：&#xA;public int getNumber() { return number; } public void setNumber(Integer number) { this.</description>
     </item>
     <item>
       <title>后端——问题小书（2022）</title>
-      <link>/cn/2022/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882/</link>
+      <link>//localhost:1313/cn/2022/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882/</link>
       <pubDate>Sat, 31 Dec 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882/</guid>
+      <guid>//localhost:1313/cn/2022/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882/</guid>
       <description>1、spring cloud stream介绍 Spring Cloud Stream是一个用来为微服务应用构建消息驱动能力的框架。它可以基于Spring Boot来创建独立的、可用于生产的Spring应用程序。它通过使用Spring Integration来连接消息代理中间件以实现消息事件驱动的微服务应用。Spring Cloud Stream为一些供应商的消息中间件产品提供了个性化的自动化配置实现，并且引入了发布-订阅、消费组以及消息分区这三个核心概念。简单的说，Spring Cloud Stream本质上就是整合了Spring Boot和Spring Integration，实现了一套轻量级的消息驱动的微服务框架。通过使用Spring Cloud Stream，可以有效地简化开发人员对消息中间件的使用复杂度，让系统开发人员可以有更多的精力关注于核心业务逻辑的处理。&#xA;Binder绑定器 通过定义绑定器作为中间层，完美地实现了应用程序与消息中间件细节之间的隔离。通过向应用程序暴露统一的Channel通道，使得应用程序不需要再考虑各种不同的消息中间件实现。&#xA;发布-订阅模式 在Spring Cloud Stream中的消息通信方式遵循了发布-订阅模式，当一条消息被投递到消息中间件之后，它会通过共享的Topic主题进行广播，消息消费者在订阅的主题中收到它并触发自身的业务逻辑处理。这里所提到的Topic主题是Spring Cloud Stream中的一个抽象概念，用来代表发布共享消息给消费者的地方。在不同的消息中间件中，Topic可能对应着不同的概念，比如：在RabbitMQ中的它对应了Exchange、而在Kakfa中则对应了Kafka中的Topic。&#xA;消费组 虽然Spring Cloud Stream通过发布-订阅模式将消息生产者与消费者做了很好的解耦，基于相同主题的消费者可以轻松的进行扩展，但是这些扩展都是针对不同的应用实例而言的，在现实的微服务架构中，我们每一个微服务应用为了实现高可用和负载均衡，实际上都会部署多个实例。很多情况下，消息生产者发送消息给某个具体微服务时，只希望被消费一次，按照上面我们启动两个应用的例子，虽然它们同属一个应用，但是这个消息出现了被重复消费两次的情况。为了解决这个问题，在Spring Cloud Stream中提供了消费组的概念。&#xA;如果在同一个主题上的应用需要启动多个实例的时候，我们可以通过spring.cloud.stream.bindings.input.group属性为应用指定一个组名，这样这个应用的多个实例在接收到消息的时候，只会有一个成员真正的收到消息并进行处理。&#xA;消息分区 通过引入消费组的概念，我们已经能够在多实例的情况下，保障每个消息只被组内一个实例进行消费。通过上面对消费组参数设置后的实验，我们可以观察到，消费组并无法控制消息具体被哪个实例消费。也就是说，对于同一条消息，它多次到达之后可能是由不同的实例进行消费的。但是对于一些业务场景，就需要对于一些具有相同特征的消息每次都可以被同一个消费实例处理，比如：一些用于监控服务，为了统计某段时间内消息生产者发送的报告内容，监控服务需要在自身内容聚合这些数据，那么消息生产者可以为消息增加一个固有的特征ID来进行分区，使得拥有这些ID的消息每次都能被发送到一个特定的实例上实现累计统计的效果，否则这些数据就会分散到各个不同的节点导致监控结果不一致的情况。而分区概念的引入就是为了解决这样的问题：当生产者将消息数据发送给多个消费者实例时，保证拥有共同特征的消息数据始终是由同一个消费者实例接收和处理。&#xA;2、mapstruct简单使用 MapStruct 是一个代码生成器，主要用于 Java Bean 之间的映射，如 entity 到 DTO 的映射。&#xA;参考 优雅的对象转换解决方案-MapStruct使用进阶(二)&#xA;MapStruct使用指南&#xA;导入 Maven 依赖以及插件 注意lombok和MapStruct 的冲突（在maven install时候会出现属性找不到错误）：&#xA;确保 Lombok 最低版本为 1.18.16 annotationProcessorPaths 中，要配置lombok 如未使用 lombok 可以去除后两个注解处理器&#xA;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;project xmlns=&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34; xmlns:xsi=&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34; xsi:schemaLocation=&amp;#34;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&amp;gt; &amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt; &amp;lt;parent&amp;gt; &amp;lt;groupId&amp;gt;org.</description>
     </item>
     <item>
       <title>后端——问题小书（2021）</title>
-      <link>/cn/2021/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <link>//localhost:1313/cn/2021/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
       <pubDate>Wed, 29 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>/cn/2021/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <guid>//localhost:1313/cn/2021/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
       <description>问题1：Cannot forward to error page for request 具体描述&#xA;Cannot forward to error page for request [/wechat/portal] as the response has already been commit&#xA;解决方案和原理&#xA;使用response输出流或@ResponseBody&#xA;response.getWriter().print(echostr);&#xA;@responseBody注解的作用是将controller的方法返回的对象通过适当的转换器转换为指定的格式之后，写入到response对象的body区，通常用来返回JSON数据或者是XML数据，需要注意的呢，在使用此注解之后不会再走试图处理器，而是直接将数据写入到流中，他的效果等同于通过response对象输出指定格式的数据。&#xA;因此可知之前直接使用return echostr spring会找不到对应的视图，但是视图找不到，spring又转到errorPage，但是项目中没有配置errorPage，从而404.&#xA;问题2、文件上传功能报错 具体描述&#xA;Current request is not a multipart request&#xA;解决方案和原理&#xA;是postmapping而不是getmapping&#xA;@ApiOperation(value = &amp;#34;测试图片上传&amp;#34;) @PostMapping(value = &amp;#34;/upload&amp;#34;) public Result handleFileUpload(@RequestParam List&amp;lt;MultipartFile&amp;gt; files) { return Result.buildSuccess( storageService.storeByString(files) ).setMsg(&amp;#34;You successfully uploaded &amp;#34; + files.size() + &amp;#34;files !&amp;#34;); } 问题3、httpClient警告 具体描述&#xA;Warning：“Going to buffer response body of large or unknown size.</description>
     </item>
     <item>
       <title>idea spring boot热部署</title>
-      <link>/cn/2019/2019-12-19-springboot-devtools/</link>
+      <link>//localhost:1313/cn/2019/2019-12-19-springboot-devtools/</link>
       <pubDate>Thu, 19 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>/cn/2019/2019-12-19-springboot-devtools/</guid>
+      <guid>//localhost:1313/cn/2019/2019-12-19-springboot-devtools/</guid>
       <description>idea spring boot热部署 1. 引入spring boot devtools，添加maven依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-devtools&amp;lt;/artifactId&amp;gt; &amp;lt;scope&amp;gt;runtime&amp;lt;/scope&amp;gt; &amp;lt;optional&amp;gt;true&amp;lt;/optional&amp;gt; &amp;lt;/dependency&amp;gt; 2. 在maven中添加插件 &amp;lt;plugin&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-maven-plugin&amp;lt;/artifactId&amp;gt; &amp;lt;configuration&amp;gt; &amp;lt;!--fork : 如果没有该项配置devtools不会起作用，即应用不会restart --&amp;gt; &amp;lt;fork&amp;gt;true&amp;lt;/fork&amp;gt; &amp;lt;addResources&amp;gt;true&amp;lt;/addResources&amp;gt;&amp;lt;!--支持静态文件热部署--&amp;gt; &amp;lt;/configuration&amp;gt; &amp;lt;/plugin&amp;gt; 3. 勾选File &amp;gt; Settings &amp;gt; Compiler-Build Project automatically 4. 一些其他的方式 非常详细的热部署说明 http://tengj.top/2017/06/01/springboot10/</description>
     </item>
   </channel>

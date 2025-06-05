@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>达梦数据库 on Rehoni | 罗皓</title>
-    <link>/tags/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <link>//localhost:1313/tags/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
     <description>Recent content in 达梦数据库 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 06 Apr 2022 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>达梦——常见问题及解决</title>
-      <link>/cn/2022/%E8%BE%BE%E6%A2%A6%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</link>
+      <link>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</link>
       <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/%E8%BE%BE%E6%A2%A6%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</guid>
+      <guid>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</guid>
       <description>1、获取表名和字段名 select table_name from user_tables; //当前用户拥有的表 select table_name from all_tables; //所有用户的表 select table_name from dba_tables; //包括系统表 获取表字段： select * from user_tab_columns where Table_Name=&amp;#39;用户表&amp;#39;; select * from all_tab_columns where Table_Name=&amp;#39;用户表&amp;#39;; select * from dba_tab_columns where Table_Name=&amp;#39;用户表&amp;#39;; 获取表注释： select * from user_tab_comments 相应的还有dba_tab_comments，all_tab_comments，这两个比user_tab_comments多了ower列。 获取字段注释： select * from user_col_comments 相应的还有dba_col_comments，all_col_comments，这两个比user_col_comments多了ower列。 举例如下 -- 获取表名和表注释 select * from all_tab_comments where owner=&amp;#39;HIS&amp;#39; and Table_Name=&amp;#39;OPS_EQUIPMENT_SUMMARY&amp;#39;; -- 获取字段名和详情 select * from all_tab_columns where owner=&amp;#39;HIS&amp;#39; and Table_Name=&amp;#39;OPS_EQUIPMENT_SUMMARY&amp;#39;; -- 获取字段名和字段注释 select * from all_col_comments where owner=&amp;#39;HIS&amp;#39; and Table_Name=&amp;#39;OPS_EQUIPMENT_SUMMARY&amp;#39;; 2、SQL语句指定用户当前模式 MySQL或者SQLSERVER程序在连接时可以在连接串中指定对应的数据库名，达梦数据库中是指定对应的模式名，如果表等对象存在默认模式下，可以不用在连接串中指定默认模式名，达梦数据库用户登录后默认为当前用户的默认模式且模式名与用户名相同。</description>
     </item>
     <item>
       <title>达梦——集群连接</title>
-      <link>/cn/2022/%E8%BE%BE%E6%A2%A6%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5/</link>
+      <link>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5/</link>
       <pubDate>Tue, 05 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/%E8%BE%BE%E6%A2%A6%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5/</guid>
+      <guid>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5/</guid>
       <description>在之前的博客我们了解了DM 数据库连接的几种方式,如下：&#xA;DM7 达梦数据库 disql 工具连接 数据库的三种方式 https://www.cndba.cn/dave/article/3572&#xA;在DMDSC 集群环境里和单实例连接没有区别。但在连接 DM 共享存储集群时，实际上是连接到集群中的一个实例，用户的所有增删改查操作都是由该实例完成的。 同Oracle RAC一样，DMDSC集群在单个节点实例出现故障时，对应的用户连接也会被转移到其他正常实例。而这种转移对用户是透明的，用户的增删改查继续返回正确结果，感觉不到异常。 实现故障自动重连的前提条件是在配置 DM 共享存储集群的时候，必须配置连接服务名。&#xA;1 配置服务名（dmsvc.conf） 配置 DMDSC 集群，一般要求配置连接服务名，以实现故障自动重连。连接服务名可以在 DM 提供的JDBC、DPI 等接口中使用，连接数据库时指定连接服务名，接口会随机选择一个 IP 进行连接，如果连接不成功或者服务器状态不正确，则顺序获取下一个 IP 进行连接，直至连接成功或者遍历了所有 IP。&#xA;连接服务名配置文件 dm_svc.conf在 DM安装时生成，Windows 平台下位于%SystemRoot%/system32 目录，Linux 平台下位于/etc 目录。&#xA;连接服务名格式：&#xA;SERVERNAME=(IP[:PORT],IP[:PORT],……)&#xA;dm_svc.conf 配置文件包含如下配置选项：&#xA;1.SERVERNAME：连接服务名，用户通过连接服务名访问数据库。 2.IP：数据库所在的 IP 地址，如果是 IPv6 地址，为了区分端口，需要用[]封闭 IP 地址。 3.PORT：数据库使用的 TCP 连接端口，可选配置，不配置则使用连接上指定的端口。 4.SWITCH_TIME：检测到数据库实例故障时，接口在服务器之间切换的次数；超过设置次数没有连接到有效数据库时，断开连接并报错。有效值范围 1~9223372036854775807，默认值为 3。 5.SWITCH_INTERVAL：表示在服务器之间切换的时间间隔，单位为毫秒，有效值范围1~9223372036854775807，默认值为 200。 2 测试 2.1 搭建DMDSC 环境 参考：&#xA;DM7 达梦 共享存储数据库集群 (6) — 搭建2节点的DMDSC 环境（DMASM） https://www.</description>
     </item>
     <item>
       <title>达梦——disql工具连接数据库</title>
-      <link>/cn/2022/%E8%BE%BE%E6%A2%A6disql%E5%B7%A5%E5%85%B7%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <link>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6disql%E5%B7%A5%E5%85%B7%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
       <pubDate>Mon, 04 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/%E8%BE%BE%E6%A2%A6disql%E5%B7%A5%E5%85%B7%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <guid>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6disql%E5%B7%A5%E5%85%B7%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
       <description>DIsql 是 DM 数据库自带的一个命令行客户端工具，用来与 DM 数据库服务器进行交互。&#xA;工具语法如下：&#xA;DIsql [ [&amp;lt;option&amp;gt;] [&amp;lt;logon&amp;gt; | /NOLOG] [&amp;lt;start&amp;gt;] ] &amp;lt;option&amp;gt;::=HELP|-H|-S &amp;lt;logon&amp;gt;::=&amp;lt;username&amp;gt;[/&amp;lt;password&amp;gt;][*&amp;lt;MPP_TYPE&amp;gt;][@&amp;lt;server&amp;gt;][:&amp;lt;port&amp;gt;][?{UDP|TCP} ][#&amp;lt;sslpath&amp;gt;@ssl_pwd] &amp;lt;start&amp;gt;::=&amp;lt;`运行脚本&amp;gt;|&amp;lt;start 运行脚本&amp;gt;|&amp;lt;直接执行语句&amp;gt; &amp;lt;`运行脚本&amp;gt;::=`&amp;lt;file_path&amp;gt; [&amp;lt;PARAMETER_VALUE&amp;gt;{ &amp;lt;PARAMETER_VALUE&amp;gt;}] &amp;lt;start 运行脚本&amp;gt;::=START &amp;lt;file_path&amp;gt; [&amp;lt;PARAMETER_VALUE&amp;gt;{ &amp;lt;PARAMETER_VALUE&amp;gt;}] &amp;lt;直接执行语句&amp;gt;::= -E “&amp;lt;SQL 语句&amp;gt;{;&amp;lt;SQL 语句&amp;gt;}” 关于这些选项的详细解释可以参考DM的官方手册。&#xA;本博客主要看Disql 连接DM实例的三种不同方式。&#xA;1. DM 服务器上直接连接 [dave@www.cndba.cn ~]$ disql SYSDBA/SYSDBA 服务器[LOCALHOST:5236]:处于普通打开状态 登录使用时间: 9.409(毫秒) disql V7.6.0.95-Build(2018.09.13-97108)ENT Connected to: DM 7.1.6.95 SQL&amp;gt; 这种方式只能连接到本地实例。&#xA;2. 使用IP地址和端口连接 这种方式可以连接到任意服务器，只要IP地址和端口正确即可。&#xA;[dave@www.cndba.cn ~]$ disql SYSDBA/SYSDBA@192.168.20.191:5236 服务器[192.168.20.191:5236]:处于普通打开状态 登录使用时间: 9.463(毫秒) disql V7.6.0.95-Build(2018.09.13-97108)ENT Connected to: DM 7.1.6.95 SQL&amp;gt; conn SYSDBA/SYSDBA@192.</description>
     </item>
     <item>
       <title>达梦——用户管理</title>
-      <link>/cn/2022/%E8%BE%BE%E6%A2%A6%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</link>
+      <link>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</link>
       <pubDate>Sun, 03 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/%E8%BE%BE%E6%A2%A6%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</guid>
+      <guid>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</guid>
       <description>达梦数据库的用户管理 达梦数据库安装完成后，系统默认会自带有一些系统级的用户：&#xA;1、sys &amp;mdash;&amp;ndash;达梦数据库内置管理用户，不能登录数据库，数据库使用的大部分的数据字典和动态性能视图sys。&#xA;2、Sysdba &amp;mdash;&amp;ndash;数据库管理员用户&#xA;3、Sysauditor &amp;mdash;-审计用户&#xA;4、Syssso —安全用户&#xA;5、Sysdbo &amp;mdash;-数据操作员&#xA;在达梦数据库里每一个用户都有一个默认的表空间，对于 SYS、SYSSSO、SYSAUDITOR 系统用户，默认的用户表空间是 SYSTEM，SYSDBA 的默认表空间为 MAIN，新创建的用户如果没有指定默认表空间，则系统自动指定 MAIN 表空间为用户默认的表空间。&#xA;1、查看所有用户相关信息&#xA;select username,user_id,default_tablespace,profile from dba_users; 2、用户策略&#xA;名字：字母开头，a—z,0-9,$#_&#xA;位置：对应的表空间。&#xA;口令策略：&#xA;用户密码最长为48个字节，创建用户语句password policy子句来指定口令策略。（dm.ini pwd_policy)&#xA;系统支持的口令策略&#xA;0：无策略&#xA;1：禁止与用户名相同&#xA;2：口令长度不小于9&#xA;4：至少包含一个大写字母（A-Z)&#xA;8: 至少包含一个数字（0-9）&#xA;16：至少包含一个标点符号（英文状态输入，除”和空格除外）&#xA;口令可以单独使用，也可以组合使用，比如需要策略1和2，则设置口令策略为3&#xA;相关参数：&#xA;faild_login_attemps 密码尝试登录次数&#xA;password_lock_time 密码失败锁定时间&#xA;password_life_time 密码过期时间&#xA;相关视图：&#xA;sysusers, all_users , dba_users&#xA;3、创建用户&#xA;create user test1 identified by test123456 default tablespace tbs1; 创建用户设置密码注意：&#xA;DM7.6之前版本默认密码是转为大写存储的，登录时要注意。比如用户设置test1/test123456，那么登录的时候用test1/TEST123456和TEST1/TEST123456可以登录，用test1/test123456和TEST1/test123456就不能登录。如果设置密码时加引号，则存储实际的密码。&#xA;DM8版本后大小写默认通用，用户名密码默认统一都存储大写的，登录时用大小写都可以，都转为大写做匹配。如果设置密码时加引号，则存储实际的密码。&#xA;新建的用户未赋值权限只能查询通用的系统表，是没有创建表之类的权限。&#xA;如果没有赋值权限，那这个用户只能连接，还不能做任何事情&#xA;给用户赋管理员权限：grant dba to test1; 或者只给创建表等部分的权限：grant create table to test1; 查看用户相关权限：</description>
     </item>
     <item>
       <title>达梦——表空间管理</title>
-      <link>/cn/2022/%E8%BE%BE%E6%A2%A6%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/</link>
+      <link>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/</link>
       <pubDate>Fri, 01 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/%E8%BE%BE%E6%A2%A6%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/</guid>
+      <guid>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/</guid>
       <description>表空间管理（DM7） DM7表空间概述&#xA;在DM7数据库中，表空间是一种逻辑存储结构，数据库的对象如表、索引等在逻辑上都是存储在指定的表空间中。数据库在初始化的时候，系统会自动创建5个默认表空间，SYSTEM，MAIN，ROLL，TEMP和HMAIN表空间。其中SYSTEM表空间是系统表空间，存储有数据字典信息，用户数据不能存放在该表空间上。ROLL，TEMP和HMAIN表空间，由系统自动维护，不需要用户干预。初始的MAIN表空间为用户默认表空间。表空间只是一种逻辑结构，对应的物理存储结构为数据文件。也即是，用户的数据是存储在表空间对应的数据文件上面。DM7数据库中，物理存储结构的数据文件后缀为DBF。系统提供v$tablespace和 v$datafile视图查询表空间和数据文件。&#xA;-- 查询表空间 select * from v$tablespace; -- 查询数据文件 select * from v$datafile; -- 查询表空间对应的数据文件 SELECT ts.NAME, df.PATH FROM V$TABLESPACE AS ts, V$DATAFILE AS df WHERE ts.ID = df.GROUP_ID; 2.1表空间创建与删除 -- 创建表空间，最简洁形式 -- 仅指定数据文件路径，以及数据文件初始大小，单位为（MB） -- 注意大小仅为数字，不能带M符号 CREATE TABLESPACE bookshop DATAFILE &amp;#39;/opt/bookshop1.dbf&amp;#39; SIZE 128; -- 以上创建表空间语句，自动指定如下属性： autoextend on maxsize 33554431 CACHE = NORMAL 属性分别指：数据文件自动扩展，扩展最大大小，数据页的缓冲池名称 -- 创建表空间，指定非自动扩展 CREATE TABLESPACE bookshop DATAFILE &amp;#39;/opt/bookshop1.dbf&amp;#39; SIZE 128 autoextend off; -- 删除表空间 drop tablespace bookshop; 删除表空间时，改表空间上必须没有数据库对象，否则会删除失败 2.</description>
     </item>
   </channel>

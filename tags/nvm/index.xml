@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nvm on Rehoni | 罗皓</title>
-    <link>/tags/nvm/</link>
+    <link>//localhost:1313/tags/nvm/</link>
     <description>Recent content in Nvm on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 10 Jun 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/nvm/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/nvm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>nvm安装和使用</title>
-      <link>/cn/2024/nvm/</link>
+      <link>//localhost:1313/cn/2024/nvm/</link>
       <pubDate>Mon, 10 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>/cn/2024/nvm/</guid>
+      <guid>//localhost:1313/cn/2024/nvm/</guid>
       <description>安装&#xA;curl或者wget指令安装。&#xA;安装完后记得按照提示内容，把给出的命令都执行一遍。&#xA;使用&#xA;nvm --version nvm ls-remote nvm ls-remote --lts nvm ls nvm use v10.6.3 nvm current </description>
     </item>
   </channel>

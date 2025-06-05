@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Windows Terminal on Rehoni | 罗皓</title>
-    <link>/tags/windows-terminal/</link>
+    <link>//localhost:1313/tags/windows-terminal/</link>
     <description>Recent content in Windows Terminal on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 01 Sep 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/windows-terminal/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/windows-terminal/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>windows配置terminal</title>
-      <link>/cn/2020/terminal/</link>
+      <link>//localhost:1313/cn/2020/terminal/</link>
       <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/terminal/</guid>
+      <guid>//localhost:1313/cn/2020/terminal/</guid>
       <description>Windows10 terminal 设置右键启动 添加Windows Terminal到鼠标右键菜单&#xA;Windows Terminal 完美配置 PowerShell 7.1 包括Windows terminal的右键菜单，安装power shell等内容&#xA;Windows Terminal 完美配置 PowerShell 7.1</description>
     </item>
   </channel>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>IDEA on Rehoni | 罗皓</title>
-    <link>/tags/idea/</link>
+    <link>//localhost:1313/tags/idea/</link>
     <description>Recent content in IDEA on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 23 Jul 2022 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/idea/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/idea/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>IDEA小技巧</title>
-      <link>/cn/2022/idea/</link>
+      <link>//localhost:1313/cn/2022/idea/</link>
       <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/idea/</guid>
+      <guid>//localhost:1313/cn/2022/idea/</guid>
       <description>1、快捷键和设置 IDEA相关资源 IntelliJ IDEA 简体中文专题教程&#xA;IDEA类和方法注释模板设置（非常详细）&#xA;1、启用注解处理器 File | Settings | Build, Execution, Deployment | Compiler | Annotation Processors，enable annotation processing&#xA;2、Properties中文乱码 3、build project automatically 自动build project，如果和maven-profile 混用时，最好关闭&#xA;否则在clean之后，reimport时，会自动使用idea的build，导致maven-profile失效，不同profile的配置文件未能正确排除。&#xA;4、行注释设置，不从行首开始，在代码之前 5、IntelliJ IDEA取消自动删除空格： 6、提高idea的运存 -Xms2048m -Xmx4096m&#xD;-XX:ReservedCodeCacheSize=2048m&#xD;-XX:+UseConcMarkSweepGC -Xms 初始堆内存，调大该内存可以让启动速度更快，以省去分配内存的时间&#xA;-Xmx 最大堆内存，如果遇到 OutOfMemoryError 可以调大该数值，最大不要超过系统 1/4&#xA;-XX:+UseConcMarkSweepGC` 参数用来调整 GC 算法。使用该算法利用多个线程在后台进行 GC，以避免应用程序停止。当分配超过 4GB 的堆内存时，可以尝试使用 `-XX:+UseG1GC -XX:ReservedCodeCacheSize=510m 设置编译器最大的 code cache，另外一个相关的 JVM 参数是 -XX:InitialCodeCacheSize JetBrains 推荐这里使用 240m&#xA;-XX:SoftRefLRUPolicyMSPerMB=[value] 参数用来控制每 M 空间中 soft reference 保证存活的毫秒数。默认的时间是 1000，JetBrains 推荐 50</description>
     </item>
   </channel>

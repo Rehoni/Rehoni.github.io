@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>开发 on Rehoni | 罗皓</title>
-    <link>/categories/%E5%BC%80%E5%8F%91/</link>
+    <link>//localhost:1313/categories/%E5%BC%80%E5%8F%91/</link>
     <description>Recent content in 开发 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 10 Jun 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/categories/%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/categories/%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>nvm安装和使用</title>
-      <link>/cn/2024/nvm/</link>
+      <link>//localhost:1313/cn/2024/nvm/</link>
       <pubDate>Mon, 10 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>/cn/2024/nvm/</guid>
+      <guid>//localhost:1313/cn/2024/nvm/</guid>
       <description>安装&#xA;curl或者wget指令安装。&#xA;安装完后记得按照提示内容，把给出的命令都执行一遍。&#xA;使用&#xA;nvm --version nvm ls-remote nvm ls-remote --lts nvm ls nvm use v10.6.3 nvm current </description>
     </item>
     <item>
       <title>npm设置镜像源</title>
-      <link>/cn/2024/npm%E8%AE%BE%E7%BD%AE%E6%BA%90/</link>
+      <link>//localhost:1313/cn/2024/npm%E8%AE%BE%E7%BD%AE%E6%BA%90/</link>
       <pubDate>Tue, 04 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>/cn/2024/npm%E8%AE%BE%E7%BD%AE%E6%BA%90/</guid>
+      <guid>//localhost:1313/cn/2024/npm%E8%AE%BE%E7%BD%AE%E6%BA%90/</guid>
       <description>改变全局的注册&#xA;npm config set registry https://registry.npm.taobao.org npm config get registry 使用nrm&#xA;npm install -g nrm nrm ls nrm use taobao </description>
     </item>
   </channel>

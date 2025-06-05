@@ -2,206 +2,206 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>编程开发 on Rehoni | 罗皓</title>
-    <link>/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/</link>
+    <link>//localhost:1313/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/</link>
     <description>Recent content in 编程开发 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 08 Oct 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>kafka备忘</title>
-      <link>/cn/2023/kafka/</link>
+      <link>//localhost:1313/cn/2023/kafka/</link>
       <pubDate>Sun, 08 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>/cn/2023/kafka/</guid>
+      <guid>//localhost:1313/cn/2023/kafka/</guid>
       <description>1、kafka启动 运行kafka需要使用Zookeeper，所以你需要先启动Zookeeper，如果你没有Zookeeper，你可以使用kafka自带打包和配置好的Zookeeper。&#xA;# 下载解压 tar -xzf kafka_2.13-3.2.0.tgz cd kafka_2.13-3.2.0 # 启动zookeeper # 注意：Apache Kafka2.8版本之后可以不需要使用ZooKeeper，内测中，文章末尾有体验的安装方式。 bin/zookeeper-server-start.sh config/zookeeper.properties &amp;amp; # 打开另一个命令终端启动kafka服务： bin/kafka-server-start.sh config/server.properties &amp;amp; 2、使用 Zookeeper命令行修改 Kafka Cluster ID 先讲一下做这件事的背景，笔者用 Docker搭了一套 Kafka的环境用于测试，某天发现 Kafka频繁重启，查看日志中的报错如下：&#xA;ERROR Fatal error during KafkaServer startup. Prepare to shutdown (kafka.server.KafkaServer) kafka.common.InconsistentClusterIdException: The Cluster ID q3r3fhGkTya24-s3dfvYUQ doesn&amp;#39;t match stored clusterId Some(kguWHlzQQGmCHczV3u38vQ) in meta.properties. The broker is trying to join the wrong cluster. Configured zookeeper.connect may be wrong. at kafka.server.KafkaServer.startup(KafkaServer.scala:218) at kafka.</description>
     </item>
     <item>
       <title>Windows命令行操作</title>
-      <link>/cn/2022/windows%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</link>
+      <link>//localhost:1313/cn/2022/windows%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</link>
       <pubDate>Thu, 01 Sep 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/windows%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</guid>
+      <guid>//localhost:1313/cn/2022/windows%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</guid>
       <description>1、Windows后台执行bat脚本 通过vb脚本来隐藏dos窗口，后台执行&#xA;@echo off if &amp;#34;%1&amp;#34; == &amp;#34;h&amp;#34; goto begin mshta vbscript:createobject(&amp;#34;wscript.shell&amp;#34;).run(&amp;#34;%~nx0 h&amp;#34;,0)(window.close)&amp;amp;&amp;amp;exit :begin :: redis-server.exe 建立脚本流程&#xA;创建main.vbs文件，调用运行bat，放入后台执行&#xA;Set ws = CreateObject(&amp;#34;Wscript.Shell&amp;#34;) ws.run &amp;#34;cmd /c A.bat&amp;#34;,0 ws.run &amp;#34;cmd /c B.bat&amp;#34;,0 ws.run &amp;#34;cmd /c C.bat&amp;#34;,0 建立主脚本main.bat，循环执行&#xA;@echo off&amp;lt;nul 3&amp;gt;nul :one echo %date:~0,10% %time:~0,-3% 守护进程正在监控系统... start main.vbs ping 127.0.0.1 -n 10&amp;gt;nul goto one 通过ping命令来实现sleep 10秒的操作，每10秒执行main.vbs里边执行的3个脚本。&#xA;start命令&#xA;通过在bat脚本中，使用start命令来后台执行需要执行的脚本或者程序&#xA;start /b a.bat Windows开机自动执行bat脚本&#xA;编写bat脚本放置在以下位置&#xA;C:\\Users\\xxxx\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup 即可实现开机自动执行该脚本&#xA;执行Java脚本&#xA;编写脚本时，如果有多java环境，需要设定好执行的JAVA_HOME，即指定的jdk目录。&#xA;如果jdk目录包含空格，如Program Files这样的目录，可以用&amp;quot;&amp;quot;进行转义；如果转义无用，则可以考虑使用绝对路径。&#xA;@echo off C: cd C:\\Program Files\\Java\\jdk1.</description>
     </item>
     <item>
       <title>Nginx常见问题</title>
-      <link>/cn/2022/nginx%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</link>
+      <link>//localhost:1313/cn/2022/nginx%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</link>
       <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/nginx%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</guid>
+      <guid>//localhost:1313/cn/2022/nginx%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</guid>
       <description>1、一分钟实现文件服务器 在局域网内和同事共享文件的好方法&#xA;1 安装nginx sudo apt-get install nginx&#xA;2 创建conf文件 sudo gedit /etc/nginx/conf.d/file_server.conf&#xA;修改conf文件如下：&#xA;server { listen 80; server_name 10.1.2.3; # 自己PC的ip或者服务器的域名 charset utf-8; # 避免中文乱码 root /home/xx/share; # 存放文件的目录 location / { autoindex on; # 索引 autoindex_exact_size on; # 显示文件大小 autoindex_localtime on; # 显示文件时间 } } 3 使配置生效 sudo rm /etc/nginx/sites-enabled/default 这一行尤为重要 sudo service nginx reload&#xA;4 命令 sudo /etc/init.d/nginx start|stop|reload| sudo service nginx start|stop|reload|&#xA;5 访问 浏览器里直接输入 http://10.1.2.3</description>
     </item>
     <item>
       <title>达梦——常见问题及解决</title>
-      <link>/cn/2022/%E8%BE%BE%E6%A2%A6%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</link>
+      <link>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</link>
       <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/%E8%BE%BE%E6%A2%A6%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</guid>
+      <guid>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E9%97%AE%E9%A2%98%E6%89%8B%E5%86%8C/</guid>
       <description>1、获取表名和字段名 select table_name from user_tables; //当前用户拥有的表 select table_name from all_tables; //所有用户的表 select table_name from dba_tables; //包括系统表 获取表字段： select * from user_tab_columns where Table_Name=&amp;#39;用户表&amp;#39;; select * from all_tab_columns where Table_Name=&amp;#39;用户表&amp;#39;; select * from dba_tab_columns where Table_Name=&amp;#39;用户表&amp;#39;; 获取表注释： select * from user_tab_comments 相应的还有dba_tab_comments，all_tab_comments，这两个比user_tab_comments多了ower列。 获取字段注释： select * from user_col_comments 相应的还有dba_col_comments，all_col_comments，这两个比user_col_comments多了ower列。 举例如下 -- 获取表名和表注释 select * from all_tab_comments where owner=&amp;#39;HIS&amp;#39; and Table_Name=&amp;#39;OPS_EQUIPMENT_SUMMARY&amp;#39;; -- 获取字段名和详情 select * from all_tab_columns where owner=&amp;#39;HIS&amp;#39; and Table_Name=&amp;#39;OPS_EQUIPMENT_SUMMARY&amp;#39;; -- 获取字段名和字段注释 select * from all_col_comments where owner=&amp;#39;HIS&amp;#39; and Table_Name=&amp;#39;OPS_EQUIPMENT_SUMMARY&amp;#39;; 2、SQL语句指定用户当前模式 MySQL或者SQLSERVER程序在连接时可以在连接串中指定对应的数据库名，达梦数据库中是指定对应的模式名，如果表等对象存在默认模式下，可以不用在连接串中指定默认模式名，达梦数据库用户登录后默认为当前用户的默认模式且模式名与用户名相同。</description>
     </item>
     <item>
       <title>达梦——集群连接</title>
-      <link>/cn/2022/%E8%BE%BE%E6%A2%A6%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5/</link>
+      <link>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5/</link>
       <pubDate>Tue, 05 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/%E8%BE%BE%E6%A2%A6%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5/</guid>
+      <guid>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5/</guid>
       <description>在之前的博客我们了解了DM 数据库连接的几种方式,如下：&#xA;DM7 达梦数据库 disql 工具连接 数据库的三种方式 https://www.cndba.cn/dave/article/3572&#xA;在DMDSC 集群环境里和单实例连接没有区别。但在连接 DM 共享存储集群时，实际上是连接到集群中的一个实例，用户的所有增删改查操作都是由该实例完成的。 同Oracle RAC一样，DMDSC集群在单个节点实例出现故障时，对应的用户连接也会被转移到其他正常实例。而这种转移对用户是透明的，用户的增删改查继续返回正确结果，感觉不到异常。 实现故障自动重连的前提条件是在配置 DM 共享存储集群的时候，必须配置连接服务名。&#xA;1 配置服务名（dmsvc.conf） 配置 DMDSC 集群，一般要求配置连接服务名，以实现故障自动重连。连接服务名可以在 DM 提供的JDBC、DPI 等接口中使用，连接数据库时指定连接服务名，接口会随机选择一个 IP 进行连接，如果连接不成功或者服务器状态不正确，则顺序获取下一个 IP 进行连接，直至连接成功或者遍历了所有 IP。&#xA;连接服务名配置文件 dm_svc.conf在 DM安装时生成，Windows 平台下位于%SystemRoot%/system32 目录，Linux 平台下位于/etc 目录。&#xA;连接服务名格式：&#xA;SERVERNAME=(IP[:PORT],IP[:PORT],……)&#xA;dm_svc.conf 配置文件包含如下配置选项：&#xA;1.SERVERNAME：连接服务名，用户通过连接服务名访问数据库。 2.IP：数据库所在的 IP 地址，如果是 IPv6 地址，为了区分端口，需要用[]封闭 IP 地址。 3.PORT：数据库使用的 TCP 连接端口，可选配置，不配置则使用连接上指定的端口。 4.SWITCH_TIME：检测到数据库实例故障时，接口在服务器之间切换的次数；超过设置次数没有连接到有效数据库时，断开连接并报错。有效值范围 1~9223372036854775807，默认值为 3。 5.SWITCH_INTERVAL：表示在服务器之间切换的时间间隔，单位为毫秒，有效值范围1~9223372036854775807，默认值为 200。 2 测试 2.1 搭建DMDSC 环境 参考：&#xA;DM7 达梦 共享存储数据库集群 (6) — 搭建2节点的DMDSC 环境（DMASM） https://www.</description>
     </item>
     <item>
       <title>达梦——disql工具连接数据库</title>
-      <link>/cn/2022/%E8%BE%BE%E6%A2%A6disql%E5%B7%A5%E5%85%B7%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <link>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6disql%E5%B7%A5%E5%85%B7%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
       <pubDate>Mon, 04 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/%E8%BE%BE%E6%A2%A6disql%E5%B7%A5%E5%85%B7%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <guid>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6disql%E5%B7%A5%E5%85%B7%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
       <description>DIsql 是 DM 数据库自带的一个命令行客户端工具，用来与 DM 数据库服务器进行交互。&#xA;工具语法如下：&#xA;DIsql [ [&amp;lt;option&amp;gt;] [&amp;lt;logon&amp;gt; | /NOLOG] [&amp;lt;start&amp;gt;] ] &amp;lt;option&amp;gt;::=HELP|-H|-S &amp;lt;logon&amp;gt;::=&amp;lt;username&amp;gt;[/&amp;lt;password&amp;gt;][*&amp;lt;MPP_TYPE&amp;gt;][@&amp;lt;server&amp;gt;][:&amp;lt;port&amp;gt;][?{UDP|TCP} ][#&amp;lt;sslpath&amp;gt;@ssl_pwd] &amp;lt;start&amp;gt;::=&amp;lt;`运行脚本&amp;gt;|&amp;lt;start 运行脚本&amp;gt;|&amp;lt;直接执行语句&amp;gt; &amp;lt;`运行脚本&amp;gt;::=`&amp;lt;file_path&amp;gt; [&amp;lt;PARAMETER_VALUE&amp;gt;{ &amp;lt;PARAMETER_VALUE&amp;gt;}] &amp;lt;start 运行脚本&amp;gt;::=START &amp;lt;file_path&amp;gt; [&amp;lt;PARAMETER_VALUE&amp;gt;{ &amp;lt;PARAMETER_VALUE&amp;gt;}] &amp;lt;直接执行语句&amp;gt;::= -E “&amp;lt;SQL 语句&amp;gt;{;&amp;lt;SQL 语句&amp;gt;}” 关于这些选项的详细解释可以参考DM的官方手册。&#xA;本博客主要看Disql 连接DM实例的三种不同方式。&#xA;1. DM 服务器上直接连接 [dave@www.cndba.cn ~]$ disql SYSDBA/SYSDBA 服务器[LOCALHOST:5236]:处于普通打开状态 登录使用时间: 9.409(毫秒) disql V7.6.0.95-Build(2018.09.13-97108)ENT Connected to: DM 7.1.6.95 SQL&amp;gt; 这种方式只能连接到本地实例。&#xA;2. 使用IP地址和端口连接 这种方式可以连接到任意服务器，只要IP地址和端口正确即可。&#xA;[dave@www.cndba.cn ~]$ disql SYSDBA/SYSDBA@192.168.20.191:5236 服务器[192.168.20.191:5236]:处于普通打开状态 登录使用时间: 9.463(毫秒) disql V7.6.0.95-Build(2018.09.13-97108)ENT Connected to: DM 7.1.6.95 SQL&amp;gt; conn SYSDBA/SYSDBA@192.</description>
     </item>
     <item>
       <title>达梦——用户管理</title>
-      <link>/cn/2022/%E8%BE%BE%E6%A2%A6%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</link>
+      <link>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</link>
       <pubDate>Sun, 03 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/%E8%BE%BE%E6%A2%A6%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</guid>
+      <guid>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</guid>
       <description>达梦数据库的用户管理 达梦数据库安装完成后，系统默认会自带有一些系统级的用户：&#xA;1、sys &amp;mdash;&amp;ndash;达梦数据库内置管理用户，不能登录数据库，数据库使用的大部分的数据字典和动态性能视图sys。&#xA;2、Sysdba &amp;mdash;&amp;ndash;数据库管理员用户&#xA;3、Sysauditor &amp;mdash;-审计用户&#xA;4、Syssso —安全用户&#xA;5、Sysdbo &amp;mdash;-数据操作员&#xA;在达梦数据库里每一个用户都有一个默认的表空间，对于 SYS、SYSSSO、SYSAUDITOR 系统用户，默认的用户表空间是 SYSTEM，SYSDBA 的默认表空间为 MAIN，新创建的用户如果没有指定默认表空间，则系统自动指定 MAIN 表空间为用户默认的表空间。&#xA;1、查看所有用户相关信息&#xA;select username,user_id,default_tablespace,profile from dba_users; 2、用户策略&#xA;名字：字母开头，a—z,0-9,$#_&#xA;位置：对应的表空间。&#xA;口令策略：&#xA;用户密码最长为48个字节，创建用户语句password policy子句来指定口令策略。（dm.ini pwd_policy)&#xA;系统支持的口令策略&#xA;0：无策略&#xA;1：禁止与用户名相同&#xA;2：口令长度不小于9&#xA;4：至少包含一个大写字母（A-Z)&#xA;8: 至少包含一个数字（0-9）&#xA;16：至少包含一个标点符号（英文状态输入，除”和空格除外）&#xA;口令可以单独使用，也可以组合使用，比如需要策略1和2，则设置口令策略为3&#xA;相关参数：&#xA;faild_login_attemps 密码尝试登录次数&#xA;password_lock_time 密码失败锁定时间&#xA;password_life_time 密码过期时间&#xA;相关视图：&#xA;sysusers, all_users , dba_users&#xA;3、创建用户&#xA;create user test1 identified by test123456 default tablespace tbs1; 创建用户设置密码注意：&#xA;DM7.6之前版本默认密码是转为大写存储的，登录时要注意。比如用户设置test1/test123456，那么登录的时候用test1/TEST123456和TEST1/TEST123456可以登录，用test1/test123456和TEST1/test123456就不能登录。如果设置密码时加引号，则存储实际的密码。&#xA;DM8版本后大小写默认通用，用户名密码默认统一都存储大写的，登录时用大小写都可以，都转为大写做匹配。如果设置密码时加引号，则存储实际的密码。&#xA;新建的用户未赋值权限只能查询通用的系统表，是没有创建表之类的权限。&#xA;如果没有赋值权限，那这个用户只能连接，还不能做任何事情&#xA;给用户赋管理员权限：grant dba to test1; 或者只给创建表等部分的权限：grant create table to test1; 查看用户相关权限：</description>
     </item>
     <item>
       <title>达梦——表空间管理</title>
-      <link>/cn/2022/%E8%BE%BE%E6%A2%A6%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/</link>
+      <link>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/</link>
       <pubDate>Fri, 01 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>/cn/2022/%E8%BE%BE%E6%A2%A6%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/</guid>
+      <guid>//localhost:1313/cn/2022/%E8%BE%BE%E6%A2%A6%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/</guid>
       <description>表空间管理（DM7） DM7表空间概述&#xA;在DM7数据库中，表空间是一种逻辑存储结构，数据库的对象如表、索引等在逻辑上都是存储在指定的表空间中。数据库在初始化的时候，系统会自动创建5个默认表空间，SYSTEM，MAIN，ROLL，TEMP和HMAIN表空间。其中SYSTEM表空间是系统表空间，存储有数据字典信息，用户数据不能存放在该表空间上。ROLL，TEMP和HMAIN表空间，由系统自动维护，不需要用户干预。初始的MAIN表空间为用户默认表空间。表空间只是一种逻辑结构，对应的物理存储结构为数据文件。也即是，用户的数据是存储在表空间对应的数据文件上面。DM7数据库中，物理存储结构的数据文件后缀为DBF。系统提供v$tablespace和 v$datafile视图查询表空间和数据文件。&#xA;-- 查询表空间 select * from v$tablespace; -- 查询数据文件 select * from v$datafile; -- 查询表空间对应的数据文件 SELECT ts.NAME, df.PATH FROM V$TABLESPACE AS ts, V$DATAFILE AS df WHERE ts.ID = df.GROUP_ID; 2.1表空间创建与删除 -- 创建表空间，最简洁形式 -- 仅指定数据文件路径，以及数据文件初始大小，单位为（MB） -- 注意大小仅为数字，不能带M符号 CREATE TABLESPACE bookshop DATAFILE &amp;#39;/opt/bookshop1.dbf&amp;#39; SIZE 128; -- 以上创建表空间语句，自动指定如下属性： autoextend on maxsize 33554431 CACHE = NORMAL 属性分别指：数据文件自动扩展，扩展最大大小，数据页的缓冲池名称 -- 创建表空间，指定非自动扩展 CREATE TABLESPACE bookshop DATAFILE &amp;#39;/opt/bookshop1.dbf&amp;#39; SIZE 128 autoextend off; -- 删除表空间 drop tablespace bookshop; 删除表空间时，改表空间上必须没有数据库对象，否则会删除失败 2.</description>
     </item>
     <item>
       <title>tomcat——静态资源映射</title>
-      <link>/cn/2021/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84/</link>
+      <link>//localhost:1313/cn/2021/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84/</link>
       <pubDate>Thu, 02 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>/cn/2021/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84/</guid>
+      <guid>//localhost:1313/cn/2021/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84/</guid>
       <description>方法一 tomcat访问外部的资源，配置静态资源映射&#xA;https://www.cnblogs.com/iyangyuan/p/3316444.html&#xA;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;Context crossContext=&amp;#34;true&amp;#34; docBase=&amp;#34;/users/ems/zhsbdStatic&amp;#34; path=&amp;#34;/zhsbdResources&amp;#34; reloadable=&amp;#34;true&amp;#34;&amp;gt; &amp;lt;/Context&amp;gt; server.xml的Host标签下&#xA;&amp;lt;Host name=&amp;#34;localhost&amp;#34; appBase=&amp;#34;webapps&amp;#34; unpackWARs=&amp;#34;true&amp;#34; autoDeploy=&amp;#34;true&amp;#34;&amp;gt; &amp;lt;!-- 增加虚拟路径，供访问本地图片--&amp;gt; &amp;lt;Context path=&amp;#34;/upload_file&amp;#34; docBase=&amp;#34;D:/upload/img&amp;#34; reloadable=&amp;#34;false&amp;#34; &amp;gt;&amp;lt;/Context&amp;gt; &amp;lt;/Host&amp;gt; 方法二 只适合jar包或者打包了资源的war包，未打包资源的war包丢入服务器的tomcat，是无法通过配置来访问外部资源的&#xA;@Configuration public class WebMvcConfig implements WebMvcConfigurer { /** * Add handlers to serve static resources such as images, js, and, css * files from specific locations under web application root, the classpath, * and others. * * @param registry */ @Override public void addResourceHandlers(ResourceHandlerRegistry registry) { // addResourceHandler 服务的相对路径 // addResourceLocations 本机/部署环境的绝对路径，注意Windows下前缀不同 file:///D:/files/ registry.</description>
     </item>
     <item>
       <title>字符串相似度匹配算法</title>
-      <link>/cn/2021/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</link>
+      <link>//localhost:1313/cn/2021/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</link>
       <pubDate>Mon, 11 Oct 2021 00:00:00 +0000</pubDate>
-      <guid>/cn/2021/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</guid>
+      <guid>//localhost:1313/cn/2021/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</guid>
       <description>相似度匹配算法 常见的字符串相似度算法包括编辑距离算法（EditDistance），n-gram算法，JaroWinkler算法以及Soundex算法。本文接下来大略的介绍一下这几种算法，有兴趣的读者可以在互联网找到一些更详细的资料。&#xA;最常见的相似度算法为编辑距离算法（EditDistance），该算法将两个字符串的相似度问题，归结为将其中一个字符串转化成另一个字符串所要付出的代价。转化的代价越高，说明两个字符串的相似度越低。通常可以选择的转化方式包含插入，替换以及删除。&#xA;N-Gram算法则是基于这样的一个假设： 即在字符串中第n个词的出现只与前面n-1个词相关，而与其他任何词都不相关，整个字符串出现的概率就是各个词出现的概率的乘积。 N-gram本身也代表目标字符串中长度为n的子串，举例，“ARM”在“ARMY”中，便是一个3-gram。当两个字符串中，相同的n-gram越多时，两个字串就会被认为更加相似。&#xA;Jaro Winkler则是将n-gram算法更进了一步。将n-gram中的不匹配的部分同时进行了换位的考虑，使得能获得更准确的相似程度。JaroWinkler在比较两个较短字符串的情况下，能够取得很好的结果。&#xA;Soundex算法与前面几种都不太相同。该算法的特点是，它所关注的问题并非两个字符串文本上的相似程度，而是发音的近似。首先，该算法会将两个字符串分别通过一定的hash算法转换成一个hash值，该值由四个字符构成，第一个字符为英文字母，后面三个为数字。进行转化的hash算法并非随机选取，而是利用了该拉丁文字符串的读音近似值。&#xA;当获得了两个字符串的读音上的hash值之后，该算法再对两个hash的相似度进行计算，便可以得出输入字符串的读音相似度。&#xA;Soundex算法的另一个应用场景在于，用户进行模糊查询时，可以通过Soundex值进行过滤，以提高查询性能。&#xA;Levenshtein Distance算法 In this article, we describe the Levenshtein distance, alternatively known as the Edit distance. The algorithm explained here was devised by a Russian scientist, Vladimir Levenshtein, in 1965.&#xA;Levenshtein Distance，也叫编辑距离，是一种度量两个序列(字符串)差异大小的方法。&#xA;两个序列(以单词为例，这里序列也可以表示一个句子)的Levenshtein distance是在使用一个单词修改为另一个单词时，通过编辑单个字符(如插入，删除，修改)所需要的最小次数。&#xA;通常允许三种类型的编辑：&#xA;插入字符c 删除字符c 字符c与c&amp;rsquo; 替换 We know that at the end of the transformation, both Strings will be of equal length and have matching characters at each position.</description>
     </item>
     <item>
       <title>tomcat——JVM参数说明</title>
-      <link>/cn/2021/%E8%AE%BE%E7%BD%AEjvm%E5%A4%A7%E5%B0%8F/</link>
+      <link>//localhost:1313/cn/2021/%E8%AE%BE%E7%BD%AEjvm%E5%A4%A7%E5%B0%8F/</link>
       <pubDate>Wed, 01 Sep 2021 00:00:00 +0000</pubDate>
-      <guid>/cn/2021/%E8%AE%BE%E7%BD%AEjvm%E5%A4%A7%E5%B0%8F/</guid>
+      <guid>//localhost:1313/cn/2021/%E8%AE%BE%E7%BD%AEjvm%E5%A4%A7%E5%B0%8F/</guid>
       <description>JVM参数说明 -server: 一定要作为第一个参数，在多个CPU时性能佳 -Xms：java Heap初始大小。 默认是物理内存的1/64。 -Xmx：java heap最大值。建议均设为物理内存的一半。不可超过物理内存。 -XX:PermSize:设定内存的永久保存区初始大小，缺省值为64M。 -XX:MaxPermSize:设定内存的永久保存区最大 大小，缺省值为64M。 -XX:SurvivorRatio=2 :生还者池的大小,默认是2，如果垃圾回收变成了瓶颈，您可以尝试定制生成池设置 -XX:NewSize: 新生成的池的初始大小。 缺省值为2M。 -XX:MaxNewSize: 新生成的池的最大大小。缺省值为32M。 -verbose:gc 现实垃圾收集信息 -Xloggc:gc.log 指定垃圾收集日志文件 -Xmn：young generation的heap大小，一般设置为Xmx的3、4分之一 -XX:+UseParNewGC ：缩短minor收集的时间 -XX:+UseConcMarkSweepGC ：缩短major收集的时间 此选项在Heap Size 比较大而且Major收集时间较长的情况下使用更合适。 -XX:userParNewGC 可用来设置并行收集【多核CPU】 -XX:ParallelGCThreads 可用来增加并行度【多核CPU】 -XX:UseParallelGC 设置后可以使用并行清除收集器【多核CPU】 常见的内存溢出 Java.lang.OutOfMemoryError: PermGen space PermGen space的全称是Permanent Generation space,是指内存的永久保存区域,这块内存主要是被JVM存放Class和Meta信息的,Class在被Loader时就会被放到PermGen space中,它和存放类实例(Instance)的Heap区域不同,GC(Garbage Collection)不会在主程序运行期对PermGen space进行清理，所以如果你的应用中有很多CLASS的话,就很可能出现PermGen space错误,这种错误常见在web服务器对JSP进行pre compile的时候。如果你的WEB APP下都用了大量的第三方jar, 其大小超过了jvm默认的大小(4M)那么就会产生此错误信息了。&#xA;解决方法： 手动设置MaxPermSize大小&#xA;建议：将相同的第三方jar文件移置到tomcat/shared/lib目录下，这样可以达到减少jar 文档重复占用内存的目的。&#xA;Java.lang.OutOfMemoryError: Java heap space JVM堆的设置是指java程序运行过程中JVM可以调配使用的内存空间的设置.JVM在启动的时候会自动设置Heap size的值，其初始空间(即-Xms)是物理内存的1/64，最大空间(-Xmx)是物理内存的1/4。可以利用JVM提供的-Xmn -Xms -Xmx等选项可进行设置。Heap size 的大小是Young Generation 和Tenured Generaion 之和。 提示：在JVM中如果98％的时间是用于GC且可用的Heap size 不足2％的时候将抛出此异常信息。 提示：==Heap Size 最大不要超过可用物理内存的80％，一般的要将-Xms和-Xmx选项设置为相同，而-Xmn为1/4的-Xmx值==。 解决方法：手动设置Heap size</description>
     </item>
     <item>
       <title>Java线程定时得到结果退出示例</title>
-      <link>/cn/2020/2020-11-24-java-restwithres/</link>
+      <link>//localhost:1313/cn/2020/2020-11-24-java-restwithres/</link>
       <pubDate>Tue, 24 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/2020-11-24-java-restwithres/</guid>
+      <guid>//localhost:1313/cn/2020/2020-11-24-java-restwithres/</guid>
       <description>大致需求 定时每几秒调用一次rest接口，如果接口响应成功则退出线程，如果接口响应失败，则继续调用直至成功。&#xA;做了一个简单的线程任务。简单来说是一个异步的调用方式。目前采用的方式是设置一个flag，作为判断rest接口是否调用成功的结果标志位，接口调用不成功则线程死循环；接口调用成功则线程不进入while，退出。&#xA;public static void main(String[] args) { // 线程沉睡时间，每3秒试图调用一次接口插入到告警表 final long timeInterval = 3000; AtomicBoolean flag = new AtomicBoolean(false); Thread thread = new Thread(() -&amp;gt; { while (!flag.get()) { flag.set(testFlag()); try { Thread.sleep(timeInterval); } catch (InterruptedException e) { log.info(&amp;#34;thread sleep interrupted&amp;#34;); } } }); thread.start(); } private static boolean testFlag() { int code = 500; boolean fl = false; try { if (code == 500) { throw new NullPointerException(); } else if (code == 200) { log.</description>
     </item>
     <item>
       <title>Java学习规划（2020版）</title>
-      <link>/cn/2020/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</link>
+      <link>//localhost:1313/cn/2020/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</link>
       <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</guid>
+      <guid>//localhost:1313/cn/2020/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</guid>
       <description>Java基础书籍阅读 Java8 实战 effective Java on Java 8 深入理解Java虚拟机 第三版 算法 第四版 Java并发编程实战 环境搭建 Java版本 Java8：https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html&#xA;代码管理工具sourcetree：https://www.sourcetreeapp.com/&#xA;Jar包管理Maven：https://maven.apache.org/download.cgi&#xA;Maven的setting配置需要修改，配置公司的仓库。&#xA;Java开发IDE Jet brains IDEA：https://www.jetbrains.com/idea/download/#section=windows&#xA;破解：https://juejin.im/post/5df8a5a5e51d4557f0460990&#xA;DataGrip可装可不装&#xA;注意要配入环境变量：Maven、Java&#xA;新特性 Java 8 新特性 localDate，Optinal容器类，lambda表达式、Colletcions集合、steam流、函数式编程&#xA;Modern Java - A Guide to Java 8 翻译版 https://juejin.im/post/5c3d7c8a51882525dd591ac7#Stream-流&#xA;Java 8 新特性概述 https://www.ibm.com/developerworks/cn/java/j-lo-jdk8newfeature/&#xA;Java8新特性总结 https://www.jianshu.com/p/4df02599aeb2&#xA;Java 8新特性终极指南 https://www.cnblogs.com/LiuYanYGZ/p/6206159.html&#xA;深入理解 Java 函数式编程 https://www.ibm.com/developerworks/cn/java/j-understanding-functional-programming-1/index.html&#xA;Java 11 新特性 Java 11 新特性介绍 https://www.ibm.com/developerworks/cn/java/the-new-features-of-Java-11/index.html&#xA;指南 项目推荐 awesome-java ： https://github.com/akullpp/awesome-java#bean-mapping&#xA;Collection of awesome Java project on Github(Github 上非常棒的 Java 开源项目集合).</description>
     </item>
     <item>
       <title>Java各时间类的转换</title>
-      <link>/cn/2020/2020-10-13-java-timesconvert/</link>
+      <link>//localhost:1313/cn/2020/2020-10-13-java-timesconvert/</link>
       <pubDate>Tue, 13 Oct 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/2020-10-13-java-timesconvert/</guid>
+      <guid>//localhost:1313/cn/2020/2020-10-13-java-timesconvert/</guid>
       <description>LocalDateTime和String的转换 // LocalDateTime转为String String string = LocalDateTime.now().format(new DateTimeFormatter.ofPattern(&amp;#34;yyyy-MM-dd HH:mm:ss.SSSSSS&amp;#34;)); // String转为LocalDateTime String time = &amp;#34;2020-07-08 14:41:50.238473&amp;#34;; LocalDateTime parse = LocalDateTime.parse(time, new DateTimeFormatter.ofPattern(&amp;#34;yyyy-MM-dd HH:mm:ss.SSSSSS&amp;#34;)); java.util.Date和String的转换 SimpleDateFormat格式化进行转换&#xA;// java.util.Date转换String DateFormat dateFormat = new SimpleDateFormat(&amp;#34;dd-MM-yy:HH:mm:ss&amp;#34;); Date date = new Date(); String dateStr = dateFormat.format(date); // String转换java.util.Date try { DateFormat dateFormat = new SimpleDateFormat(&amp;#34;dd/MM/yyy&amp;#34;); Date date = dateFormat.parse(dateStr); } catch (ParseException e) { e.printStack(); } java.sql.Timestamp和String的转换 与java.util.Date和String的转换类似，都是通过SimpleDateFormat格式化进行转换，不展开代码细讲。&#xA;java.util.Date和java.sql.Timestamp的转换 //Date转换Timestamp Timestamp timestamp = new Timestamp((new Date()).</description>
     </item>
     <item>
       <title>tomcat——简要介绍和部署</title>
-      <link>/cn/2020/%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/</link>
+      <link>//localhost:1313/cn/2020/%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/</guid>
+      <guid>//localhost:1313/cn/2020/%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/</guid>
       <description>Linux查看tomcat运行日志 实时查看运行日志了&#xA;cd usr/local/tomcat/logs&#xD;tail -f catalina.out Tomcat部署问题 bin目录 执行tomcat脚本的目录，对setclasspath.bat中的内容进行修改，可以在这里边设置不同的JAVA_HOME和JRE_HOME，直接将设置语句放在文件前边即可。如果有问题，则在calalina.bat文件中也添加这两句。&#xA;set JAVA_HOME = &amp;#34;C:\\Program Files\\Java\\jdk1.8.0_251&amp;#34;&#xD;set JRE_HOME = &amp;#34;C:\\Program Files\\Java\\jre1.8.0_251&amp;#34; 注意因为的jre文件放在“program files”文件下，这个路径中间存在空格，会导致出现”此时不应有files/java/jre“的问题。&#xA;conf目录 配置tomcat的目录&#xA;**server.xml：**中可以配置端口转发和监听器等内容，可以通过修改默认8080端口为其他端口，来解决8080端口被占用的问题。&#xA;**logging.properties：**修改日志的配置，如果出现console窗口出现乱码的问题，可以将UTF-8修改为GBK编码&#xA;java.util.logging.ConsoleHandler.encoding = UTF-8 webapp目录 丢war包的地方&#xA;可以通过server.xml修改webapp的目录</description>
     </item>
     <item>
       <title>tomcat——隐藏版本查看</title>
-      <link>/cn/2020/%E9%9A%90%E8%97%8F%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B/</link>
+      <link>//localhost:1313/cn/2020/%E9%9A%90%E8%97%8F%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B/</link>
       <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/%E9%9A%90%E8%97%8F%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B/</guid>
+      <guid>//localhost:1313/cn/2020/%E9%9A%90%E8%97%8F%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B/</guid>
       <description>备份原来的tomcat配置文件 在ems用户下，备份原来tomcat下的tomcat/conf目录，注意操作前shutdown掉tomcat&#xA;cp -r conf/ 目录 在ems用户下，给原来的tomcat压一份包备份，如果无法压缩则用root账户压包&#xA;tar czf old_tomcat.tar.gz -C 目录 放入新的tomcat 官网下载最新的tomcat的tar.gz包，上传到服务器上解压缩&#xA;tar xf apache-tomcat-8.5.57.tar.gz -C 目录 将旧的conf文件夹替换掉新的tomcat的conf文件夹，正常启动新的tomcat即可，删除旧的tomcat文件夹&#xA;查看/隐藏tomcat版本 查看tomcat版本 bin目录下.version.sh lib目录下找到catalina.jar包，解压缩查看里边的org\\apache\\catalina\\util\\ServerInfo.properties文件 lib目录下找到catalina.jar包，解压缩查看里边的org\\apache\\catalina\\MANIFEST.MF文件，仅作为参考（最低版本）。 Manifest-Version: 1.0&#xD;Ant-Version: Apache Ant 1.10.5&#xD;Created-By: 1.8.0_151-b12 (Oracle Corporation)&#xD;Specification-Title: Apache Tomcat&#xD;Specification-Version: 8.5&#xD;Specification-Vendor: Apache Software Foundation&#xD;Implementation-Title: Apache Tomcat&#xD;Implementation-Version: 8.5.42&#xD;Implementation-Vendor: Apache Software Foundation&#xD;X-Compile-Source-JDK: 1.7&#xD;X-Compile-Target-JDK: 1.7 修改tomcat版本 推荐直接修改lib目录下catalina.jar包，解压缩修改里边的org\\apache\\catalina\\util\\ServerInfo.properties文件，然后再重新压成jar包，放入tomcat替换。&#xA;取消session持久化功能 Session 是保存在内存中的，如果服务器重启、宕机的话，Session 就会丢失。有时候，我们需要对 Session 持久化以应对意外的情况发生。例如，客户端与服务器在交互过程中，可能因为 Session 的丢失而造成数据的丢失。还有一种情况，我们需要持久化 Session。如果当前用户的访问量巨大，大量的 Session 便会占用服务器大量的内存，从而使服务器的性能受到影响。如果能将一些闲置时间较长的 Session 换出，存储至磁盘，便可以起到节省内存空间的作用。需要注意的一点是，要持久化 Session，那么 Session 里存放的对象必须是可序列化的，即实现了 java.</description>
     </item>
     <item>
       <title>编程学习的思考</title>
-      <link>/cn/2023/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%80%9D%E8%80%83/</link>
+      <link>//localhost:1313/cn/2023/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%80%9D%E8%80%83/</link>
       <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2023/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%80%9D%E8%80%83/</guid>
+      <guid>//localhost:1313/cn/2023/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%80%9D%E8%80%83/</guid>
       <description>总结一下：用力地啃好书。专心地做好项目。剩下的，时间会帮你搞定。&#xA;开始读书了&#xA;你就明白：你以往东拼西凑几十篇烂文才明白的事，书上那几页纸都写着，而且详细的很。&#xA;多找第三方开源&#xA;你就明白：原来工作摸鱼不是梦。&#xA;太随便用第三方&#xA;你就明白：某天需求一变，它兼顾不到，可以把你往死里坑，坑到你得去看源码。&#xA;学了OO, 熟悉了“设计模式”, 领悟了IoC和DI, 让我大概感觉到了程序应该有一些结构, 而不是简单的把逻辑用if-else写进去, 这是我感觉自己能力提高的第一次飞跃;&#xA;看SICP和CTM让我开始理解程序和编程到底是什么, 特别是对CTM里的最小表达力原则的理解, 这是我编程思想的第二次飞跃;&#xA;学了函数式编程思想为我打开了另外一个世界, 引导我去了解haskell, 去稍稍的学习了些category theory(这个是真的难&amp;hellip;), 这解放了我编程思想的另外一个纬度, 抽象能力有了质的提高(主要体现在generic programming的能力提高, 高级类型的灵活运用), 我开始有意识的去降低核心程序的&amp;quot;熵&amp;quot;(程序的可能性越多, 各种可能性的概率越均等, 熵越高), 使得程序更容易理解(熵越低信息含量越低则越容易理解), 而把系统的灵活性(比如状态, config等)隔离在核心逻辑之外(这样使得变化可以在一个地方, 比如系统setup时, 集中理解, 然后用理解的setup来很简单的推理核心逻辑在这种setup下会怎样运转), 这样就使得程序的核心复杂度更加接近于核心业务的复杂度(业务的熵是本质复杂度无法用调整程序结构的方法降低, 但是, 本质复杂度也是可以降低的, 请往下看), 但是又没有写死整个系统的灵活度; 这是第三次飞跃;&#xA;然而, 最大的飞跃是当我最终把重点从编程本身转移开来之后, 当我开始去看分布式系统算法, 去理解各种云服务的特性, 去深入了解我所工作的领域或者说业务, 去了解和我们组有关系的其他部门的业务, 去了解ML(由于业务相关); 去了解需求获取, 怎样拒绝不合理需求, 怎样调整和简化需求(降低业务本质复杂度的关键), 甚至创造合理需求，去了解测试, 监控, 部署, 构架, 运维, 项目规划和人员部署, 思考为什么junior SDE会犯错, 帮助mentor别人, 甚至开始关心组内的技术文化建设;&#xA;这是因为“编程是最重要也是最不重要的事”&#xA;这是因为编程作为把思维变为实现的这个循环的最后一步(然后写好的程序会成为新的思考输入和基础，开始新的一轮迭代开发)，它和一个项目一个系统的所有其他方面都息息相关：需求获取，问题抽象，测试，监控，部署，框架运用，系统间集成，灵活性，未来拓展性，易用性，系统健壮性，多版本实验性，高层业务决策等等，这使得编程变得无比重要(所有的一切都需要编程来最终落到实地)，也毫不重要(编程被所有其他一切所约束和指导)。能够支撑这些所有上层思考的程序才是“好程序”，能够支撑所有这些思考的程序员，才是好程序员。学好/学会编程这件事是把所有需要思考的东西都弄明白都学好之后的自然结果。而把这些思考留给别人，自己只做思维和程序的翻译器(区分创造者和工具人的关键)，根本无法写出好的程序来。这也是DDD(Domain Driven Design) 的精神之一 （关于DDD的精神，参见此文的最后一段， 阿莱克西斯：在做程序员的道路上，你掌握了什么概念或技术使你感觉自我提升突飞猛进？ ）&#xA;以上引用出自自学编程需要注意什么？&#xA;我觉得: 我们在积累技术能力的同时一定要开阔眼界, 这样才不会陷入一个&amp;quot;局部最优解&amp;quot; (随便逮着一个点都能开阔人类边界的天才除外); 眼界太窄以至于学了一点点东西就觉得自己&amp;quot;天下无敌&amp;quot;了, 是我们进步的大敌 (也是曾经是我最大的敌人);</description>
     </item>
     <item>
       <title>Java创建不可变并且static静态的Map</title>
-      <link>/cn/2020/2020-08-15-java-createstaticmap/</link>
+      <link>//localhost:1313/cn/2020/2020-08-15-java-createstaticmap/</link>
       <pubDate>Sat, 15 Aug 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/2020-08-15-java-createstaticmap/</guid>
+      <guid>//localhost:1313/cn/2020/2020-08-15-java-createstaticmap/</guid>
       <description>findbugs错误提示 MS_MUTABLE_COLLECTION_PKGPROTECT, Priority: Normal&#xA;XX.XX.XXX.XX is a mutable collection which should be package protected&#xA;A mutable collection instance is assigned to a final static field, thus can be changed by malicious code or by accident from another package. The field could be made package protected to avoid this vulnerability. Alternatively you may wrap this field into Collections.unmodifiableSet/List/Map/etc. to avoid this vulnerability. 很容易写的一个错误案例如下： public class TestMap { private static final Map&amp;lt;Integer,String&amp;gt; map = new LinkedHashMap&amp;lt;Integer, String&amp;gt;(); static { map = new HashMap(); map.</description>
     </item>
     <item>
       <title>Paas、IaaS等</title>
-      <link>/cn/2020/paasiaas%E7%AD%89/</link>
+      <link>//localhost:1313/cn/2020/paasiaas%E7%AD%89/</link>
       <pubDate>Sun, 12 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/paasiaas%E7%AD%89/</guid>
+      <guid>//localhost:1313/cn/2020/paasiaas%E7%AD%89/</guid>
       <description>前一阵子这几个概念炒得很火，时不时有有叫XaaS的产品上市，这几个概念本身也不容易理解，所以很多人都是云里雾里，不知道有什么区别。因此本文以通俗的例子和语言来解释一下这几个概念到底是什么意思。&#xA;整体而言：&#xA;IaaS 是云服务的最底层，主要提供一些基础资源。&#xA;PaaS 提供软件部署平台（runtime），抽象掉了硬件和操作系统细节，可以无缝地扩展（scaling）。开发者只需要关注自己的业务逻辑，不需要关注底层。&#xA;SaaS 是软件的开发、管理、部署都交给第三方，不需要关心技术问题，可以拿来即用。&#xA;那么BaaS和FaaS又是什么呢？&#xA;BaaS：Backend as a Service（后端即服务）&#xA;服务商为客户(开发者)提供整合云后端的服务，如提供文件存储、数据存储、推送服务、身份验证服务等功能，以帮助开发者快速开发应用。&#xA;FaaS：Function as a service（函数即服务）&#xA;无服务器计算，当前使用最广泛的是AWS的Lambada。&#xA;服务商提供一个平台，允许客户开发、运行和管理应用程序功能，而无需构建和维护通常与开发和启动应用程序相关的基础架构的复杂性。 按照此模型构建应用程序是实现“无服务器”体系结构的一种方式，通常在构建微服务应用程序时使用。&#xA;其实还有很多的aaS，比如DaaS(Data as a service，数据即服务)、NaaS(Network as a service，网络即服务) 等等。&#xA;一个例子 很多人举例子，都使用了一个做披萨的例子，但是这个例子实际上是不太恰当了，完全脱离了本意，与实际场景也很难对应上。为了更好地理解，我直接以这些概念本身应用的场景作为例子来讲解。&#xA;比如说，你有一家制造衣服的工厂，你准备把工厂里面的衣服通过网上渠道卖出去。这是这件事情的出发点。&#xA;接下去，你从朋友那里了解到，弄一个电商系统就可以了，这样就可以把衣服放到网上去卖，顾客可以在你的电商系统上面买衣服。&#xA;再接下去，你继续了解到，要找一个产品经理设计一个电商系统。所以这时候你找了一个产品经理。&#xA;之后，产品经理把电商系统设计好了，他告诉你，需要程序员把设计好的东西开发出来，他还告诉你，分别至少需要一个前端程序员和一个后端程序员。&#xA;你又问什么要这么多人，产品经理告诉你，后端程序员写业务逻辑，前端程序员写页面展示，他们通过接口传输数据，这叫前后端分离。&#xA;再接下来，你找了程序员，东西也开发好了，程序员告诉你，这东西还不能直接用，要放到服务器上面。&#xA;接下去你又买了服务器，程序员有告诉你，他不会部署服务器，要找专门的运维，才能部署服务器。&#xA;于是你又招了运维人员来，服务器也部署好了，这时候程序员告诉你，还是不能用，还要搭软件的环境，因为是他是用PHP语言写的，还要搭一个PHP的环境才能运行程序。&#xA;最后，环境搭好了，程序终于跑起来了，你也终于累瘫了。为了弄一个电商系统，你总共招了1个产品经理，1个前端工程师，1个后端工程师，1个运维工程师，还买了一台服务器。&#xA;SaaS 这个时候，你意识到，自己只是想要建立网上渠道来卖衣服，只要弄个别人已经开发好的电商系统就够了，完全没必要自己去开发一套新的，能用就好，管他谁开发的呢。&#xA;这就是SaaS（Software as a Service，软件即服务）的概念，直接购买第三方服务商已经开发好的软件来使用，从而免去了自己去组建一个团队来开发的麻烦。&#xA;我们可以算一笔账，来计算使用SaaS节省下来的费用，以上面的这个例子，搭建这样一个团队，按最低配置算，需要至少4人，开发周期至少2月，人力成本算平均1.5W/人·月，那就至少需要12W，这还不包括后期维护的成本。但是如果使用SaaS，每年只需要付几百到几千的费用，就能达到更好的效果，两者相比，差距很明显。&#xA;实际上，第三方服务商开发这样一套软件，也需要这样多的成本，为什么他就能挣钱呢？原因在于，他开发出来的软件，不是只卖给一个人用的，可能卖给了成千上万的人使用。可以按照一个用户一年1000元计算，只要能够卖给120个用户以上，就稳赚不赔了。这就是SaaS的商业模式。&#xA;需要注意的是，SaaS卖的不仅是软件，而是对软件开箱即用的服务，软件是部署在SaaS服务商那里的，不需要客户自行部署软件运营的环境和服务器等。像有赞、十二赞、微盟等，就是典型的SaaS服务商，注册账号后就可以直接使用一套完整的电商系统，无需自己进行任何开发工作。&#xA;你发现，使用SaaS，上面原本要招的4个人你一个都不用招了，服务器也不用买了，省了一大笔开支。&#xA;BaaS 用了一段时间的SaaS后，你发现，SaaS好是好，但是缺点也有，那就是东西都被定好了，自己没得改。自己想在某个页面加一个亮闪闪的东西上去，结果被告知没得改，SaaS服务商答复说，那么多用户在用，不能为了你一个人而改。&#xA;你了解到，自己要改的东西，只需要前端改了就可以了，后端部分完全不需要改。这时候你动脑筋，可以招了前端工程师，前端页面自己做，后端部分还是用服务商的。&#xA;这就是BaaS（Backend as a Service，后端即服务），自己只需要开发前端部分，剩下的所有都交给了服务商。经常说的“后端云”就是BaaS的意思，例如像LeanCloud、Bomb等就是典型的BaaS服务商。&#xA;BaaS模式跟SaaS模式比较，多出了需要自己开发前端。这就至少需要1个前端工程师了，但是这种方案跟最初的方案比，还是能够省下1个产品经理，1个后端工程师，1个运维和1台服务器。&#xA;PaaS 随着业务规模的变大，你发现，即便是使用BaaS，也有很多不能满足的地方，因为后端被完全限制了，后端部分决定了你的系统能够做什么事情，前端只是做一个展现以及作为做这些事情的一个渠道，后端做不到的事情，前端无论怎么改都做不到。&#xA;于是你又招了1个后端工程师来进行开发，考虑到需要自行设计业务逻辑，同时也招了1个产品经理，自行设计开发一个电商系统。但是软件运行的环节还是使用服务商的。&#xA;这就是PaaS（Platform as a Service，平台即服务），自己只需关心软件本身，至于软件运行的环境由服务商提供。我们常说的云引擎、云容器等就是PaaS。例如你的程序是用PHP写的，你就可以选一个已经搭建好PHP运行环境的平台，如果是用Python写的，就选一个搭建好Python环境的，以此类推。&#xA;使用PaaS跟最初的方案比，能够省下1个运维和1台服务器。&#xA;IaaS 使用了一段时间的PaaS，你发现缺点是，可能有的环境服务商没提供或者支持不好，于是你决定环境还是自己进行搭配，服务商只需要提供能够运行的服务器就可以了。&#xA;这就是IaaS（Infrastructure as a Service，基础设施即服务），由服务商提供服务器，一般为云主机，客户自行搭建环境部署软件。例如阿里云、腾讯云等就是典型的IaaS服务商。</description>
     </item>
     <item>
       <title>Java实体类和map的转换</title>
-      <link>/cn/2020/2020-06-29-java-bean2map/</link>
+      <link>//localhost:1313/cn/2020/2020-06-29-java-bean2map/</link>
       <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/2020-06-29-java-bean2map/</guid>
+      <guid>//localhost:1313/cn/2020/2020-06-29-java-bean2map/</guid>
       <description>Java反射对JavaBean体和泛型Map做互换 Map转为Bean public &amp;lt;T, K, V&amp;gt; T map2Bean(Map&amp;lt;K, V&amp;gt; map, Class&amp;lt;T&amp;gt; beanCls) { // try catch未写 T t = null; BeanInfo beanInfo = Introspector.getBeanInfo(beanCls.getClass()); PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors(); t = beanCls.newInstance(); for (PropertyDescriptor property : propertyDescriptors) { String key = property.getName(); if (map.containsKey(key)) { Object value = map.get(key); Method setter = property.getWriteMethod(); setter.invoke(t, value); } } return t; } Bean转为Map public &amp;lt;T, K, V&amp;gt; Map&amp;lt;String, Object&amp;gt; bean2Map(T bean) { // try catch未写 Map&amp;lt;String, Object&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); if (bean == null) { return null; } BeanInfo beanInfo = Introspector.</description>
     </item>
     <item>
       <title>Java的DOM4J解析XML文件</title>
-      <link>/cn/2020/2020-06-29-java-dom4j/</link>
+      <link>//localhost:1313/cn/2020/2020-06-29-java-dom4j/</link>
       <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/2020-06-29-java-dom4j/</guid>
+      <guid>//localhost:1313/cn/2020/2020-06-29-java-dom4j/</guid>
       <description>dom4j获取iterator&#xA;/** * @author luohao * @create 2020/6/18 17:21 */ @Slf4j public class Dom4jUtils { public static Iterator&amp;lt;Element&amp;gt; getElementIterator(String path) { SAXReader reader = new SAXReader(); Document document = null; try { document = reader.read(new File(path)); } catch (DocumentException e) { log.error(&amp;#34;Dom4j：读取xml文件时异常{}&amp;#34;, e.getMessage(), e); } Optional&amp;lt;Document&amp;gt; docElementOpt = Optional.ofNullable(document); return docElementOpt.map(Document::getRootElement).map(Element::elementIterator).orElseGet(() -&amp;gt; new Iterator&amp;lt;Element&amp;gt;() { @Override public boolean hasNext() { return false; } @Override public Element next() { return null; } }); } } 获取xml的node节点和属性</description>
     </item>
     <item>
       <title>Java数据库（1）基本概念和try-with-resources</title>
-      <link>/cn/2020/2020-06-20-java-jdbctrycatch/</link>
+      <link>//localhost:1313/cn/2020/2020-06-20-java-jdbctrycatch/</link>
       <pubDate>Sat, 20 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/2020-06-20-java-jdbctrycatch/</guid>
+      <guid>//localhost:1313/cn/2020/2020-06-20-java-jdbctrycatch/</guid>
       <description>1. 连接池 连接池创建好固定数量的连接，数据库操作通过借用连接池的连接来进行操作，并且不关闭而是返还给连接池。&#xA;2. try-with-resources 实现autoClosable接口的类，均可以进行try-with-resources的操作。&#xA;close的顺序是，先进后出，类似堆栈。&#xA;try (Connection c = DriverManager.getConnection(&amp;#34;jdbc:mysql://127.0.0.1:3306/how2java?characterEncoding=UTF-8&amp;#34;,&amp;#34;root&amp;#34;, &amp;#34;admin&amp;#34;); Statement s = c.createStatement();) { String sql = &amp;#34;select * from hero where id = &amp;#34; + id; ResultSet rs = s.executeQuery(sql); // 因为id是唯一的，ResultSet最多只能有一条记录 // 所以使用if代替while if (rs.next()) { hero = new Hero(); String name = rs.getString(2); float hp = rs.getFloat(&amp;#34;hp&amp;#34;); int damage = rs.getInt(4); hero.name = name; hero.hp = hp; hero.damage = damage; hero.id = id; } } catch (SQLException e) { // TODO Auto-generated catch block e.</description>
     </item>
     <item>
       <title>Java数据库（2）改造jdbc工具类</title>
-      <link>/cn/2020/2020-06-20-java-jdbcutils/</link>
+      <link>//localhost:1313/cn/2020/2020-06-20-java-jdbcutils/</link>
       <pubDate>Sat, 20 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/2020-06-20-java-jdbcutils/</guid>
+      <guid>//localhost:1313/cn/2020/2020-06-20-java-jdbcutils/</guid>
       <description>增删改 可以设置一个Object数组，用来占位Preparement的sql里的那些?，数组的长度就是预插入的值的数量，数组里的值就是可以录入到Preparestatement的值。&#xA;//我们发现，增删改只有SQL语句和传入的参数是不知道的而已，所以让调用该方法的人传递进来 //由于传递进来的参数是各种类型的，而且数目是不确定的，所以使用Object[] public static void update(String sql, Object[] objects) { Connection connection = null; PreparedStatement preparedStatement = null; ResultSet resultSet = null; try { connection = getConnection(); preparedStatement = connection.prepareStatement(sql); //根据传递进来的参数，设置SQL占位符的值 for (int i = 0; i &amp;lt; objects.length; i++) { preparedStatement.setObject(i + 1, objects[i]); } //执行SQL语句 preparedStatement.executeUpdate(); } catch (Exception e) { e.printStackTrace(); } } 查询 注意这里可以定义一个接口，对select的结果集进行操作，但是不知道需要具体进行操作，调用接口的实现类，接口就可以调用实现的方法。&#xA;/* 1:对于查询语句来说，我们不知道对结果集进行什么操作【常用的就是把数据封装成一个Bean对象，封装成一个List集合】 2:我们可以定义一个接口，让调用者把接口的实现类传递进来 3:这样接口调用的方法就是调用者传递进来实现类的方法。【策略模式】 */ //这个方法的返回值是任意类型的，所以定义为Object。 public static Object query(String sql, Object[] objects, ResultSetHandler rsh) { Connection connection = null; PreparedStatement preparedStatement = null; ResultSet resultSet = null; try { connection = getConnection(); preparedStatement = connection.</description>
     </item>
     <item>
       <title>正则表达式规则</title>
-      <link>/cn/2020/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%A7%84%E5%88%99/</link>
+      <link>//localhost:1313/cn/2020/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%A7%84%E5%88%99/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%A7%84%E5%88%99/</guid>
+      <guid>//localhost:1313/cn/2020/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%A7%84%E5%88%99/</guid>
       <description>匹配数字 数字：^[0-9]*$&#xD;n位的数字：^\d{n}$&#xD;至少n位的数字：^\d{n,}$&#xD;m-n位的数字：^\d{m,n}$&#xD;零和非零开头的数字：^(0|[1-9][0-9]*)$&#xD;非零开头的最多带两位小数的数字：^([1-9][0-9]*)+(.[0-9]{1,2})?$&#xD;带1-2位小数的正数或负数：^(\-)?\d+(\.\d{1,2})?$&#xD;正数、负数、和小数：^(\-|\+)?\d+(\.\d+)?$&#xD;有两位小数的正实数：^[0-9]+(.[0-9]{2})?$&#xD;有1~3位小数的正实数：^[0-9]+(.[0-9]{1,3})?$&#xD;非零的正整数：^[1-9]\d*$ 或 ^([1-9][0-9]*){1,3}$ 或 ^\+?[1-9][0-9]*$&#xD;非零的负整数：^\-[1-9][]0-9&amp;#34;*$ 或 ^-[1-9]\d*$&#xD;非负整数：^\d+$ 或 ^[1-9]\d*|0$&#xD;非正整数：^-[1-9]\d*|0$ 或 ^((-\d+)|(0+))$&#xD;非负浮点数：^\d+(\.\d+)?$ 或 ^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$&#xD;非正浮点数：^((-\d+(\.\d+)?)|(0+(\.0+)?))$ 或 ^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$&#xD;正浮点数：^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$ 或 ^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$&#xD;负浮点数：^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$ 或 ^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$&#xD;浮点数：^(-?\d+)(\.\d+)?$ 或 ^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$ 匹配任意数量任意字符 [\\s\\S]* 匹配电压等级 [0-9][0-9]{0,2}kV 替换回车、换行和空白符号 匹配字符串a和b之间的字符 (?&amp;lt;=create table).*(?=primary key) 匹配中文字符 [\\u4e00-\\u9fa5] [^(\u4e00-\u9fa5)] 匹配双字节字符(包括汉字在内) [^\\x00-\\xff] 匹配空白行 用于删除空白行&#xA;\\n\\s*\\r 匹配腾讯QQ号 [1-9][0-9]{4,} (腾讯QQ号从10000开始) 匹配ip地址 \\d+\\.\\d+\\.\\d+\\.\\d+ 匹配身份证 中国的身份证为15位或18位，不一定全为数字，需要勘误&#xA;^\\d{15}|\\d{18}$ 匹配国内电话号码 手机号码 电话号码 国内电话号码 ^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$&#xD;(&amp;#34;XXX-XXXXXXX&amp;#34;、&amp;#34;XXXX-XXXXXXXX&amp;#34;、&amp;#34;XXX-XXXXXXX&amp;#34;、&amp;#34;XXX-XXXXXXXX&amp;#34;、&amp;#34;XXXXXXX&amp;#34;和&amp;#34;XXXXXXXX)：^(\\(\\d{3,4}-)|\\d{3.</description>
     </item>
     <item>
       <title>Java核心技术卷(4)</title>
-      <link>/cn/2018/2018-04-08-javacore4/</link>
+      <link>//localhost:1313/cn/2018/2018-04-08-javacore4/</link>
       <pubDate>Sun, 08 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>/cn/2018/2018-04-08-javacore4/</guid>
+      <guid>//localhost:1313/cn/2018/2018-04-08-javacore4/</guid>
       <description>需要了解的类库 java.util.GregorianCalendar java.text.DateFormatSymbols java.util.Random 类 类, 构造, 实例, 封装, 实例域, 方法等概念 对象: 对象的行为, 状态, 标识三个特性 类之间的关系: 依赖(uses-a), 聚合(has-a), 继承(is-a) UML语言来表达类之间的一些关系 一个对象变量并没有实际包含一个对象,而是仅仅引用一个对象. 任何对象变量的值都是对存储在另一个地方的一个对象的引用, new操作符的返回值也是一个引用. 隐式参数和显式参数, 隐式参数指对象的实例, 在方法中可以用this代指, 显式参数则为方法括号中的参数 封装的优点: 保护私密数据, 更改器方法可以执行错误检查. 封装的要求: 一个私有的数据域, 一个公有的域访问器方法, 一个公有的域更改器方法. 私有域private以及final的用法 静态域与静态方法, 静态常量和静态方法可以不用实例化对象就调用. 用静态方法的情况: 1.不需要访问对象状态,其所需参数都是通过显式参数提供 2.只需要访问类的静态域 工厂方法 对象引用进行的是值的传递 重载: 相同方法名, 不同参数 初始化块以及静态的初始化块 对象析构和finalize方法, 由于Java自动垃圾回收的机制而不支持析构器, 同时因为难以知道finalize方法什么时候调用而不用(不安全), 一般需要关闭的是一些资源如文件流等对象的close方法 静态导入, 如 import static java.lang.System.*; 就可以直接 out.println了(似乎也不常见) 类设计技巧 一定要保证数据私有 一定要对数据初始化 不要在类中使用过多的基本类型 不是所有的域都需要独立的域访问器和域更改器 将职责过多的类进行分解 类名和方法名要能够体现他们的职责 一些代码注意点 所有与通配符匹配的源文件都将被编译成为类文件&#xA;javac Employee*.java 注意不要编写返回可变对象的访问器方法. 下代码中test代码中d和harry.hireDay引用同一个对象, 更改d就会自动改变这个雇员对象的私有状态</description>
     </item>
     <item>
       <title>Java核心技术卷(1)</title>
-      <link>/cn/2018/2018-04-06-javacore1/</link>
+      <link>//localhost:1313/cn/2018/2018-04-06-javacore1/</link>
       <pubDate>Fri, 06 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>/cn/2018/2018-04-06-javacore1/</guid>
+      <guid>//localhost:1313/cn/2018/2018-04-06-javacore1/</guid>
       <description>Java的一些特性 简单性&#xA;面向对象&#xA;网络技能&#xA;健壮性&#xA;Java采用的指针模型可以消除重写内存和损坏数据的可能性&#xA;安全性&#xA;体系结构中立&#xA;可移植性&#xA;Java规范中没有依赖具体实现的地方&#xA;解释型&#xA;增量式且轻量级的链接&#xA;高性能&#xA;多线程&#xA;动态性</description>
     </item>
     <item>
       <title>Java核心技术卷(2)</title>
-      <link>/cn/2018/2018-04-06-javacore2/</link>
+      <link>//localhost:1313/cn/2018/2018-04-06-javacore2/</link>
       <pubDate>Fri, 06 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>/cn/2018/2018-04-06-javacore2/</guid>
+      <guid>//localhost:1313/cn/2018/2018-04-06-javacore2/</guid>
       <description>JDK 从开始学习java的java7到现在已经有java10了&#xA;一些名词 术语名词 缩写 解释 Java development Kit JDK 编写Java程序的程序员使用的软件 Java runtime environment JRE 运行Java程序的用户使用的软件 Standard Edition SE 用于桌面或者简单的服务器应用的Java平台 Enterprise Edition EE 用于复杂的服务器应用的Java平台 Micro Edition ME 用于手机和其他小型设备的Java平台 Java 2 J2 过时 Software development kit SDK 过时 Java安装 Java位置 C:\Program Files\Java Java文档安装 Java jdk目录结构 使用命令行工具 javac Welcome.java java Welcome 使用集成开发工具 IntelliJ Java applet似乎已经过时了 </description>
     </item>
     <item>
       <title>Java核心技术卷(3)</title>
-      <link>/cn/2018/2018-04-06-javacore3/</link>
+      <link>//localhost:1313/cn/2018/2018-04-06-javacore3/</link>
       <pubDate>Fri, 06 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>/cn/2018/2018-04-06-javacore3/</guid>
+      <guid>//localhost:1313/cn/2018/2018-04-06-javacore3/</guid>
       <description>Java类 java.lang.stringv java.lang.StringBuilder java.util.Scanner java.lang.System java.io.Console java.io.PrintWriter java.nio.file.Paths java,math.BigInteger java.util.Arrays 数据类型 整形 数据类型 存储需求 取值范围 int 4字节 -2147483648~2147483647(正好超过20亿) short 2字节 -32768~32767 long 8字节 &amp;hellip;算了 byte 1字节 -128~127 Java没有unsigned类型 浮点型 数据类型 存储需求 取值范围 float 4字节 有效位数6-7位 double 8字节 有效位数15位 注意3.14F为float类型, 3.14/3.14D为double类型 NaN: 0/0或者负数的平方根结果 Double.NaN(x) char类型: 用UTF-16编码描述一个代码单元 Boolean类型 变量 变量初始化 常量用final, const为Java保留的关键字 运算符 三元运算符 condition ? yes : no 位运算符 &amp;amp;与,|或,^异或,~非: 没有逻辑短路(&amp;amp;&amp;amp;和||) &amp;gt;&amp;gt;和&amp;lt;&amp;lt;: 将二进制进行右移和左移操作 &amp;gt;&amp;raquo;: 将0填充到高位, 没有&amp;lt;&amp;lt;&amp;lt; 数学函数Math类 数值类型转换 直接进行合法转换: 有信息丢失的为int-&amp;gt;float,long-&amp;gt;float和long-&amp;gt;double,编译器也有警告 强制类型转换: 会有截断 int nx=(int) x 还可以用各种类型类的函数 运算符优先级和结合性 枚举类型 enum Size{S,M,L,XL}; Size s = Size.</description>
     </item>
   </channel>

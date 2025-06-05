@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>工作流 on Rehoni | 罗皓</title>
-    <link>/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/</link>
+    <link>//localhost:1313/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/</link>
     <description>Recent content in 工作流 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 15 Aug 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>生活工作流体系</title>
-      <link>/cn/2023/workflow/</link>
+      <link>//localhost:1313/cn/2023/workflow/</link>
       <pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate>
-      <guid>/cn/2023/workflow/</guid>
+      <guid>//localhost:1313/cn/2023/workflow/</guid>
       <description>各种软件、手机、电脑都只是工具，真真有用的，还是知识本身。&#xA;功能用处 软件 平台 备注 状态 笔记 Typora+坚果云 Windows、iOS、Linux Typora编辑器，坚果云云同步；（Joplin笔记管理，已丢弃） 番茄钟 Forest iOS、Android 记录学习时间 弃用 睡眠 Sleep Town iOS、Android 记录睡眠 弃用 小米手环 iOS、Android 躺平了 习惯 小日常 iOS 记录个人生活习惯 弃用 待办 待办事项 iOS、Windows 记录待办事项，包括工作和日常记录 弃用 日程 日历 iOS、Windows 记录日程，已确定的日程可以记录在日历 弃用 滴答清单 iOS、Windows、Android 习惯+日程+待办 密码 KeepassXC Windows 记录密码 Keepassium iOS 记录密码 KeePass2android Android 记录密码 VPN 翼游 iOS、Windows 翻墙 弃用 agentNEO iOS、Windows 翻墙 记账 moneywiz 2020 iOS、Windows 记账 弃用 钱迹 iOS、Android 记账 ssh windterm Windows 可以设置配置文件目录，无缝迁移设置和会话：.</description>
     </item>
     <item>
       <title>word转sql表结构</title>
-      <link>/cn/2020/2020-04-15-workflow-word2sql/</link>
+      <link>//localhost:1313/cn/2020/2020-04-15-workflow-word2sql/</link>
       <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/cn/2020/2020-04-15-workflow-word2sql/</guid>
+      <guid>//localhost:1313/cn/2020/2020-04-15-workflow-word2sql/</guid>
       <description>word转sql表结构： 工作流如下：&#xA;已经在office word编辑好的数据库说明文档&#xA;通过按照特定的表结构，录入到excel中，前两行为中文表名和英文表名，下边为字段，下方的sheet名也为中文表名，并且注意”名称“列，是不可以有重名的，否则执行脚本的时候会报错，并且一直占用该excel导致此excel只读，无法编辑（如果修改完excel没有退出则继续修改就行）只能创建excel副本。&#xA;打开power designer-&amp;gt;create model-&amp;gt;physical data，创建物理模型，DBMS选择对应的数据库，版本低一点没有关系，商用库为12a，选择最高的Oracle version 11g，创建之后按ctrl+shift+x打开脚本执行界面，执行以下VB脚本，生成表的物理模型。可以根据数据库文档中每一列的含义，在脚本中进行调整。执行完之后可以保存到power designer的脚本库中，方便之后重用。&#xA;&amp;#39;&#xD;&amp;#39; @Author: 罗皓&#xD;&amp;#39; @Date: 2020-03-25 14:41:57&#xD;&amp;#39; @LastEditTime: 2020-03-26 10:11:31&#xD;&amp;#39; @Description:&#xD;&amp;#39; @LastEditors: 罗皓&#xD;&amp;#39;&#xD;Option Explicit&#xD;Dim mdl &amp;#39; the current model&#xD;Set mdl = ActiveModel&#xD;If (mdl Is Nothing) Then&#xD;MsgBox &amp;#34;There is no Active Model&amp;#34;&#xD;End If&#xD;Dim HaveExcel&#xD;Dim RQ&#xD;RQ = vbYes &amp;#39;MsgBox(&amp;#34;Is Excel Installed on your machine ?&amp;#34;, vbYesNo + vbInformation, &amp;#34;Confirmation&amp;#34;)&#xD;If RQ = vbYes Then&#xD;HaveExcel = True&#xD;&amp;#39; Open &amp;amp; Create Excel Document&#xD;Dim x1 &amp;#39;&#xD;Dim wb&#xD;Dim Sht&#xD;Dim count&#xD;Dim newTableName &amp;#39;sheet中的表名&#xD;Dim singleTable &amp;#39;powerdesigner中的表名&#xD;Dim existsFlag&#xD;Set x1 = CreateObject(&amp;#34;Excel.</description>
     </item>
   </channel>
