@@ -2,115 +2,115 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>开发技巧 on Rehoni | 罗皓</title>
-    <link>//localhost:1313/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/</link>
+    <link>/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/</link>
     <description>Recent content in 开发技巧 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 11 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker——centos卸载docker</title>
-      <link>//localhost:1313/cn/2024/centos%E5%8D%B8%E8%BD%BDdocker/</link>
+      <link>/cn/2024/centos%E5%8D%B8%E8%BD%BDdocker/</link>
       <pubDate>Thu, 11 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2024/centos%E5%8D%B8%E8%BD%BDdocker/</guid>
+      <guid>/cn/2024/centos%E5%8D%B8%E8%BD%BDdocker/</guid>
       <description>删除服务&#xA;#取消开机自启 [root@CenOS-1 system]# systemctl disable docker #取消注册文件 [root@CenOS-1 system]# rm -rf /etc/systemd/system/docker.service 删除命令&#xA;[root@CenOS-1 system]# rm -rf /usr/bin/containerd [root@CenOS-1 system]# rm -rf /usr/bin/containerd-shim [root@CenOS-1 system]# rm -rf /usr/bin/ctr [root@CenOS-1 system]# rm -rf /usr/bin/runc [root@CenOS-1 system]# rm -rf /usr/bin/docker* 删除配置&#xA;[root@CenOS-1 system]# rm -rf /etc/docker/ 删除镜像或容器&#xA;[root@CenOS-1 system]# rm -rf /var/lib/docker </description>
     </item>
     <item>
       <title>logback不同类的日志打印在不同的文件中</title>
-      <link>//localhost:1313/cn/2024/logback%E4%B8%8D%E5%90%8C%E7%B1%BB%E7%9A%84%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD/</link>
+      <link>/cn/2024/logback%E4%B8%8D%E5%90%8C%E7%B1%BB%E7%9A%84%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD/</link>
       <pubDate>Wed, 12 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2024/logback%E4%B8%8D%E5%90%8C%E7%B1%BB%E7%9A%84%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD/</guid>
+      <guid>/cn/2024/logback%E4%B8%8D%E5%90%8C%E7%B1%BB%E7%9A%84%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD/</guid>
       <description>定义两个 appender，分别命名为 “CLASS1_FILE” 和 “CLASS2_FILE”。每个appender会将日志输出到指定的文件中，这里分别是 logs/class1.log 和 logs/class2.log。&#xA;定义两个 logger，分别对应 com.example.Class1 和 com.example.Class2 类。这两个 logger 的日志级别都设置为 “info”，并将日志输出到对应的 appender 中。additivity=&amp;ldquo;false&amp;rdquo; 的设置是为了防止日志被父 logger（在这里是 root logger）也处理。&#xA;最后，root logger 设置为只处理 “error” 级别以上的日志，它的日志输出到两个 appender 中。&#xA;示例如下：&#xA;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;configuration&amp;gt; &amp;lt;appender name=&amp;#34;CLASS1_FILE&amp;#34; class=&amp;#34;ch.qos.logback.core.rolling.RollingFileAppender&amp;#34;&amp;gt; &amp;lt;file&amp;gt;logs/class1.log&amp;lt;/file&amp;gt; &amp;lt;encoder class=&amp;#34;ch.qos.logback.classic.encoder.PatternLayoutEncoder&amp;#34;&amp;gt; &amp;lt;pattern&amp;gt;%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n&amp;lt;/pattern&amp;gt; &amp;lt;/encoder&amp;gt; &amp;lt;/appender&amp;gt; &amp;lt;appender name=&amp;#34;CLASS2_FILE&amp;#34; class=&amp;#34;ch.qos.logback.core.rolling.RollingFileAppender&amp;#34;&amp;gt; &amp;lt;file&amp;gt;logs/class2.log&amp;lt;/file&amp;gt; &amp;lt;encoder class=&amp;#34;ch.qos.logback.classic.encoder.PatternLayoutEncoder&amp;#34;&amp;gt; &amp;lt;pattern&amp;gt;%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n&amp;lt;/pattern&amp;gt; &amp;lt;/encoder&amp;gt; &amp;lt;/appender&amp;gt; &amp;lt;logger name=&amp;#34;com.example.Class1&amp;#34; level=&amp;#34;info&amp;#34; additivity=&amp;#34;false&amp;#34;&amp;gt; &amp;lt;appender-ref ref=&amp;#34;CLASS1_FILE&amp;#34; /&amp;gt; &amp;lt;/logger&amp;gt; &amp;lt;logger name=&amp;#34;com.</description>
     </item>
     <item>
       <title>后端——问题小书（2023）</title>
-      <link>//localhost:1313/cn/2023/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%983/</link>
+      <link>/cn/2023/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%983/</link>
       <pubDate>Sun, 24 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%983/</guid>
+      <guid>/cn/2023/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%983/</guid>
       <description>1、MyBatis注解-动态SQL解决方案 在一个表中有id,name,email我们查询的时候，希望name不为null的时候，作为查询条件，如果email不为null的时候，作为查询条件。&#xA;方案1：&amp;lt;script&amp;gt; @Select(&amp;#34;&amp;lt;script&amp;gt; &amp;#34; + &amp;#34;SELECT * &amp;#34; + &amp;#34;from Demo &amp;#34; + &amp;#34; &amp;lt;where&amp;gt; &amp;#34; + &amp;#34; 1=1&amp;#34; + &amp;#34; &amp;lt;if test=\&amp;#34;name != null\&amp;#34;&amp;gt;and name=#{name}&amp;lt;/if&amp;gt; &amp;#34; + &amp;#34; &amp;lt;if test=\&amp;#34;email != null\&amp;#34;&amp;gt; and email=#{email}&amp;lt;/if&amp;gt; &amp;#34; + &amp;#34; &amp;lt;/where&amp;gt; &amp;#34; + &amp;#34; &amp;lt;/script&amp;gt; &amp;#34;) public List&amp;lt;Demo&amp;gt; select4(Demo demo); 方案二：@Provider 对于创建动态的查的语言。MyBatis提供了多个注解如：@InsertProvider,@UpdateProvider,@DeleteProvider和@SelectProvider，这些都是建立动态语言和让MyBatis执行这些语言。&#xA;2、SpringBoot 实现 Websocket 通信详解 SpringBoot 实现 Websocket 通信详解&#xA;3、Spring的BeanUtils.copyProperties(obj1, obj2)，复制对象时字段类型不一致，导致赋值不上 当用spring的BeanUtils.copyProperties(obj1, obj2);对象进行复制时，因为在obj1 类型的对象中定义的属性类型不同（set方法中用的是Integer类型，get方法中返回的是int类型）：&#xA;public int getNumber() { return number; } public void setNumber(Integer number) { this.</description>
     </item>
     <item>
       <title>使用spring-javaformat格式化项目代码</title>
-      <link>//localhost:1313/cn/2023/%E4%BD%BF%E7%94%A8spring-javaformat%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/</link>
+      <link>/cn/2023/%E4%BD%BF%E7%94%A8spring-javaformat%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/</link>
       <pubDate>Wed, 01 Nov 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/%E4%BD%BF%E7%94%A8spring-javaformat%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/</guid>
+      <guid>/cn/2023/%E4%BD%BF%E7%94%A8spring-javaformat%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/</guid>
       <description>参考 一步步降低代码复杂度&#xA;GitHub仓库&#xA;maven 1、根pom下引入插件&#xA;&amp;lt;build&amp;gt; &amp;lt;plugins&amp;gt; &amp;lt;plugin&amp;gt; &amp;lt;groupId&amp;gt;io.spring.javaformat&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-javaformat-maven-plugin&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;0.0.39&amp;lt;/version&amp;gt; &amp;lt;/plugin&amp;gt; &amp;lt;/plugins&amp;gt; &amp;lt;/build&amp;gt; 2、修改.m2/settings.xml&#xA;&amp;lt;pluginGroups&amp;gt; &amp;lt;pluginGroup&amp;gt;io.spring.javaformat&amp;lt;/pluginGroup&amp;gt; &amp;lt;/pluginGroups&amp;gt; 3、支持java8&#xA;根pom同级下新增.springjavaformatconfig文件&#xA;java-baseline=8 4、安装idea的插件&#xA;这个网址下载，https://mvnrepository.com/artifact/io.spring.javaformat/spring-javaformat-intellij-idea-plugin/0.0.39&#xA;然后idea安装插件，选择下载好的jar包，导入插件&#xA;5、验证&#xA;有此插件&#xA;格式化代码ctrl+alt+L能生效&#xA;有此标志&#xA;checkStyle 1、maven引入插件（此步骤好像非必须）&#xA;&amp;lt;plugin&amp;gt; &amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;maven-checkstyle-plugin&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;3.1.1&amp;lt;/version&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.puppycrawl.tools&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;checkstyle&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.3&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.spring.javaformat&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-javaformat-checkstyle&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;0.0.39&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; &amp;lt;executions&amp;gt; &amp;lt;execution&amp;gt; &amp;lt;id&amp;gt;checkstyle-validation&amp;lt;/id&amp;gt; &amp;lt;phase&amp;gt;validate&amp;lt;/phase&amp;gt; &amp;lt;inherited&amp;gt;true&amp;lt;/inherited&amp;gt; &amp;lt;configuration&amp;gt; &amp;lt;configLocation&amp;gt;io/spring/javaformat/checkstyle/checkstyle.xml&amp;lt;/configLocation&amp;gt; &amp;lt;includeTestSourceDirectory&amp;gt;true&amp;lt;/includeTestSourceDirectory&amp;gt; &amp;lt;/configuration&amp;gt; &amp;lt;goals&amp;gt; &amp;lt;goal&amp;gt;check&amp;lt;/goal&amp;gt; &amp;lt;/goals&amp;gt; &amp;lt;/execution&amp;gt; &amp;lt;/executions&amp;gt; &amp;lt;/plugin&amp;gt; 2、IDEA 安装 plugin&#xA;3、下载 checkstyle 和 config 的jar包&#xA;checkstyle 包下载地址 https://mvnrepository.</description>
     </item>
     <item>
       <title>selenium driver实现后台运行</title>
-      <link>//localhost:1313/cn/2023/selenium%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</link>
+      <link>/cn/2023/selenium%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</link>
       <pubDate>Fri, 13 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/selenium%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</guid>
+      <guid>/cn/2023/selenium%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</guid>
       <description>标准解决方案：使用headless的selenium driver就可以了。&#xA;短频快的解决方案：使用ghost driver。&#xA;解决&amp;rsquo;chromedriver&amp;rsquo; executable needs to be in PATH问题 1.首先需要下载Chromedriver，下载后得到的是一个chromedriver.exe文件。（chromedriver下载地址） 2.将chromedriver.exe拷贝至谷歌浏览器目录（如 C:\Program Files\Google\Chrome\Application）以及python根目录（C:\Python27）。 3.将谷歌浏览器环境变量添加到path（C:\Users\HD003\AppData\Local\Google\Chrome\Application）。 至此，就可以解决 ‘chromedriver’ executable needs to be in PATH问题了。&#xA;填充表单 Selenium专门提供了Select类来处理下拉框。 其实 WebDriver 中提供了一个叫 Select 的方法，可以帮助我们完成这些事情：&#xA;# 导入 Select 类&#xD;from selenium.webdriver.support.ui import Select&#xD;# 找到 name 的选项卡&#xD;select = Select(driver.find_element_by_name(&amp;#39;status&amp;#39;))&#xD;# select.select_by_index(1)&#xD;select.select_by_value(&amp;#34;0&amp;#34;)&#xD;select.select_by_visible_text(u&amp;#34;未审核&amp;#34;) 以上是三种选择下拉框的方式，它可以根据索引来选择，可以根据值来选择，可以根据文字来选择。注意：&#xA;index 索引从 0 开始 value是option标签的一个属性值，并不是显示在下拉框中的值 visible_text是在option标签文本的值，是显示在下拉框的值&#xA;全部取消选择怎么办呢？很简单:&#xA;select.deselect_all() </description>
     </item>
     <item>
       <title>pycharm导出虚拟环境包</title>
-      <link>//localhost:1313/cn/2023/pycharm%E5%AF%BC%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%8C%85/</link>
+      <link>/cn/2023/pycharm%E5%AF%BC%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%8C%85/</link>
       <pubDate>Mon, 09 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/pycharm%E5%AF%BC%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%8C%85/</guid>
+      <guid>/cn/2023/pycharm%E5%AF%BC%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%8C%85/</guid>
       <description>在Pycharm中Terminal，注意terminal最好是cmd，运行导出命令：终端会标注出(venv)&#xA;(venv) D:\Projects\PyCharmProjects\worklog&amp;gt; pip freeze &amp;gt; requirement.txt 运行离线下载依赖包命令：&#xA;(venv) D:\Projects\PyCharmProjects\worklog&amp;gt; pip download -r requirement.txt -d /whl-packages 在服务器上离线导入whl：&#xA;如果有 后缀为 -cp310-cp310-win_amd64.whl 的whl文件，改为和其他的whl文件一样的后缀即可，如 -py3-none-any.whl&#xA;python3 -m pip install --no-index --find-links=/home/nari/luohao/whl -r req.txt 2、Selenium selenium driver实现后台运行 标准解决方案：使用headless的selenium driver就可以了。&#xA;短频快的解决方案：使用ghost driver。&#xA;解决&amp;rsquo;chromedriver&amp;rsquo; executable needs to be in PATH问题 1.首先需要下载Chromedriver，下载后得到的是一个chromedriver.exe文件。（chromedriver下载地址） 2.将chromedriver.exe拷贝至谷歌浏览器目录（如 C:\Program Files\Google\Chrome\Application）以及python根目录（C:\Python27）。 3.将谷歌浏览器环境变量添加到path（C:\Users\HD003\AppData\Local\Google\Chrome\Application）。 至此，就可以解决 ‘chromedriver’ executable needs to be in PATH问题了。&#xA;填充表单 Selenium专门提供了Select类来处理下拉框。 其实 WebDriver 中提供了一个叫 Select 的方法，可以帮助我们完成这些事情：&#xA;# 导入 Select 类&#xD;from selenium.webdriver.support.ui import Select&#xD;# 找到 name 的选项卡&#xD;select = Select(driver.</description>
     </item>
     <item>
       <title>MAVEN的relativePath标签说明</title>
-      <link>//localhost:1313/cn/2023/maven/</link>
+      <link>/cn/2023/maven/</link>
       <pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/maven/</guid>
+      <guid>/cn/2023/maven/</guid>
       <description>relativePath标签说明 从父级仓库查找依赖版本&#xA;MAVEN构建jar包时候查找顺序：relativePath元素中的地址&amp;gt;本地仓库&amp;gt;远程仓库&#xA;父模块配置 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.18.12&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 子模块 &amp;lt;parent&amp;gt; 没有配置 `&amp;lt;relativePath/&amp;gt;` 如果`&amp;lt;dependencies&amp;gt;`中依赖没有指定版本，编译时不能获取父`&amp;lt;dependencyManagement&amp;gt;`中定义的版本。 工作案例 不带，有默认值，就是从父级目录查找pom.xml，也就是../ 目录查找pom，如果这个父级元素不在这个目录就会报错。&#xA;但你这个父级肯定不是在这个位置，而是在远程仓库中，或者本地仓库中。 如果带了，而不指定位置，那就是只从远程仓库中查找。 如果带了，也指定了位置，那就是先从指定位置查找，然后本地仓库，最后远程仓库。&#xA;不带这个，一般是用于模块项目，就是建一个父项目，然后很多子项目。一般创建模块子项目的时候，是不带的，比如我们pcs9000V1版本是这样的。&#xA;但是如果父项目是外部依赖，并不是项目的父项目，才会用到relativePath，比如你创建一个springboot项目的时候，父依赖如果是spring-boot-starter-parent，那么就会加relativePath这个标签，来指定父依赖的来源是远程仓库。 比如我们现在的pcs9000V2、pcs9000V3中的父元素nrcloud，以及nrcloud中的父元素spring-boot-starter-parent。&#xA;dependencies与dependencyManagement的区别 dependencies即使在子项目中不写该依赖项，那么子项目仍然会从父项目中继承该依赖项（全部继承）&#xA;dependencyManagement里只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本，才会从父项目中继承该项，并且version和scope都读取自父pom;另外如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。&#xA;&amp;lt;!--父项目1--&amp;gt; &amp;lt;dependencyManagement&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;!--这个要子项目引入才能使用--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2.61&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; &amp;lt;/dependencyManagement&amp;gt; &amp;lt;!--子项目：添加一个fastjson--&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; &amp;lt;!--父项目2--&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;!--这个依赖，子项目一定会依赖，可以直接使用--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.commons&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;commons-lang3&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;3.8.1&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; Dependency scope 用来限制Dependency的作用范围的, 影响maven项目在各个生命周期时导入的package的状态。&#xA;自从2.0.9后，新增了1种，现在有了6种scope:&#xA;compile 默认的scope，表示 dependency 都可以在生命周期中使用。而且，这些dependencies 会传递到依赖的项目中。&#xA;provided 跟compile相似，但是表明了dependency 由JDK或者容器提供，例如Servlet AP和一些Java EE APIs。这个scope 只能作用在编译和测试时，同时没有传递性。</description>
     </item>
     <item>
       <title>后端——问题小书（2022）</title>
-      <link>//localhost:1313/cn/2022/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882/</link>
+      <link>/cn/2022/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882/</link>
       <pubDate>Sat, 31 Dec 2022 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2022/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882/</guid>
+      <guid>/cn/2022/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882/</guid>
       <description>1、spring cloud stream介绍 Spring Cloud Stream是一个用来为微服务应用构建消息驱动能力的框架。它可以基于Spring Boot来创建独立的、可用于生产的Spring应用程序。它通过使用Spring Integration来连接消息代理中间件以实现消息事件驱动的微服务应用。Spring Cloud Stream为一些供应商的消息中间件产品提供了个性化的自动化配置实现，并且引入了发布-订阅、消费组以及消息分区这三个核心概念。简单的说，Spring Cloud Stream本质上就是整合了Spring Boot和Spring Integration，实现了一套轻量级的消息驱动的微服务框架。通过使用Spring Cloud Stream，可以有效地简化开发人员对消息中间件的使用复杂度，让系统开发人员可以有更多的精力关注于核心业务逻辑的处理。&#xA;Binder绑定器 通过定义绑定器作为中间层，完美地实现了应用程序与消息中间件细节之间的隔离。通过向应用程序暴露统一的Channel通道，使得应用程序不需要再考虑各种不同的消息中间件实现。&#xA;发布-订阅模式 在Spring Cloud Stream中的消息通信方式遵循了发布-订阅模式，当一条消息被投递到消息中间件之后，它会通过共享的Topic主题进行广播，消息消费者在订阅的主题中收到它并触发自身的业务逻辑处理。这里所提到的Topic主题是Spring Cloud Stream中的一个抽象概念，用来代表发布共享消息给消费者的地方。在不同的消息中间件中，Topic可能对应着不同的概念，比如：在RabbitMQ中的它对应了Exchange、而在Kakfa中则对应了Kafka中的Topic。&#xA;消费组 虽然Spring Cloud Stream通过发布-订阅模式将消息生产者与消费者做了很好的解耦，基于相同主题的消费者可以轻松的进行扩展，但是这些扩展都是针对不同的应用实例而言的，在现实的微服务架构中，我们每一个微服务应用为了实现高可用和负载均衡，实际上都会部署多个实例。很多情况下，消息生产者发送消息给某个具体微服务时，只希望被消费一次，按照上面我们启动两个应用的例子，虽然它们同属一个应用，但是这个消息出现了被重复消费两次的情况。为了解决这个问题，在Spring Cloud Stream中提供了消费组的概念。&#xA;如果在同一个主题上的应用需要启动多个实例的时候，我们可以通过spring.cloud.stream.bindings.input.group属性为应用指定一个组名，这样这个应用的多个实例在接收到消息的时候，只会有一个成员真正的收到消息并进行处理。&#xA;消息分区 通过引入消费组的概念，我们已经能够在多实例的情况下，保障每个消息只被组内一个实例进行消费。通过上面对消费组参数设置后的实验，我们可以观察到，消费组并无法控制消息具体被哪个实例消费。也就是说，对于同一条消息，它多次到达之后可能是由不同的实例进行消费的。但是对于一些业务场景，就需要对于一些具有相同特征的消息每次都可以被同一个消费实例处理，比如：一些用于监控服务，为了统计某段时间内消息生产者发送的报告内容，监控服务需要在自身内容聚合这些数据，那么消息生产者可以为消息增加一个固有的特征ID来进行分区，使得拥有这些ID的消息每次都能被发送到一个特定的实例上实现累计统计的效果，否则这些数据就会分散到各个不同的节点导致监控结果不一致的情况。而分区概念的引入就是为了解决这样的问题：当生产者将消息数据发送给多个消费者实例时，保证拥有共同特征的消息数据始终是由同一个消费者实例接收和处理。&#xA;2、mapstruct简单使用 MapStruct 是一个代码生成器，主要用于 Java Bean 之间的映射，如 entity 到 DTO 的映射。&#xA;参考 优雅的对象转换解决方案-MapStruct使用进阶(二)&#xA;MapStruct使用指南&#xA;导入 Maven 依赖以及插件 注意lombok和MapStruct 的冲突（在maven install时候会出现属性找不到错误）：&#xA;确保 Lombok 最低版本为 1.18.16 annotationProcessorPaths 中，要配置lombok 如未使用 lombok 可以去除后两个注解处理器&#xA;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;project xmlns=&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34; xmlns:xsi=&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34; xsi:schemaLocation=&amp;#34;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&amp;gt; &amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt; &amp;lt;parent&amp;gt; &amp;lt;groupId&amp;gt;org.</description>
     </item>
     <item>
       <title>Git——提交规范</title>
-      <link>//localhost:1313/cn/2022/git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/</link>
+      <link>/cn/2022/git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/</link>
       <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2022/git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/</guid>
+      <guid>/cn/2022/git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/</guid>
       <description>遇到的问题 版本回退时无法快速定位到指定版本 无法知道项目中封版操作是哪一个commit 无法清晰的知道每次提交的记录 以下是commit提交规范 每次提交，Commit message 都包括三个部分：Header，Body 和 Footer。&#xA;其中，Header 是必需的，Body 和 Footer 可以省略。&#xA;&amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt; // 空一行 &amp;lt;body&amp;gt; // 空一行 &amp;lt;footer&amp;gt; 12345 Header Header部分只有一行，包括两个字段：type（必需）和subject（必需）。&#xA;type用于说明 commit 的类别，只允许使用下面9个标识。&#xA;feat: 新功能（feature）&#xD;fix: 修补bug&#xD;docs: 文档（documentation）&#xD;style: 格式（不影响代码运行的变动）&#xD;refactor: 重构（即不是新增功能，也不是修改bug的代码变动）&#xD;chore: 构建过程或辅助工具的变动&#xD;revert: 撤销，版本回退&#xD;perf: 性能优化&#xD;test：测试&#xD;improvement: 改进&#xD;build: 打包&#xD;ci: 持续集成&#xD;123456789101112 subject是 commit 目的的简短描述，不超过50个字符。&#xA;以动词开头，使用第一人称现在时，比如修改/修复/增加 等等&#xD;example: 订单详情增加导出功能&#xD;12 scope scope用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。&#xA;Body Body 部分是对本次 commit 的详细描述，可以分成多行。下面是一个范例。</description>
     </item>
     <item>
       <title>IDEA小技巧</title>
-      <link>//localhost:1313/cn/2022/idea/</link>
+      <link>/cn/2022/idea/</link>
       <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2022/idea/</guid>
+      <guid>/cn/2022/idea/</guid>
       <description>1、快捷键和设置 IDEA相关资源 IntelliJ IDEA 简体中文专题教程&#xA;IDEA类和方法注释模板设置（非常详细）&#xA;1、启用注解处理器 File | Settings | Build, Execution, Deployment | Compiler | Annotation Processors，enable annotation processing&#xA;2、Properties中文乱码 3、build project automatically 自动build project，如果和maven-profile 混用时，最好关闭&#xA;否则在clean之后，reimport时，会自动使用idea的build，导致maven-profile失效，不同profile的配置文件未能正确排除。&#xA;4、行注释设置，不从行首开始，在代码之前 5、IntelliJ IDEA取消自动删除空格： 6、提高idea的运存 -Xms2048m -Xmx4096m&#xD;-XX:ReservedCodeCacheSize=2048m&#xD;-XX:+UseConcMarkSweepGC -Xms 初始堆内存，调大该内存可以让启动速度更快，以省去分配内存的时间&#xA;-Xmx 最大堆内存，如果遇到 OutOfMemoryError 可以调大该数值，最大不要超过系统 1/4&#xA;-XX:+UseConcMarkSweepGC` 参数用来调整 GC 算法。使用该算法利用多个线程在后台进行 GC，以避免应用程序停止。当分配超过 4GB 的堆内存时，可以尝试使用 `-XX:+UseG1GC -XX:ReservedCodeCacheSize=510m 设置编译器最大的 code cache，另外一个相关的 JVM 参数是 -XX:InitialCodeCacheSize JetBrains 推荐这里使用 240m&#xA;-XX:SoftRefLRUPolicyMSPerMB=[value] 参数用来控制每 M 空间中 soft reference 保证存活的毫秒数。默认的时间是 1000，JetBrains 推荐 50</description>
     </item>
     <item>
       <title>Docker——常见场景</title>
-      <link>//localhost:1313/cn/2022/%E5%B7%A5%E5%85%B7_docker/</link>
+      <link>/cn/2022/%E5%B7%A5%E5%85%B7_docker/</link>
       <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2022/%E5%B7%A5%E5%85%B7_docker/</guid>
+      <guid>/cn/2022/%E5%B7%A5%E5%85%B7_docker/</guid>
       <description>《Docker-从入门到实践》&#xA;1、MySQL docker search mysql docker pull mysql # 进入shell，查看mysql版本信息 docker run -it mysql /bin/bash mysql --help | grep Distrib mysql --version # 后台启动，可以使用-v 挂载目录，比如/data/mysql/logs:/logs docker run -p 3306:3306 --name mysql_test -e MYSQL_ROOT_PASSWORD=123456 -d mysql # 查看端口映射 docker port mysql_test # 进入运行的MySQL容器内部 docker exec -it mysql_test /bin/bash 2、mongodb # 运行，-v 为设置容器的挂载目录，这里是将本机的“/data/mongo”目录挂载到容器中的/data/db中，作为 mongodb 的存储目录 docker run -p 27017:27017 -v ~/docker/mongodb:/data/db --name mongodb_test -d mongo # 进入运行的mongodb容器内部 docker exec -it mongodb_test mongo # 连接数据库（此时不需要用户就可以连接），创建用户 db.</description>
     </item>
     <item>
       <title>VsCode小技巧</title>
-      <link>//localhost:1313/cn/2022/%E5%B7%A5%E5%85%B7_vscode/</link>
+      <link>/cn/2022/%E5%B7%A5%E5%85%B7_vscode/</link>
       <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2022/%E5%B7%A5%E5%85%B7_vscode/</guid>
+      <guid>/cn/2022/%E5%B7%A5%E5%85%B7_vscode/</guid>
       <description>删除重复行并排序 安装插件:Transformer&#xA;ctrl + a 全选文字&#xA;ctrl + shift + P 打开命令窗口&#xA;输入：&#xA;Transform:Unique Lines //删除重复行&#xA;Transform:Sort Lines //排序&#xA;提取指定特征的文本 一般通过正则筛选特征文本后，点击菜单上的，选择-&amp;gt;选择所有匹配项，后复制即可&#xA;行首行尾处理 列模式，编辑软件应该都有； 搜索时，选择正则表达式，行首^，行尾$,匹配之后进行全部替换；在正则表达式模式下，替换成/n可以实现换行。 vscode列模式 按住alt+shift 点选；命令调出列模式选择。&#xA;转化大小写 需要自定义一个快捷键&#xA;搜索、移动和折叠 ctrl+f，下方有替换栏；左侧栏有全局搜索；&#xA;选中代码块，tab可以整体右移；shift + tab整体左移；&#xA;softWrap设置vscode折叠代码；&#xA;vscode格式化vue的格式 分号，单引号问题 Setting.json里边修改设置&#xA;&amp;#34;vetur.format.defaultFormatterOptions&amp;#34;: {&#xD;&amp;#34;js-beautify-html&amp;#34;: {&#xD;// force-aligned | force-expand-multiline&#xD;&amp;#34;wrap_attributes&amp;#34;: &amp;#34;force-aligned&amp;#34;&#xD;},&#xD;&amp;#34;prettyhtml&amp;#34;: {&#xD;&amp;#34;printWidth&amp;#34;: 100,&#xD;&amp;#34;singleQuote&amp;#34;: false,&#xD;&amp;#34;wrapAttributes&amp;#34;: false,&#xD;&amp;#34;sortAttributes&amp;#34;: true&#xD;},&#xD;// --- 解决问题 ---&#xD;&amp;#34;prettier&amp;#34;: {&#xD;&amp;#34;semi&amp;#34;: false,&#xD;&amp;#34;singleQuote&amp;#34;: true&#xD;}&#xD;// --- 解决问题 ---&#xD;} x-invalid-end-tag问题 在.</description>
     </item>
     <item>
       <title>Git——常见问题</title>
-      <link>//localhost:1313/cn/2022/%E5%B7%A5%E5%85%B7_git/</link>
+      <link>/cn/2022/%E5%B7%A5%E5%85%B7_git/</link>
       <pubDate>Wed, 16 Feb 2022 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2022/%E5%B7%A5%E5%85%B7_git/</guid>
+      <guid>/cn/2022/%E5%B7%A5%E5%85%B7_git/</guid>
       <description>1、查看和修改当前project的用户名、密码 git config user.name &amp;amp; user.email 2、本地已创建分支dev，要推送到远程分支 在远程分支中创建一个dev，利用 git push origin dev:dev 推送到远程，这样有一个坏处，如果未设置1️⃣中的user，则会以本地计算机或global中的信息推送过去。&#xA;故可以考虑commit之后直接push，git会提醒你push没有上游，采用git branch -u origin/dev来设置本地dev的上游为远程的origin/dev。&#xA;3、本地仓库推送到远程GitHub 新建本地仓库关联&#xA;在需要建立本地仓库的位置调出git bash 输入git init，初始化本地仓库 输入git remote add origin 仓库地址， 添加远程仓库 如果远程仓库中有提交历史，输入git pull origin master，将提交历史和文件拉到本地仓库，有冲突解决冲突 输入git add，git commit，将文件存入本地仓库 输入git push -u origin master，将之前已commit的本地仓库文件推到远程仓库 已有本地仓库关联&#xA;在需要关联的本地仓库位置调出git bash 没有已关联的远程仓库则输入git remote add origin 仓库地址， 添加远程仓库，有则输入 git remote set-url origin 新地址 如果远程仓库中有提交历史，本地仓库也有，则输入git pull origin master &amp;ndash;allow-unrelated-histories，合并两个项目不关联的历史 输入git push -u origin master，将本地仓库的commit推到远程仓库 注：origin和master根据需要替换，一般创建远程仓库时默认仓库别名是origin，默认分支是master。&#xA;再记录一下https设置用户名，密码步骤，不用每次有远程操作都要输入：&#xA;在本地仓库中调出git bash，输入git config credential.</description>
     </item>
     <item>
       <title>后端——问题小书（2021）</title>
-      <link>//localhost:1313/cn/2021/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <link>/cn/2021/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
       <pubDate>Wed, 29 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <guid>/cn/2021/%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
       <description>问题1：Cannot forward to error page for request 具体描述&#xA;Cannot forward to error page for request [/wechat/portal] as the response has already been commit&#xA;解决方案和原理&#xA;使用response输出流或@ResponseBody&#xA;response.getWriter().print(echostr);&#xA;@responseBody注解的作用是将controller的方法返回的对象通过适当的转换器转换为指定的格式之后，写入到response对象的body区，通常用来返回JSON数据或者是XML数据，需要注意的呢，在使用此注解之后不会再走试图处理器，而是直接将数据写入到流中，他的效果等同于通过response对象输出指定格式的数据。&#xA;因此可知之前直接使用return echostr spring会找不到对应的视图，但是视图找不到，spring又转到errorPage，但是项目中没有配置errorPage，从而404.&#xA;问题2、文件上传功能报错 具体描述&#xA;Current request is not a multipart request&#xA;解决方案和原理&#xA;是postmapping而不是getmapping&#xA;@ApiOperation(value = &amp;#34;测试图片上传&amp;#34;) @PostMapping(value = &amp;#34;/upload&amp;#34;) public Result handleFileUpload(@RequestParam List&amp;lt;MultipartFile&amp;gt; files) { return Result.buildSuccess( storageService.storeByString(files) ).setMsg(&amp;#34;You successfully uploaded &amp;#34; + files.size() + &amp;#34;files !&amp;#34;); } 问题3、httpClient警告 具体描述&#xA;Warning：“Going to buffer response body of large or unknown size.</description>
     </item>
     <item>
       <title>Git实际问题</title>
-      <link>//localhost:1313/cn/2019/2019-10-11-git-problems/</link>
+      <link>/cn/2019/2019-10-11-git-problems/</link>
       <pubDate>Fri, 11 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2019/2019-10-11-git-problems/</guid>
+      <guid>/cn/2019/2019-10-11-git-problems/</guid>
       <description>查看和修改当前project的用户名、密码 git config user.name &amp;amp; user.email&#xA;本地已创建分支dev，要推送到远程分支 在远程分支中创建一个dev，利用 git push origin dev:dev 推送到远程，这样有一个坏处，如果未设置:one:中的user，则会以本地计算机或global中的信息推送过去。&#xA;故可以考虑commit之后直接push，git会提醒你push没有上游，采用git branch -u origin/dev来设置本地dev的上游为远程的origin/dev。&#xA;合并分支到master上 https://blog.csdn.net/boysky0015/article/details/78185879&#xA;关于记住密码、多项目不同用户 git config credential.helper store TODO: 多项目不同用户&#xA;Changing the Git history of your repository using a script 打开Git bash&#xA;创建存储库的全新裸克隆&#xA;git clone --bare https://github.com/user/repo.git cd repo.git 复制粘贴脚本，替换变量&#xA;OLD_EMAIL CORRECT_NAME CORRECT_EMAIL #!/bin/sh git filter-branch --env-filter &amp;#39; OLD_EMAIL=&amp;#34;your-old-email@example.com&amp;#34; CORRECT_NAME=&amp;#34;Your Correct Name&amp;#34; CORRECT_EMAIL=&amp;#34;your-correct-email@example.com&amp;#34; if [ &amp;#34;$GIT_COMMITTER_EMAIL&amp;#34; = &amp;#34;$OLD_EMAIL&amp;#34; ] then export GIT_COMMITTER_NAME=&amp;#34;$CORRECT_NAME&amp;#34; export GIT_COMMITTER_EMAIL=&amp;#34;$CORRECT_EMAIL&amp;#34; fi if [ &amp;#34;$GIT_AUTHOR_EMAIL&amp;#34; = &amp;#34;$OLD_EMAIL&amp;#34; ] then export GIT_AUTHOR_NAME=&amp;#34;$CORRECT_NAME&amp;#34; export GIT_AUTHOR_EMAIL=&amp;#34;$CORRECT_EMAIL&amp;#34; fi &amp;#39; --tag-name-filter cat -- --branches --tags 执行脚本</description>
     </item>
   </channel>

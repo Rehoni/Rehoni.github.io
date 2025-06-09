@@ -2,101 +2,101 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>工具 on Rehoni | 罗皓</title>
-    <link>//localhost:1313/categories/%E5%B7%A5%E5%85%B7/</link>
+    <link>/categories/%E5%B7%A5%E5%85%B7/</link>
     <description>Recent content in 工具 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 14 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>gitbash终端代理</title>
-      <link>//localhost:1313/cn/2024/gitbash%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/</link>
+      <link>/cn/2024/gitbash%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/</link>
       <pubDate>Sun, 14 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2024/gitbash%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/</guid>
+      <guid>/cn/2024/gitbash%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/</guid>
       <description>这里只说明搭配 Clash 使用的git bash的https终端代理，主要解决的是git clone失败的问题。&#xA;git 有两种协议，一种书 https，还有一种是 ssh 。&#xA;如果是用 https，设置终端代理即可。如果是 ssh，需要单独配置代理。&#xA;cat &amp;gt; ~/.bash_profile &amp;lt;&amp;lt; EOF function proxy_on() { export http_proxy=http://127.0.0.1:7890 export https_proxy=\$http_proxy echo -e &amp;#34;终端代理已开启。&amp;#34; } function proxy_off(){ unset http_proxy https_proxy echo -e &amp;#34;终端代理已关闭。&amp;#34; } EOF source ~/.bash_profile 打开代理 proxy_on&#xA;关闭代理 proxy_off</description>
     </item>
     <item>
       <title>Typora配置Github图床</title>
-      <link>//localhost:1313/cn/2024/typora%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</link>
+      <link>/cn/2024/typora%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</link>
       <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2024/typora%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</guid>
+      <guid>/cn/2024/typora%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</guid>
       <description>1、github&#xA;创建 github 私有仓库&#xA;生成一个 token 用于 PicGo 操作你的仓库：&#xA;访问：https://github.com/settings/tokens&#xA;然后点击 Generate new token。&#xA;2、picgo/picList&#xA;图床，选择“Github”作为图床服务。&#xA;在 Github 设置页面中，填写你的 Github 仓库信息，包括仓库名称、分支、文件夹等。&#xA;确保仓库是公开可访问的，并且已经创建了用于存储图片的文件夹。&#xA;可以启用 CDN 加速：https://cdn.jsdelivr.net/gh/user/repo@version/file&#xA;picList 可以开启删除云端功能，记得在设置中配置代理加速&#xA;3、typora&#xA;插入图片时规则——上传图片，并勾选对本地位置的图片应用上述规则&#xA;上传服务勾选 PicGo 或者 PicList，选中安装路径即可。&#xA;typora 如果显示图片比较慢，可以开启 typora 代理：Launch Arguments (Windows / Linux)</description>
     </item>
     <item>
       <title>Typora使用指南</title>
-      <link>//localhost:1313/cn/2024/typora%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</link>
+      <link>/cn/2024/typora%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</link>
       <pubDate>Tue, 06 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2024/typora%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</guid>
+      <guid>/cn/2024/typora%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</guid>
       <description>Typora使用指南 1、快捷键 参考知乎：完全使用指南&#xA;收起侧边栏 ctrl + shift + L/3 段落内代码 ctrl + shift +· 代码块 ctrl + shift + k 折叠 删除线 like this，~~like this~~&#xA;下划线 Ctrl + U 或者加上标签`&amp;lt;u&amp;gt;Underline&amp;lt;/u&amp;gt;` 。 添加/删除表格行 Command/Ctrl+Enter添加行&#xA;Shift+Command/Ctrl+L删除行&#xA;鼠标拽住表头可以进行拖拽。&#xA;强调 ==like this==，==like this==&#xA;To use this feature, please enable it first in the Preference Panel -&amp;gt; Markdown Tab. Then, use == to wrap highlight content. For example: ==highlight==.&#xA;表格内行内换行 shift + Enter会以插入一个&amp;lt;br/&amp;gt;的形式，进行换行。&#xA;2、一些高级用法 Typora，世界上最漂亮的写作App - 马索萌的文章 - 知乎 https://zhuanlan.</description>
     </item>
     <item>
       <title>proxychains代理windows</title>
-      <link>//localhost:1313/cn/2023/proxychains-for-windows/</link>
+      <link>/cn/2023/proxychains-for-windows/</link>
       <pubDate>Sat, 07 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/proxychains-for-windows/</guid>
+      <guid>/cn/2023/proxychains-for-windows/</guid>
       <description>在 linux 下为了终端命令绕过防火墙我们可以使用 proxychains 结合 socksv5 代理进行使用，在windows下有没有类似工具呢，有！大佬写了一个 proxychains for windows 版可以使用，下面就是简要的设置过程&#xA;参考：Proxychains for Windows 自述文件&#xA;去 https://github.com/shunf4/proxychains-windows/releases 下一个最新版如 proxychains_0.6.8_win32_x64.zip，解压到任意目录，我为了方便解压到D:\proxychains 将 proxychains_win32_x64.exe 重命名 proxychains 编辑目录下 proxychains.conf 配置文件，根据自己实际情况改，例如 socks5 127.0.0.1 1081 编辑系统环境变量将 D:\proxychains 加入系统 PATH 变量。 新建一个系统变量名称 PROXYCHAINS_CONF_FILE 值 D:\proxychains\proxychains.conf 根据情况自己修改 打开一个新的 cmd，使用方法 proxychains command，如 proxychains go get github.com/StackExchange/wmi 注意：一些协议估计没法代理，详情见作者项目文档</description>
     </item>
     <item>
       <title>SSH可视化工具比较</title>
-      <link>//localhost:1313/cn/2023/%E5%B7%A5%E5%85%B7_ssh/</link>
+      <link>/cn/2023/%E5%B7%A5%E5%85%B7_ssh/</link>
       <pubDate>Fri, 22 Sep 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/%E5%B7%A5%E5%85%B7_ssh/</guid>
+      <guid>/cn/2023/%E5%B7%A5%E5%85%B7_ssh/</guid>
       <description>名称 优点 缺点 mobaxterm 颜色比较丰富：javalog有颜色区分有传文件窗口：拖拽隧道好用经服务器代理的ssh也能拖拽传文件 偶尔传文件传不上去能不关闭会话切换编码，但略繁琐 windterm 配色丰富：javalog有颜色区分历史命令有传文件窗口：拖拽 经服务器代理的ssh不能拖拽传文件隧道容易出问题未找到不关闭会话切换编码的办法 xshell 不关闭会话切换编码比较方便能从xftp直接打开 复制粘贴命令比较繁琐 tabby 好看传文件比较繁琐 未找到切换编码的地方javalog无颜色 putty （只是为了升级 ssh 协议，偶尔配合 winscp 用）&#xA;传文件基本用 xftp （因为支持 ctrl c 、v ），偶尔用 winscp&#xA;windterm v2.6.0出现部分bug 下载的Java log文件是二进制编辑器看不了 日志里突然挂个乱码 导出会话和配置 建议将此文件夹压缩为一个zip&#xA;关闭主密码 一、点击配置文件目录&#xA;二、找到此目录&#xA;三、修改配置文件&#xA;四、将&amp;quot;application.masterPassword&amp;quot; : false(需要重启客户端)&#xA;锁屏密码关闭 修改global\wind.config将application.lockScreenTimeout设置为0或负数即可(需要重启客户端)&#xA;菜单栏 消失 不见了 唤起 先按Alt+W，再按Alt+M&#xA;mobaxterm 中文复制乱码问题 比如服务器locale 为 GB18080，切换terminal font setting 为 ISO-885901&#xA;ls之后，中文正常显示，鼠标选中复制乱码&#xA;切utf-8，鼠标选中复制不乱码，但是此时如果再ls，乱码&#xA;设置保持SSH连接 在设置里点选setting&amp;gt;SSH&amp;gt;sessions setting&amp;gt;勾选ssh Keepalive&#xA;配置ssh隧道 如图所示，本地与远程服务器之间存在防火墙，防火墙只允许SSH端口通过，为访问远程服务器，我们可以借助MobaXterm来与SSH服务器建立隧道，使得防火墙外的用户能够访问远程服务器&#xA;******具体配置：********&#xA;1.打开MobaXterm，在工具中找到MobaSSHtunnal</description>
     </item>
     <item>
       <title>滴答清单workflow</title>
-      <link>//localhost:1313/cn/2023/dida/</link>
+      <link>/cn/2023/dida/</link>
       <pubDate>Mon, 19 Jun 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/dida/</guid>
+      <guid>/cn/2023/dida/</guid>
       <description>工作 直接在“看板”中添加，紧急程度使用“优先级”、“日期”来区分。 设定优先级，确保所有大工作的优先级，大工作子任务项目的优先级。&#xA;日常： 直接在“看板”中添加，紧急程度使用“优先级”、“日期”来区分。&#xA;所有日常任务最好做排期，没有排期的放入以下清单，通过扫描来提醒排期 愿望清单：每周一扫描 娱乐清单：每周五扫描 日常清单：每周一扫描，琐碎-&amp;gt;看板琐碎，提升-&amp;gt;看板提升&#xA;排期后，为增加关注可拖拽到“看板”中去。</description>
     </item>
     <item>
       <title>vmvare设置网络</title>
-      <link>//localhost:1313/cn/2022/vmware/</link>
+      <link>/cn/2022/vmware/</link>
       <pubDate>Thu, 27 Oct 2022 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2022/vmware/</guid>
+      <guid>/cn/2022/vmware/</guid>
       <description>设置网络 使用桥接模式，相当于同网段的服务器&#xA;1、dhclient 获取IP&#xA;2、vi /etc/sysconfig/network-scripts/ifcfg-ens33 设置静态IP&#xA;​&#x9;注意这里，设置网关需要和本机的网络IP的网关相同，而不是直接取255、1之类的&#xA;3、systemctl restart network.service 重启网络服务&#xA;4、ping www.baidu.com 以及 ping 本机网络IP&#xA;Linux报错之ping: www.baidu.com: Name or service not known 在网卡设置里，新增DNS设置&#xA;DNS1=8.8.8.8 /etc/resolv.conf配置DNS客户端&#xA;文件/etc/resolv.conf配置DNS客户端，它包含了主机的域名搜索顺序和DNS服务器的地址，每一行应包含一个关键字和一个或者多个的由空格隔开的参数。下面是一个例子文件：&#xA;search mydom.edu.cn nameserver 210.34.0.14 nameserver 210.34.0.2 合法的参数及其意义如下： nameserver: 表明DNS服务器的IP地址。可以有很多行的nameserver，每一个带一个IP地址。在查询时就按nameserver在本文件中的顺序进行，且只有当第一个nameserver没有反应才查询下面的nameserver。 domain: 声明主机的域名。很多程序用到它，如邮件系统；当为没有域名的主机进行DNS查询时，也要用到。如果没有域名，主机名将被使用，删除所有在第一个点(.)前面的内容。 search: 它的多个参数指明域名查询顺序。当要查询没有域名的主机，主机将在由search声明的域中分别查找。domain和search不能共存；如果同时存在，后面出现的将会被使用。 sortlist: 允许将得到域名结果进行特定的排序。它的参数为网络/掩码对，允许任意的排列顺序。 Red Hat中没有提供缺省的/etc/resolv.conf文件，它的内容是根据在安装时给出的动态创建的。</description>
     </item>
     <item>
       <title>Windows同时输出相同音源</title>
-      <link>//localhost:1313/cn/2021/windows%E8%BE%93%E5%87%BA%E7%9B%B8%E5%90%8C%E9%9F%B3%E6%BA%90/</link>
+      <link>/cn/2021/windows%E8%BE%93%E5%87%BA%E7%9B%B8%E5%90%8C%E9%9F%B3%E6%BA%90/</link>
       <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/windows%E8%BE%93%E5%87%BA%E7%9B%B8%E5%90%8C%E9%9F%B3%E6%BA%90/</guid>
+      <guid>/cn/2021/windows%E8%BE%93%E5%87%BA%E7%9B%B8%E5%90%8C%E9%9F%B3%E6%BA%90/</guid>
       <description>同时输出相同音源 需求：和老婆一起玩双人同屏游戏（以撒的结合:抗生），但需要带上蓝牙耳机玩。&#xA;设备：2个蓝牙耳机、1个蓝牙接收器、1台Win10系统电脑。&#xA;通过关键字搜索出一个解决方案（Output audio to multiple devices in Windows 10）&#xA;在我电脑上测试无法实现。&#xA;但顺着思路，找到了虚拟音频软件（Virtual Audio Cable）。&#xA;经测试，使用Virtual Audio Cable软件可以实现以上需求。&#xA;安装软件，连接蓝牙设备。 运行Audio Repeater (MME)，Wave in 选择Line 1，Wave Out选择你的蓝牙设备1，Total buffer设置为50，点start。 不关再运行一次Audio Repeater (MME)，也就是双开软件，Wave in 选择Line 1，Wave Out选择你的蓝牙设备2，Total buffer设置为50。点start。&#xA;其实如果只是看剧的话，可以用MPC-BE播放器，选项-音频里可以设置多重输出，选择你的两个蓝牙设备即可，效果还更好。&#xA;Windows快捷键 🚈 Windows桌面和虚拟桌面 贴靠窗口：Win +左/右&amp;gt; Win +上/下&amp;gt;窗口可以变为1/4大小放置在屏幕4个角落&#xA;切换窗口：Alt + Tab&#xA;任务视图：Win + Tab(松开键盘界面不会消失)&#xA;创建新的虚拟桌面：Win + Ctrl + D&#xA;关闭当前虚拟桌面：Win + Ctrl + F4&#xA;切换虚拟桌面：Win + Ctrl +左/右&#xA;输入法 中英文符号切换：ctrl+.&#xA;表情：Win+.或;&#xA;字体 Fira Code 连字 https://github.</description>
     </item>
     <item>
       <title>Windows快捷键</title>
-      <link>//localhost:1313/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</link>
+      <link>/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</link>
       <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid>
+      <guid>/cn/2021/windows%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid>
       <description>Windows快捷键 🚈 Windows桌面和虚拟桌面 贴靠窗口：Win +左/右&amp;gt; Win +上/下&amp;gt;窗口可以变为1/4大小放置在屏幕4个角落&#xA;切换窗口：Alt + Tab&#xA;任务视图：Win + Tab(松开键盘界面不会消失)&#xA;创建新的虚拟桌面：Win + Ctrl + D&#xA;关闭当前虚拟桌面：Win + Ctrl + F4&#xA;切换虚拟桌面：Win + Ctrl +左/右&#xA;输入法 中英文符号切换：ctrl+.&#xA;表情：Win+.或;&#xA;字体 Fira Code 连字 https://github.com/tonsky/FiraCode cascadia code 连字 https://github.com/microsoft/cascadia-code palatino linotype Monaco operator mono mononoki jetbrains mono连字 consolas Ubuntu mono </description>
     </item>
     <item>
       <title>windows启用docker</title>
-      <link>//localhost:1313/cn/2020/2020-12-03-docker-windowsstartup/</link>
+      <link>/cn/2020/2020-12-03-docker-windowsstartup/</link>
       <pubDate>Thu, 03 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/2020-12-03-docker-windowsstartup/</guid>
+      <guid>/cn/2020/2020-12-03-docker-windowsstartup/</guid>
       <description>问题 这次出现这个问题的原因是给电脑上安装了安卓模拟器导致了冲突，后卸载后docker仍不可用，故再排查一次。&#xA;An Error occurred.&#xA;windows 10 docker cannot enable hyper-v service&#xA;1、systeminfo命令 在命令行中执行systeminfo，如果所有列出的Hyper-V要求的值都为Yes，则系统可以运行Hyper-V。&#xA;Hyper-V要求： 虚拟机监视器模式扩展：是&#xD;固件中已启用虚拟化：是&#xD;二级地址转换：是&#xD;执行数据保护可用：是 同样需要四项均为“是”才符合运行Hyper-V虚拟机的要求&#xA;2、启用或关闭Windows功能 3、bios设置 CPU Configuration -&amp;gt; Intel Virtualization Technology，将次设置项修改为enabled。&#xA;如果已经是enabled状态，可以考虑开关一次此设置，再F10保存重启。</description>
     </item>
     <item>
       <title>windows配置terminal</title>
-      <link>//localhost:1313/cn/2020/terminal/</link>
+      <link>/cn/2020/terminal/</link>
       <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/terminal/</guid>
+      <guid>/cn/2020/terminal/</guid>
       <description>Windows10 terminal 设置右键启动 添加Windows Terminal到鼠标右键菜单&#xA;Windows Terminal 完美配置 PowerShell 7.1 包括Windows terminal的右键菜单，安装power shell等内容&#xA;Windows Terminal 完美配置 PowerShell 7.1</description>
     </item>
     <item>
       <title>离线服务器通过PC中转连接公网</title>
-      <link>//localhost:1313/cn/2020/%E7%A6%BB%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87pc%E4%B8%AD%E8%BD%AC%E8%BF%9E%E6%8E%A5%E5%85%AC%E7%BD%91/</link>
+      <link>/cn/2020/%E7%A6%BB%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87pc%E4%B8%AD%E8%BD%AC%E8%BF%9E%E6%8E%A5%E5%85%AC%E7%BD%91/</link>
       <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/%E7%A6%BB%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87pc%E4%B8%AD%E8%BD%AC%E8%BF%9E%E6%8E%A5%E5%85%AC%E7%BD%91/</guid>
+      <guid>/cn/2020/%E7%A6%BB%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87pc%E4%B8%AD%E8%BD%AC%E8%BF%9E%E6%8E%A5%E5%85%AC%E7%BD%91/</guid>
       <description>CCProxy 主要用于局域网内共享宽带上网，ADSL共享上网、专线代理共享、ISDN代理共享、卫星代理共享、蓝牙代理共享、二级代理和SOCKS5代理等共享代理上网。&#xA;安装好这个软件之后启动就相当于开启了当前这台安装CCProxy的电脑作为中转服务器，然后挑选一个离线内网服务器可以访问的到的IP地址作为流量中转服务器的代理地址。&#xA;Proxychains4 一个可以在终端进行socks流量转发的工具Proxychains4&#xA;proxychains-ng是proxychains的加强版，主要有以下功能和不足：&#xA;支持http/https/socks4/socks5 支持认证 远端dns查询 多种代理模式 不支持udp/icmp转发 少部分程序和在后台运行的可能无法代理 简单的说就是这个程序 Hook 了 sockets 相关的操作，让普通程序的 sockets 数据走 SOCKS/HTTP 代理。其核心就是利用了 LD_PRELOAD 这个环境变量（Mac 上是 DYLD_INSERT_LIBRARIES）。&#xA;在 Unix 系统中，如果设置了 LD_PRELOAD 环境变量，那么在程序运行时，动态链接器会先加载该环境变量所指定的动态库。也就是说，这个动态库的加载优先于任何其它的库，包括 libc。&#xA;ProxyChains 创建了一个叫 libproxychains4.so（Mac 上是 libproxychains4.dylib）的动态库。里面重写了 connect、close 以及 sendto 等与 socket 相关的函数，通过这些函数发出的数据将会走代理，详细代码可以参考 libproxychains.c。&#xA;在主程序里，它会读取配置文件，查找 libproxychains4 所在位置，把这些信息存入环境变量后执行子程序。这样子程序里对 socket 相关的函数调用就会被 Hook 了，对子程序来说，跟代理相关的东西都是透明的。&#xA;配置 通过源代码安装的配置文件默认在 /etc/proxychains.conf，我们通过改写这个配置文件中的最后几行如下：&#xA;[ProxyList]&#xD;# 一些注释&#xD;# 填入你的代理服务器IP x.x.x.x 和端口&#xD;socks5 x.x.x.x 3030 使用 任意使用某个指令，例如下载某个东西：&#xA;proxychains4 wget 下载地址 同理，它还可以用于梯子的使用。</description>
     </item>
     <item>
       <title>chrome浏览器相关</title>
-      <link>//localhost:1313/cn/2020/chrome/</link>
+      <link>/cn/2020/chrome/</link>
       <pubDate>Tue, 11 Feb 2020 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2020/chrome/</guid>
+      <guid>/cn/2020/chrome/</guid>
       <description>浏览器卡顿 第一步：&#xA;打开 Chrome 谷歌浏览器，进入“设置 → 高级 → 系统”，将 使用硬件加速模式的选项关闭掉，重启浏览器。如果设置后卡顿已有明显改善，那么就此搞定，不然继续第二步。&#xA;第二步：&#xA;在地址栏上输入：chrome://flags/回车，在顶部搜索栏中搜索“gpu”，列表中找到：“GPU rasterization”(GPU 渲染) 以及 “Accelerated 2D canvas”(2D 图形加速) 两项，将它们都设为“Disabled”禁用即可。点击右下角的“ReLaunch”重启浏览器。&#xA;你会发现，做完这两个设置后，流畅的 Chrome 又一次回来了！我这里即便同时开启超过 50 个页面，响应依然飞快，看视频也不再卡顿了。经过几周的使用观察，我认为问题已基本解决。&#xA;扩展程序导出 打开谷歌浏览器 -&amp;gt; 点击右上方设置按钮 -&amp;gt; 更多工具 -&amp;gt; 扩展程序&#xA;开启开发者模式&#xA;找到需要打包的扩展程序，记住扩展ID&#xA;点击左上方打包扩展程序&#xA;注意AppData为隐藏文件夹，需要在文件资源管理器-&amp;gt;查看-&amp;gt;查看隐藏文件&#xA;浏览目录：C:\Users\用户名\AppData\Local\Google\Chrome\User Data\Default\Extensions\扩展ID\版本号&#xA;生成的扩展程序压缩包为 crx 文件&#xA;安装打包好的拓展程序：&#xA;方法一：&#xA;（1）打开谷歌浏览器 -&amp;gt; 点击右上方设置按钮 -&amp;gt; 更多工具 -&amp;gt; 扩展程序（或直接输入：chrome://extensions/）&#xA;（2）将.crx的文件拖拽到浏览器中间，会出现拖拽以安装的提示，安装。&#xA;（3）如果浏览器能直接安装即成功，如果不能安装，或者提示只能通过Chrome网上应用商店安装该程序，请参照方法二。&#xA;方法二：&#xA;（1）将.crx的文件的扩展名改为.zip，&#xA;（2）打开谷歌浏览器 -&amp;gt; 点击右上方设置按钮 -&amp;gt; 更多工具 -&amp;gt; 扩展程序（或直接输入：chrome://extensions/）&#xA;（3）将.zip的文件拖拽到浏览器中即可安装。&#xA;错误代码：ERR_UNSAFE_PORT 用Nginx发布多个站点测试，使用了87、88端口，&#xA;88端口访问正常，87端口就怎么也访问不了，点击更多，提示错误代码：ERR_UNSAFE_PORT&#xA;不想修改浏览器设置的就改用其它端口吧，搜索了一下，Firefox也有类似的端口限制；如果非要使用类似的端口，&#xA;我们要做的是允许访问非常规端口地址，解决办法：选中Google Chrome 快捷方式，右键属性，在”目标”对应文本框添加：</description>
     </item>
   </channel>

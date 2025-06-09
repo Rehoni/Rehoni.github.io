@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ssh on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/ssh/</link>
+    <link>/tags/ssh/</link>
     <description>Recent content in Ssh on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 22 Sep 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SSH可视化工具比较</title>
-      <link>//localhost:1313/cn/2023/%E5%B7%A5%E5%85%B7_ssh/</link>
+      <link>/cn/2023/%E5%B7%A5%E5%85%B7_ssh/</link>
       <pubDate>Fri, 22 Sep 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/%E5%B7%A5%E5%85%B7_ssh/</guid>
+      <guid>/cn/2023/%E5%B7%A5%E5%85%B7_ssh/</guid>
       <description>名称 优点 缺点 mobaxterm 颜色比较丰富：javalog有颜色区分有传文件窗口：拖拽隧道好用经服务器代理的ssh也能拖拽传文件 偶尔传文件传不上去能不关闭会话切换编码，但略繁琐 windterm 配色丰富：javalog有颜色区分历史命令有传文件窗口：拖拽 经服务器代理的ssh不能拖拽传文件隧道容易出问题未找到不关闭会话切换编码的办法 xshell 不关闭会话切换编码比较方便能从xftp直接打开 复制粘贴命令比较繁琐 tabby 好看传文件比较繁琐 未找到切换编码的地方javalog无颜色 putty （只是为了升级 ssh 协议，偶尔配合 winscp 用）&#xA;传文件基本用 xftp （因为支持 ctrl c 、v ），偶尔用 winscp&#xA;windterm v2.6.0出现部分bug 下载的Java log文件是二进制编辑器看不了 日志里突然挂个乱码 导出会话和配置 建议将此文件夹压缩为一个zip&#xA;关闭主密码 一、点击配置文件目录&#xA;二、找到此目录&#xA;三、修改配置文件&#xA;四、将&amp;quot;application.masterPassword&amp;quot; : false(需要重启客户端)&#xA;锁屏密码关闭 修改global\wind.config将application.lockScreenTimeout设置为0或负数即可(需要重启客户端)&#xA;菜单栏 消失 不见了 唤起 先按Alt+W，再按Alt+M&#xA;mobaxterm 中文复制乱码问题 比如服务器locale 为 GB18080，切换terminal font setting 为 ISO-885901&#xA;ls之后，中文正常显示，鼠标选中复制乱码&#xA;切utf-8，鼠标选中复制不乱码，但是此时如果再ls，乱码&#xA;设置保持SSH连接 在设置里点选setting&amp;gt;SSH&amp;gt;sessions setting&amp;gt;勾选ssh Keepalive&#xA;配置ssh隧道 如图所示，本地与远程服务器之间存在防火墙，防火墙只允许SSH端口通过，为访问远程服务器，我们可以借助MobaXterm来与SSH服务器建立隧道，使得防火墙外的用户能够访问远程服务器&#xA;******具体配置：********&#xA;1.打开MobaXterm，在工具中找到MobaSSHtunnal</description>
     </item>
   </channel>

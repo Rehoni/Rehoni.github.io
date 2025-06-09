@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>密码 on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/%E5%AF%86%E7%A0%81/</link>
+    <link>/tags/%E5%AF%86%E7%A0%81/</link>
     <description>Recent content in 密码 on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 01 Dec 2021 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/%E5%AF%86%E7%A0%81/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/%E5%AF%86%E7%A0%81/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>搭建个人密码管理体系</title>
-      <link>//localhost:1313/cn/2021/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/</link>
+      <link>/cn/2021/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/</link>
       <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2021/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/</guid>
+      <guid>/cn/2021/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/</guid>
       <description>搭建个人密码管理体系 目前使用iPhone+Android+Windows，以及如何搭建自己的多平台密码管理体系，仅作为参考。&#xA;个人设备 设备 系统 OPPO Reno6 5G Android 11 iPhone XR iOS 15.4 ThinkPad T480 Windows 11 网站密码管理 chrome 存放日常使用网站登录的所有密码。&#xA;keepass 存放旧密码，数据库存放于坚果云中，逐步淘汰。&#xA;APP密码管理 chrome 全局填充+ 唤起 keepass 手动复制，不太方便，勉强能用。&#xA;1、Chrome Chrome密码管理（需要科学上网），经个人主观体验Chrome手机端+移动端同步体验，要比Edge要无感+快捷很多。&#xA;Google Chrome应用商店中搜索，KeePassXC-Browser，下载插件配置即可。&#xA;2、Edge（现未使用） Microsoft Edge应用商店中搜索，KeePassXC-Browser&#xA;3、Windows Chrome浏览器同时作为密码管理器。&#xA;KeePassXC客户端，目前最新版本v2.6.4&#xA;KeePassXC Team官网&#xA;Github链接之一&#xA;4、iOS（iPhone+iPad） AppStore—&amp;gt;KeePassium，目前使用体验比较好的免费的iOS端app。&#xA;5、Android 使用 Google 密码填充，辅以KeePass2android，可以通过坚果云webdav的方式来同步密码数据库。&#xA;6、多平台同步 使用时效性比较高的云平台来进行密码的同步，实际上就是针对KeePassXC数据库.kdbx文件进行同步，我采用的是坚果云。关于坚果云的使用不再赘述。&#xA;参考Windows端图例，可以看到客户端打开的是存储在坚果云同步文件夹下的.kdbx文件。同理在移动端也可以进行同样的操作。一般来说在Windows端记录好的密码、经坚果云同步之后，基本可以实现在手机实时使用的效果。&#xA;同样可以使用webdav的方式，效果类似。</description>
     </item>
   </channel>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Spring-Javaformat on Rehoni | 罗皓</title>
-    <link>//localhost:1313/tags/spring-javaformat/</link>
+    <link>/tags/spring-javaformat/</link>
     <description>Recent content in Spring-Javaformat on Rehoni | 罗皓</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 01 Nov 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/spring-javaformat/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/spring-javaformat/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用spring-javaformat格式化项目代码</title>
-      <link>//localhost:1313/cn/2023/%E4%BD%BF%E7%94%A8spring-javaformat%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/</link>
+      <link>/cn/2023/%E4%BD%BF%E7%94%A8spring-javaformat%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/</link>
       <pubDate>Wed, 01 Nov 2023 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/cn/2023/%E4%BD%BF%E7%94%A8spring-javaformat%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/</guid>
+      <guid>/cn/2023/%E4%BD%BF%E7%94%A8spring-javaformat%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/</guid>
       <description>参考 一步步降低代码复杂度&#xA;GitHub仓库&#xA;maven 1、根pom下引入插件&#xA;&amp;lt;build&amp;gt; &amp;lt;plugins&amp;gt; &amp;lt;plugin&amp;gt; &amp;lt;groupId&amp;gt;io.spring.javaformat&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-javaformat-maven-plugin&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;0.0.39&amp;lt;/version&amp;gt; &amp;lt;/plugin&amp;gt; &amp;lt;/plugins&amp;gt; &amp;lt;/build&amp;gt; 2、修改.m2/settings.xml&#xA;&amp;lt;pluginGroups&amp;gt; &amp;lt;pluginGroup&amp;gt;io.spring.javaformat&amp;lt;/pluginGroup&amp;gt; &amp;lt;/pluginGroups&amp;gt; 3、支持java8&#xA;根pom同级下新增.springjavaformatconfig文件&#xA;java-baseline=8 4、安装idea的插件&#xA;这个网址下载，https://mvnrepository.com/artifact/io.spring.javaformat/spring-javaformat-intellij-idea-plugin/0.0.39&#xA;然后idea安装插件，选择下载好的jar包，导入插件&#xA;5、验证&#xA;有此插件&#xA;格式化代码ctrl+alt+L能生效&#xA;有此标志&#xA;checkStyle 1、maven引入插件（此步骤好像非必须）&#xA;&amp;lt;plugin&amp;gt; &amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;maven-checkstyle-plugin&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;3.1.1&amp;lt;/version&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.puppycrawl.tools&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;checkstyle&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.3&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.spring.javaformat&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-javaformat-checkstyle&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;0.0.39&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; &amp;lt;executions&amp;gt; &amp;lt;execution&amp;gt; &amp;lt;id&amp;gt;checkstyle-validation&amp;lt;/id&amp;gt; &amp;lt;phase&amp;gt;validate&amp;lt;/phase&amp;gt; &amp;lt;inherited&amp;gt;true&amp;lt;/inherited&amp;gt; &amp;lt;configuration&amp;gt; &amp;lt;configLocation&amp;gt;io/spring/javaformat/checkstyle/checkstyle.xml&amp;lt;/configLocation&amp;gt; &amp;lt;includeTestSourceDirectory&amp;gt;true&amp;lt;/includeTestSourceDirectory&amp;gt; &amp;lt;/configuration&amp;gt; &amp;lt;goals&amp;gt; &amp;lt;goal&amp;gt;check&amp;lt;/goal&amp;gt; &amp;lt;/goals&amp;gt; &amp;lt;/execution&amp;gt; &amp;lt;/executions&amp;gt; &amp;lt;/plugin&amp;gt; 2、IDEA 安装 plugin&#xA;3、下载 checkstyle 和 config 的jar包&#xA;checkstyle 包下载地址 https://mvnrepository.</description>
     </item>
   </channel>
